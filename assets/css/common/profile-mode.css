@@ -26,6 +26,7 @@
     border-radius: 50%;
     border: 1px solid var(--tertiary);
     object-fit: cover;
+    object-position: center 10%;
     aspect-ratio: 1 / 1;
 }
 
