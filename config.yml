@@ -1,0 +1,103 @@
+baseURL: "https://audachang.world/"
+title: Erik Chang
+theme: PaperMod
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+pagination:
+  pagerSize: 20
+
+taxonomies:
+    tag: tags
+
+menu:
+    main:
+        - name: Research
+          url: papers/
+          weight: 1
+        - name: Teaching
+          url: courses/
+          weight: 2
+        - name: Data & Tools
+          url: data/
+          weight: 3
+        - name: Lab Wiki
+          url: https://audachang.world/neuroimaging/new_wiki/
+          weight: 4
+
+params:
+    description: "Erik Chang's academic website — Action & Cognition Lab, National Central University. Research in neuroimaging, cognitive neuroscience, and recommender systems."
+    author: Erik Chang
+    # googleAnalyticsID: "G-XXXXX"
+    DateFormat: "January 2006"
+    defaultTheme: light
+    hideFooter: false
+    disableThemeToggle: false
+    ShowShareButtons: false
+    ShowReadingTime: false
+    disableSpecial1stPost: true
+    disableAnchoredHeadings: true
+    ShowPostNavLinks: false
+    ShowBreadCrumbs: false
+    ShowCodeCopyButtons: true
+    ShowAllPagesInArchive: false
+    MainSections: ["papers","courses","data"]
+    ShowToc: false
+    disableScrollToTop: true
+    TocOpen: true
+    ShowWordCount: false
+    UseHugoToc: true
+    comments: false
+    math: true
+    profileMode:
+          enabled: true
+          title: Erik Chang (張智宏)
+          subtitle: "I am an Associate Professor at the Institute of Cognitive Neuroscience, National Central University, Taiwan. I direct the Action & Cognition Laboratory (ACL@NCU), where we study how the brain supports action perception, motor cognition, and decision-making using neuroimaging and computational methods."
+          imageUrl: "ErikChang_Profile_enhanced.jpg"
+          imageWidth: 160
+          imageHeight: 160
+          buttons:
+            - name: Research
+              url: papers/
+            - name: Teaching
+              url: courses/
+            - name: Data & Tools
+              url: data/
+            - name: Lab Wiki
+              url: https://audachang.world/neuroimaging/new_wiki/
+
+    socialIcons:
+        - name: CV
+          url: ErikChang_CV_20260402_short_ENG.pdf
+        - name: Email
+          url: mailto:audachang@gmail.com
+        - name: Location
+          url: location/
+        - name: Office Hours
+          url: officehours/
+        - name: Google Scholar
+          url: https://scholar.google.com/
+        - name: GitHub
+          url: https://github.com/audachang
+
+    assets:
+        disableScrollBarStyle: true
+    cover:
+        hiddenInList: false
+        hiddenInSingle: true
+    label:
+      text: "Erik Chang"
+      icon: favicon.ico
+      iconHeight: 18
+
+markup:
+    goldmark:
+        renderer:
+            unsafe: true
+    highlight:
+        guessSyntax: true
+        style: autumn
+    tableOfContents:
+        endLevel: 2
+        ordered: false
+        startLevel: 2
