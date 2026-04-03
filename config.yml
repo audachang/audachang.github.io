@@ -15,15 +15,18 @@ menu:
         - name: Research
           url: papers/
           weight: 1
+        - name: Publications
+          url: publications/
+          weight: 2
         - name: Teaching
           url: courses/
-          weight: 2
+          weight: 3
         - name: Data & Tools
           url: data/
-          weight: 3
+          weight: 4
         - name: Lab Wiki
           url: https://audachang.world/neuroimaging/new_wiki/
-          weight: 4
+          weight: 5
 
 params:
     description: "Erik Chang's academic website — Action & Cognition Lab, National Central University. Research in neuroimaging, cognitive neuroscience, and recommender systems."
@@ -59,6 +62,8 @@ params:
           buttons:
             - name: Research
               url: papers/
+            - name: Publications
+              url: publications/
             - name: Teaching
               url: courses/
             - name: Data & Tools
