@@ -69,7 +69,7 @@ params:
             - name: Data & Tools
               url: data/
             - name: Lab Wiki
-              url: https://audachang.world/neuroimaging/new_wiki/
+              url: http://140.115.47.34/new_wiki/index.php/Action_%26_Cognition_Laboratory
 
     socialIcons:
         - name: CV
