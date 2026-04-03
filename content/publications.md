@@ -10,6 +10,12 @@ disableAnchoredHeadings: false
 
 ---
 
+## 2026
+
+**Chang, E. C.**\*, Chen, L., & Chen, S. Y. (2026, accepted). The universal trend and shifts of digital learning: Big data analysis for academic literature. *Universal Access in the Information Society*.
+
+---
+
 ## 2025
 
 Tien, H.-P., & **Chang, E. C.** (2025). The application of information theory in studying motor control. In *Cognitive and Neural Foundations of Chinese Reading* (Chinese Language Learning Sciences, pp. 199–211). Springer. https://doi.org/10.1007/978-981-96-6669-0_12
