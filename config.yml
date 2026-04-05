@@ -33,7 +33,7 @@ params:
     author: Erik Chang
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
-    defaultTheme: light
+    defaultTheme: auto
     hideFooter: false
     disableThemeToggle: false
     ShowShareButtons: false
