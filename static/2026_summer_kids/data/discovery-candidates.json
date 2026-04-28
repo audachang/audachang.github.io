@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "updatedAt": "2026-04-28",
+    "status": "checked",
+    "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
+    "lastMessage": "0 new candidate(s) discovered."
+  },
+  "candidates": [
+    {
+      "id": "candidate-taoyuan-be90ac8ac1",
+      "city": "桃園",
+      "status": "candidate",
+      "title": "[中壢說故事]中壢分館、龍岡分館、自強分館115年4-6月份兒童說故事活動列表 - 桃園市立圖書館",
+      "url": "https://www.typl.gov.tw/zh-tw/Activity/Content/9411",
+      "sourceTitle": "Typl",
+      "description": "中壢分館、內壢分館、龍岡分館、自強分館4~6月份兒童說故事活動如下： · ※內壢分館因工程期間閉館暫停說故事活動※ ... 115年【梅好楊梅 閱讀生活】系列活動--暑期的生態探險~一起去丸子蟲星球尋寶 2026.07.11",
+      "dateSnippets": [
+        "2026.07.11",
+        "4/11",
+        "2026-04-11",
+        "2026-06-27",
+        "4/18",
+        "4/25",
+        "5/2",
+        "5/16",
+        "5/23",
+        "5/30",
+        "6/6",
+        "6/13",
+        "6/20",
+        "6/27",
+        "2026.07.18",
+        "2026.06.27"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-04-28",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "4/11",
+          "2026-04-11",
+          "2026-06-27",
+          "4/18",
+          "4/25",
+          "5/2",
+          "5/16",
+          "5/23",
+          "5/30",
+          "6/6",
+          "6/13",
+          "6/20",
+          "6/27",
+          "2026.07.18",
+          "2026.07.11",
+          "2026.06.27"
+        ],
+        "contentHash": "9d3f2be0299ada87"
+      }
+    },
+    {
+      "id": "candidate-taoyuan-f47a48984d",
+      "city": "桃園",
+      "status": "candidate",
+      "title": "[總館電影]4月份小朋友電影院 - 桃園市立圖書館",
+      "url": "https://www.typl.gov.tw/zh-tw/activity/Content/3220",
+      "sourceTitle": "Typl",
+      "description": "115年【梅好楊梅 閱讀生活】系列活動--暑期的生態探險~一起去丸子蟲星球尋寶 2026.07.11",
+      "dateSnippets": [
+        "2026.07.11",
+        "4/1",
+        "2026-04-01",
+        "2026-04-29",
+        "04/01",
+        "04/08",
+        "04/15",
+        "04/22",
+        "04/29",
+        "2026.07.18",
+        "6/27",
+        "2026.06.27"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-04-28",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "4/1",
+          "2026-04-01",
+          "2026-04-29",
+          "04/01",
+          "04/08",
+          "04/15",
+          "04/22",
+          "04/29",
+          "2026.07.18",
+          "2026.07.11",
+          "6/27",
+          "2026.06.27"
+        ],
+        "contentHash": "24f2cb00bfe0a44b"
+      }
+    },
+    {
+      "id": "candidate-taipei-7c10b939ec",
+      "city": "台北",
+      "status": "candidate",
+      "title": "【轉知】-國立臺北教育大學進修推廣處推廣教育中心辦理「2026夏令營」 | 臺北市立成功高級中學",
+      "url": "https://www.cksh.tp.edu.tw/news/%E3%80%90%E8%BD%89%E7%9F%A5%E3%80%91-%E5%9C%8B%E7%AB%8B%E8%87%BA%E5%8C%97%E6%95%99%E8%82%B2%E5%A4%A7%E5%AD%B8%E9%80%B2%E4%BF%AE%E6%8E%A8%E5%BB%A3%E8%99%95%E6%8E%A8%E5%BB%A3%E6%95%99%E8%82%B2%E4%B8%AD",
+      "sourceTitle": "Tp",
+      "description": "【轉知】-國立陽明交通大學廣教育中心辦理暑期「心智圖超記憶親子免費 講座」及「2026暑期- 心智圖超記憶學習營 」",
+      "dateSnippets": [
+        "2026-04-28",
+        "7月14日",
+        "2026-04-24",
+        "6月6日",
+        "2026-04-23",
+        "2026 年 4 月 23 日",
+        "2026年07月06日",
+        "08月28日",
+        "2026年05月17日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-04-28",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026-04-28",
+          "7月14日",
+          "2026-04-24",
+          "6月6日",
+          "2026-04-23",
+          "2026 年 4 月 23 日",
+          "2026年07月06日",
+          "08月28日",
+          "2026年05月17日"
+        ],
+        "contentHash": "67acfabb1cc0d7d2"
+      }
+    }
+  ]
+}

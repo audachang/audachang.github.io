@@ -1,0 +1,19 @@
+{
+  "generatedFrom": "./activities.json",
+  "reviewMode": "conservative",
+  "notes": [
+    "This file tracks source checking behavior for automation.",
+    "The update script fetches every source URL, records reachability, title, and date-like snippets, then writes update-report.md.",
+    "Activity fields are intentionally not overwritten from raw website text unless a future parser is added for a specific official site."
+  ],
+  "watchTerms": [
+    "2026",
+    "暑假",
+    "暑期",
+    "報名",
+    "截止",
+    "兒童",
+    "藝術節",
+    "圖書館"
+  ]
+}
