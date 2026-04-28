@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>2026 暑假小學生活動整理｜桃園・台北・新北</title>
+    <meta
+      name="description"
+      content="2026 年桃園市、台北市、新北市適合 11 歲國小五年級學生的暑假活動整理，含已可安排與待公告資訊。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">2026 Summer Kids Guide</p>
+        <h1>桃園、台北、新北<br />小五生暑假活動整理</h1>
+        <p class="hero-copy">
+          這份頁面把目前已查到的三市官方暑假活動整理成家長好閱讀版本，優先區分
+          <strong>已可安排</strong> 與 <strong>待公告</strong>，方便直接排暑假。
+        </p>
+        <div class="hero-meta">
+          <span>查核日期：2026-04-28</span>
+          <span>對象：11 歲 / 國小五年級</span>
+          <span>來源：市府與所屬機關官方頁面</span>
+        </div>
+      </header>
+
+      <main class="content-grid">
+        <aside class="summary-panel">
+          <section class="summary-card">
+            <h2>快速建議</h2>
+            <ul class="plain-list">
+              <li>想現在就先卡位：先看桃園蘆竹婦幼館與新北市圖暑期營。</li>
+              <li>想排大型暑假重點活動：先追台北兒童藝術節，再等新北兒藝節公告。</li>
+              <li>想找免費、單次、好安排的：桃園圖書館兒童劇最明確。</li>
+            </ul>
+          </section>
+
+          <section class="summary-card" id="metrics"></section>
+
+          <section class="summary-card">
+            <h2>下載整理</h2>
+            <div class="download-groups">
+              <div>
+                <h3>三市總覽</h3>
+                <a href="./docs/three_city_summer_activities_2026_overview.md">Markdown</a>
+                <a href="./docs/three_city_summer_activities_2026_overview.pdf">PDF</a>
+              </div>
+              <div>
+                <h3>各城市</h3>
+                <a href="./docs/taoyuan_summer_activities_2026.md">桃園 MD</a>
+                <a href="./docs/taoyuan_summer_activities_2026.pdf">桃園 PDF</a>
+                <a href="./docs/taipei_summer_activities_2026.md">台北 MD</a>
+                <a href="./docs/taipei_summer_activities_2026.pdf">台北 PDF</a>
+                <a href="./docs/new_taipei_summer_activities_2026.md">新北 MD</a>
+                <a href="./docs/new_taipei_summer_activities_2026.pdf">新北 PDF</a>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <section class="main-panel">
+          <section class="toolbar" aria-label="活動篩選">
+            <div class="button-row" id="city-filters"></div>
+            <div class="button-row" id="status-filters"></div>
+          </section>
+
+          <section class="callout">
+            <strong>閱讀方式：</strong>
+            已可安排代表目前已經看得到活動頁、日期、票務或報名入口；待公告代表活動方向已知，但正式截止日或完整場次還沒全數上架。
+          </section>
+
+          <section id="activity-list" class="activity-list" aria-live="polite"></section>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
