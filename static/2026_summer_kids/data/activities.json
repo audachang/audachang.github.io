@@ -22,6 +22,25 @@
           "label": "蘆竹區公所公告",
           "url": "https://www.luzhu.tycg.gov.tw/News_Content.aspx?n=5714&s=1617511"
         }
+      ],
+      "sourceDiagnostics": [
+        {
+          "label": "蘆竹區公所公告",
+          "url": "https://www.luzhu.tycg.gov.tw/News_Content.aspx?n=5714&s=1617511",
+          "ok": true,
+          "status": 200,
+          "title": "2026年桃園市蘆竹區婦幼館暑期育樂營暨兒童權利公約宣導活動自115年5月15日星期五8時開放報名",
+          "contentHash": "a0a35555d5c00a47",
+          "dateSnippets": [
+            "5月15日",
+            "7月1日",
+            "8月26日",
+            "5月29日",
+            "2022年6月15日"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        }
       ]
     },
     {
@@ -41,6 +60,32 @@
           "label": "桃園市立圖書館活動頁",
           "url": "https://www.typl.gov.tw/zh-tw/Activity/Content/9501"
         }
+      ],
+      "sourceDiagnostics": [
+        {
+          "label": "桃園市立圖書館活動頁",
+          "url": "https://www.typl.gov.tw/zh-tw/Activity/Content/9501",
+          "ok": true,
+          "status": 200,
+          "title": "【全市活動】2026童心啟航！4/26～9/5 童演童語大型兒童劇熱鬧開跑 - 桃園市立圖書館",
+          "contentHash": "e0b6de9a126e8294",
+          "dateSnippets": [
+            "4/26",
+            "9/5",
+            "2026-04-26",
+            "2026-09-05",
+            "4月26日",
+            "04月14日",
+            "04月24日",
+            "5月30日",
+            "04月27日",
+            "05月29日",
+            "6月28日",
+            "06月01日"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        }
       ]
     },
     {
@@ -59,6 +104,32 @@
         {
           "label": "桃園市立圖書館活動頁",
           "url": "https://www.typl.gov.tw/kids/Activity/Content/9548"
+        }
+      ],
+      "sourceDiagnostics": [
+        {
+          "label": "桃園市立圖書館活動頁",
+          "url": "https://www.typl.gov.tw/kids/Activity/Content/9548",
+          "ok": true,
+          "status": 200,
+          "title": "【全市活動】2026年童演童語小型兒童劇歡樂登場 - 桃園市立圖書館",
+          "contentHash": "30f4a28af6a7f759",
+          "dateSnippets": [
+            "5/9",
+            "2026-05-09",
+            "2026-09-12",
+            "9/12",
+            "5月9日",
+            "4月22日",
+            "2026年4月22日",
+            "2026年5月7日",
+            "6月27日",
+            "6月1日",
+            "2026年6月1日",
+            "2026年6月25日"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
         }
       ]
     },
@@ -82,6 +153,43 @@
         {
           "label": "桃園市觀光行事曆",
           "url": "https://www.tycg.gov.tw/NewsPage_Content.aspx?n=16786&s=1601961"
+        }
+      ],
+      "sourceDiagnostics": [
+        {
+          "label": "文化局介紹",
+          "url": "https://culture.tycg.gov.tw/News_Photo_Content.aspx?n=23556&s=1566353",
+          "ok": false,
+          "status": null,
+          "title": "",
+          "contentHash": null,
+          "dateSnippets": [],
+          "checkedAt": "2026-04-28",
+          "error": "fetch failed"
+        },
+        {
+          "label": "桃園市觀光行事曆",
+          "url": "https://www.tycg.gov.tw/NewsPage_Content.aspx?n=16786&s=1601961",
+          "ok": true,
+          "status": 200,
+          "title": "桃園市政府",
+          "contentHash": "ba7e41c44a7f4370",
+          "dateSnippets": [
+            "4月1日",
+            "4月30日",
+            "4月18日",
+            "5月9日",
+            "4/25",
+            "5/2",
+            "5月2日",
+            "15/03",
+            "15/02",
+            "15/01",
+            "15/06",
+            "15/05"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
         }
       ]
     },
@@ -110,6 +218,58 @@
           "label": "北藝中心節目頁",
           "url": "https://tpac.org.taipei/program/1422"
         }
+      ],
+      "sourceDiagnostics": [
+        {
+          "label": "臺北旅遊網總覽",
+          "url": "https://www.travel.taipei/zh-tw/event-calendar/details/66374",
+          "ok": true,
+          "status": 200,
+          "title": "2026臺北兒童藝術節 | 臺北旅遊網",
+          "contentHash": "e8eff531bf21cac5",
+          "dateSnippets": [
+            "2026-06-28",
+            "2026-08-02"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        },
+        {
+          "label": "OPENTIX 套票",
+          "url": "https://www.opentix.life/ticketpackage/2046503607896674305",
+          "ok": true,
+          "status": 200,
+          "title": "【套票】2026臺北兒童藝術節 - 新手玩家套票 2張享88折 — OPENTIX兩廳院文化生活",
+          "contentHash": "4c76ee40ed539037",
+          "dateSnippets": [
+            "2026.5.11",
+            "6/21",
+            "9/18",
+            "12/25",
+            "6/11",
+            "0/2"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        },
+        {
+          "label": "北藝中心節目頁",
+          "url": "https://tpac.org.taipei/program/1422",
+          "ok": true,
+          "status": 200,
+          "title": "2026臺北兒童藝術節：《幾米男孩的100次勇敢》 ● 臺北表演藝術中心",
+          "contentHash": "eaaac66a9cb38c39",
+          "dateSnippets": [
+            "2026-07-17",
+            "2026-07-18",
+            "2026-07-19",
+            "2026-07-24",
+            "2026-07-25",
+            "2026-07-26"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        }
       ]
     },
     {
@@ -133,6 +293,42 @@
           "label": "2025 教育局公告（參考）",
           "url": "https://www.doe.gov.taipei/News_Content.aspx?n=CFF17D5B0DE104FB&s=8FDC95537988C9DF"
         }
+      ],
+      "sourceDiagnostics": [
+        {
+          "label": "暑期體驗營平台",
+          "url": "https://holiday.tp.edu.tw/",
+          "ok": true,
+          "status": 200,
+          "title": "所有體驗營 | 臺北市國民小學暑期體驗營 | 暑期體驗營後台管理系統",
+          "contentHash": "362cffa4e913f0b8",
+          "dateSnippets": [
+            "5月14日",
+            "5月20日"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        },
+        {
+          "label": "2025 教育局公告（參考）",
+          "url": "https://www.doe.gov.taipei/News_Content.aspx?n=CFF17D5B0DE104FB&s=8FDC95537988C9DF",
+          "ok": true,
+          "status": 200,
+          "title": "臺北市政府教育局-國小-臺北市114年度國民小學學生暑期體驗學習營「Fun探遊樂學習」將於114/5/13開始報名，歡迎踴躍報名參加!",
+          "contentHash": "0ce279d3e4986769",
+          "dateSnippets": [
+            "14/5",
+            "5月13日",
+            "5月19日",
+            "5月20日",
+            "5月23日",
+            "6月12日",
+            "5月26日",
+            "6月5日"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        }
       ]
     },
     {
@@ -151,6 +347,19 @@
         {
           "label": "北市圖暑期閱讀專區",
           "url": "https://reading.tpml.gov.taipei/News.aspx?n=F850862ACD70FDC6&sms=EBF5ED68A2F6E55D"
+        }
+      ],
+      "sourceDiagnostics": [
+        {
+          "label": "北市圖暑期閱讀專區",
+          "url": "https://reading.tpml.gov.taipei/News.aspx?n=F850862ACD70FDC6&sms=EBF5ED68A2F6E55D",
+          "ok": true,
+          "status": 200,
+          "title": "臺北市立圖書館閱讀網-暑期閱讀活動",
+          "contentHash": "d2ab0c1df56e72a5",
+          "dateSnippets": [],
+          "checkedAt": "2026-04-28",
+          "error": null
         }
       ]
     },
@@ -175,6 +384,56 @@
           "label": "新北市圖活動資訊",
           "url": "https://www.library.ntpc.gov.tw/singlehtml/ActvInfo?cntId=86ca7e7956f345cc82b09e85692d204b"
         }
+      ],
+      "sourceDiagnostics": [
+        {
+          "label": "新北市圖 ATPASS",
+          "url": "https://atpass.ntpclib.gov.tw/eventWeb/",
+          "ok": true,
+          "status": 200,
+          "title": "新北市圖-活動報名",
+          "contentHash": "f79b27e4e2d703c0",
+          "dateSnippets": [
+            "9月14日",
+            "8月8日",
+            "2026年05月20日",
+            "2026年05月09日",
+            "2026年07月25日",
+            "5月2日",
+            "2026年05月02日",
+            "2026年06月03日",
+            "2026年09月16日",
+            "2026年07月02日",
+            "2026年08月24日",
+            "2026年07月07日"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        },
+        {
+          "label": "新北市圖活動資訊",
+          "url": "https://www.library.ntpc.gov.tw/singlehtml/ActvInfo?cntId=86ca7e7956f345cc82b09e85692d204b",
+          "ok": true,
+          "status": 200,
+          "title": "新北市立圖書館",
+          "contentHash": "0180ce47dd88799b",
+          "dateSnippets": [
+            "9月14日",
+            "8月8日",
+            "5月3日",
+            "5月10日",
+            "4/29",
+            "5月2日",
+            "5月20日",
+            "4月1日",
+            "8月31日",
+            "5/2",
+            "7/31",
+            "4/18"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        }
       ]
     },
     {
@@ -197,6 +456,56 @@
         {
           "label": "新北市圖活動資訊",
           "url": "https://www.library.ntpc.gov.tw/singlehtml/ActvInfo?cntId=86ca7e7956f345cc82b09e85692d204b"
+        }
+      ],
+      "sourceDiagnostics": [
+        {
+          "label": "新北市圖 ATPASS",
+          "url": "https://atpass.ntpclib.gov.tw/eventWeb/",
+          "ok": true,
+          "status": 200,
+          "title": "新北市圖-活動報名",
+          "contentHash": "f79b27e4e2d703c0",
+          "dateSnippets": [
+            "9月14日",
+            "8月8日",
+            "2026年05月20日",
+            "2026年05月09日",
+            "2026年07月25日",
+            "5月2日",
+            "2026年05月02日",
+            "2026年06月03日",
+            "2026年09月16日",
+            "2026年07月02日",
+            "2026年08月24日",
+            "2026年07月07日"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        },
+        {
+          "label": "新北市圖活動資訊",
+          "url": "https://www.library.ntpc.gov.tw/singlehtml/ActvInfo?cntId=86ca7e7956f345cc82b09e85692d204b",
+          "ok": true,
+          "status": 200,
+          "title": "新北市立圖書館",
+          "contentHash": "0180ce47dd88799b",
+          "dateSnippets": [
+            "9月14日",
+            "8月8日",
+            "5月3日",
+            "5月10日",
+            "4/29",
+            "5月2日",
+            "5月20日",
+            "4月1日",
+            "8月31日",
+            "5/2",
+            "7/31",
+            "4/18"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
         }
       ]
     },
@@ -224,6 +533,55 @@
         {
           "label": "2025 暑期活動懶人包（參考）",
           "url": "https://www.culture.ntpc.gov.tw/xceventsnews/cont?bdate=2025-07-13&disp=1&qcat=0G336743893825971626&sid=0M207401390331869130&xsmsid=0G295700334178642420"
+        }
+      ],
+      "sourceDiagnostics": [
+        {
+          "label": "文化局主題介紹",
+          "url": "https://www.culture.ntpc.gov.tw/sdgs/cont?sid=0J133517304722478560",
+          "ok": true,
+          "status": 200,
+          "title": "消除各地一切形式的貧窮 | 新北市文化局",
+          "contentHash": "b997bc0b4fc4a5d8",
+          "dateSnippets": [
+            "2026-04-28"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        },
+        {
+          "label": "文化局首頁主題專區",
+          "url": "https://www.culture.ntpc.gov.tw/%E3%80%80",
+          "ok": true,
+          "status": 200,
+          "title": "首頁 | 新北市文化局",
+          "contentHash": "fa6f037167d83a65",
+          "dateSnippets": [
+            "12月30日",
+            "2026-04-28"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
+        },
+        {
+          "label": "2025 暑期活動懶人包（參考）",
+          "url": "https://www.culture.ntpc.gov.tw/xceventsnews/cont?bdate=2025-07-13&disp=1&qcat=0G336743893825971626&sid=0M207401390331869130&xsmsid=0G295700334178642420",
+          "ok": true,
+          "status": 200,
+          "title": "公告 | 新北市文化局",
+          "contentHash": "0f909d43be4c8cab",
+          "dateSnippets": [
+            "2026-03-09",
+            "2026-01-15",
+            "2026-04-27",
+            "2026-04-23",
+            "2026-04-21",
+            "2026-04-16",
+            "2026-04-15",
+            "2026-04-28"
+          ],
+          "checkedAt": "2026-04-28",
+          "error": null
         }
       ]
     }
