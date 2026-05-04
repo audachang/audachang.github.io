@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-04-28",
+    "updatedAt": "2026-05-04",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "0 new candidate(s) discovered."
+    "lastMessage": "3 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -138,6 +138,148 @@
           "2026年05月17日"
         ],
         "contentHash": "67acfabb1cc0d7d2"
+      }
+    },
+    {
+      "id": "candidate-taipei-c0da91ad1c",
+      "city": "台北",
+      "status": "candidate",
+      "title": "臺北市立圖書館-藝文活動-2026世界書香日「開卷遊戲」—讓閱讀成為一場冒險！",
+      "url": "https://tpml.gov.taipei/News_Content.aspx?n=3951678DEC0A8461&s=2AE2629C8E644BD2&sms=9D72E82EC16F3E64",
+      "sourceTitle": "Gov",
+      "description": "2026年世界書香日，臺北市立圖書館自4月23日至5月31日推出「開卷遊戲」主題活動。今年以「閱讀遊戲化」為核心概念，結合桌遊、解謎體驗、講座以及親子工作坊等多元形式，打破閱讀只能靜靜翻書的想像，讓圖書館化身為充滿驚喜的知識迷宮，邀請市民透過遊戲與互動重新發現閱讀的樂趣。",
+      "dateSnippets": [
+        "4月23日",
+        "5月31日",
+        "4月25日",
+        "4月9日",
+        "5月2日",
+        "4月24日",
+        "5月9日",
+        "4月15日",
+        "5月5日",
+        "5月12日",
+        "5月16日",
+        "4月26日",
+        "5月23日",
+        "5月3日",
+        "4月19日",
+        "5月17日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-05-04",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "4月23日",
+          "5月31日",
+          "4月25日",
+          "4月9日",
+          "5月2日",
+          "4月24日",
+          "5月9日",
+          "4月15日",
+          "5月5日",
+          "5月12日",
+          "5月16日",
+          "4月26日",
+          "5月23日",
+          "5月3日",
+          "4月19日",
+          "5月17日"
+        ],
+        "contentHash": "ea2112b6e248159d"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-3109d74a30",
+      "city": "新北",
+      "status": "candidate",
+      "title": "【新聞】2026新北閱讀節首度戶外登場！聽音樂、逛市集還能抽iPad！早鳥再送百元券-新北市立圖書館",
+      "url": "https://www.library.ntpc.gov.tw/singlehtml/Info?cntId=14ca4e6570ee4157bb90be470a214cec",
+      "sourceTitle": "Ntpc",
+      "description": "2026新北閱讀節「聽見‧閱讀」將於4/18(六)、4/19(日)在三重向日葵廣場登場，以「閱讀市集派對」的形式打造結合音樂、閱讀與生活風格的閱讀活動。除了有戶外閱讀市集，還有Jazz live band、黑膠DJ派對、Swing Dance互動、不插電演唱、陌生書桌、親子繪本講座等多元活動，邀民眾一起來聽音樂、逛市集、享閱讀，還有機會抽中價值萬元的iPad。前500名報名的民眾，另可免費獲得100元市集抵用券。",
+      "dateSnippets": [
+        "4/18",
+        "4/19",
+        "9月14日",
+        "8月8日",
+        "4月18日",
+        "4月19日",
+        "4月15日",
+        "2026-04-14",
+        "2026-05-04"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-05-04",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "9月14日",
+          "8月8日",
+          "4/18",
+          "4/19",
+          "4月18日",
+          "4月19日",
+          "4月15日",
+          "2026-04-14",
+          "2026-05-04"
+        ],
+        "contentHash": "abca86d276bc27a2"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-cf462e6367",
+      "city": "新北",
+      "status": "candidate",
+      "title": "新北市立圖書館公共服務受理原則",
+      "url": "https://www.library.ntpc.gov.tw/MainPortal/htmlcnt/a32ad4c49337457688108e379503ff19",
+      "sourceTitle": "Ntpc",
+      "description": "4/18-5/31「2026新北閱讀節」，將以「聽見．樂讀」為主題，從閱讀出發，結合音樂主題的系列活動在全市各館展開，4/18、19首發的「閱讀市集派對，將在三重向日葵廣場打造閱讀城市的活力與創意。同時搭「旅讀巴士」移動書房，走入城市角落，探索在地文化與故事。一起逛市集、聽音樂、集章拿好禮，展開豐富又充滿驚喜的閱讀之旅！",
+      "dateSnippets": [
+        "4/18",
+        "5/31",
+        "9月14日",
+        "8月8日",
+        "5月3日",
+        "5月10日",
+        "5月2日",
+        "5月20日",
+        "4月1日",
+        "8月31日",
+        "5/2",
+        "7/31",
+        "4/1",
+        "4/21",
+        "5/17",
+        "5/24"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-05-04",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "9月14日",
+          "8月8日",
+          "5月3日",
+          "5月10日",
+          "5月2日",
+          "5月20日",
+          "4月1日",
+          "8月31日",
+          "5/2",
+          "7/31",
+          "4/18",
+          "5/31",
+          "4/1",
+          "4/21",
+          "5/17",
+          "5/24"
+        ],
+        "contentHash": "ddef1e94ebe476ac"
       }
     }
   ]
