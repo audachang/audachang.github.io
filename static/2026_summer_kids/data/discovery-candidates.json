@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-05-04",
+    "updatedAt": "2026-05-11",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "3 new candidate(s) discovered."
+    "lastMessage": "2 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -280,6 +280,110 @@
           "5/24"
         ],
         "contentHash": "ddef1e94ebe476ac"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-bb7844eb12",
+      "city": "新北",
+      "status": "candidate",
+      "title": "本週新北重點活動在這裡🔎 2026碧潭水舞季 X 圖書館閱讀抓周活動 X 2026新北河濱蝶戀季 | 新北市民會員網",
+      "url": "https://member.ntpc.gov.tw/notice/board/380",
+      "sourceTitle": "Ntpc",
+      "description": "「2026碧潭水舞季」不僅是一場視覺饗宴，更串聯展演、觀光與文化體驗，全面展現碧潭水岸魅力。誠摯邀請民眾於春夏之際前來共襄盛舉，感受光影與水舞交織的精彩夜晚。更多活動資訊請至新北市觀光旅遊網及「新北旅客」臉書粉絲專頁查詢。 ... 📚新北市圖嬰幼兒親子閱讀活動周末登場！「閱讀抓周」、「寶寶爬爬樂」免費報名】",
+      "dateSnippets": [
+        "2026/05/08",
+        "3/21",
+        "3月21日",
+        "9/6",
+        "5月31日",
+        "4月25日",
+        "5/31",
+        "4月12日",
+        "4月26日",
+        "5月9日",
+        "4月13日",
+        "4/10",
+        "5/10",
+        "5月1日",
+        "6月14日",
+        "5月23日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-05-11",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026/05/08",
+          "3/21",
+          "3月21日",
+          "9/6",
+          "5月31日",
+          "4月25日",
+          "5/31",
+          "4月12日",
+          "4月26日",
+          "5月9日",
+          "4月13日",
+          "4/10",
+          "5/10",
+          "5月1日",
+          "6月14日",
+          "5月23日"
+        ],
+        "contentHash": "87a74b23bf2d8868"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-8094a0272a",
+      "city": "新北",
+      "status": "candidate",
+      "title": "新北市立圖書館- 新北市政府",
+      "url": "https://www.library.ntpc.gov.tw/sso",
+      "sourceTitle": "Ntpc",
+      "description": "2026閱讀MVP正式開跑！ 4/21至5/17至新北市立圖書館總館及新莊中港分館借書，就有機會進場看球賽！還有特別任務，加碼抽，讓我們用閱讀應援，用書本進場！ · 新北市立圖書館電子書新書上架囉! 本館將分散各平臺的電子書加以統整，只要點擊書籍封面，就可以輕鬆連結借閱。此外，也提供附有QR code的完整新到電子書書單，随點随掃任您選歡迎讀者踴躍借閱!",
+      "dateSnippets": [
+        "4/21",
+        "5/17",
+        "9月14日",
+        "8月8日",
+        "5月11日",
+        "5月2日",
+        "5月20日",
+        "4月1日",
+        "8月31日",
+        "4月6日",
+        "5/2",
+        "7/31",
+        "4/18",
+        "5/31",
+        "4/1",
+        "5/10"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-05-11",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "9月14日",
+          "8月8日",
+          "5月11日",
+          "5月2日",
+          "5月20日",
+          "4月1日",
+          "8月31日",
+          "4月6日",
+          "5/2",
+          "7/31",
+          "4/18",
+          "5/31",
+          "4/1",
+          "4/21",
+          "5/17",
+          "5/10"
+        ],
+        "contentHash": "353e717466e65ba8"
       }
     }
   ]
