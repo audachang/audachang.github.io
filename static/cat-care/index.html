@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>米花照顧指南</title>
+      <meta name="description" content="米花的餵食、飲水、貓砂與用品照顧指南。">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f4ee;
+      --surface: #ffffff;
+      --surface-soft: #fbfaf7;
+      --text: #20201d;
+      --muted: #69665f;
+      --line: #ded7ca;
+      --accent: #2f6f5e;
+      --accent-strong: #1f4f43;
+      --accent-soft: #e2efe9;
+      --warn: #8a4a12;
+      --warn-soft: #fff1dc;
+      --shadow: 0 16px 40px rgba(69, 57, 35, 0.12);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      z-index: 10;
+      transform: translateY(-150%);
+      padding: 0.5rem 0.75rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 0.375rem;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 1.25rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 1.5rem;
+      align-items: end;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.35rem;
+      color: var(--accent-strong);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.25;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4.4rem);
+      letter-spacing: 0;
+    }
+
+    h2 {
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      margin-bottom: 0.75rem;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .lead {
+      max-width: 42rem;
+      margin: 0.75rem 0 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-panel {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 0.5rem;
+      padding: 1rem;
+    }
+
+    .hero-panel dl {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.45rem 0.85rem;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .hero-panel dt {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .hero-panel dd {
+      margin: 0;
+    }
+
+    nav {
+      border-top: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.65rem 0;
+    }
+
+    .nav-inner a {
+      flex: 0 0 auto;
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.4rem 0.7rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+
+    .nav-inner a:focus,
+    .nav-inner a:hover {
+      border-color: var(--line);
+      background: var(--accent-soft);
+      outline: none;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 1.5rem 0 3rem;
+    }
+
+    section {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    section:last-child {
+      border-bottom: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .task-list,
+    .steps,
+    .notes {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .task-list li,
+    .steps li,
+    .note-box,
+    .supply-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .task-list label {
+      display: grid;
+      grid-template-columns: 1.25rem 1fr;
+      gap: 0.7rem;
+      align-items: start;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      width: 1.1rem;
+      height: 1.1rem;
+      margin-top: 0.25rem;
+      accent-color: var(--accent);
+    }
+
+    .meta {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 0.2rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    button,
+    .button {
+      appearance: none;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: white;
+      border-radius: 0.4rem;
+      padding: 0.6rem 0.85rem;
+      font: inherit;
+      font-weight: 700;
+      line-height: 1.2;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    button.secondary,
+    .button.secondary {
+      background: var(--surface);
+      color: var(--accent-strong);
+    }
+
+    button:focus,
+    .button:focus {
+      outline: 3px solid rgba(47, 111, 94, 0.25);
+      outline-offset: 2px;
+    }
+
+    .section-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1.1fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      margin-right: 0.35rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .note-box.warning {
+      background: var(--warn-soft);
+      border-color: #f0c994;
+    }
+
+    .note-box strong {
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    figure {
+      margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    figure img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #eee7dc;
+    }
+
+    figure.source-page img {
+      aspect-ratio: auto;
+      object-fit: contain;
+      background: white;
+    }
+
+    figcaption {
+      padding: 0.55rem 0.7rem 0.65rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .annotated-photo {
+      position: relative;
+    }
+
+    .photo-marker {
+      position: absolute;
+      left: calc(50% + 1.25cm);
+      top: calc(88% - 0.25cm);
+      width: 2.2rem;
+      height: 2.2rem;
+      transform: translate(-50%, -50%);
+      border: 3px solid #d83a2e;
+      border-radius: 999px;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.35);
+      pointer-events: none;
+    }
+
+    .photo-marker-label {
+      position: absolute;
+      left: calc(50% + 1.25cm + 1.5rem);
+      top: calc(88% - 0.25cm - 2.4rem);
+      transform: translateY(-50%);
+      padding: 0.25rem 0.45rem;
+      background: #d83a2e;
+      color: white;
+      border-radius: 0.3rem;
+      font-size: 0.82rem;
+      font-weight: 800;
+      line-height: 1.2;
+      pointer-events: none;
+    }
+
+    .supply-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .supply-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .supply-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #eee7dc;
+    }
+
+    .supply-card div {
+      padding: 0.65rem 0.75rem 0.8rem;
+    }
+
+    .supply-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .source {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 0.65rem 0 0;
+    }
+
+    footer {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 0 0 2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .section-layout,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .supply-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        width: min(100% - 1rem, 1120px);
+        padding-top: 1rem;
+      }
+
+      main,
+      footer,
+      .nav-inner {
+        width: min(100% - 1rem, 1120px);
+      }
+
+      .photo-grid,
+      .supply-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel dl {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      nav,
+      .button-row,
+      .supply-grid {
+        display: none;
+      }
+
+      body {
+        background: white;
+      }
+
+      header,
+      .task-list li,
+      .steps li,
+      .note-box,
+      figure {
+        box-shadow: none;
+      }
+
+      section {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
+  <header>
+    <div class="hero">
+      <div>
+        <p class="eyebrow">米花照顧資訊</p>
+        <h1>米花照顧指南</h1>
+        <p class="lead">給臨時照顧者使用的快速版：依序準備罐頭與加料、確認自動餵食器與飲水機、清理貓砂，最後整理回收與垃圾。</p>
+      </div>
+      <aside class="hero-panel" aria-label="基本資訊">
+        <dl>
+          <dt>公開網址</dt>
+          <dd><code>audachang.github.io/cat-care</code></dd>
+        </dl>
+      </aside>
+    </div>
+    <nav aria-label="頁面導覽">
+      <div class="nav-inner">
+        <a href="#checklist">照顧清單</a>
+        <a href="#food">罐頭與加料</a>
+        <a href="#water">飲水機</a>
+        <a href="#litter">貓砂盆</a>
+        <a href="#supplies">用品照片</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section id="checklist" aria-labelledby="checklist-title">
+      <h2 id="checklist-title">每次到訪清單</h2>
+      <div class="grid">
+        <ul class="task-list" aria-label="餵食清單">
+          <li>
+            <label>
+              <input type="checkbox" data-task="play-groom-photo">
+              <span><strong>拍貓、梳毛、陪米花玩</strong><span class="meta">先和米花互動，確認精神與狀態，再開始餵食與清理。</span></span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" data-task="wet-food">
+              <span><strong>準備半罐罐頭</strong><span class="meta">用洗碗槽內湯匙挖到小鐵碗，加一點水、加按壓一次份量的磷蝦油，用注射筒抽取 1 cc 歐斯沛保健液加入碗中，一匙牙齒保健粉、些許貓薄荷草、剪一塊乾肉塊為小塊入碗中。</span></span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" data-task="mixins">
+              <span><strong>確認加料用品歸位</strong><span class="meta">磷蝦油、歐斯沛保健液、牙齒保健粉、貓薄荷草與乾肉塊用完後放回原位，避免下次找不到。</span></span>
+            </label>
+          </li>
+        </ul>
+        <ul class="task-list" aria-label="水與機器清單">
+          <li>
+            <label>
+              <input type="checkbox" data-task="feeder">
+              <span><strong>確認自動餵食器</strong><span class="meta">機器會按時出糧，盆子上通常會留一些沒吃完的貓糧。</span></span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" data-task="water">
+              <span><strong>確認飲水機出水</strong><span class="meta">看水盤小洞是否有水湧出；前面板下方圓鍵亮藍光且有出水即正常。</span></span>
+            </label>
+          </li>
+        </ul>
+        <ul class="task-list" aria-label="清理清單">
+          <li>
+            <label>
+              <input type="checkbox" data-task="litter">
+              <span><strong>清貓砂並補砂</strong><span class="meta">貓砂和便便皆丟入貓砂盆旁的加蓋垃圾筒；清完補四分之一砂瓢。</span></span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" data-task="trash">
+              <span><strong>處理剩食、回收與垃圾</strong><span class="meta">剩食放入冰箱小鐵鍋；空罐稍微沖水後放流理台或後陽台回收筒。</span></span>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="button-row">
+        <button type="button" id="resetChecklist" class="secondary">重設清單</button>
+        <button type="button" onclick="window.print()">列印照顧指南</button>
+      </div>
+    </section>
+
+    <section id="food" aria-labelledby="food-title">
+      <div class="section-layout">
+        <div>
+          <h2 id="food-title">罐頭、自動餵食器與加料</h2>
+          <ul class="steps">
+            <li><span class="step-number">1</span>每次給半罐罐頭，用洗碗槽內湯匙挖取，放入小鐵碗。</li>
+            <li><span class="step-number">2</span>加一點水、按壓一次份量的磷蝦油、用注射筒抽取 1 cc 歐斯沛保健液加入碗中、一匙牙齒保健粉、些許貓薄荷草，並剪一塊乾肉塊成小塊放入碗中。</li>
+            <li><span class="step-number">3</span>注射筒每次使用完後，在水龍頭下再吸些水然後推出，反覆數次作清潔。</li>
+            <li><span class="step-number">4</span>磷蝦油是因米花腿關節問題，獸醫建議用來消炎止痛。</li>
+            <li><span class="step-number">5</span>未用完的罐頭用黃色萬用塑膠蓋蓋好，放回冰箱下次使用。</li>
+            <li><span class="step-number">6</span>碗內未吃完的食物請清到冰箱內的小鐵鍋，避免倒入垃圾筒或水槽後發臭。</li>
+            <li><span class="step-number">7</span>自動餵食器會按時出乾糧，盆子上通常會有一些沒吃完的貓糧。</li>
+            <li><span class="step-number">8</span>Wellness 和 Temptation 零食每天各餵食 8 小塊以內份量。</li>
+          </ul>
+        </div>
+        <div class="photo-grid" aria-label="食物用品照片">
+          <figure>
+            <img src="docs/canned-food-yellow-lid.jpg" alt="米花罐頭與黃色萬用蓋">
+            <figcaption>罐頭每次使用半罐，未用完請蓋上黃色萬用蓋後冷藏。</figcaption>
+          </figure>
+          <figure>
+            <img src="docs/krill-oil.jpg" alt="磷蝦油瓶">
+            <figcaption>磷蝦油每次按壓一次份量，加在罐頭裡。</figcaption>
+          </figure>
+          <figure>
+            <img src="docs/dental-powder.jpg" alt="牙齒保健粉罐">
+            <figcaption>牙齒保健粉每次一匙，拌入罐頭。</figcaption>
+          </figure>
+          <figure>
+            <img src="docs/catnip.jpg" alt="貓薄荷草罐">
+            <figcaption>貓薄荷草每次加些許，拌入罐頭。</figcaption>
+          </figure>
+          <figure>
+            <img src="docs/osteo-supplement-liquid.jpg" alt="歐斯沛保健液瓶">
+            <figcaption>歐斯沛保健液每次用注射筒抽取 1 cc；乾肉塊需剪成小塊後加入碗中。</figcaption>
+          </figure>
+          <figure>
+            <img src="docs/dry-meat-blocks.jpg" alt="乾肉塊盒">
+            <figcaption>乾肉塊每次剪一塊成小塊，加入罐頭碗中。</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="water" aria-labelledby="water-title">
+      <div class="section-layout">
+        <div>
+          <h2 id="water-title">飲水機</h2>
+          <ul class="steps">
+            <li><span class="step-number">1</span>確認飲水機有在出水：按壓一次面板按鍵後，水盤小洞應該有水湧出。</li>
+            <li><span class="step-number">2</span>按前面板下方圓鍵會亮藍光；按鍵後有出水即功能正常，飲水機會自動間歇供水。</li>
+            <li><span class="step-number">3</span>約每五天補一次水。補水時用水壺裝自來水，翻開最上方白色水盤，從透明盤上的大洞倒入。</li>
+          </ul>
+        </div>
+        <div class="photo-grid" aria-label="飲水用品照片">
+          <figure>
+            <div class="annotated-photo">
+              <img src="docs/homerunpet-water-fountain.jpg" alt="米花飲水機，正中央下方圓鈕已標示">
+              <span class="photo-marker" aria-hidden="true"></span>
+              <span class="photo-marker-label" aria-hidden="true">按鍵</span>
+            </div>
+            <figcaption>飲水機正面。正中央下方圓鈕為面板按鍵。</figcaption>
+          </figure>
+          <figure>
+            <img src="docs/water-fountain-fill-hole.jpg" alt="飲水機加水孔">
+            <figcaption>掀開上方白色水盤後，可看到透明盤上的加水孔。</figcaption>
+          </figure>
+          <figure>
+            <img src="docs/water-kettle.jpg" alt="加水用水壺">
+            <figcaption>用水壺裝自來水後，從飲水機水盤下方的大孔補水。</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="litter" aria-labelledby="litter-title">
+      <div class="section-layout">
+        <div>
+          <h2 id="litter-title">貓砂盆</h2>
+          <ul class="steps">
+            <li><span class="step-number">1</span>用砂鏟取出便便與被尿凝結的砂團。凝結砂不易沾黏貓砂盆，稍微用力鏟一下即可整塊取出。</li>
+            <li><span class="step-number">2</span>貓砂和便便皆丟入貓砂盆旁的加蓋垃圾筒。</li>
+            <li><span class="step-number">3</span>每次清理後，用砂瓢從旁邊藍色桶中取四分之一瓢貓砂加入貓砂盆，盡量不要讓貓砂盆見底。</li>
+          </ul>
+          <p class="note-box warning"><strong>垃圾筒味道太重時</strong>取出垃圾袋並打結封口，換上新的垃圾袋。封口的垃圾袋放在回收筒內。</p>
+        </div>
+        <div class="photo-grid" aria-label="貓砂用品照片">
+          <figure>
+            <img src="docs/litter-box.jpg" alt="米花貓砂盆">
+            <figcaption>貓砂盆。清理後補四分之一砂瓢，盡量不要讓貓砂盆見底。</figcaption>
+          </figure>
+          <figure>
+            <img src="docs/litter-trash-bin.jpg" alt="貓砂盆旁加蓋垃圾筒">
+            <figcaption>貓砂和便便皆丟入貓砂盆旁的加蓋垃圾筒。</figcaption>
+          </figure>
+          <figure>
+            <img src="docs/litter-scoop-and-bucket.jpg" alt="貓砂鏟、砂瓢與貓砂桶">
+            <figcaption>砂鏟、砂瓢與藍色貓砂桶。清理後從桶中補砂。</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="supplies" aria-labelledby="supplies-title">
+      <h2 id="supplies-title">用品照片</h2>
+      <p class="source">以下照片來自 <code>docs</code> 資料夾，保留給照顧者快速辨識包裝與用品。</p>
+      <div class="supply-grid">
+        <article class="supply-card">
+          <img src="docs/wellness-dental-treats.jpg" alt="Wellness 潔牙零食">
+          <div><h3>Wellness 潔牙零食</h3><p>零食用品。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/temptations-treats.jpg" alt="Temptation 零食">
+          <div><h3>Temptation 零食</h3><p>零食用品。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/canned-food-yellow-lid.jpg" alt="罐頭">
+          <div><h3>罐頭</h3><p>每次半罐，加水、磷蝦油、歐斯沛保健液、牙齒保健粉、貓薄荷草與剪小塊的乾肉塊。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/osteo-supplement-liquid.jpg" alt="歐斯沛保健液">
+          <div><h3>歐斯沛保健液</h3><p>每次用注射筒抽取 1 cc 加入罐頭；用後以水龍頭吸水推出，反覆數次清潔注射筒。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/dry-meat-blocks.jpg" alt="乾肉塊">
+          <div><h3>乾肉塊</h3><p>每次剪一塊成小塊，加入罐頭碗中。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/catnip.jpg" alt="貓薄荷草">
+          <div><h3>貓薄荷草</h3><p>每次加些許，拌入罐頭。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/dental-powder.jpg" alt="牙齒保健粉">
+          <div><h3>牙齒保健粉</h3><p>每次一匙，拌入罐頭。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/krill-oil.jpg" alt="磷蝦油">
+          <div><h3>磷蝦油</h3><p>每次按壓一次份量，加入罐頭。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/water-kettle.jpg" alt="加水用水壺">
+          <div><h3>加水水壺</h3><p>補飲水機用。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/catit-creamy-treats.jpg" alt="Catit Creamy 肉泥">
+          <div><h3>Catit Creamy 肉泥</h3><p>零食用品。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/litter-box.jpg" alt="貓砂盆">
+          <div><h3>貓砂盆</h3><p>清理後補四分之一砂瓢。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/litter-trash-bin.jpg" alt="貓砂垃圾筒">
+          <div><h3>貓砂垃圾筒</h3><p>貓砂和便便皆丟入此垃圾筒。</p></div>
+        </article>
+        <article class="supply-card">
+          <img src="docs/litter-scoop-and-bucket.jpg" alt="貓砂鏟、砂瓢與貓砂桶">
+          <div><h3>砂鏟與貓砂桶</h3><p>清理後從藍色桶中補砂。</p></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <section aria-labelledby="other-notes-title">
+      <h2 id="other-notes-title">其他注意事項</h2>
+      <ol>
+        <li>逢週五幫前陽台植物澆水。</li>
+        <li>注意後陽台門保持開啟。</li>
+        <li>每次到訪時可開前陽台落地窗和後陽台窗保持通風，離開時關上以防大雨。</li>
+      </ol>
+    </section>
+  </footer>
+
+  <script>
+    const storageKey = "mika-care-checklist";
+    const inputs = Array.from(document.querySelectorAll("[data-task]"));
+
+    function readState() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function writeState() {
+      const state = Object.fromEntries(inputs.map((input) => [input.dataset.task, input.checked]));
+      localStorage.setItem(storageKey, JSON.stringify(state));
+    }
+
+    const saved = readState();
+    inputs.forEach((input) => {
+      input.checked = Boolean(saved[input.dataset.task]);
+      input.addEventListener("change", writeState);
+    });
+
+    document.getElementById("resetChecklist").addEventListener("click", () => {
+      inputs.forEach((input) => {
+        input.checked = false;
+      });
+      writeState();
+    });
+  </script>
+</body>
+</html>
