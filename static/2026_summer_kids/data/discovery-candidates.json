@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-05-11",
+    "updatedAt": "2026-05-18",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "2 new candidate(s) discovered."
+    "lastMessage": "1 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -384,6 +384,48 @@
           "5/10"
         ],
         "contentHash": "353e717466e65ba8"
+      }
+    },
+    {
+      "id": "candidate-taipei-023a4998cf",
+      "city": "台北",
+      "status": "candidate",
+      "title": "2026全國國民中小學童軍大露營 | 臺北市立陽明高級中學",
+      "url": "https://www.ymsh.tp.edu.tw/news/2026%E5%85%A8%E5%9C%8B%E5%9C%8B%E6%B0%91%E4%B8%AD%E5%B0%8F%E5%AD%B8%E7%AB%A5%E8%BB%8D%E5%A4%A7%E9%9C%B2%E7%87%9F",
+      "sourceTitle": "Tp",
+      "description": "營隊資訊 ( 461 ) 活動快報 ( 7,824 ) 新生入學 ( 261 ) 防疫專區 ( 113 ) 教師研習 ( 2,963 ) 系統公告 ( 28 ) ::: 【2026-04-17】115 年「『英語文思辨簡報比賽』研析攻略 3.0 – 『技高辨力店』 ... 【2026-04-17】國立臺灣藝術大學 暑期大學先修課程報名 ·",
+      "dateSnippets": [
+        "2026-04-17",
+        "2026-04-28",
+        "2026-04-09",
+        "2026-03-31",
+        "2026 年 4 月 17 日",
+        "4月8日",
+        "7月3日",
+        "7月6日",
+        "4月30日",
+        "5月8日",
+        "5月15日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-05-18",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026-04-28",
+          "2026-04-17",
+          "2026-04-09",
+          "2026-03-31",
+          "2026 年 4 月 17 日",
+          "4月8日",
+          "7月3日",
+          "7月6日",
+          "4月30日",
+          "5月8日",
+          "5月15日"
+        ],
+        "contentHash": "916ec9f188bd5632"
       }
     }
   ]
