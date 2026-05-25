@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-05-18",
+    "updatedAt": "2026-05-25",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "1 new candidate(s) discovered."
+    "lastMessage": "3 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -426,6 +426,72 @@
           "5月15日"
         ],
         "contentHash": "916ec9f188bd5632"
+      }
+    },
+    {
+      "id": "candidate-taipei-c2510c1925",
+      "city": "台北",
+      "status": "candidate",
+      "title": "2026臺北兒童藝術節 | 臺北旅遊網",
+      "url": "https://travel.taipei/zh-tw/event-calendar/details/66374",
+      "sourceTitle": "Taipei Travel",
+      "description": "臺北兒童藝術節是為兒童及青少年規劃的藝術節慶，致力於提供與成人劇場同樣精緻、藝術價值成熟的親子藝術創作，除引進優質國際兒童表演藝術節目，透過前進社區、校園演出與戶外演出等免費活動，將表演藝術帶進...",
+      "dateSnippets": [
+        "2026-06-28",
+        "2026-08-02"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-05-25",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026-06-28",
+          "2026-08-02"
+        ],
+        "contentHash": "9a1be976f526a66b"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-c9c84befdf",
+      "city": "新北",
+      "status": "candidate",
+      "title": "新北市立圖書館各分館館藏特色主題一覽表",
+      "url": "https://www.library.ntpc.gov.tw/download/22440;jsessionid=B9BD17EA94F329FC9E6D38C4A13DAA6E",
+      "sourceTitle": "Ntpc",
+      "description": "三重分館即將變身為新北...一系列活動，邀大家一起回到圖書館做最後巡禮，透過音樂、表演與空間互動，留下美好的閱讀記憶。 · 當巴黎的風，吹進新北的五月天，詩，也悄悄走進我們的生活。 五股守讓堂2026新北詩歌...",
+      "dateSnippets": [],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-05-25",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [],
+        "contentHash": "4ab90165bc998431"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-68e949a771",
+      "city": "新北",
+      "status": "candidate",
+      "title": "新北市立圖書館公共服務申請書",
+      "url": "https://www.library.ntpc.gov.tw/download/c360dc7cd7534ce4ab36b2f93a5f7e5d;jsessionid=5F4522070C9512FB71E81BF1125E9063",
+      "sourceTitle": "Ntpc",
+      "description": "三重分館即將變身為新北...一系列活動，邀大家一起回到圖書館做最後巡禮，透過音樂、表演與空間互動，留下美好的閱讀記憶。 · 當巴黎的風，吹進新北的五月天，詩，也悄悄走進我們的生活。 五股守讓堂2026新北詩歌...",
+      "dateSnippets": [
+        "8/5",
+        "9/9"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-05-25",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "8/5",
+          "9/9"
+        ],
+        "contentHash": "51fbc3c1fb0f8335"
       }
     }
   ]
