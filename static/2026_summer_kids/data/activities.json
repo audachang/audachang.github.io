@@ -1,13 +1,13 @@
 {
   "meta": {
-    "updatedAt": "2026-06-05",
+    "updatedAt": "2026-06-06",
     "audience": "11 歲 / 國小五年級",
     "sourcePolicy": "活動資料以市府、圖書館、售票平台等官方頁面為優先來源。自動更新腳本會檢查來源可讀性、記錄疑似日期線索，並重新產生 Markdown 文件；語意判斷仍以人工確認為準。"
   },
   "activities": [
     {
       "id": "taoyuan-01",
-      "lastChecked": "2026-06-05",
+      "lastChecked": "2026-06-06",
       "city": "桃園",
       "status": "ready",
       "title": "蘆竹區婦幼館暑期育樂營",
@@ -30,7 +30,7 @@
           "ok": true,
           "status": 200,
           "title": "2026年桃園市蘆竹區婦幼館暑期育樂營暨兒童權利公約宣導活動自115年5月15日星期五8時開放報名",
-          "contentHash": "6e448617bba9540c",
+          "contentHash": "c95660973be5aebe",
           "dateSnippets": [
             "5月15日",
             "7月1日",
@@ -38,14 +38,14 @@
             "5月29日",
             "2022年6月15日"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         }
       ]
     },
     {
       "id": "taoyuan-02",
-      "lastChecked": "2026-06-05",
+      "lastChecked": "2026-06-06",
       "city": "桃園",
       "status": "ready",
       "title": "桃園市立圖書館「童演童語」大型兒童劇",
@@ -68,7 +68,7 @@
           "ok": true,
           "status": 200,
           "title": "【全市活動】2026童心啟航！4/26～9/5 童演童語大型兒童劇熱鬧開跑 - 桃園市立圖書館",
-          "contentHash": "6b765a5251c3e5d6",
+          "contentHash": "f8a51003eab8f0d0",
           "dateSnippets": [
             "4/26",
             "9/5",
@@ -83,14 +83,14 @@
             "6月28日",
             "06月01日"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         }
       ]
     },
     {
       "id": "taoyuan-03",
-      "lastChecked": "2026-06-05",
+      "lastChecked": "2026-06-06",
       "city": "桃園",
       "status": "ready",
       "title": "桃園市立圖書館「童演童語」小型兒童劇",
@@ -113,7 +113,7 @@
           "ok": true,
           "status": 200,
           "title": "【全市活動】2026年童演童語小型兒童劇歡樂登場 - 桃園市立圖書館",
-          "contentHash": "d0fb04d494420fd5",
+          "contentHash": "33110e51191a5477",
           "dateSnippets": [
             "5/9",
             "2026-05-09",
@@ -128,14 +128,14 @@
             "2026年6月1日",
             "2026年6月25日"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         }
       ]
     },
     {
       "id": "taoyuan-04",
-      "lastChecked": "2026-06-05",
+      "lastChecked": "2026-06-06",
       "city": "桃園",
       "status": "pending",
       "title": "2026 桃園兒童藝術節",
@@ -162,40 +162,27 @@
           "ok": true,
           "status": 200,
           "title": "桃園兒童藝術節",
-          "contentHash": "d1727c735131d394",
+          "contentHash": "634543501f1ab8c4",
           "dateSnippets": [],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         },
         {
           "label": "桃園市觀光行事曆",
           "url": "https://www.tycg.gov.tw/NewsPage_Content.aspx?n=16786&s=1601961",
-          "ok": true,
-          "status": 200,
-          "title": "桃園市政府",
-          "contentHash": "b432a7b0d6384874",
-          "dateSnippets": [
-            "5月29日",
-            "7月31日",
-            "6月7日",
-            "6月1日",
-            "15/03",
-            "15/02",
-            "15/01",
-            "15/06",
-            "15/05",
-            "15/04",
-            "15/09",
-            "15/07"
-          ],
-          "checkedAt": "2026-06-05",
+          "ok": false,
+          "status": 428,
+          "title": "Anti-DDoS Flood Protection",
+          "contentHash": "2fe337fcd16418e9",
+          "dateSnippets": [],
+          "checkedAt": "2026-06-06",
           "error": null
         }
       ]
     },
     {
       "id": "taipei-01",
-      "lastChecked": "2026-06-05",
+      "lastChecked": "2026-06-06",
       "city": "台北",
       "status": "ready",
       "title": "2026 臺北兒童藝術節",
@@ -226,12 +213,12 @@
           "ok": true,
           "status": 200,
           "title": "2026臺北兒童藝術節 | 臺北旅遊網",
-          "contentHash": "edbfa3bff1f6ae82",
+          "contentHash": "f8ecdcb6200cc76c",
           "dateSnippets": [
             "2026-06-30",
             "2026-08-06"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         },
         {
@@ -249,7 +236,7 @@
             "6/11",
             "0/2"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         },
         {
@@ -258,7 +245,7 @@
           "ok": true,
           "status": 200,
           "title": "2026臺北兒童藝術節：《幾米男孩的100次勇敢》 ● 臺北表演藝術中心",
-          "contentHash": "6fdc41955ede1d7f",
+          "contentHash": "337f981f5ba76768",
           "dateSnippets": [
             "2026-07-17",
             "2026-07-18",
@@ -267,14 +254,14 @@
             "2026-07-25",
             "2026-07-26"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         }
       ]
     },
     {
       "id": "taipei-02",
-      "lastChecked": "2026-06-05",
+      "lastChecked": "2026-06-06",
       "city": "台北",
       "status": "pending",
       "title": "臺北市國民小學暑期體驗學習營",
@@ -301,7 +288,7 @@
           "ok": true,
           "status": 200,
           "title": "臺北市國民小學暑期體驗營",
-          "contentHash": "f1ee67f83fff57df",
+          "contentHash": "1eb3742efb905c15",
           "dateSnippets": [
             "7/01",
             "7/04",
@@ -316,7 +303,7 @@
             "8/02",
             "8/08"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         },
         {
@@ -325,7 +312,7 @@
           "ok": true,
           "status": 200,
           "title": "臺北市政府教育局-國小-臺北市115年度國民小學學生暑期體驗學習營「城市探險 夢想無垠」將於115/5/12開始報名，歡迎踴躍報名參加!",
-          "contentHash": "e5989099e0ddf550",
+          "contentHash": "056b65be3d82847f",
           "dateSnippets": [
             "15/5",
             "5月12日",
@@ -335,14 +322,14 @@
             "5月25日",
             "6月4日"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         }
       ]
     },
     {
       "id": "taipei-03",
-      "lastChecked": "2026-06-05",
+      "lastChecked": "2026-06-06",
       "city": "台北",
       "status": "pending",
       "title": "臺北市立圖書館暑期閱讀活動",
@@ -365,16 +352,16 @@
           "ok": true,
           "status": 200,
           "title": "臺北市立圖書館閱讀網-暑期閱讀活動",
-          "contentHash": "050d6e9d08d20866",
+          "contentHash": "df3992b8e7262150",
           "dateSnippets": [],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         }
       ]
     },
     {
       "id": "new-taipei-01",
-      "lastChecked": "2026-06-05",
+      "lastChecked": "2026-06-06",
       "city": "新北",
       "status": "ready",
       "title": "萬里分館 夏日海洋偵探營~解謎冒險與守護地球",
@@ -401,10 +388,12 @@
           "ok": true,
           "status": 200,
           "title": "新北市圖-活動報名",
-          "contentHash": "bcf2c292c4c02849",
+          "contentHash": "d7ae41f3f74da5fe",
           "dateSnippets": [
             "9月14日",
             "8月8日",
+            "2026年05月03日",
+            "2026年06月27日",
             "2026年07月04日",
             "2026年08月29日",
             "2026年06月01日",
@@ -412,11 +401,9 @@
             "2026年07月02日",
             "2026年08月24日",
             "2026年06月14日",
-            "6月27日",
-            "2026年06月27日",
-            "2026年05月09日"
+            "6月27日"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         },
         {
@@ -425,14 +412,14 @@
           "ok": true,
           "status": 200,
           "title": "新北市立圖書館",
-          "contentHash": "213bd58ac5e23e9e",
+          "contentHash": "ef4c577332c77d2e",
           "dateSnippets": [
             "9月14日",
             "8月8日",
+            "6月1日",
             "6月8日",
             "6月9日",
             "6月5日",
-            "6月1日",
             "5月2日",
             "4月1日",
             "8月31日",
@@ -440,14 +427,14 @@
             "5/2",
             "7/31"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         }
       ]
     },
     {
       "id": "new-taipei-02",
-      "lastChecked": "2026-06-05",
+      "lastChecked": "2026-06-06",
       "city": "新北",
       "status": "ready",
       "title": "金山分館 夏日魔法創客營~魔法與科學創作樂園",
@@ -474,10 +461,12 @@
           "ok": true,
           "status": 200,
           "title": "新北市圖-活動報名",
-          "contentHash": "bcf2c292c4c02849",
+          "contentHash": "d7ae41f3f74da5fe",
           "dateSnippets": [
             "9月14日",
             "8月8日",
+            "2026年05月03日",
+            "2026年06月27日",
             "2026年07月04日",
             "2026年08月29日",
             "2026年06月01日",
@@ -485,11 +474,9 @@
             "2026年07月02日",
             "2026年08月24日",
             "2026年06月14日",
-            "6月27日",
-            "2026年06月27日",
-            "2026年05月09日"
+            "6月27日"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         },
         {
@@ -498,14 +485,14 @@
           "ok": true,
           "status": 200,
           "title": "新北市立圖書館",
-          "contentHash": "213bd58ac5e23e9e",
+          "contentHash": "ef4c577332c77d2e",
           "dateSnippets": [
             "9月14日",
             "8月8日",
+            "6月1日",
             "6月8日",
             "6月9日",
             "6月5日",
-            "6月1日",
             "5月2日",
             "4月1日",
             "8月31日",
@@ -513,14 +500,14 @@
             "5/2",
             "7/31"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         }
       ]
     },
     {
       "id": "new-taipei-03",
-      "lastChecked": "2026-06-05",
+      "lastChecked": "2026-06-06",
       "city": "新北",
       "status": "pending",
       "title": "新北市兒童藝術節",
@@ -555,7 +542,7 @@
           "dateSnippets": [
             "2026-06-05"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         },
         {
@@ -568,7 +555,7 @@
           "dateSnippets": [
             "2026-06-05"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         },
         {
@@ -591,7 +578,7 @@
             "2026-05-28",
             "2026-06-05"
           ],
-          "checkedAt": "2026-06-05",
+          "checkedAt": "2026-06-06",
           "error": null
         }
       ]
