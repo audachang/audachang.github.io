@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-06-01",
+    "updatedAt": "2026-06-08",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "0 new candidate(s) discovered."
+    "lastMessage": "3 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -492,6 +492,109 @@
           "9/9"
         ],
         "contentHash": "51fbc3c1fb0f8335"
+      }
+    },
+    {
+      "id": "candidate-taoyuan-75ee25f759",
+      "city": "桃園",
+      "status": "candidate",
+      "title": "2026暑假兒童生態夏令營 - 桃園市蘆竹區公所",
+      "url": "https://www.luzhu.tycg.gov.tw/News_Content.aspx?n=5714&s=1613963",
+      "sourceTitle": "Tycg",
+      "description": "1. 2024蘆竹炫YA農遊季活動於113年6月1日及6月2日辦理，其中地景科技燈飾展期延續至113年8月31日(每日點燈時間為18時至22時)。2. 燈飾展區地點:大古山登山步道公園(桃園市蘆竹區大古路228號旁)坑子溪休閒農業區遊客服務中心...",
+      "dateSnippets": [
+        "6月1日",
+        "6月2日",
+        "8月31日",
+        "6月15日",
+        "8月21日",
+        "2022年6月15日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-06-08",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "6月15日",
+          "8月21日",
+          "2022年6月15日"
+        ],
+        "contentHash": "8f6d11180c37520e"
+      }
+    },
+    {
+      "id": "candidate-taoyuan-13be1157fd",
+      "city": "桃園",
+      "status": "candidate",
+      "title": "【全市活動】2026童演童語DIY+夏令營+電影欣賞 一起玩中學、樂中讀 - 桃園市立圖書館",
+      "url": "https://www.typl.gov.tw/zh-tw/activity/Content/9550",
+      "sourceTitle": "Typl",
+      "description": "5/31～10/17，歡樂開場，一...名連結 5/31(日)14:00-16:00心情轉轉盤：今天我是什麼顏色？總館3樓親子小學堂點我報名(5/1下午4點開放報名) 6/28(日)14:00-16:00冷靜守護戰：奪回小火龍的平靜之力草漯分館-4樓研習教室點我報名(6/1下午4點開放報名) 7/6(一)14:00-16:00冷同理… ...",
+      "dateSnippets": [
+        "5/31",
+        "10/17",
+        "5/1",
+        "6/28",
+        "6/1",
+        "7/6",
+        "2026-05-31",
+        "2026-10-17",
+        "6/6",
+        "8/25",
+        "7/25",
+        "9/26",
+        "8/26",
+        "7/16",
+        "6/16",
+        "8/28"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-06-08",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "5/31",
+          "2026-05-31",
+          "2026-10-17",
+          "10/17",
+          "5/1",
+          "6/28",
+          "6/1",
+          "7/6",
+          "6/6",
+          "8/25",
+          "7/25",
+          "9/26",
+          "8/26",
+          "7/16",
+          "6/16",
+          "8/28"
+        ],
+        "contentHash": "3831a0e706f7a349"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-62de3b04e8",
+      "city": "新北",
+      "status": "candidate",
+      "title": "2026第四十四屆大墩陽光夏令營，暑假7月6日～8月28日舉辦",
+      "url": "https://sanchong.ntpc.gov.tw/home.jsp?act=be4f48068b2b0031&dataserno=4c316ff62738bb74eb4896face9fa4d4&id=36678cac09f774f3",
+      "sourceTitle": "Ntpc",
+      "description": "一、2026第四十四屆大墩陽光兒童夏令營，營隊計有動物醫學院一五大獸醫探險任務、小小烘焙師─創作美學營、超級英雄-動力積木管、迪士尼美語表演一歡樂大冒險、福爾摩斯少年偵探隊、麥塊程式遊戲設計營、小小漫畫家、小小魔術師─口才表演藝術營、空中霸主─無人機科技營、日式劍術運動養成營、勁舞學園─星光街舞營、熱血閃電─足球運動營、灌籃高手─籃球運動營、獨立成長─冒險過夜營(可國小、國高中)、大墩陽光偏鄉志工服務隊(國高中以上)。 二、活動報名網址 http://www.sng.idv.tw 全國服務專線:(04)37007883",
+      "dateSnippets": [
+        "7月6日",
+        "8月28日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-06-08",
+      "pageCheck": {
+        "ok": false,
+        "status": null,
+        "dateSnippets": [],
+        "contentHash": null,
+        "error": "fetch failed"
       }
     }
   ]
