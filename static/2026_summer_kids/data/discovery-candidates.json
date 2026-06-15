@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-06-08",
+    "updatedAt": "2026-06-15",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "3 new candidate(s) discovered."
+    "lastMessage": "2 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -595,6 +595,50 @@
         "dateSnippets": [],
         "contentHash": null,
         "error": "fetch failed"
+      }
+    },
+    {
+      "id": "candidate-taoyuan-c0a378b7f1",
+      "city": "桃園",
+      "status": "candidate",
+      "title": "中華大墩教育推廣協會：2026第四十四屆大墩陽光夏令營，暑假7月6日～8月28日舉辦。",
+      "url": "https://www.dayuan.tycg.gov.tw/News_Content.aspx?n=7621&s=1619912",
+      "sourceTitle": "Tycg",
+      "description": "資料提供單位：桃園市大園區公所 · 一、2026第四十四屆 大墩陽光兒童夏令營 ，營隊計有動物醫學院 一五大獸醫探險任務、小小烘焙師─創作美學營、超級英雄-動力 積木管、迪士尼美語表演一歡樂大冒險、福爾摩斯少年偵...",
+      "dateSnippets": [
+        "7月6日",
+        "8月28日",
+        "2022年6月15日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-06-15",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "7月6日",
+          "8月28日",
+          "2022年6月15日"
+        ],
+        "contentHash": "0bc709dcec5e77cb"
+      }
+    },
+    {
+      "id": "candidate-taipei-6341b8bd4f",
+      "city": "台北",
+      "status": "candidate",
+      "title": "臺北市立圖書館-總館-全-「2026閱讀MVP」 從閱讀出發，全力衝刺夢想！",
+      "url": "https://tpml.gov.taipei/News_Content.aspx?n=E0F2D70C9BCDCECB&s=2754D8AC8928D283&sms=9D72E82EC16F3E64",
+      "sourceTitle": "Gov",
+      "description": "今年北市圖與中信銀行合作辦理「2026閱讀MVP」，誠摯邀請家長與孩子一同參與，在閱讀中感受運動選手追夢的堅持與熱情，在運動中發現書本裡的無限想像力 。",
+      "dateSnippets": [],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-06-15",
+      "pageCheck": {
+        "ok": false,
+        "status": 404,
+        "dateSnippets": [],
+        "contentHash": "e6b65f3096939a8e"
       }
     }
   ]
