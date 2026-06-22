@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-06-15",
+    "updatedAt": "2026-06-22",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "2 new candidate(s) discovered."
+    "lastMessage": "4 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -639,6 +639,130 @@
         "status": 404,
         "dateSnippets": [],
         "contentHash": "e6b65f3096939a8e"
+      }
+    },
+    {
+      "id": "candidate-taoyuan-9b0af7c25e",
+      "city": "桃園",
+      "status": "candidate",
+      "title": "兒童玩具圖書館【光影體驗區】 - 桃園市立圖書館",
+      "url": "https://www.typl.gov.tw/zh-tw/Activity/Content/9127",
+      "sourceTitle": "Typl",
+      "description": "115年【梅好楊梅 閱讀生活】系列活動--暑期的生態探險~一起去丸子蟲星球尋寶 2026.07.11",
+      "dateSnippets": [
+        "2026.07.11",
+        "1/3",
+        "2026-01-03",
+        "2026-12-31",
+        "2026.12.05",
+        "2026.11.21",
+        "2026.11.14",
+        "2026.10.24"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-06-22",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "1/3",
+          "2026-01-03",
+          "2026-12-31",
+          "2026.12.05",
+          "2026.11.21",
+          "2026.11.14",
+          "2026.10.24"
+        ],
+        "contentHash": "02b051dee45520dc"
+      }
+    },
+    {
+      "id": "candidate-taipei-abd57aa736",
+      "city": "台北",
+      "status": "candidate",
+      "title": "臺北市政府全球資訊網-市府新聞稿-2026動物園暑期營隊6/15開放報名！",
+      "url": "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=B58D930CD5E581CD&sms=72544237BBE4C5F6",
+      "sourceTitle": "Gov",
+      "description": "大小朋友們千呼萬喚的動...難忘的暑假。 · 臺北市立動物園今(2026)年推出多種主題暑期營隊：鳥類百科「少年ㄟ鳥『視』界」體驗營，帶領升國小三年級至六年級學童，拜訪兒童動物區、鳥園、企鵝館等區域的鳥居民，教你從現場觀察發現鳥類的魅力，邁出成為賞鳥達人的第一步。「夜訪貓空最佳生態筍友」親子體驗營，透過自然觀察與採綠竹筍體驗活動，結合...",
+      "dateSnippets": [
+        "6/15",
+        "6月15日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-06-22",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "6/15",
+          "6月15日"
+        ],
+        "contentHash": "05698f6daddc64f7"
+      }
+    },
+    {
+      "id": "candidate-taipei-7e3b8cbe8a",
+      "city": "台北",
+      "status": "candidate",
+      "title": "2026暑假營隊—實踐大學媒體傳達設計系辦理「2026暑期高中生營隊─80%靈感靠調配」 | 臺北市立中崙高級中學",
+      "url": "https://www.zlsh.tp.edu.tw/news/2026%E6%9A%91%E5%81%87%E7%87%9F%E9%9A%8A-%E5%AF%A6%E8%B8%90%E5%A4%A7%E5%AD%B8%E5%AA%92%E9%AB%94%E5%82%B3%E9%81%94%E8%A8%AD%E8%A8%88%E7%B3%BB%E8%BE%A6%E7%90%86%E3%80%8C2026%E6%9A%91%E6%9C%9F",
+      "sourceTitle": "Tp",
+      "description": "中華民國兒童福利聯盟基金會「少年+」據點辦理「暑假生涯探索營隊—轉生成為職涯冒險家」及第三季「人際關係主題活動-童話沒有教的青春事及小聚系列」事宜",
+      "dateSnippets": [
+        "2026-06-17",
+        "2026-06-16",
+        "2026-06-15",
+        "2026-06-12",
+        "2026-06-10",
+        "2026 年 4 月 09 日",
+        "7月15日",
+        "6月16日",
+        "2026-04-09",
+        "2026-04-08"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-06-22",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026-06-17",
+          "2026-06-16",
+          "2026-06-15",
+          "2026-06-12",
+          "2026-06-10",
+          "2026 年 4 月 09 日",
+          "7月15日",
+          "6月16日",
+          "2026-04-09",
+          "2026-04-08"
+        ],
+        "contentHash": "99fa2b0d4553ce91"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-bae403381e",
+      "city": "新北",
+      "status": "candidate",
+      "title": "市政新聞-五股暑假首波強檔親子活動！夏日兒童劇7/4熱鬧登場-新北市政府",
+      "url": "https://www.ntpc.gov.tw/ch/home.jsp?dataserno=9403fcf11e16a4266a793b60ef1e9387&id=e8ca970cde5c00e1",
+      "sourceTitle": "Ntpc",
+      "description": "【新北市訊】2026五股夏... 7月4日（六）下午4時至晚間8時，在五股體健防災公園熱鬧開演，當日活動內容有超吸睛互動兒童劇演出、免費童趣設施、美食兌換、宣導好禮及現場豐富摸彩 。活動前...",
+      "dateSnippets": [
+        "7/4",
+        "7月4日",
+        "2026-06-12"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-06-22",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026-06-12",
+          "7月4日"
+        ],
+        "contentHash": "00104034fcc11154"
       }
     }
   ]
