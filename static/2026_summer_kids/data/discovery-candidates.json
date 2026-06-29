@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-06-22",
+    "updatedAt": "2026-06-29",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "4 new candidate(s) discovered."
+    "lastMessage": "1 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -763,6 +763,40 @@
           "7月4日"
         ],
         "contentHash": "00104034fcc11154"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-03fcf05dd9",
+      "city": "新北",
+      "status": "candidate",
+      "title": "「職想玩透透」！新北觀光工廠暑假大冒險開跑五大主題活動串聯18家 邀大小朋友探索產業魅力 | 新北市民會員網",
+      "url": "https://member.ntpc.gov.tw/notice/board/521",
+      "sourceTitle": "Ntpc",
+      "description": "經發局補充，暑假正是親子同遊、安排小旅行的最佳時機，新北市18家觀光工廠及產業文化館不僅提供豐富的體驗活動，也結合文化、教育與產業特色，是兼具知識性與娛樂性的旅遊選擇。歡迎民眾把握暑假期間走訪各館，透過參觀、體驗與互動，深入認識在地產業故事，發掘不一樣的新北魅力。更多活動詳情及報名資訊，請至「來趣新北金發局」臉書粉絲專頁及經發局官網查詢。 ... 5.新北市產業觀光職人手作概念館：7月17日至7月19日在台北世貿中心展覽一館「2026 FUN!嗜100嗜好與手作展」展出。",
+      "dateSnippets": [
+        "7月17日",
+        "7月19日",
+        "2026/06/22",
+        "6月29日",
+        "7月1日",
+        "9月30日",
+        "00/13"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-06-29",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026/06/22",
+          "6月29日",
+          "7月1日",
+          "9月30日",
+          "7月17日",
+          "7月19日",
+          "00/13"
+        ],
+        "contentHash": "1ec3bcebbd5f2b24"
       }
     }
   ]
