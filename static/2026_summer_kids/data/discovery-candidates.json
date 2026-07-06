@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-06-29",
+    "updatedAt": "2026-07-06",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "1 new candidate(s) discovered."
+    "lastMessage": "3 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -797,6 +797,107 @@
           "00/13"
         ],
         "contentHash": "1ec3bcebbd5f2b24"
+      }
+    },
+    {
+      "id": "candidate-taipei-345dc7791c",
+      "city": "台北",
+      "status": "candidate",
+      "title": "臺北市無圍牆環境教育博物館-2026臺北FUN暑假",
+      "url": "https://eemuseum.gov.taipei/cp.aspx?n=66BB93F259B927C7",
+      "sourceTitle": "Gov",
+      "description": "想帶孩子度過一個充實又有意義的暑假嗎？ · 活動7～8月共規劃17場次免費戶外環境教育體驗課程及淨零新生活為主題",
+      "dateSnippets": [
+        "6月18日",
+        "7月20日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-07-06",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "6月18日",
+          "7月20日"
+        ],
+        "contentHash": "b699394737e46e32"
+      }
+    },
+    {
+      "id": "candidate-taipei-bc21604b06",
+      "city": "台北",
+      "status": "candidate",
+      "title": "2026 活動年曆 | 臺北旅遊網",
+      "url": "https://www.travel.taipei/zh-tw/event-calendar/2026?page=1",
+      "sourceTitle": "Taipei Travel",
+      "description": "2026台北霞海城隍文化節─誕隍祭 · 宗教慶典 · 2026-06-14~2026-07-02 · 2026臺北國際龍舟錦標賽 · 運動賽事 · 2026-06-19~2026-06-21 · 2026臺北兒童藝術節 · 觀光旅遊 · 2026-06-30~2026-08-06 · 7-9 月 · 各活動時間以主辦單位最新公告為主 ·",
+      "dateSnippets": [
+        "2026-06-14",
+        "2026-07-02",
+        "2026-06-19",
+        "2026-06-21",
+        "2026-06-30",
+        "2026-08-06"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-07-06",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [],
+        "contentHash": "5c362c0091f9e895"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-40ece170b5",
+      "city": "新北",
+      "status": "candidate",
+      "title": "General Error page",
+      "url": "https://www.library.ntpc.gov.tw/Activity",
+      "sourceTitle": "Ntpc",
+      "description": "暑假將至，新北市立圖書...關係」暑期活動。融合嚴選書展、紓壓手作研習班、感受溝通力講座、讀出心聲故事屋、愛的真諦電影院等多元形式，邀請家長與小朋友探索自身情緒，學習表達對家人、朋友的關懷，了解愛的多種面貌。 · 當巴黎的風，吹進新北的五月天，詩，也悄悄走進我們的生活。 五股守讓堂2026新北詩歌...",
+      "dateSnippets": [
+        "9月14日",
+        "8月8日",
+        "6月1日",
+        "7月6日",
+        "8月31日",
+        "7月13日",
+        "6月25日",
+        "5月2日",
+        "5月30日",
+        "5/2",
+        "7/31",
+        "7/18",
+        "7/25",
+        "8/22",
+        "5/9",
+        "7/4"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-07-06",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "9月14日",
+          "8月8日",
+          "6月1日",
+          "7月6日",
+          "8月31日",
+          "7月13日",
+          "6月25日",
+          "5月2日",
+          "5月30日",
+          "5/2",
+          "7/31",
+          "7/18",
+          "7/25",
+          "8/22",
+          "5/9",
+          "7/4"
+        ],
+        "contentHash": "9fe9f088f782eae6"
       }
     }
   ]
