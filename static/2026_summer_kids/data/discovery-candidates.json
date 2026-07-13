@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-07-06",
+    "updatedAt": "2026-07-13",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "3 new candidate(s) discovered."
+    "lastMessage": "4 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -898,6 +898,136 @@
           "7/4"
         ],
         "contentHash": "9fe9f088f782eae6"
+      }
+    },
+    {
+      "id": "candidate-taoyuan-f469ca5fb6",
+      "city": "桃園",
+      "status": "candidate",
+      "title": "2026第四十四屆大墩陽光兒童夏令營 - 桃園市蘆竹區公所",
+      "url": "https://www.luzhu.tycg.gov.tw/News_Content.aspx?n=5714&s=1620034",
+      "sourceTitle": "Tycg",
+      "description": "2026第四十四屆大墩陽光夏令營，暑假7月6日～8月28日舉辦 · 一、2026第四十四屆大墩陽光兒童夏令營，營隊計有動物醫學院一五大獸醫探險任務、小小烘焙師─創作美學營、超級英雄-動力積木管、迪士尼美語表演一歡樂大...",
+      "dateSnippets": [
+        "7月6日",
+        "8月28日",
+        "2022年6月15日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-07-13",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "7月6日",
+          "8月28日",
+          "2022年6月15日"
+        ],
+        "contentHash": "4cc0877ab24942ae"
+      }
+    },
+    {
+      "id": "candidate-taipei-3cfc5414b7",
+      "city": "台北",
+      "status": "candidate",
+      "title": "臺北市政府教育局-新聞稿-2026臺北教育博覽會推廣「親子共讀」 陪伴學子蘊育自主學習力",
+      "url": "https://www.doe.gov.taipei/News_Content.aspx?n=B3DDF0458F0FFC11&s=F5A6098BC1D2D34B&sms=72544237BBE4C5F6",
+      "sourceTitle": "Gov",
+      "description": "本次親子童書舞台活動透過作繪者對談、故事展演與角色互動，帶領孩子從《小火龍氣象預報》的故事中親近閱讀，學習觀察生活中的變化，並理解情緒與感受的多元樣貌。孩子在聆聽、回應與參與的過程中，不僅能激發想像力，也能培養語言表達、情緒覺察及勇敢面對挑戰的能力。家庭是孩子學習與成長的重要起點，透過親子共讀，家長能以陪伴開啟對話，以故事連結生活，進一步增進親子互動，並為孩子累積穩定的情感支持與培養心理韌性。",
+      "dateSnippets": [
+        "6月7日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-07-13",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "6月7日"
+        ],
+        "contentHash": "26d31a996235a8e8"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-5add0e3fb7",
+      "city": "新北",
+      "status": "candidate",
+      "title": "新北商圈chill一夏邀您一起吹海風、吃美食、玩體驗",
+      "url": "https://www.economic.ntpc.gov.tw/Api/News/Page?id=8226",
+      "sourceTitle": "Ntpc",
+      "description": "蘆洲商圈結合暑假檔期，推出「2026蘆洲夜市王」系列活動，串聯蘆洲特色美食、夜市文化與在地店家，打造最具代表性的夜間商圈品牌。暑假期間將有「蘆洲夜市王」臉書留言抽獎活動，帶領民眾深入體驗蘆洲周邊及夜市生活圈魅力。此外，深受親子家庭喜愛的「蘆洲商圈廟埕文化著色比賽」也將同步登場，預計自6月30日起開放收件至9月5日止，邀請國小學童以畫筆描繪蘆洲廟埕文化與夜市故事，透過親子共同參與，深入認識蘆洲豐厚的人文特色，打造兼具文化教育與商圈互動的暑期活動。活動詳情及報名方式可至蘆洲夜市生活圈臉書。",
+      "dateSnippets": [
+        "6月30日",
+        "9月5日",
+        "2026-06-05",
+        "5月30日",
+        "6月14日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-07-13",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026-06-05",
+          "5月30日",
+          "6月14日",
+          "6月30日",
+          "9月5日"
+        ],
+        "contentHash": "efe4b5131106d035"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-b41949ace1",
+      "city": "新北",
+      "status": "candidate",
+      "title": "2026 歲次丙午年",
+      "url": "https://www.library.ntpc.gov.tw/download/c43bd631b3454a5ea1514e91fa139f2c;jsessionid=BC87BBC45084A1A8EF8C4C90CFC82591",
+      "sourceTitle": "Ntpc",
+      "description": "行動書車突破時間與空間...，以靈活機動的方式深入社區，提供借還書、辦證、主題書展及閱讀推廣等服務。每月巡迴新北市各行政區，將豐富的圖書資源與閱讀服務帶到民眾身邊，打造更便利的閱讀環境，陪伴市民在忙碌之餘享受書香、探索知識。 · 暑假將至，新北市立圖書館辦理逾150場豐富有趣的「讀出好關係」暑期活動。融...",
+      "dateSnippets": [
+        "0/8",
+        "4/4",
+        "4/5",
+        "2025-11-03",
+        "9/8",
+        "73/8",
+        "83/5",
+        "1/5",
+        "5/8",
+        "9/5",
+        "8/1",
+        "34/4",
+        "0/05",
+        "32/39",
+        "2013-11-05",
+        "2004.12.15"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-07-13",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "0/8",
+          "4/4",
+          "4/5",
+          "2025-11-03",
+          "9/8",
+          "73/8",
+          "83/5",
+          "1/5",
+          "5/8",
+          "9/5",
+          "8/1",
+          "34/4",
+          "0/05",
+          "32/39",
+          "2013-11-05",
+          "2004.12.15"
+        ],
+        "contentHash": "99d2921f9511613a"
       }
     }
   ]
