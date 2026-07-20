@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-07-13",
+    "updatedAt": "2026-07-20",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "4 new candidate(s) discovered."
+    "lastMessage": "1 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -1028,6 +1028,33 @@
           "2004.12.15"
         ],
         "contentHash": "99d2921f9511613a"
+      }
+    },
+    {
+      "id": "candidate-taipei-dba3b9f9c5",
+      "city": "台北",
+      "status": "candidate",
+      "title": "2026天母啤酒節 | 臺北旅遊網",
+      "url": "https://www.travel.taipei/zh-tw/activity/details/67506",
+      "sourceTitle": "Taipei Travel",
+      "description": "2026士林農趣生活節－農趣童樂 FUN一夏80 · 2026-07-11～2026-07-22 · 信楽吹來的風展 台灣X日本藝術交流展164 · 2026-07-04～2026-08-31 · 暑假清涼開玩！兒童新樂園PILIGILI水樂園7/4登場 大型水上氣墊、霹靂IP、市集活動，加碼推出水陸聯票，一票暢玩雙重歡樂！293更多活動 ·",
+      "dateSnippets": [
+        "2026-07-11",
+        "2026-07-22",
+        "2026-07-04",
+        "2026-08-31",
+        "7/4",
+        "2024-05-21"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-07-20",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2024-05-21"
+        ],
+        "contentHash": "c1324fa821e3619d"
       }
     }
   ]
