@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-07-20",
+    "updatedAt": "2026-07-27",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "1 new candidate(s) discovered."
+    "lastMessage": "3 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -1055,6 +1055,143 @@
           "2024-05-21"
         ],
         "contentHash": "c1324fa821e3619d"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-be221e67a9",
+      "city": "新北",
+      "status": "candidate",
+      "title": "新北市政府施政成果網|施政成果|新北市兒童藝術節 親子一同歡度快樂暑假",
+      "url": "https://wedid.ntpc.gov.tw/Governance/Detail/8ZDNlYKxPyj1",
+      "sourceTitle": "Ntpc",
+      "description": "2026新北市兒童藝術節以「怪獸叢林」為主題，於7月13日至19日規劃「怪獸基地」、「幻獸谷」、「聲林舞台」、「叢林故事屋」及「奇幻島」五大主題場域，由兒藝節經典IP怪獸帶領大小朋友展開一場充滿想像的叢林探險旅程。其中，「聲林舞台」邀請紙風車劇團、如果兒童劇團，以及法國知名國際巨型木偶與視覺戲劇團隊「Archibald Caramantran」等團體帶來精彩演出；「幻獸谷」則於市民廣場及周邊空間，集結來自韓國、法國、日本及臺灣等地藝術家，共",
+      "dateSnippets": [
+        "7月13日",
+        "7月25日",
+        "8月16日",
+        "7月29日",
+        "8月14日",
+        "8月5日",
+        "8月13日",
+        "7月21日",
+        "7月14日",
+        "7月20日",
+        "7月12日",
+        "7月19日",
+        "6月25日",
+        "7/11",
+        "7/19",
+        "10/5"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-07-27",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "7月25日",
+          "8月16日",
+          "7月29日",
+          "8月14日",
+          "8月5日",
+          "8月13日",
+          "7月13日",
+          "7月21日",
+          "7月14日",
+          "7月20日",
+          "7月12日",
+          "7月19日",
+          "6月25日",
+          "7/11",
+          "7/19",
+          "10/5"
+        ],
+        "contentHash": "762fdcc672fb72f2"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-30768f8f68",
+      "city": "新北",
+      "status": "candidate",
+      "title": "2026新北市兒童藝術節「怪獸叢林」7/11-7/19盛大登場 5大主題場域！跨國獻藝x吸睛演出x藝術裝置x體驗設施 | 新北市文化局",
+      "url": "https://www.culture.ntpc.gov.tw/xmdoc/cont?sid=0Q176574020672683424&xsmsid=0G244578733604637236",
+      "sourceTitle": "Ntpc",
+      "description": "【新北市訊】新北市年度盛事「2026新北市兒童藝術節」將於7月11日至7月19日，每天晚間4點至9點，在新北市市民廣場、新北市府一樓大廳與板橋區府中廣場登場。今年以「怪獸叢林」為主題，結合國內外表演團體與藝術家...",
+      "dateSnippets": [
+        "7/11",
+        "7/19",
+        "7月11日",
+        "7月19日",
+        "2026-07-27",
+        "2026-07-17",
+        "7/18",
+        "2026-07-15",
+        "2026-07-13",
+        "7/13",
+        "2026-07-09",
+        "7月13日",
+        "2026-07-06",
+        "2026-07-04"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-07-27",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026-07-27",
+          "2026-07-17",
+          "7/18",
+          "7/19",
+          "2026-07-15",
+          "2026-07-13",
+          "7/13",
+          "2026-07-09",
+          "7月13日",
+          "2026-07-06",
+          "2026-07-04"
+        ],
+        "contentHash": "b471595f8a8c9fd8"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-bbb583eba8",
+      "city": "新北",
+      "status": "candidate",
+      "title": "【樹林分館】2026「藝文一夏」樹林暑期兒童夏令營活動開跑囉！-新北市立圖書館",
+      "url": "https://www.library.ntpc.gov.tw/singlehtml/ActvInfo?cntId=7b4ad1bbc6a7423fa206a027e8f40d5b",
+      "sourceTitle": "Ntpc",
+      "description": "首頁 > 圖書館資訊 > 活動資訊 > 【樹林分館】 2026「藝文一夏」樹林暑期兒童夏令營活動 開跑囉！ ... 為豐富兒童暑期生活，樹林區公所、新北市立圖書館與樹林區鄉土文化藝文協會共同辦理「2026藝文一夏－樹林暑期兒童夏...",
+      "dateSnippets": [
+        "9月14日",
+        "8月8日",
+        "6/27",
+        "6月24日",
+        "7月9日",
+        "6/13",
+        "6月13日",
+        "6/4",
+        "2026-06-27",
+        "2026-07-27"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-07-27",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "9月14日",
+          "8月8日",
+          "6/27",
+          "6月24日",
+          "7月9日",
+          "6/13",
+          "6月13日",
+          "6/4",
+          "2026-06-27",
+          "2026-07-27"
+        ],
+        "contentHash": "526951f0a187113e"
       }
     }
   ]
