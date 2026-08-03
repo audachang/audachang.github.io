@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-07-27",
+    "updatedAt": "2026-08-03",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "3 new candidate(s) discovered."
+    "lastMessage": "2 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -1192,6 +1192,78 @@
           "2026-07-27"
         ],
         "contentHash": "526951f0a187113e"
+      }
+    },
+    {
+      "id": "candidate-taoyuan-c0fbacdd9e",
+      "city": "桃園",
+      "status": "candidate",
+      "title": "「不一樣」的暑假，從兒美館開始 探索差異、體驗共融的夏日藝術旅程",
+      "url": "https://culture.tycg.gov.tw/News_Content.aspx?n=11103&s=1725745",
+      "sourceTitle": "Tycg",
+      "description": "桃園市兒童美術館表示，...度過一個「不一樣」的夏天。 ... ▌展覽資訊 展覽名稱：一樣不一樣 展覽期間： 2026/07/04 - 2026/11/30 （週三至週一 09:30-17:00，週二休館） 展覽地點：桃園市兒童美術館（桃園市中壢區...",
+      "dateSnippets": [
+        "2026/07/04",
+        "2026/11/30",
+        "08/01",
+        "09/19",
+        "09/28",
+        "10/3",
+        "10/4",
+        "10/31",
+        "11/28"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-08-03",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026/07/04",
+          "2026/11/30",
+          "08/01",
+          "09/19",
+          "09/28",
+          "10/3",
+          "10/4",
+          "10/31",
+          "11/28"
+        ],
+        "contentHash": "829f880a4d8750d0"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-d22dd85a5c",
+      "city": "新北",
+      "status": "candidate",
+      "title": "市政新聞-「職想玩透透」！新北觀光工廠暑假大冒險開跑五大主題活動串聯18家 邀大小朋友探索產業魅力-新北市政府",
+      "url": "https://www.ntpc.gov.tw/ch/home.jsp?dataserno=18fc3a8422e4152df628bf6b771337cb&id=e8ca970cde5c00e1",
+      "sourceTitle": "Ntpc",
+      "description": "「職想玩透透」！新北觀光工廠暑假大冒險開跑五大主題活動串聯18家 邀大小朋友探索產業魅力 · 【新北市訊】搶搭暑期觀光熱潮，新北市政府今（15）日舉辦「2026新北觀光工廠系列活動」啟動記者會，今（115）年以「職想玩透透」為主軸，串聯全市18家觀光工廠與產業文化館，推出巴士一日遊、限量主題禮包、發票登錄抽好禮、滿額贈品及探索派對等五大主題活動。不論是親子共遊、好友同樂，都能透過手作體驗、產業導覽及互動遊戲，探索新北產",
+      "dateSnippets": [
+        "2026-06-15",
+        "6月29日",
+        "7月1日",
+        "9月30日",
+        "7月17日",
+        "7月19日",
+        "00/13"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-08-03",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026-06-15",
+          "6月29日",
+          "7月1日",
+          "9月30日",
+          "7月17日",
+          "7月19日",
+          "00/13"
+        ],
+        "contentHash": "63c5c243c6f2f266"
       }
     }
   ]
