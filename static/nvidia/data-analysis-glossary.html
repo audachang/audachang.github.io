@@ -10,6 +10,8 @@
     body { margin:0; background:var(--ground); color:var(--ink); font:16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
     header { background:#111; border-bottom:5px solid var(--green); color:#fff; padding:3.5rem 1.25rem 2.75rem; }
     .container { width:min(1120px, calc(100% - 2rem)); margin:auto; }
+    .resource-index { display:inline-block; margin-bottom:1.25rem; color:#dff5b6; font-size:.9rem; font-weight:650; text-underline-offset:.2em; }
+    .resource-index:hover, .resource-index:focus { color:#fff; }
     h1 { max-width:850px; margin:0; font-size:clamp(2rem, 5vw, 3.4rem); line-height:1.05; letter-spacing:-.035em; }
     h1 span { color:var(--green); }
     header p { max-width:780px; margin:.9rem 0 0; color:#cad0cb; font-size:1.05rem; }
@@ -39,6 +41,7 @@
 </head>
 <body>
 <header><div class="container">
+  <a class="resource-index" href="./">← Resource index</a>
   <h1>Data-analysis <span>field glossary</span></h1>
   <p>Conceptual and practical terms encountered in NVIDIA DLI’s <em>Fundamentals of Accelerated Data Science</em>. Definitions are deliberately tied to the operation each notebook asks learners to perform.</p>
   <a class="language" href="data-analysis-glossary-zh-TW.html" hreflang="zh-Hant" lang="zh-Hant">繁體中文版本</a>
