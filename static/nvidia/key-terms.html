@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NVIDIA Accelerated Computing Stack — Glossary 術語對照表</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NVIDIA Accelerated Computing Stack — Key Terms</title>
 <style>
   :root {
     --nv-green: #76B900;
@@ -198,390 +199,361 @@
     section.layer { break-inside: avoid; border: 1px solid #ccc; }
     body { background: #fff; }
   }
+
+  .page-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 14px; margin-bottom: 22px; font-size: .9em; }
+  .page-nav a { color: #d9edb7; text-underline-offset: .18em; }
+  .page-nav strong { color: #fff; }
+  .page-nav a:focus-visible, #search:focus-visible, .stack-bar:focus-visible { outline: 3px solid var(--nv-green); outline-offset: 3px; }
+  th.c-term { width: 18%; } th.c-full { width: 25%; } th.c-en, th.c-zh { width: 57%; }
+  @media (max-width: 560px) { .page-nav { justify-content: flex-start; } header { padding-top: 22px; } }
 </style>
 </head>
 <body>
-
 <header>
-  <div class="wrap">
-    <h1>NVIDIA Accelerated Computing Stack <span class="zh">術語與縮寫對照表</span></h1>
-    <p class="subtitle">Glossary of technical terms &amp; acronyms — organized by stack layer, from easiest-to-use to maximum-performance<br>依堆疊層級整理：由「最容易使用」到「最高效能」</p>
-    <span class="course">Fundamentals of Accelerated Data Science</span>
-  </div>
+<div class="wrap"><nav aria-label="Page links" class="page-nav"><a href="./">Notebook concepts</a> · <strong>Key terms</strong> · <strong>English</strong> · <a href="./zh-tw/key-terms.html" lang="zh-Hant-TW">繁體中文</a></nav>
+<h1>NVIDIA Accelerated Computing Stack — Key Terms</h1>
+<p class="subtitle">Technical terms and acronyms organized by stack layer, from easiest to use to maximum performance.</p>
+<span class="course">Fundamentals of Accelerated Data Science</span>
+</div>
 </header>
-
-<div class="intro">
-  <p><strong>How to read this stack 如何閱讀這個堆疊：</strong></p>
-  <p>The NVIDIA accelerated computing stack is a series of layers trading <em>ease of use</em> against <em>control and performance</em>. The top layers require zero or minimal code changes but hide the GPU details; the bottom layers require writing C++/CUDA but offer maximum performance. Most data science work happens in the top three layers.</p>
-  <p class="zh">NVIDIA 加速運算堆疊由多個層級組成，在「易用性」與「控制度／效能」之間取捨：越上層越不需要改動程式碼（但對 GPU 細節的控制越少）；越下層越需要撰寫 C++/CUDA（但效能上限越高）。大多數資料科學工作只會用到最上面三層。</p>
-  <div class="axis"><span>Easier to Use 易於使用</span><div class="bar"></div><span>Maximum Performance 最高效能</span></div>
-</div>
-
+<div class="intro"><p><strong>How to read this stack</strong></p><p>The NVIDIA accelerated computing stack is a series of layers trading <em>ease of use</em> against <em>control and performance</em>. The top layers require zero or minimal code changes but hide GPU details; the bottom layers require writing C++/CUDA but offer maximum performance. Most data science work happens in the top three layers.</p><div class="axis"><span>Easier to use</span><div class="bar"></div><span>Maximum performance</span></div></div>
 <div class="stack-fig">
-  <h2>The Stack at a Glance 堆疊總覽</h2>
-  <p class="stack-hint">Click any layer to jump to its terms 點擊任一層即可跳至該層的術語</p>
-  <div class="stack-wrap">
-    <div class="stack-axis">
-      <span class="axis-label">Easier to Use<br>易於使用</span>
-      <div class="arrow"></div>
-      <span class="axis-label">Maximum Performance<br>最高效能</span>
-    </div>
-    <div class="stack-rows">
-      <div class="stack-row" style="--i:0">
-        <a class="stack-bar" href="#layer-1">Zero Code Change: Acceleration Plugins <span class="sub">(no-code change)</span></a>
-        <p class="stack-ex">cudf.pandas: Accelerated pandas, Accelerated NetworkX nx-cugraph, RAPIDS Spark Accelerator, Array-API backed scikit-learn…</p>
-      </div>
-      <div class="stack-row" style="--i:1">
-        <a class="stack-bar" href="#layer-2">Hybrid CPU/GPU Libraries <span class="sub">(minimal change)</span></a>
-        <p class="stack-ex">PyTorch, FAISS, TensorFlow, XGBoost, cuML-CPU… &nbsp;Dask, PySpark…</p>
-      </div>
-      <div class="stack-row" style="--i:2">
-        <a class="stack-bar" href="#layer-3">GPU Python Libraries <span class="sub">(GPU Python code)</span></a>
-        <p class="stack-ex">RAPIDS core libraries (cuDF, cuML, cuGraph, cuVS), RMM, CuPy, Numba, OpenAI Triton…</p>
-      </div>
-      <div class="stack-row" style="--i:3">
-        <a class="stack-bar" href="#layer-4">Python/CUDA Libraries <span class="sub">(hybrid Python / CUDA code)</span></a>
-        <p class="stack-ex">CuPy RawKernels, Numba CUDA, Cython wrappers for CUDA…</p>
-      </div>
-      <div class="stack-row" style="--i:4">
-        <a class="stack-bar" href="#layer-5">C++/CUDA High Level <span class="sub">(high-level C++/CUDA code)</span></a>
-        <p class="stack-ex">RAFT, CCCL: Thrust, CUB…</p>
-      </div>
-      <div class="stack-row" style="--i:5">
-        <a class="stack-bar" href="#layer-6">CUDA Toolkit <span class="sub">(C++/CUDA code and kernels)</span></a>
-        <p class="stack-ex">cuBLAS, cuDNN, cuSolver, cuSPARSE…</p>
-      </div>
-    </div>
-  </div>
-  <p class="stack-note">Redrawn in HTML from the NVIDIA DLI course slide ("Easier to Use ↔ Maximum Performance" stack) · 本圖依 NVIDIA DLI 課程投影片重繪</p>
+<h2>The Stack at a Glance</h2>
+<p class="stack-hint">Select a layer to jump to its terms.</p>
+<div class="stack-wrap">
+<div class="stack-axis">
+<span class="axis-label">Easier to use</span>
+<div class="arrow"></div>
+<span class="axis-label">Maximum performance</span>
 </div>
-
+<div class="stack-rows">
+<div class="stack-row" style="--i:0">
+<a class="stack-bar" href="#layer-1">Zero Code Change: Acceleration Plugins <span class="sub">(no-code change)</span></a>
+<p class="stack-ex">cudf.pandas: Accelerated pandas, Accelerated NetworkX nx-cugraph, RAPIDS Spark Accelerator, Array-API backed scikit-learn…</p>
+</div>
+<div class="stack-row" style="--i:1">
+<a class="stack-bar" href="#layer-2">Hybrid CPU/GPU Libraries <span class="sub">(minimal change)</span></a>
+<p class="stack-ex">PyTorch, FAISS, TensorFlow, XGBoost, cuML-CPU…  Dask, PySpark…</p>
+</div>
+<div class="stack-row" style="--i:2">
+<a class="stack-bar" href="#layer-3">GPU Python Libraries <span class="sub">(GPU Python code)</span></a>
+<p class="stack-ex">RAPIDS core libraries (cuDF, cuML, cuGraph, cuVS), RMM, CuPy, Numba, OpenAI Triton…</p>
+</div>
+<div class="stack-row" style="--i:3">
+<a class="stack-bar" href="#layer-4">Python/CUDA Libraries <span class="sub">(hybrid Python / CUDA code)</span></a>
+<p class="stack-ex">CuPy RawKernels, Numba CUDA, Cython wrappers for CUDA…</p>
+</div>
+<div class="stack-row" style="--i:4">
+<a class="stack-bar" href="#layer-5">C++/CUDA High Level <span class="sub">(high-level C++/CUDA code)</span></a>
+<p class="stack-ex">RAFT, CCCL: Thrust, CUB…</p>
+</div>
+<div class="stack-row" style="--i:5">
+<a class="stack-bar" href="#layer-6">CUDA Toolkit <span class="sub">(C++/CUDA code and kernels)</span></a>
+<p class="stack-ex">cuBLAS, cuDNN, cuSolver, cuSPARSE…</p>
+</div>
+</div>
+</div>
+<p class="stack-note">Redrawn in HTML from the NVIDIA DLI course slide “Easier to Use ↔ Maximum Performance.”</p>
+</div>
 <div class="toolbar">
-  <div class="wrap">
-    <input id="search" type="text" placeholder="Filter terms… 搜尋術語（例：cuDF、記憶體、vector）" aria-label="Filter terms">
-    <span id="count"></span>
-  </div>
+<div class="wrap">
+<input aria-label="Filter terms" id="search" placeholder="Filter terms… (for example: cuDF, memory, vector)" type="text"/>
+<span id="count"></span>
 </div>
-
+</div>
 <!-- ══════════════ Layer 0: Core concepts ══════════════ -->
 <section class="layer l0" id="foundations">
-  <div class="layer-head"><h2>Foundations 基礎概念</h2><span class="tag">(terms behind the whole stack 貫穿整個堆疊的核心名詞)</span></div>
-  <div class="layer-desc">These terms appear in every layer below — make sure they are solid first.
-    <span class="zh">以下名詞會在所有層級反覆出現，建議先確實掌握。</span></div>
-  <table>
-    <thead><tr><th class="c-term">Term 術語</th><th class="c-full">Full name 全名</th><th class="c-en">Definition (English)</th><th class="c-zh">說明（繁體中文）</th></tr></thead>
-    <tbody>
-      <tr>
-        <td class="term">GPU</td>
-        <td class="full">Graphics Processing Unit</td>
-        <td>A processor with thousands of small cores designed for massively parallel computation. Originally built for graphics, now the workhorse of accelerated data science and AI.</td>
-        <td class="zh">圖形處理器。具備數千個小型運算核心，專為大規模平行運算設計；原為繪圖而生，現已成為加速資料科學與 AI 的主力硬體。</td>
-      </tr>
-      <tr>
-        <td class="term">CPU</td>
-        <td class="full">Central Processing Unit</td>
-        <td>A processor with few but powerful cores, optimized for sequential and general-purpose tasks. In accelerated computing, the CPU orchestrates work and the GPU executes the parallel parts.</td>
-        <td class="zh">中央處理器。核心數少但單核效能強，擅長循序與通用工作。在加速運算中，CPU 負責調度流程，GPU 負責平行運算的部分。</td>
-      </tr>
-      <tr>
-        <td class="term">API</td>
-        <td class="full">Application Programming Interface</td>
-        <td>A defined interface through which software components communicate. It specifies the functions, inputs, outputs and rules a library or service exposes, so a program can use it without knowing its internal implementation.</td>
-        <td class="zh">應用程式介面。一組讓軟體元件彼此溝通的明確規格，定義函式庫或服務提供的功能、輸入、輸出與使用規則；程式可據此使用功能，而不必知道內部如何實作。</td>
-      </tr>
-      <tr>
-        <td class="term">CUDA</td>
-        <td class="full">Compute Unified Device Architecture <span class="note">(original expansion; now used simply as a name 原始全名，現多直接作為名稱使用)</span></td>
-        <td>NVIDIA's parallel computing platform and programming model — the foundation every library in this stack is built on. It lets programs define work that runs across thousands of GPU threads.</td>
-        <td class="zh">NVIDIA 的平行運算平台與程式設計模型，是本堆疊中所有函式庫的共同基石；讓程式能定義由數千條 GPU 執行緒平行執行的工作。</td>
-      </tr>
-      <tr>
-        <td class="term">kernel</td>
-        <td class="full">— <span class="note">(general CUDA concept 通用概念)</span></td>
-        <td>A function that runs on the GPU, executed simultaneously by many threads. "Writing a kernel" means writing the code each GPU thread will run.</td>
-        <td class="zh">核心函式：在 GPU 上執行的函式，由大量執行緒同時執行同一段程式碼。「撰寫 kernel」即撰寫每條 GPU 執行緒要跑的程式。</td>
-      </tr>
-      <tr>
-        <td class="term">RAPIDS</td>
-        <td class="full">— <span class="note">(brand name, not an acronym 品牌名稱，非縮寫)</span></td>
-        <td>NVIDIA's open-source suite of GPU-accelerated data science libraries (cuDF, cuML, cuGraph, cuVS, RMM…). Its APIs deliberately mirror pandas, scikit-learn and NetworkX to minimize the learning curve.</td>
-        <td class="zh">NVIDIA 開源的 GPU 加速資料科學函式庫套件（含 cuDF、cuML、cuGraph、cuVS、RMM 等）。API 刻意模仿 pandas、scikit-learn 與 NetworkX，以降低學習成本。</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<div class="layer-head"><h2>Foundations</h2><span class="tag">(terms behind the whole stack)</span></div>
+<div class="layer-desc">These terms appear in every layer below — make sure they are solid first.</div>
+<table>
+<thead><tr><th class="c-term">Term</th><th class="c-full">Full name</th><th class="c-en">Definition</th></tr></thead>
+<tbody>
+<tr>
+<td class="term">GPU</td>
+<td class="full">Graphics Processing Unit</td>
+<td>A processor with thousands of small cores designed for massively parallel computation. Originally built for graphics, now the workhorse of accelerated data science and AI.</td>
 
+</tr>
+<tr>
+<td class="term">CPU</td>
+<td class="full">Central Processing Unit</td>
+<td>A processor with few but powerful cores, optimized for sequential and general-purpose tasks. In accelerated computing, the CPU orchestrates work and the GPU executes the parallel parts.</td>
+
+</tr>
+<tr>
+<td class="term">API</td>
+<td class="full">Application Programming Interface</td>
+<td>A defined interface through which software components communicate. It specifies the functions, inputs, outputs and rules a library or service exposes, so a program can use it without knowing its internal implementation.</td>
+
+</tr>
+<tr>
+<td class="term">CUDA</td>
+<td class="full">Compute Unified Device Architecture <span class="note">(original expansion; now used simply as a name)</span></td>
+<td>NVIDIA's parallel computing platform and programming model — the foundation every library in this stack is built on. It lets programs define work that runs across thousands of GPU threads.</td>
+
+</tr>
+<tr>
+<td class="term">kernel</td>
+<td class="full">— <span class="note">(general CUDA concept)</span></td>
+<td>A function that runs on the GPU, executed simultaneously by many threads. "Writing a kernel" means writing the code each GPU thread will run.</td>
+
+</tr>
+<tr>
+<td class="term">RAPIDS</td>
+<td class="full">— <span class="note">(brand name, not an acronym)</span></td>
+<td>NVIDIA's open-source suite of GPU-accelerated data science libraries (cuDF, cuML, cuGraph, cuVS, RMM…). Its APIs deliberately mirror pandas, scikit-learn and NetworkX to minimize the learning curve.</td>
+
+</tr>
+</tbody>
+</table>
+</section>
 <!-- ══════════════ Layer 1 ══════════════ -->
 <section class="layer l1" id="layer-1">
-  <div class="layer-head"><h2>1 · Zero Code Change: Acceleration Plugins 零程式碼修改：加速外掛</h2><span class="tag">(no-code change)</span></div>
-  <div class="layer-desc">Load a plugin or switch a backend and existing pandas / NetworkX / Spark / scikit-learn code runs on the GPU. Unsupported operations automatically fall back to the CPU. Easiest entry point, least control.
-    <span class="zh">完全不改程式碼——只需載入外掛或切換後端，既有的 pandas／NetworkX／Spark／scikit-learn 程式即可在 GPU 上執行；不支援的操作會自動回退（fallback）到 CPU。最容易上手，控制度最低。</span></div>
-  <table>
-    <thead><tr><th class="c-term">Term 術語</th><th class="c-full">Full name 全名</th><th class="c-en">Definition (English)</th><th class="c-zh">說明（繁體中文）</th></tr></thead>
-    <tbody>
-      <tr>
-        <td class="term">cudf.pandas</td>
-        <td class="full">cuDF pandas accelerator mode</td>
-        <td>cuDF's zero-code-change mode. Enabled with <code>%load_ext cudf.pandas</code> (Jupyter) or <code>python -m cudf.pandas</code>, it intercepts pandas API calls, runs supported operations on the GPU, and silently falls back to CPU pandas for the rest.</td>
-        <td class="zh">cuDF 的 pandas 加速模式。在 Jupyter 以 <code>%load_ext cudf.pandas</code>（或命令列 <code>python -m cudf.pandas</code>）啟用後，會攔截 pandas API 呼叫，支援的操作在 GPU 上執行，其餘自動回退至 CPU 版 pandas。</td>
-      </tr>
-      <tr>
-        <td class="term">nx-cugraph</td>
-        <td class="full">Accelerated NetworkX (cuGraph backend for NetworkX)</td>
-        <td>A GPU backend plugin for NetworkX, the most popular Python graph-analysis library. Once installed, algorithms such as PageRank and shortest paths dispatch to cuGraph on the GPU with no code changes.</td>
-        <td class="zh">NetworkX（最普及的 Python 圖分析函式庫）的 GPU 後端外掛。安裝後，PageRank、最短路徑等演算法會自動改由 GPU 上的 cuGraph 執行，程式碼完全不需修改。</td>
-      </tr>
-      <tr>
-        <td class="term">RAPIDS Spark Accelerator</td>
-        <td class="full">RAPIDS Accelerator for Apache Spark</td>
-        <td>A plugin for Apache Spark that transparently moves Spark SQL and DataFrame operations onto GPUs, accelerating large-scale ETL and query workloads without changing Spark application code.</td>
-        <td class="zh">Apache Spark 的外掛，將 Spark SQL 與 DataFrame 運算透明地轉移到 GPU 執行，加速大規模 ETL 與查詢工作，Spark 應用程式本身不需改寫。</td>
-      </tr>
-      <tr>
-        <td class="term">Array-API backed scikit-learn</td>
-        <td class="full">scikit-learn with Python Array API standard support</td>
-        <td>Scikit-learn estimators that support the Array API standard can accept GPU arrays (e.g., CuPy arrays or PyTorch tensors) directly, so the same estimator code computes on the GPU with essentially no changes.</td>
-        <td class="zh">scikit-learn 支援 Python「Array API」標準後，部分估計器（estimator）可直接接受 GPU 陣列（如 CuPy 陣列、PyTorch 張量）作為輸入，讓相同的程式碼在 GPU 上運算，幾乎不需改寫。</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<div class="layer-head"><h2>1 · Zero Code Change: Acceleration Plugins</h2><span class="tag">(no-code change)</span></div>
+<div class="layer-desc">Load a plugin or switch a backend and existing pandas / NetworkX / Spark / scikit-learn code runs on the GPU. Unsupported operations automatically fall back to the CPU. Easiest entry point, least control.</div>
+<table>
+<thead><tr><th class="c-term">Term</th><th class="c-full">Full name</th><th class="c-en">Definition</th></tr></thead>
+<tbody>
+<tr>
+<td class="term">cudf.pandas</td>
+<td class="full">cuDF pandas accelerator mode</td>
+<td>cuDF's zero-code-change mode. Enabled with <code>%load_ext cudf.pandas</code> (Jupyter) or <code>python -m cudf.pandas</code>, it intercepts pandas API calls, runs supported operations on the GPU, and silently falls back to CPU pandas for the rest.</td>
 
+</tr>
+<tr>
+<td class="term">nx-cugraph</td>
+<td class="full">Accelerated NetworkX (cuGraph backend for NetworkX)</td>
+<td>A GPU backend plugin for NetworkX, the most popular Python graph-analysis library. Once installed, algorithms such as PageRank and shortest paths dispatch to cuGraph on the GPU with no code changes.</td>
+
+</tr>
+<tr>
+<td class="term">RAPIDS Spark Accelerator</td>
+<td class="full">RAPIDS Accelerator for Apache Spark</td>
+<td>A plugin for Apache Spark that transparently moves Spark SQL and DataFrame operations onto GPUs, accelerating large-scale ETL and query workloads without changing Spark application code.</td>
+
+</tr>
+<tr>
+<td class="term">Array-API backed scikit-learn</td>
+<td class="full">scikit-learn with Python Array API standard support</td>
+<td>Scikit-learn estimators that support the Array API standard can accept GPU arrays (e.g., CuPy arrays or PyTorch tensors) directly, so the same estimator code computes on the GPU with essentially no changes.</td>
+
+</tr>
+</tbody>
+</table>
+</section>
 <!-- ══════════════ Layer 2 ══════════════ -->
 <section class="layer l2" id="layer-2">
-  <div class="layer-head"><h2>2 · Hybrid CPU/GPU Libraries 混合 CPU/GPU 函式庫</h2><span class="tag">(minimal change)</span></div>
-  <div class="layer-desc">One API that runs on either CPU or GPU — usually just a device flag away (e.g., <code>device="cuda"</code>). Develop anywhere, accelerate when a GPU is present.
-    <span class="zh">同一套 API 可在 CPU 或 GPU 上執行，通常只需極少修改（例如指定 <code>device="cuda"</code>）。可先在無 GPU 環境開發，有 GPU 時再加速。</span></div>
-  <table>
-    <thead><tr><th class="c-term">Term 術語</th><th class="c-full">Full name 全名</th><th class="c-en">Definition (English)</th><th class="c-zh">說明（繁體中文）</th></tr></thead>
-    <tbody>
-      <tr>
-        <td class="term">PyTorch</td>
-        <td class="full">— <span class="note">(name 名稱)</span></td>
-        <td>Meta's deep learning framework built on tensor computation and automatic differentiation. Moving work to the GPU is one call: <code>.to("cuda")</code>.</td>
-        <td class="zh">Meta 開發的深度學習框架，以張量（tensor）運算與自動微分為核心；只需 <code>.to("cuda")</code> 一行即可將運算移到 GPU。</td>
-      </tr>
-      <tr>
-        <td class="term">FAISS</td>
-        <td class="full">Facebook AI Similarity Search</td>
-        <td>A library for efficient similarity search and clustering of dense vectors, with both CPU and GPU indexes. Widely used in recommender systems and retrieval-augmented generation (RAG).</td>
-        <td class="zh">高效率的稠密向量相似度搜尋與分群函式庫，提供 CPU 與 GPU 兩種索引；廣泛用於推薦系統與檢索增強生成（RAG）。</td>
-      </tr>
-      <tr>
-        <td class="term">TensorFlow</td>
-        <td class="full">— <span class="note">(name 名稱)</span></td>
-        <td>Google's end-to-end machine learning framework. It automatically places operations on a GPU when one is available.</td>
-        <td class="zh">Google 開發的端到端機器學習框架；偵測到可用的 GPU 時會自動將運算配置到 GPU 上。</td>
-      </tr>
-      <tr>
-        <td class="term">XGBoost</td>
-        <td class="full">eXtreme Gradient Boosting</td>
-        <td>The leading gradient-boosted decision tree library for tabular data. GPU training is enabled with a single parameter (<code>device="cuda"</code>).</td>
-        <td class="zh">梯度提升決策樹（gradient-boosted decision trees）函式庫，表格資料建模的主力工具；只需設定 <code>device="cuda"</code> 即可改用 GPU 訓練。</td>
-      </tr>
-      <tr>
-        <td class="term">cuML-CPU</td>
-        <td class="full">cuML CPU execution mode</td>
-        <td>cuML's CPU execution capability: the same cuML estimator code can run on machines without a GPU (e.g., a laptop) and later run unchanged, accelerated, on a GPU system.</td>
-        <td class="zh">cuML 的 CPU 執行模式：同一份 cuML 程式碼可先在無 GPU 的環境（如筆電）開發與執行，之後不需修改即可移到 GPU 系統上加速。</td>
-      </tr>
-      <tr>
-        <td class="term">Dask</td>
-        <td class="full">— <span class="note">(name 名稱)</span></td>
-        <td>A Python framework for parallel and distributed computing. It partitions pandas/NumPy/cuDF workloads and schedules them across cores or cluster nodes; combined with RAPIDS (dask-cudf) it scales to multiple GPUs.</td>
-        <td class="zh">Python 的平行／分散式運算框架，可將 pandas／NumPy／cuDF 的工作切分並排程到多核心或叢集節點；與 RAPIDS 結合（dask-cudf）即可擴展到多 GPU。</td>
-      </tr>
-      <tr>
-        <td class="term">PySpark</td>
-        <td class="full">Python API for Apache Spark</td>
-        <td>The Python interface to Apache Spark, the distributed big-data processing engine. Pairs with the RAPIDS Spark Accelerator (layer 1) for GPU acceleration.</td>
-        <td class="zh">Apache Spark（分散式大數據處理引擎）的 Python 介面；搭配第 1 層的 RAPIDS Spark Accelerator 即可獲得 GPU 加速。</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<div class="layer-head"><h2>2 · Hybrid CPU/GPU Libraries</h2><span class="tag">(minimal change)</span></div>
+<div class="layer-desc">One API that runs on either CPU or GPU — usually just a device flag away (e.g., device="cuda" ). Develop anywhere, accelerate when a GPU is present.</div>
+<table>
+<thead><tr><th class="c-term">Term</th><th class="c-full">Full name</th><th class="c-en">Definition</th></tr></thead>
+<tbody>
+<tr>
+<td class="term">PyTorch</td>
+<td class="full">— <span class="note">(name)</span></td>
+<td>Meta's deep learning framework built on tensor computation and automatic differentiation. Moving work to the GPU is one call: <code>.to("cuda")</code>.</td>
 
+</tr>
+<tr>
+<td class="term">FAISS</td>
+<td class="full">Facebook AI Similarity Search</td>
+<td>A library for efficient similarity search and clustering of dense vectors, with both CPU and GPU indexes. Widely used in recommender systems and retrieval-augmented generation (RAG).</td>
+
+</tr>
+<tr>
+<td class="term">TensorFlow</td>
+<td class="full">— <span class="note">(name)</span></td>
+<td>Google's end-to-end machine learning framework. It automatically places operations on a GPU when one is available.</td>
+
+</tr>
+<tr>
+<td class="term">XGBoost</td>
+<td class="full">eXtreme Gradient Boosting</td>
+<td>The leading gradient-boosted decision tree library for tabular data. GPU training is enabled with a single parameter (<code>device="cuda"</code>).</td>
+
+</tr>
+<tr>
+<td class="term">cuML-CPU</td>
+<td class="full">cuML CPU execution mode</td>
+<td>cuML's CPU execution capability: the same cuML estimator code can run on machines without a GPU (e.g., a laptop) and later run unchanged, accelerated, on a GPU system.</td>
+
+</tr>
+<tr>
+<td class="term">Dask</td>
+<td class="full">— <span class="note">(name)</span></td>
+<td>A Python framework for parallel and distributed computing. It partitions pandas/NumPy/cuDF workloads and schedules them across cores or cluster nodes; combined with RAPIDS (dask-cudf) it scales to multiple GPUs.</td>
+
+</tr>
+<tr>
+<td class="term">PySpark</td>
+<td class="full">Python API for Apache Spark</td>
+<td>The Python interface to Apache Spark, the distributed big-data processing engine. Pairs with the RAPIDS Spark Accelerator (layer 1) for GPU acceleration.</td>
+
+</tr>
+</tbody>
+</table>
+</section>
 <!-- ══════════════ Layer 3 ══════════════ -->
 <section class="layer l3" id="layer-3">
-  <div class="layer-head"><h2>3 · GPU Python Libraries GPU 原生 Python 函式庫</h2><span class="tag">(GPU Python code)</span></div>
-  <div class="layer-desc">Python libraries written explicitly for the GPU: data stays in GPU memory end-to-end, giving more performance and control — but the code assumes a GPU is present.
-    <span class="zh">明確以 GPU 為前提撰寫的 Python 函式庫：資料自始至終留在 GPU 記憶體中，效能與控制度更高，但程式假設 GPU 存在。</span></div>
-  <table>
-    <thead><tr><th class="c-term">Term 術語</th><th class="c-full">Full name 全名</th><th class="c-en">Definition (English)</th><th class="c-zh">說明（繁體中文）</th></tr></thead>
-    <tbody>
-      <tr>
-        <td class="term">cuDF</td>
-        <td class="full">CUDA DataFrames</td>
-        <td>RAPIDS' GPU DataFrame library with a pandas-like API. Loading, filtering, joining and group-by aggregation all execute in GPU memory.</td>
-        <td class="zh">RAPIDS 的 GPU DataFrame 函式庫，API 仿 pandas；讀檔、篩選、合併與分組聚合等操作全部在 GPU 記憶體中完成。</td>
-      </tr>
-      <tr>
-        <td class="term">cuML</td>
-        <td class="full">CUDA Machine Learning</td>
-        <td>RAPIDS' GPU machine learning library with a scikit-learn-like API: regression, clustering (e.g., k-means, DBSCAN), dimensionality reduction (PCA, UMAP), random forests and more.</td>
-        <td class="zh">RAPIDS 的 GPU 機器學習函式庫，API 仿 scikit-learn：涵蓋迴歸、分群（k-means、DBSCAN）、降維（PCA、UMAP）、隨機森林等演算法。</td>
-      </tr>
-      <tr>
-        <td class="term">cuGraph</td>
-        <td class="full">CUDA Graph analytics</td>
-        <td>RAPIDS' GPU graph analytics library — PageRank, community detection, shortest paths and more — and the engine behind the nx-cugraph NetworkX backend.</td>
-        <td class="zh">RAPIDS 的 GPU 圖分析函式庫（PageRank、社群偵測、最短路徑等），也是第 1 層 nx-cugraph（NetworkX 後端）背後的運算引擎。</td>
-      </tr>
-      <tr>
-        <td class="term">cuVS</td>
-        <td class="full">CUDA Vector Search</td>
-        <td>RAPIDS' library for vector search and clustering on the GPU, providing approximate nearest neighbor (ANN) indexes such as CAGRA and IVF-PQ — the machinery behind GPU-accelerated vector databases and RAG.</td>
-        <td class="zh">RAPIDS 的 GPU 向量搜尋與分群函式庫，提供 CAGRA、IVF-PQ 等近似最近鄰（ANN）索引，是 GPU 加速向量資料庫與 RAG 應用的核心元件。</td>
-      </tr>
-      <tr>
-        <td class="term">RMM</td>
-        <td class="full">RAPIDS Memory Manager</td>
-        <td>The centralized GPU memory management layer for RAPIDS: memory pools and pluggable allocators that let cuDF, cuML and CuPy share GPU memory efficiently instead of each allocating on its own.</td>
-        <td class="zh">RAPIDS 的 GPU 記憶體管理層：提供記憶體池（memory pool）與可替換的配置器（allocator），讓 cuDF、cuML、CuPy 等函式庫高效共用 GPU 記憶體，而非各自配置。</td>
-      </tr>
-      <tr>
-        <td class="term">CuPy</td>
-        <td class="full">— <span class="note">(name blends CUDA + NumPy/Python 名稱結合 CUDA 與 NumPy/Python)</span></td>
-        <td>A NumPy/SciPy-compatible array library for CUDA GPUs. For much code, acceleration is as simple as replacing <code>import numpy as np</code> with <code>import cupy as cp</code>.</td>
-        <td class="zh">與 NumPy／SciPy 高度相容的 GPU 陣列函式庫；許多程式只需把 <code>import numpy as np</code> 改成 <code>import cupy as cp</code> 即可加速。</td>
-      </tr>
-      <tr>
-        <td class="term">Numba</td>
-        <td class="full">— <span class="note">(name 名稱)</span></td>
-        <td>A just-in-time (JIT) compiler for Python: decorators such as <code>@jit</code> compile numeric Python functions to fast machine code at run time, on CPU — and on GPU via its CUDA target (layer 4).</td>
-        <td class="zh">Python 的即時（JIT）編譯器：以 <code>@jit</code> 等裝飾器在執行期將數值運算的 Python 函式編譯成高速機器碼；亦可透過其 CUDA 模式編譯 GPU 程式（見第 4 層）。</td>
-      </tr>
-      <tr>
-        <td class="term">OpenAI Triton</td>
-        <td class="full">— <span class="note">(name 名稱)</span></td>
-        <td>An open-source Python-like language and compiler for writing custom high-performance GPU kernels. Heavily used by PyTorch 2's <code>torch.compile</code>.</td>
-        <td class="zh">OpenAI 開源的 GPU kernel 撰寫語言與編譯器，以類 Python 語法撰寫高效能自訂 kernel；PyTorch 2 的 <code>torch.compile</code> 大量採用。</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<div class="layer-head"><h2>3 · GPU Python Libraries</h2><span class="tag">(GPU Python code)</span></div>
+<div class="layer-desc">Python libraries written explicitly for the GPU: data stays in GPU memory end-to-end, giving more performance and control — but the code assumes a GPU is present.</div>
+<table>
+<thead><tr><th class="c-term">Term</th><th class="c-full">Full name</th><th class="c-en">Definition</th></tr></thead>
+<tbody>
+<tr>
+<td class="term">cuDF</td>
+<td class="full">CUDA DataFrames</td>
+<td>RAPIDS' GPU DataFrame library with a pandas-like API. Loading, filtering, joining and group-by aggregation all execute in GPU memory.</td>
 
+</tr>
+<tr>
+<td class="term">cuML</td>
+<td class="full">CUDA Machine Learning</td>
+<td>RAPIDS' GPU machine learning library with a scikit-learn-like API: regression, clustering (e.g., k-means, DBSCAN), dimensionality reduction (PCA, UMAP), random forests and more.</td>
+
+</tr>
+<tr>
+<td class="term">cuGraph</td>
+<td class="full">CUDA Graph analytics</td>
+<td>RAPIDS' GPU graph analytics library — PageRank, community detection, shortest paths and more — and the engine behind the nx-cugraph NetworkX backend.</td>
+
+</tr>
+<tr>
+<td class="term">cuVS</td>
+<td class="full">CUDA Vector Search</td>
+<td>RAPIDS' library for vector search and clustering on the GPU, providing approximate nearest neighbor (ANN) indexes such as CAGRA and IVF-PQ — the machinery behind GPU-accelerated vector databases and RAG.</td>
+
+</tr>
+<tr>
+<td class="term">RMM</td>
+<td class="full">RAPIDS Memory Manager</td>
+<td>The centralized GPU memory management layer for RAPIDS: memory pools and pluggable allocators that let cuDF, cuML and CuPy share GPU memory efficiently instead of each allocating on its own.</td>
+
+</tr>
+<tr>
+<td class="term">CuPy</td>
+<td class="full">— <span class="note">(name blends CUDA + NumPy/Python)</span></td>
+<td>A NumPy/SciPy-compatible array library for CUDA GPUs. For much code, acceleration is as simple as replacing <code>import numpy as np</code> with <code>import cupy as cp</code>.</td>
+
+</tr>
+<tr>
+<td class="term">Numba</td>
+<td class="full">— <span class="note">(name)</span></td>
+<td>A just-in-time (JIT) compiler for Python: decorators such as <code>@jit</code> compile numeric Python functions to fast machine code at run time, on CPU — and on GPU via its CUDA target (layer 4).</td>
+
+</tr>
+<tr>
+<td class="term">OpenAI Triton</td>
+<td class="full">— <span class="note">(name)</span></td>
+<td>An open-source Python-like language and compiler for writing custom high-performance GPU kernels. Heavily used by PyTorch 2's <code>torch.compile</code>.</td>
+
+</tr>
+</tbody>
+</table>
+</section>
 <!-- ══════════════ Layer 4 ══════════════ -->
 <section class="layer l4" id="layer-4">
-  <div class="layer-head"><h2>4 · Python/CUDA Libraries Python 與 CUDA 混合</h2><span class="tag">(hybrid Python / CUDA code)</span></div>
-  <div class="layer-desc">Write actual CUDA kernel code from inside Python — Python's convenience with CUDA-level control, for operations no library provides.
-    <span class="zh">在 Python 中直接撰寫或嵌入 CUDA kernel 程式碼——兼顧 Python 的開發效率與 CUDA 層級的控制，適合函式庫未提供的客製化運算。</span></div>
-  <table>
-    <thead><tr><th class="c-term">Term 術語</th><th class="c-full">Full name 全名</th><th class="c-en">Definition (English)</th><th class="c-zh">說明（繁體中文）</th></tr></thead>
-    <tbody>
-      <tr>
-        <td class="term">CuPy RawKernel</td>
-        <td class="full">CuPy raw CUDA kernel interface</td>
-        <td>A CuPy feature for embedding native CUDA C++ kernel source as a Python string; CuPy compiles it at run time and launches it on the GPU.</td>
-        <td class="zh">CuPy 的功能之一：將原生 CUDA C++ kernel 原始碼以字串形式寫在 Python 中，由 CuPy 即時編譯並在 GPU 上啟動執行。</td>
-      </tr>
-      <tr>
-        <td class="term">Numba CUDA</td>
-        <td class="full">Numba CUDA target (<code>@cuda.jit</code>)</td>
-        <td>Numba's CUDA mode: write CUDA kernels in Python syntax with the <code>@cuda.jit</code> decorator, with direct access to GPU programming concepts such as thread indexing and shared memory.</td>
-        <td class="zh">Numba 的 CUDA 模式：以 <code>@cuda.jit</code> 裝飾器用 Python 語法撰寫 CUDA kernel，可直接操作執行緒索引、共享記憶體等 GPU 程式設計概念。</td>
-      </tr>
-      <tr>
-        <td class="term">Cython wrappers for CUDA</td>
-        <td class="full">Cython — C-Extensions for Python</td>
-        <td>Cython compiles Python-like code to C/C++, and is commonly used to wrap CUDA C++ libraries so they can be called from Python with minimal overhead.</td>
-        <td class="zh">Cython 可將類 Python 語法編譯為 C/C++，常用來「包裝」CUDA C++ 函式庫，讓 Python 能以極低的額外負擔呼叫這些底層功能。</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<div class="layer-head"><h2>4 · Python/CUDA Libraries</h2><span class="tag">(hybrid Python / CUDA code)</span></div>
+<div class="layer-desc">Write actual CUDA kernel code from inside Python — Python's convenience with CUDA-level control, for operations no library provides.</div>
+<table>
+<thead><tr><th class="c-term">Term</th><th class="c-full">Full name</th><th class="c-en">Definition</th></tr></thead>
+<tbody>
+<tr>
+<td class="term">CuPy RawKernel</td>
+<td class="full">CuPy raw CUDA kernel interface</td>
+<td>A CuPy feature for embedding native CUDA C++ kernel source as a Python string; CuPy compiles it at run time and launches it on the GPU.</td>
 
+</tr>
+<tr>
+<td class="term">Numba CUDA</td>
+<td class="full">Numba CUDA target (<code>@cuda.jit</code>)</td>
+<td>Numba's CUDA mode: write CUDA kernels in Python syntax with the <code>@cuda.jit</code> decorator, with direct access to GPU programming concepts such as thread indexing and shared memory.</td>
+
+</tr>
+<tr>
+<td class="term">Cython wrappers for CUDA</td>
+<td class="full">Cython — C-Extensions for Python</td>
+<td>Cython compiles Python-like code to C/C++, and is commonly used to wrap CUDA C++ libraries so they can be called from Python with minimal overhead.</td>
+
+</tr>
+</tbody>
+</table>
+</section>
 <!-- ══════════════ Layer 5 ══════════════ -->
 <section class="layer l5" id="layer-5">
-  <div class="layer-head"><h2>5 · C++/CUDA High Level 高階 C++/CUDA</h2><span class="tag">(high-level C++/CUDA code)</span></div>
-  <div class="layer-desc">High-level C++ abstractions: compose high-performance GPU programs without writing every kernel from scratch. The RAPIDS libraries themselves are built on this layer.
-    <span class="zh">高階 C++ 抽象層：不必從零撰寫每個 kernel，即可組合出高效能 GPU 程式；RAPIDS 各函式庫的底層即建構於此。</span></div>
-  <table>
-    <thead><tr><th class="c-term">Term 術語</th><th class="c-full">Full name 全名</th><th class="c-en">Definition (English)</th><th class="c-zh">說明（繁體中文）</th></tr></thead>
-    <tbody>
-      <tr>
-        <td class="term">RAFT</td>
-        <td class="full">Reusable Accelerated Functions and Tools</td>
-        <td>A CUDA C++ library of fundamental, widely-used primitives — linear algebra, clustering, nearest-neighbor building blocks — shared as the common foundation under cuML, cuVS and cuGraph.</td>
-        <td class="zh">CUDA C++ 的共用基礎演算法庫，提供線性代數、分群、最近鄰等可重用的基礎元件（primitives），是 cuML、cuVS、cuGraph 的共同底層。</td>
-      </tr>
-      <tr>
-        <td class="term">CCCL</td>
-        <td class="full">CUDA Core Compute Libraries</td>
-        <td>NVIDIA's umbrella project that unifies Thrust, CUB and libcudacxx (the CUDA C++ standard library) into a single core C++ library suite.</td>
-        <td class="zh">NVIDIA 將 Thrust、CUB 與 libcudacxx（CUDA 版 C++ 標準函式庫）整併而成的核心 C++ 函式庫專案。</td>
-      </tr>
-      <tr>
-        <td class="term">Thrust</td>
-        <td class="full">— <span class="note">(name 名稱)</span></td>
-        <td>A C++ parallel algorithms library modeled on the C++ STL — sort, reduce, scan and friends — producing efficient GPU code from high-level calls, no hand-written kernels required.</td>
-        <td class="zh">仿 C++ STL 的平行演算法函式庫（sort、reduce、scan 等），以高階介面直接產生高效率 GPU 程式，不需手寫 kernel。</td>
-      </tr>
-      <tr>
-        <td class="term">CUB</td>
-        <td class="full">CUDA UnBound <span class="note">(commonly cited expansion; current docs simply use "CUB" 常見說法，現行官方文件僅稱 CUB)</span></td>
-        <td>A library of reusable, high-performance primitives at the warp, block and device level — the building blocks used when writing custom CUDA kernels.</td>
-        <td class="zh">提供 warp／block／device 層級的可重用高效能基礎元件，是撰寫自訂 CUDA kernel 時的重要積木。</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+<div class="layer-head"><h2>5 · C++/CUDA High Level</h2><span class="tag">(high-level C++/CUDA code)</span></div>
+<div class="layer-desc">High-level C++ abstractions: compose high-performance GPU programs without writing every kernel from scratch. The RAPIDS libraries themselves are built on this layer.</div>
+<table>
+<thead><tr><th class="c-term">Term</th><th class="c-full">Full name</th><th class="c-en">Definition</th></tr></thead>
+<tbody>
+<tr>
+<td class="term">RAFT</td>
+<td class="full">Reusable Accelerated Functions and Tools</td>
+<td>A CUDA C++ library of fundamental, widely-used primitives — linear algebra, clustering, nearest-neighbor building blocks — shared as the common foundation under cuML, cuVS and cuGraph.</td>
 
+</tr>
+<tr>
+<td class="term">CCCL</td>
+<td class="full">CUDA Core Compute Libraries</td>
+<td>NVIDIA's umbrella project that unifies Thrust, CUB and libcudacxx (the CUDA C++ standard library) into a single core C++ library suite.</td>
+
+</tr>
+<tr>
+<td class="term">Thrust</td>
+<td class="full">— <span class="note">(name)</span></td>
+<td>A C++ parallel algorithms library modeled on the C++ STL — sort, reduce, scan and friends — producing efficient GPU code from high-level calls, no hand-written kernels required.</td>
+
+</tr>
+<tr>
+<td class="term">CUB</td>
+<td class="full">CUDA UnBound <span class="note">(commonly cited expansion; current docs simply use "CUB")</span></td>
+<td>A library of reusable, high-performance primitives at the warp, block and device level — the building blocks used when writing custom CUDA kernels.</td>
+
+</tr>
+</tbody>
+</table>
+</section>
 <!-- ══════════════ Layer 6 ══════════════ -->
 <section class="layer l6" id="layer-6">
-  <div class="layer-head"><h2>6 · CUDA Toolkit CUDA 工具組</h2><span class="tag">(C++/CUDA code and kernels)</span></div>
-  <div class="layer-desc">The foundation: the CUDA compiler, runtime, debugging/profiling tools, and heavily optimized math libraries. Maximum performance ceiling, highest development cost.
-    <span class="zh">最底層：CUDA 編譯器、執行期環境、除錯與效能分析工具，以及高度最佳化的數學函式庫。效能上限最高，開發成本也最高。</span></div>
-  <table>
-    <thead><tr><th class="c-term">Term 術語</th><th class="c-full">Full name 全名</th><th class="c-en">Definition (English)</th><th class="c-zh">說明（繁體中文）</th></tr></thead>
-    <tbody>
-      <tr>
-        <td class="term">CUDA Toolkit</td>
-        <td class="full">CUDA development toolkit</td>
-        <td>The complete development kit for CUDA: the <code>nvcc</code> compiler, CUDA runtime, debuggers (cuda-gdb), profilers (Nsight) and the math libraries listed below.</td>
-        <td class="zh">CUDA 的完整開發工具組：包含 <code>nvcc</code> 編譯器、CUDA runtime、除錯器（cuda-gdb）、效能分析工具（Nsight），以及下列數學函式庫。</td>
-      </tr>
-      <tr>
-        <td class="term">cuBLAS</td>
-        <td class="full">CUDA Basic Linear Algebra Subprograms</td>
-        <td>The GPU implementation of BLAS: dense linear algebra (matrix multiplication / GEMM and friends). The core numerical engine behind deep learning frameworks.</td>
-        <td class="zh">BLAS（基礎線性代數副程式）的 GPU 實作：稠密線性代數運算（矩陣乘法 GEMM 等），是深度學習框架背後的核心數值引擎。</td>
-      </tr>
-      <tr>
-        <td class="term">cuDNN</td>
-        <td class="full">CUDA Deep Neural Network library</td>
-        <td>Highly tuned GPU primitives for deep neural networks — convolution, pooling, normalization, attention. PyTorch and TensorFlow rely on it as their GPU backend.</td>
-        <td class="zh">深度神經網路的高度最佳化 GPU 基礎運算庫——卷積、池化、正規化、注意力機制等；PyTorch 與 TensorFlow 的 GPU 後端皆倚賴它。</td>
-      </tr>
-      <tr>
-        <td class="term">cuSolver</td>
-        <td class="full">CUDA Solver library</td>
-        <td>GPU-accelerated matrix factorizations and solvers: LU, QR, SVD, eigenvalue problems — the LAPACK-like layer of the toolkit.</td>
-        <td class="zh">GPU 加速的矩陣分解與求解器函式庫：LU、QR、SVD、特徵值問題等，相當於工具組中類 LAPACK 的角色。</td>
-      </tr>
-      <tr>
-        <td class="term">cuSPARSE</td>
-        <td class="full">CUDA Sparse matrix library</td>
-        <td>GPU-accelerated sparse matrix operations (e.g., sparse matrix–vector multiplication, SpMV), used in graph computation and scientific computing where most matrix entries are zero.</td>
-        <td class="zh">GPU 加速的稀疏矩陣運算函式庫（如稀疏矩陣—向量乘法 SpMV）；適用於圖運算與科學計算等大多數矩陣元素為零的場景。</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="layer-head"><h2>6 · CUDA Toolkit</h2><span class="tag">(C++/CUDA code and kernels)</span></div>
+<div class="layer-desc">The foundation: the CUDA compiler, runtime, debugging/profiling tools, and heavily optimized math libraries. Maximum performance ceiling, highest development cost.</div>
+<table>
+<thead><tr><th class="c-term">Term</th><th class="c-full">Full name</th><th class="c-en">Definition</th></tr></thead>
+<tbody>
+<tr>
+<td class="term">CUDA Toolkit</td>
+<td class="full">CUDA development toolkit</td>
+<td>The complete development kit for CUDA: the <code>nvcc</code> compiler, CUDA runtime, debuggers (cuda-gdb), profilers (Nsight) and the math libraries listed below.</td>
+
+</tr>
+<tr>
+<td class="term">cuBLAS</td>
+<td class="full">CUDA Basic Linear Algebra Subprograms</td>
+<td>The GPU implementation of BLAS: dense linear algebra (matrix multiplication / GEMM and friends). The core numerical engine behind deep learning frameworks.</td>
+
+</tr>
+<tr>
+<td class="term">cuDNN</td>
+<td class="full">CUDA Deep Neural Network library</td>
+<td>Highly tuned GPU primitives for deep neural networks — convolution, pooling, normalization, attention. PyTorch and TensorFlow rely on it as their GPU backend.</td>
+
+</tr>
+<tr>
+<td class="term">cuSolver</td>
+<td class="full">CUDA Solver library</td>
+<td>GPU-accelerated matrix factorizations and solvers: LU, QR, SVD, eigenvalue problems — the LAPACK-like layer of the toolkit.</td>
+
+</tr>
+<tr>
+<td class="term">cuSPARSE</td>
+<td class="full">CUDA Sparse matrix library</td>
+<td>GPU-accelerated sparse matrix operations (e.g., sparse matrix–vector multiplication, SpMV), used in graph computation and scientific computing where most matrix entries are zero.</td>
+
+</tr>
+</tbody>
+</table>
 </section>
-
-<footer>
-  <p><strong>Sources 參考來源：</strong>
-    <a href="https://rapids.ai/">RAPIDS</a> ·
-    <a href="https://docs.rapids.ai/api/">RAPIDS Docs</a> ·
-    <a href="https://github.com/rapidsai/cuvs">cuVS</a> ·
-    <a href="https://docs.rapids.ai/api/raft/stable/">RAFT</a> ·
-    <a href="https://github.com/nvidia/cccl">CCCL</a> ·
-    <a href="https://nvidia.github.io/cccl/cub/">CUB</a> ·
-    <a href="https://developer.nvidia.com/cuda-toolkit">CUDA Toolkit</a>
-  </p>
-  <p>Prepared for the NVIDIA DLI course <em>Fundamentals of Accelerated Data Science</em> · 依課程投影片「Easier to Use ↔ Maximum Performance」堆疊圖整理 · 2026-08</p>
-</footer>
-
+<footer><p><strong>Sources:</strong> <a href="https://rapids.ai/">RAPIDS</a> · <a href="https://docs.rapids.ai/api/">RAPIDS Docs</a> · <a href="https://github.com/rapidsai/cuvs">cuVS</a> · <a href="https://docs.rapids.ai/api/raft/stable/">RAFT</a> · <a href="https://github.com/nvidia/cccl">CCCL</a> · <a href="https://nvidia.github.io/cccl/cub/">CUB</a> · <a href="https://developer.nvidia.com/cuda-toolkit">CUDA Toolkit</a></p><p>Prepared for the NVIDIA DLI course <em>Fundamentals of Accelerated Data Science</em> · 2026-08</p></footer>
 <script>
 (function () {
   var input = document.getElementById('search');
@@ -602,13 +574,12 @@
       var any = s.querySelectorAll('tbody tr:not(.hidden)').length > 0;
       s.classList.toggle('hidden', !any);
     });
-    count.textContent = visible + ' / ' + total + ' terms 條目';
+    count.textContent = visible + ' / ' + total + ' terms';
   }
 
   input.addEventListener('input', update);
   update();
 })();
 </script>
-
 </body>
 </html>
