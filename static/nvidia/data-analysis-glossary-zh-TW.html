@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NVIDIA DLI 資料分析術語表</title>
+  <style>
+    :root{--green:#76b900;--ink:#17211d;--muted:#5d6962;--line:#dce4da;--paper:#fff;--ground:#f4f7f3;--code:#edf3e9}*{box-sizing:border-box}body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.65 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}header{background:#111;border-bottom:5px solid var(--green);color:#fff;padding:3.5rem 1.25rem 2.75rem}.container{width:min(1120px,calc(100% - 2rem));margin:auto}h1{max-width:850px;margin:0;font-size:clamp(2rem,5vw,3.4rem);line-height:1.15;letter-spacing:-.03em}h1 span{color:var(--green)}header p{max-width:780px;margin:.9rem 0 0;color:#cad0cb;font-size:1.05rem}.language{display:inline-block;margin-top:1rem;padding:.35rem .75rem;border:1px solid var(--green);border-radius:999px;color:#dff5b6;text-decoration:none;font-size:.9rem}.language:hover,.language:focus{background:#27351a}.summary{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;padding:1.25rem 0}.summary p{margin:0;color:var(--muted)}#search{width:min(350px,100%);padding:.7rem .85rem;border:1px solid #aeb9ae;border-radius:4px;background:#fff;font:inherit}#search:focus{outline:3px solid #cde9a4;border-color:var(--green)}nav{display:flex;gap:.5rem;flex-wrap:wrap;margin:.25rem 0 1.8rem}nav a{color:#284315;text-decoration:none;border:1px solid #b8cbb0;border-radius:999px;padding:.28rem .7rem;font-size:.88rem}nav a:hover,nav a:focus{background:#e6f3d8}.module{margin:0 0 1.5rem;background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden}.module-head{display:flex;gap:1rem;justify-content:space-between;align-items:baseline;padding:1rem 1.25rem;border-left:6px solid var(--green);background:#fbfdf9}h2{margin:0;font-size:1.18rem;letter-spacing:-.01em}.path{color:var(--muted);font:.8rem ui-monospace,Consolas,monospace;white-space:nowrap}.terms{margin:0}.term{display:grid;grid-template-columns:minmax(200px,27%) 1fr;gap:1.2rem;padding:1rem 1.25rem;border-top:1px solid var(--line)}dt{font-weight:750}dd{margin:0;color:#303a34}code{padding:.08em .25em;border-radius:3px;background:var(--code);font:.9em ui-monospace,Consolas,monospace}.note{border-left:4px solid #a6b69f;margin:1.5rem 0 2.5rem;padding:.6rem 1rem;color:#435047;font-size:.92rem}.hidden{display:none}footer{margin-top:3rem;padding:1.75rem 0 3rem;color:var(--muted);font-size:.9rem}@media(max-width:650px){.summary{grid-template-columns:1fr}.term{grid-template-columns:1fr;gap:.25rem}.module-head{display:block}.path{display:block;margin-top:.25rem;white-space:normal}}
+  </style>
+</head>
+<body>
+<header><div class="container"><h1>資料分析<span>術語表</span></h1><p>NVIDIA DLI「Fundamentals of Accelerated Data Science」課程中會遇到的概念與實作術語。本頁依各筆記本實際要求的分析工作說明其意義。</p><a class="language" href="data-analysis-glossary.html" hreflang="en" lang="en">English version</a></div></header>
+<main class="container">
+<div class="summary"><p>可搜尋所有術語與說明。章節依筆記本順序排列；導覽與章節概覽筆記本沒有額外的專屬分析術語，故未另列。</p><input id="search" type="search" placeholder="搜尋術語，例如：記憶體額外負擔" aria-label="搜尋術語表"></div>
+<nav aria-label="課程章節"><a href="#data">資料處理</a><a href="#graph">圖論分析</a><a href="#ml">機器學習</a><a href="#project">生物防禦專題</a></nav>
+<div class="note">範圍說明：本頁是課程學習輔助，不取代各套件的正式文件。例如「記憶體額外負擔」會隨情境而變，可能來自剖析檔案、暫存緩衝區、索引、記憶體配置器的集區或中介資料。</div>
+
+<section id="data" class="module"><div class="module-head"><h2>1-02 · 資料操作</h2><span class="path">fundamentals/1-02_data_manipulation.ipynb</span></div><dl class="terms">
+<div class="term"><dt>cuDF</dt><dd>RAPIDS 的 GPU DataFrame 函式庫。本筆記本以類似 pandas 的介面，在駐留 GPU 的資料上進行載入、選取、篩選、分組與建立欄位等操作。</dd></div>
+<div class="term"><dt>DataFrame 索引（index）</dt><dd>辨識每一列的標籤。筆記本以 <code>.loc</code> 依標籤選取，而非依數值位置選取；在排序、篩選或串接資料後，兩者的差異尤其重要。</dd></div>
+<div class="term"><dt>布林遮罩（Boolean mask）</dt><dd>與資料列等長、由 <code>True</code>／<code>False</code> 組成的序列，用來保留符合條件的列，例如位於 Sunderland 以北的郡。它是向量化篩選的基礎。</dd></div>
+<div class="term"><dt>UDF（使用者自訂函式）</dt><dd>由使用者定義的函式。<code>.map()</code> 逐元素套用；<code>.apply()</code> 可沿列或欄運作。兩者很方便，但通常不如內建的向量化操作有效率。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>1-03 · 記憶體管理</h2><span class="path">fundamentals/1-03_memory_management.ipynb</span></div><dl class="terms">
+<div class="term"><dt>記憶體額外負擔（memory overhead）</dt><dd>DataFrame 邏輯資料值以外所需的記憶體。本筆記本中，GPU 使用量可能高於 DataFrame 回報的大小，因為 CSV 剖析與載入的中間步驟會配置額外緩衝區；執行時應預留這類尖峰所需空間。</dd></div>
+<div class="term"><dt><code>memory_usage(deep=True)</code></dt><dd>pandas 用來估計物件字串欄位實際記憶體的選項。若未設定 <code>deep=True</code>，可能只計算指標而低估字串內容本身的儲存量。</dd></div>
+<div class="term"><dt>降階轉型（downcasting）</dt><dd>把數值改為較小但仍相容的型別，例如 <code>int64</code> 改為 <code>int8</code> 或 <code>float64</code> 改為 <code>float32</code>。可減少儲存量與記憶體傳輸，但前提是數值範圍與所需精度仍能保留。</dd></div>
+<div class="term"><dt>類別型資料（categorical data）</dt><dd>將重複出現的離散標籤存成類別字典與整數代碼。對低基數的文字欄位可節省記憶體並加速操作，也能保留有意義的排序。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>1-04 · GPU PyData 互通性</h2><span class="path">fundamentals/1-04_interoperability.ipynb</span></div><dl class="terms">
+<div class="term"><dt>CuPy</dt><dd>與 NumPy 相容的 GPU 陣列函式庫。筆記本以它處理數值陣列，可與 cuDF DataFrame 並用，避免不必要地把資料傳回 CPU 的 NumPy。</dd></div>
+<div class="term"><dt>英國國家格網／OSGB</dt><dd>英國使用的投影座標參考系統。經緯度轉換後的 easting 與 northing 以公尺為單位，因此在局部距離分析時，比直接以角度單位的經緯度計算更合適。</dd></div>
+<div class="term"><dt>向量化（vectorization）</dt><dd>一次對整個陣列運算，而不是用 Python 逐筆迴圈。格網座標轉換器中的 NumPy／CuPy 表達式能呈現足夠的平行工作，讓函式庫有效使用 CPU 或 GPU。</dd></div>
+<div class="term"><dt>布林陣列索引</dt><dd>以布林陣列選取陣列中的值。它相當於 DataFrame 的布林遮罩，可用於保留符合計算條件的元素。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>1-05 · 分組</h2><span class="path">fundamentals/1-05_grouping.ipynb</span></div><dl class="terms">
+<div class="term"><dt>分割—套用—合併</dt><dd><code>groupby</code> 的思考方式：先依鍵值分割資料，再在各群內套用彙整或轉換，最後合併結果。例如依郡計算平均年齡。</dd></div>
+<div class="term"><dt>分箱（binning）</dt><dd>把連續數值變數切為區間，例如年齡層。它讓摘要與作圖較簡單，但會犧牲箱內的細節；箱界位置會影響看到的模式。</dd></div>
+<div class="term"><dt><code>transform</code> 與 <code>apply</code></dt><dd><code>transform</code> 的輸出會與原始列對齊，例如為每個人附上其群組平均值；<code>apply</code> 較有彈性，可能回傳縮減或改變形狀的結果。</dd></div>
+<div class="term"><dt>樞紐分析表（pivot table）</dt><dd>把群組安排成列與欄，並以彙整值填入儲存格的交叉摘要表。它能精簡地檢視兩個類別維度之間的關係。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>1-06 · 資料視覺化</h2><span class="path">fundamentals/1-06_data_visualization.ipynb</span></div><dl class="terms">
+<div class="term"><dt>直方圖（histogram）</dt><dd>顯示落在各數值區間內觀測值數量的圖。它不同於具名類別的長條圖；連續分布呈現出的形狀會隨箱寬改變。</dd></div>
+<div class="term"><dt>Datashader</dt><dd>面對大量點資料的繪圖方法：先把資料彙整到螢幕像素，再進行渲染。這可避免點位重疊，也讓逐列繪製會過慢或不清楚的圖仍可閱讀。</dd></div>
+<div class="term"><dt>cuxfilter 儀表板</dt><dd>以 GPU 為導向的互動式視覺化儀表板，可連動多個視圖。在一個視圖篩選或選取後，其他視圖會同步更新，適合探索大型資料。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>1-07 · 擷取、轉換、載入</h2><span class="path">fundamentals/1-07_etl.ipynb</span></div><dl class="terms">
+<div class="term"><dt>ETL</dt><dd>Extract、Transform、Load 的縮寫：從來源取得資料、清理／重新編碼／衍生分析用欄位，再寫入目標系統或檔案。筆記本將前處理視為可重現的流程，而非一次性的手動工作。</dd></div>
+<div class="term"><dt>Parquet</dt><dd>二進位欄式檔案格式。它依欄儲存資料並保留中介資料與壓縮資訊，分析讀取時可只載入需要的欄位，通常比反覆剖析 CSV 更有效率。</dd></div>
+<div class="term"><dt>欄式儲存（columnar storage）</dt><dd>依欄位而非依資料列排列的實體儲存方式。它適合分析性的掃描與彙整，也利於壓縮，因為同一欄的值相鄰且往往相似。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>1-08 · cuDF Polars</h2><span class="path">fundamentals/1-08_cudf-polars.ipynb</span></div><dl class="terms">
+<div class="term"><dt>立即執行（eager execution）</dt><dd>每個操作立即執行並回傳結果。它適合互動式使用，但在後續操作尚未得知前，就已決定了執行方式。</dd></div>
+<div class="term"><dt>延遲執行（lazy execution）</dt><dd>先建立查詢計畫，待呼叫 <code>collect()</code> 才執行。Polars 因而能對整個計畫最佳化，例如提早篩選或避開未使用欄位。</dd></div>
+<div class="term"><dt>執行圖（execution graph）</dt><dd>呈現資料操作與相依關係的有向圖。檢視它可理解延遲模式如何在不改變要求結果的前提下，合併或重排工作。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>1-09 · Dask cuDF</h2><span class="path">fundamentals/1-09_dask-cudf.ipynb</span></div><dl class="terms">
+<div class="term"><dt>分區（partition）</dt><dd>分散式 DataFrame 的一個資料區塊。Dask 將超過單張 GPU 容量的資料切成分區，交由工作節點平行處理；分區大小會影響排程額外負擔與記憶體壓力。</dd></div>
+<div class="term"><dt>Dask 排程器（scheduler）</dt><dd>將任務圖轉成工作指派、遵守相依關係並分配給工作節點的協調者。它負責編排計算，本身不是執行 DataFrame 計算的位置。</dd></div>
+<div class="term"><dt>LocalCUDACluster</dt><dd>在本機啟動 GPU 感知工作節點的 Dask 叢集設定，通常每張可見 GPU 對應一個工作節點，使 Dask cuDF 工作可跨 GPU 分配。</dd></div>
+<div class="term"><dt><code>persist()</code></dt><dd>把延遲的 Dask 集合具體化並留在工作節點記憶體中，同時維持其分散式集合身分。適合重複使用的中間結果，但需計入它占用的叢集記憶體。</dd></div></dl></section>
+
+<section id="graph" class="module"><div class="module-head"><h2>2-02 · 準備圖形建構資料</h2><span class="path">fundamentals/2-02_prep_graph.ipynb</span></div><dl class="terms">
+<div class="term"><dt>圖、頂點、邊</dt><dd>圖以頂點（節點）表示實體，以邊表示關係。此處道路交叉點是頂點、道路路段是邊；分析前必須確認邊端點 ID 能與頂點 ID 正確對應。</dd></div>
+<div class="term"><dt>邊權重（edge weight）</dt><dd>附在邊上的數值成本。筆記本依道路長度與道路類型的速度假設換算行車秒數，因此「最短」可以指最快，而非物理距離最短。</dd></div>
+<div class="term"><dt>節點重新編號（reindexing）</dt><dd>把外部節點識別碼替換為緊湊、連續的 ID 範圍。這可使圖形建構與 GPU 演算法更有效率，但必須保留對照表以解讀結果。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>2-03 · cuGraph 單一來源最短路徑</h2><span class="path">fundamentals/2-03_cugraph.ipynb</span></div><dl class="terms">
+<div class="term"><dt>單一來源最短路徑（SSSP）</dt><dd>從一個指定來源頂點，計算到所有可達頂點的最小總邊權重。若權重是時間，本筆記本即估計穿越道路網的行車時間。</dd></div>
+<div class="term"><dt>可達性（reachability）</dt><dd>在圖的連通與方向規則下，兩個頂點之間是否存在路徑。不可達頂點沒有從來源出發的有限路徑，不能只解讀成「非常遠」。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>2-04 · cuGraph 作為 NetworkX 後端</h2><span class="path">fundamentals/2-04_networkx_cugraph.ipynb</span></div><dl class="terms">
+<div class="term"><dt>後端分派（backend dispatch）</dt><dd>讓相容的 NetworkX 風格呼叫透過加速的 <code>nx-cugraph</code> 後端執行的機制。程式碼可維持熟悉的介面，但底層計算實作已改變。</dd></div>
+<div class="term"><dt>中心性（centrality）</dt><dd>衡量頂點在網路結構中重要性的指標家族。它不是籠統的「重要性」事實：不同指標對應不同的網路角色，應依實質問題選擇。</dd></div>
+<div class="term"><dt>中介／度數／特徵向量／PageRank／Katz 中心性</dt><dd>中介中心性計算經過節點的路徑；度數中心性計算直接連結數；特徵向量與 PageRank 會提高連到重要節點的分數；Katz 也計入較長的路徑，但會折減其貢獻。這些意義不能互換。</dd></div></dl></section>
+
+<section id="ml" class="module"><div class="module-head"><h2>3-02 · K-Means</h2><span class="path">fundamentals/3-02_k-means.ipynb</span></div><dl class="terms">
+<div class="term"><dt>K-means 分群</dt><dd>一種非監督式方法，將每筆觀測值分配到預先指定數量 <em>k</em> 的群組，並反覆更新群中心，以減少群內的平方距離。</dd></div>
+<div class="term"><dt>質心（centroid）</dt><dd>K-means 群組中所有點的平均位置。它是數學上的中心，不必是某位實際的人或某個實際地點，且會受尺度與離群值影響。</dd></div>
+<div class="term"><dt>特徵縮放（feature scaling）</dt><dd>在以距離為基礎的學習前，將輸入變數放到可比較的數值尺度。否則數值範圍較大的特徵，可能不論其實質重要性而主導 K-means 的距離。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>3-03 · DBSCAN</h2><span class="path">fundamentals/3-03_dbscan.ipynb</span></div><dl class="terms">
+<div class="term"><dt>DBSCAN</dt><dd>Density-Based Spatial Clustering of Applications with Noise 的縮寫。它從密集點群形成叢集，可找出非球形結構，並把不在高密度區域內的點標為雜訊。</dd></div>
+<div class="term"><dt><code>eps</code> 與 <code>min_samples</code></dt><dd><code>eps</code> 是鄰域半徑；<code>min_samples</code> 是一個點成為核心點所需的鄰近點數。兩者共同定義何種密度算成叢集，尺度必須與特徵單位相符。</dd></div>
+<div class="term"><dt>雜訊標籤（noise label）</dt><dd>DBSCAN 指派給未與任何叢集形成密度連通關係之觀測值的標籤，通常是 <code>-1</code>。這是演算法結果，不代表該量測一定錯誤。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>3-04 · Logistic Regression</h2><span class="path">fundamentals/3-04_logistic_regression.ipynb</span></div><dl class="terms">
+<div class="term"><dt>邏輯斯迴歸（logistic regression）</dt><dd>以年齡、性別等預測變數，建立二元結果（本例為感染）機率的監督式分類模型。它將線性分數以 logistic 函數轉換到 0 至 1 的機率尺度。</dd></div>
+<div class="term"><dt>係數與勝算（odds）</dt><dd>係數改變的是模型的對數勝算，而不是以固定幅度改變機率。係數取指數後是勝算比，但仍要連同模型設定與其他預測變數解讀。</dd></div>
+<div class="term"><dt>訓練／測試切分</dt><dd>保留一部分未用於配適的資料，之後以它評估訓練好的模型。這可估計對相似但未見資料的泛化表現，避免把樣本內表現誤當成預測能力。</dd></div>
+<div class="term"><dt>盛行率（prevalence）</dt><dd>在特定族群或子群中具有該結果者的比例。依年齡或性別觀察到較高盛行率，是描述性的結果，本身不能證明因果風險因子。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>3-05 · K-Nearest Neighbors</h2><span class="path">fundamentals/3-05_knn.ipynb</span></div><dl class="terms">
+<div class="term"><dt>K 最近鄰（KNN）</dt><dd>針對每個查詢點，找出參考資料中 <em>k</em> 個距離最近點的距離式方法。本筆記本用它把醫院對應到附近道路節點；它不會學習道路網路本身的模型。</dd></div>
+<div class="term"><dt>查詢資料與參考資料</dt><dd>參考資料先建立索引供搜尋；查詢資料則拿來查找鄰居。解讀回傳的距離與鄰居索引時，必須分清兩者角色及各自的列索引。</dd></div>
+<div class="term"><dt>歐幾里得距離</dt><dd>在提供的特徵空間中的直線距離。投影為以公尺計的格網座標後很有用，但它不是道路行車距離，也可能忽略障礙或網路限制。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>3-06 · XGBoost</h2><span class="path">fundamentals/3-06_xgboost.ipynb</span></div><dl class="terms">
+<div class="term"><dt>XGBoost／梯度提升</dt><dd>一種循序建立決策樹的集成方法；每棵新樹用來修正先前集成的錯誤。它適合表格資料預測，但仍須驗證與審慎設定參數，以避免過度配適。</dd></div>
+<div class="term"><dt>超參數（hyperparameter）</dt><dd>在訓練前或訓練過程中設定、而非直接由訓練樣本學得的值，例如樹深、學習率或提升回合數。應使用驗證資料調整，不能用最終測試集調參。</dd></div>
+<div class="term"><dt>特徵重要性（feature importance）</dt><dd>由模型推得、概括各預測變數對分裂或損失降低貢獻的摘要。它可供檢視，但不能證明因果，亦可能受相關特徵或所採重要性定義影響。</dd></div>
+<div class="term"><dt>ROC AUC</dt><dd>受試者操作特徵曲線下面積：隨機抽一個正例與一個負例時，模型將正例評分較高的機率。它衡量跨閾值的排序辨識力，不單獨衡量校準度或實務效益。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>3-07 · Triton</h2><span class="path">fundamentals/3-07_triton.ipynb</span></div><dl class="terms">
+<div class="term"><dt>推論伺服器（inference server）</dt><dd>接收模型輸入並回傳預測結果的服務。Triton 將訓練完成的模型包裝成可提供服務的形式、處理請求並支援多種後端；這不同於模型訓練。</dd></div>
+<div class="term"><dt>模型儲存庫與設定檔</dt><dd>Triton 要求依模型名稱與版本整理目錄，並提供 <code>config.pbtxt</code>。設定檔宣告輸入、輸出、批次上限與後端設定等部署層面的資訊。</dd></div>
+<div class="term"><dt>批次大小與併發數</dt><dd>批次大小是每個請求包含的輸入數；併發數是同時尚未完成的請求數。提高任一項可能改善 GPU 使用率與吞吐量，但也可能增加延遲或超出記憶體限制。</dd></div>
+<div class="term"><dt>延遲、吞吐量、p50／p95／p99</dt><dd>延遲是每個請求花費的時間；吞吐量是單位時間完成的推論數。百分位數概括延遲分布，例如 p95 表示 95% 的量測請求在該值或更短時間內完成。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>3-08 · 以 Dask 進行多 GPU K-Means</h2><span class="path">fundamentals/3-08_k-means_dask.ipynb</span></div><dl class="terms">
+<div class="term"><dt>多 GPU 訓練</dt><dd>將資料分區並協調計算，讓一項分析跨多張 GPU 執行。它可擴充容量與速度，但效益取決於分區平衡、通訊成本，以及工作量是否足以抵銷額外負擔。</dd></div>
+<div class="term"><dt>分散式 K-means</dt><dd>在 Dask 管理的分區上執行 K-means。各工作節點的本地計算會共同更新全域質心，因此它結合平行本地工作與跨叢集同步。</dd></div></dl></section>
+
+<section id="project" class="module"><div class="module-head"><h2>4-02 · 找出感染者叢集</h2><span class="path">fundamentals/4-02_find_infected.ipynb</span></div><dl class="terms">
+<div class="term"><dt>空間叢集（spatial cluster）</dt><dd>地理位置集中的病例群。在本專題中，DBSCAN 以投影格網座標辨識高密度模式；找到叢集表示值得進一步調查的模式，不是感染原因的解釋。</dd></div>
+<div class="term"><dt>最大叢集（largest cluster）</dt><dd>被指派至該叢集的觀測值數量最多的叢集。它不同於地理面積最大或局部密度最高的叢集，因此應清楚說明判準。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>4-03 · 找出最近醫療設施</h2><span class="path">fundamentals/4-03_nearest_facilities.ipynb</span></div><dl class="terms">
+<div class="term"><dt>Easting 與 northing</dt><dd>投影格網的水平與垂直座標。在此使用的英國國家格網轉換中，兩者以公尺為尺度，因此 KNN 可計算具有明確意義的直線鄰近程度。</dd></div>
+<div class="term"><dt>最近設施索引</dt><dd><code>kneighbors</code> 回傳的整數，用來指出設施參考 DataFrame 中距離最近的那一列。必須以它連回 <code>OrganisationID</code> 等設施中介資料；重設索引可避免列標籤錯配。</dd></div></dl></section>
+
+<section class="module"><div class="module-head"><h2>4-04 · 找出感染風險因子</h2><span class="path">fundamentals/4-04_identify_risk_factors.ipynb</span></div><dl class="terms">
+<div class="term"><dt>分層（stratification）</dt><dd>在子群中計算摘要，例如同時依就業代碼與性別計算。這可檢視整體模式是否在重要分組中一致，也可能發現整體比例掩蓋的差異。</dd></div>
+<div class="term"><dt>風險因子（risk factor）</dt><dd>在特定分析中，與較高結果率有關的特徵。專題中的分組感染率可指出值得後續研究的候選因素；觀察到的關聯本身不能證明就業或性別造成感染。</dd></div></dl></section>
+</main>
+<footer class="container">依本機課程副本中 <em>Fundamentals of Accelerated Data Science</em>（NVIDIA DLI）的筆記本內容與練習整理。作為課程輔助術語表發布 · 2026-08。</footer>
+<script>(()=>{const input=document.querySelector('#search'),modules=[...document.querySelectorAll('.module')],rows=[...document.querySelectorAll('.term')];function filter(){const q=input.value.trim().toLowerCase();rows.forEach(r=>r.classList.toggle('hidden',!!q&&!r.textContent.toLowerCase().includes(q)));modules.forEach(m=>m.classList.toggle('hidden',!!q&&!m.querySelector('.term:not(.hidden)')))}input.addEventListener('input',filter)})();</script>
+</body></html>

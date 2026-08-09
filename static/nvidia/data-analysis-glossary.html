@@ -13,6 +13,8 @@
     h1 { max-width:850px; margin:0; font-size:clamp(2rem, 5vw, 3.4rem); line-height:1.05; letter-spacing:-.035em; }
     h1 span { color:var(--green); }
     header p { max-width:780px; margin:.9rem 0 0; color:#cad0cb; font-size:1.05rem; }
+    .language { display:inline-block; margin-top:1rem; padding:.35rem .75rem; border:1px solid var(--green); border-radius:999px; color:#dff5b6; text-decoration:none; font-size:.9rem; }
+    .language:hover, .language:focus { background:#27351a; }
     .summary { display:grid; grid-template-columns:1fr auto; gap:1rem; align-items:center; padding:1.25rem 0; }
     .summary p { margin:0; color:var(--muted); }
     #search { width:min(350px, 100%); padding:.7rem .85rem; border:1px solid #aeb9ae; border-radius:4px; background:#fff; font:inherit; }
@@ -39,6 +41,7 @@
 <header><div class="container">
   <h1>Data-analysis <span>field glossary</span></h1>
   <p>Conceptual and practical terms encountered in NVIDIA DLI’s <em>Fundamentals of Accelerated Data Science</em>. Definitions are deliberately tied to the operation each notebook asks learners to perform.</p>
+  <a class="language" href="data-analysis-glossary-zh-TW.html" hreflang="zh-Hant" lang="zh-Hant">繁體中文版本</a>
 </div></header>
 <main class="container">
   <div class="summary"><p>Search across terms and explanations. Sections follow the notebook sequence; the orientation and section-overview notebooks introduce the course but do not add distinct analysis vocabulary.</p><input id="search" type="search" placeholder="Search terms, e.g. overhead" aria-label="Search glossary"></div>
