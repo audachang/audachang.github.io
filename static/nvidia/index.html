@@ -3,118 +3,61 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Conceptual guide to the 28 notebooks in NVIDIA Fundamentals of Accelerated Data Science.">
-  <title>NVIDIA Accelerated Data Science — Notebook Concepts</title>
+  <meta name="description" content="Index of English and Traditional Chinese NVIDIA accelerated data science learning resources.">
+  <title>NVIDIA Accelerated Data Science — Resource Index</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <header class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="https://audachang.github.io/">Erik Chang</a>
-      <nav class="lang" aria-label="Page links"><a href="./key-terms.html">Key terms</a> · <strong>English</strong> · <a href="./zh-tw/" lang="zh-Hant-TW">繁體中文</a></nav>
+      <span class="lang">NVIDIA course resources · NVIDIA 課程資源</span>
     </div>
   </header>
 
-  <div class="page">
-    <aside class="sidebar" aria-label="Course sections">
-      <h2>Course map</h2>
-      <ol>
-        <li><a href="#section-1">Data processing</a></li>
-        <li><a href="#section-2">Graph analytics</a></li>
-        <li><a href="#section-3">Machine learning</a></li>
-        <li><a href="#section-4">Biodefense project</a></li>
-      </ol>
-    </aside>
+  <main class="directory">
+    <p class="eyebrow">Fundamentals of Accelerated Data Science</p>
+    <h1>Resource index<br><span lang="zh-Hant-TW">資源索引</span></h1>
+    <p class="dek">English and Taiwan Traditional Chinese guides for the NVIDIA accelerated data science course.<br><span lang="zh-Hant-TW">NVIDIA 加速資料科學課程的英文與臺灣繁體中文學習資源。</span></p>
+    <hr class="rule">
 
-    <main>
-      <p class="eyebrow">Fundamentals of Accelerated Data Science</p>
-      <h1>Concepts behind the notebooks</h1>
-      <p class="dek">A notebook-by-notebook guide to the ideas that matter: how GPU acceleration changes data workflows, how RAPIDS libraries connect, and how the course moves from data preparation to graphs, machine learning, deployment, and an integrated application.</p>
-      <p class="meta">28 notebooks · Source: the notebooks directly inside the <code>fundamentals</code> folder · Conceptual summary, not a code or answer key</p>
-      <hr class="rule">
+    <section class="resource-group" aria-labelledby="concepts-heading">
+      <p class="resource-number">01</p>
+      <div>
+        <h2 id="concepts-heading">Notebook concepts <span lang="zh-Hant-TW">／Notebook 概念</span></h2>
+        <p>Conceptually important points from all 28 notebooks in the <code>fundamentals</code> folder, organized notebook by notebook.</p>
+        <ul class="resource-list">
+          <li><a href="./concepts.html"><span><strong>English</strong><small>Notebook Concepts</small></span><span aria-hidden="true">→</span></a></li>
+          <li><a href="./zh-tw/" lang="zh-Hant-TW"><span><strong>繁體中文</strong><small>Notebook 概念重點</small></span><span aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+    </section>
 
-      <section class="module" id="section-1">
-        <span class="module-number">Section 1</span>
-        <h2>Accelerated data processing</h2>
-        <p class="module-intro">The governing idea is to express work as column-wise, vectorized operations, keep data on the GPU, and manage memory and data movement deliberately.</p>
+    <section class="resource-group" aria-labelledby="key-terms-heading">
+      <p class="resource-number">02</p>
+      <div>
+        <h2 id="key-terms-heading">Accelerated computing key terms <span lang="zh-Hant-TW">／加速運算術語</span></h2>
+        <p>Thirty-seven terms organized by stack layer, from zero-code-change acceleration to the CUDA Toolkit.</p>
+        <ul class="resource-list">
+          <li><a href="./key-terms.html"><span><strong>English</strong><small>Accelerated Computing Stack — Key Terms</small></span><span aria-hidden="true">→</span></a></li>
+          <li><a href="./zh-tw/key-terms.html" lang="zh-Hant-TW"><span><strong>繁體中文</strong><small>加速運算堆疊｜術語與縮寫對照表</small></span><span aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+    </section>
 
-        <details class="notebook" id="nb-1-00" open><summary><span class="filename">1-00_introduction.ipynb</span><span class="notebook-title">Environment and GPU workflow</span></summary><div class="notebook-body"><ul><li>JupyterLab combines notebooks, files, terminals, and independent kernels in one interactive environment.</li><li><code>nvidia-smi</code> reveals GPU availability, memory use, and active processes; leaving headroom matters because operations can create temporary allocations.</li><li><code>%time</code> and <code>%%time</code> support empirical performance comparison.</li><li>Each notebook has its own kernel, so shutting down unused kernels releases GPU memory across the session.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> acceleration starts with observing the hardware and controlling the execution environment.</p></div></details>
+    <section class="resource-group" aria-labelledby="glossary-heading">
+      <p class="resource-number">03</p>
+      <div>
+        <h2 id="glossary-heading">Data analysis glossary <span lang="zh-Hant-TW">／資料分析術語表</span></h2>
+        <p>Earlier course glossary covering data manipulation, visualization, graph analytics, machine learning, and deployment terminology.</p>
+        <ul class="resource-list">
+          <li><a href="./data-analysis-glossary.html"><span><strong>English</strong><small>NVIDIA DLI Data Analysis Glossary</small></span><span aria-hidden="true">→</span></a></li>
+          <li><a href="./data-analysis-glossary-zh-TW.html" lang="zh-Hant-TW"><span><strong>繁體中文</strong><small>NVIDIA DLI 資料分析術語表</small></span><span aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+    </section>
 
-        <details class="notebook" id="nb-1-01"><summary><span class="filename">1-01_section_overview.ipynb</span><span class="notebook-title">The data-processing pipeline</span></summary><div class="notebook-body"><ul><li>The section follows a coherent pipeline: manipulate data, manage memory, exchange data among libraries, group and visualize it, then build ETL and scalable workflows.</li><li>Prepared data becomes the foundation for the graph and machine-learning sections.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> end-to-end throughput matters more than accelerating one isolated operation.</p></div></details>
-
-        <details class="notebook" id="nb-1-02"><summary><span class="filename">1-02_data_manipulation.ipynb</span><span class="notebook-title">DataFrames, vectorization, and cuDF</span></summary><div class="notebook-body"><ul><li>cuDF provides a pandas-like DataFrame API for loading, selecting, filtering, joining, aggregating, and transforming data on a GPU.</li><li>DataFrames are two-dimensional labeled structures; Series are one-dimensional labeled arrays. Index alignment preserves row correspondence during operations.</li><li>Column operations, scalar broadcasting, boolean masks, and reductions expose parallelism; row-by-row iteration works against GPU architecture.</li><li><code>.loc</code> supports label-based selection, while <code>.map()</code> and <code>.apply()</code> cover logic that cannot be expressed with built-in vector operations.</li><li><code>cudf.pandas</code> can accelerate compatible pandas code and fall back to CPU for unsupported operations.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> reformulate computation as bulk operations over columns instead of Python loops.</p></div></details>
-
-        <details class="notebook" id="nb-1-03"><summary><span class="filename">1-03_memory_management.ipynb</span><span class="notebook-title">Memory is part of algorithm design</span></summary><div class="notebook-body"><ul><li>GPU memory is finite, and intermediate results may briefly require much more memory than the final result.</li><li>Choosing the smallest valid integer or floating-point type reduces storage and can improve processing speed; lowering precision is a correctness decision, not merely an optimization.</li><li>Categorical types encode repeated labels compactly and can accelerate suitable operations.</li><li>Specifying columns and data types while loading avoids reading and converting data that the analysis never needs.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> estimate peak memory, choose types intentionally, and load only useful data.</p></div></details>
-
-        <details class="notebook" id="nb-1-04"><summary><span class="filename">1-04_interoperability.ipynb</span><span class="notebook-title">Interoperability in the GPU PyData ecosystem</span></summary><div class="notebook-body"><ul><li>CuPy brings a NumPy-like multidimensional array API to GPUs, while cuDF specializes in labeled, columnar tables.</li><li>GPU array standards such as the CUDA Array Interface allow libraries to share device data without costly host copies.</li><li>The latitude/longitude conversion illustrates how a NumPy-style numerical routine can move to CuPy and feed its results back into cuDF.</li><li>Boolean array indexing provides a common, vectorized selection pattern across array and DataFrame tools.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> choose the right abstraction for each operation while keeping data on device.</p></div></details>
-
-        <details class="notebook" id="nb-1-05"><summary><span class="filename">1-05_grouping.ipynb</span><span class="notebook-title">Split, apply, combine</span></summary><div class="notebook-body"><ul><li><code>groupby</code> splits rows by keys, applies computations to each group, and combines the results.</li><li>Built-in aggregations such as mean, count, and sum are usually more parallel and efficient than arbitrary group-wise functions.</li><li>Binning converts continuous values into analytically meaningful categories; bin boundaries encode assumptions that must fit the question.</li><li><code>agg</code> returns summaries, <code>transform</code> broadcasts group results back to rows, and <code>apply</code> offers flexibility at a potential performance cost.</li><li>Pivot tables express multidimensional group summaries in a matrix layout.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> use the most structured group operation that expresses the analysis.</p></div></details>
-
-        <details class="notebook" id="nb-1-06"><summary><span class="filename">1-06_data_visualization.ipynb</span><span class="notebook-title">Visualizing data at scale</span></summary><div class="notebook-body"><ul><li>Chart choice follows the question: bars compare categories, histograms show distributions, scatterplots reveal relationships and clusters, and lines show ordered change.</li><li>Plotting every point in a very large dataset can be slow and visually misleading because of overplotting.</li><li>Datashader aggregates observations into display pixels, producing faithful images without sending every row to the browser.</li><li>cuxfilter links GPU-backed charts so interactions in one view filter the others.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> visualization is an aggregation problem as well as a rendering problem.</p></div></details>
-
-        <details class="notebook" id="nb-1-07"><summary><span class="filename">1-07_etl.ipynb</span><span class="notebook-title">Extract, transform, and load</span></summary><div class="notebook-body"><ul><li>ETL turns source data into a clean, typed, analysis-ready artifact: extract inputs, transform structure and values, then load the result.</li><li>Transformation includes filtering, coordinate conversion, feature creation, type conversion, and validation.</li><li>Parquet stores columnar data with metadata that enables column pruning and predicate-based skipping.</li><li>Persisting a well-designed intermediate dataset prevents downstream notebooks from repeating expensive preparation.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> optimize the reusable data product, not only the notebook that creates it.</p></div></details>
-
-        <details class="notebook" id="nb-1-08"><summary><span class="filename">1-08_cudf-polars.ipynb</span><span class="notebook-title">Polars lazy queries on the GPU</span></summary><div class="notebook-body"><ul><li>Polars offers eager execution for immediate results and lazy execution for building a query plan before computation.</li><li>A full lazy plan enables optimizations such as projection and predicate pushdown, reducing unnecessary reads and intermediate work.</li><li>The cuDF Polars engine examines the optimized plan and executes supported operations on the GPU.</li><li>The best acceleration path may be an execution-engine choice rather than a rewrite of the analytical logic.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> delaying execution gives the system room to optimize the entire query.</p></div></details>
-
-        <details class="notebook" id="nb-1-09"><summary><span class="filename">1-09_dask-cudf.ipynb</span><span class="notebook-title">Scaling DataFrames with Dask-cuDF</span></summary><div class="notebook-body"><ul><li>Dask partitions data and represents operations as a lazy task graph coordinated by a scheduler and workers.</li><li><code>LocalCUDACluster</code> assigns GPU workers; the dashboard exposes task progress, memory pressure, and bottlenecks.</li><li><code>compute()</code> materializes a result, while <code>persist()</code> keeps reusable partitions distributed in worker memory.</li><li>Cluster setup should precede imports that create a CUDA context so computation does not bind prematurely to one device.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> distributed acceleration adds scheduling and partitioning concerns to ordinary DataFrame logic.</p></div></details>
-      </section>
-
-      <section class="module" id="section-2">
-        <span class="module-number">Section 2</span>
-        <h2>Graph analytics</h2>
-        <p class="module-intro">Road tables become graph structures whose topology and edge weights support reachability, travel-time, and centrality analysis.</p>
-
-        <details class="notebook" id="nb-2-00"><summary><span class="filename">2-00_introduction.ipynb</span><span class="notebook-title">Environment reset for graph work</span></summary><div class="notebook-body"><ul><li>The notebook revisits Jupyter execution, timing, GPU monitoring, and kernel lifecycle for a self-contained graph section.</li><li>Independent kernels make experiments reproducible but can retain GPU allocations until they are shut down.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> verify and reset computational state before starting a memory-intensive workflow.</p></div></details>
-
-        <details class="notebook" id="nb-2-01"><summary><span class="filename">2-01_section_overview.ipynb</span><span class="notebook-title">From tables to graph questions</span></summary><div class="notebook-body"><ul><li>The section moves from graph-ready data construction to cuGraph shortest paths and NetworkX-compatible accelerated centrality.</li><li>Graph analysis depends on both a correct topology and edge weights that represent the intended cost.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> graph algorithms are only as meaningful as the node, edge, and weight model supplied to them.</p></div></details>
-
-        <details class="notebook" id="nb-2-02"><summary><span class="filename">2-02_prep_graph.ipynb</span><span class="notebook-title">Preparing a weighted road graph</span></summary><div class="notebook-body"><ul><li>A graph requires compatible source and destination identifiers; reindexing maps external road-node IDs into a consistent graph ID space.</li><li>Road edges define connectivity, while node tables retain location attributes used for interpretation and visualization.</li><li>A distance-weighted graph answers shortest-distance questions. Converting road types to speeds and distance to travel seconds creates a time-weighted graph for fastest-route questions.</li><li>Merges are not clerical steps: join completeness and units determine whether weights are valid.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> topology defines what paths exist; edge weights define what “shortest” means.</p></div></details>
-
-        <details class="notebook" id="nb-2-03"><summary><span class="filename">2-03_cugraph.ipynb</span><span class="notebook-title">Single-source shortest paths with cuGraph</span></summary><div class="notebook-body"><ul><li>A cuGraph graph is constructed from source, destination, and optional weight columns in a GPU DataFrame.</li><li>Single-source shortest path (SSSP) computes the minimum accumulated cost from one start node to every reachable node.</li><li>Changing the edge weight from road length to travel time changes the optimization objective without changing the topology.</li><li>Joining graph results back to node metadata makes abstract distances or times geographically interpretable.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> separate graph structure, cost definition, algorithm output, and real-world interpretation.</p></div></details>
-
-        <details class="notebook" id="nb-2-04"><summary><span class="filename">2-04_networkx_cugraph.ipynb</span><span class="notebook-title">cuGraph as a NetworkX backend</span></summary><div class="notebook-body"><ul><li>nx-cugraph accelerates supported NetworkX algorithms while preserving familiar NetworkX calls.</li><li>Backend selection can occur through an environment setting, an explicit backend argument, or type-based dispatch.</li><li>Centrality measures answer different questions: degree counts direct connectivity; betweenness identifies bridges; PageRank, eigenvector, and Katz incorporate the importance or reach of neighboring nodes in different ways.</li><li>Acceleration does not make centrality measures interchangeable; interpretation must match the mechanism of interest.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> separate the programming interface from the execution backend—and the metric from its interpretation.</p></div></details>
-      </section>
-
-      <section class="module" id="section-3">
-        <span class="module-number">Section 3</span>
-        <h2>Machine learning and deployment</h2>
-        <p class="module-intro">The section progresses from unsupervised spatial structure to prediction, validation, scalable training, and production inference.</p>
-
-        <details class="notebook" id="nb-3-00"><summary><span class="filename">3-00_introduction.ipynb</span><span class="notebook-title">Environment reset for machine learning</span></summary><div class="notebook-body"><ul><li>The recurring setup checks the GPU, times execution, and isolates notebook kernels before model training.</li><li>Model workflows often need extra memory for train/test copies, temporary arrays, and algorithm workspaces.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> resource headroom is part of a reliable training plan.</p></div></details>
-
-        <details class="notebook" id="nb-3-01"><summary><span class="filename">3-01_section_overview.ipynb</span><span class="notebook-title">The accelerated ML workflow</span></summary><div class="notebook-body"><ul><li>The section covers clustering, regression, nearest-neighbor search, boosted trees, inference serving, and multi-GPU learning.</li><li>cuML mirrors familiar scikit-learn patterns, while XGBoost, Dask, and Triton extend the workflow across training scale and deployment.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> acceleration spans preparation, fitting, prediction, evaluation, and serving.</p></div></details>
-
-        <details class="notebook" id="nb-3-02"><summary><span class="filename">3-02_k-means.ipynb</span><span class="notebook-title">K-means clustering</span></summary><div class="notebook-body"><ul><li>K-means is an unsupervised algorithm that assigns observations to a chosen number of clusters by minimizing within-cluster distance to centroids.</li><li>The number of clusters is supplied in advance, so it encodes an analytical choice rather than a discovered truth.</li><li>Coordinate scale and distance geometry determine the meaning of proximity.</li><li>Visualizing labels and centroids helps diagnose whether the fitted partition is useful.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> K-means gives a compact partition, but its structure depends on <em>k</em>, scaling, and geometry.</p></div></details>
-
-        <details class="notebook" id="nb-3-03"><summary><span class="filename">3-03_dbscan.ipynb</span><span class="notebook-title">Density-based clustering with DBSCAN</span></summary><div class="notebook-body"><ul><li>DBSCAN forms clusters from dense neighborhoods using a radius and a minimum-neighbor threshold.</li><li>It does not require a preset number of clusters and can label sparse observations as noise.</li><li>The radius has units inherited from the features, making coordinate choice and scale especially important.</li><li>DBSCAN can capture irregular shapes that centroid-based K-means may split poorly.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> DBSCAN defines clusters through local density, not distance to a global center.</p></div></details>
-
-        <details class="notebook" id="nb-3-04"><summary><span class="filename">3-04_logistic_regression.ipynb</span><span class="notebook-title">Probability, coefficients, and validation</span></summary><div class="notebook-body"><ul><li>Logistic regression models the probability of a binary outcome as a function of input features.</li><li>Coefficient signs describe conditional associations in the fitted model; they do not by themselves establish causation.</li><li>Grouping observed infection prevalence by age or sex provides a descriptive check against model interpretation.</li><li>A train/test split evaluates predictions on held-out observations and helps reveal overfitting.</li><li>Class imbalance means accuracy alone can be misleading; predicted risk should be compared with observed prevalence.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> interpretable coefficients still require held-out validation and cautious causal language.</p></div></details>
-
-        <details class="notebook" id="nb-3-05"><summary><span class="filename">3-05_knn.ipynb</span><span class="notebook-title">Nearest-neighbor search</span></summary><div class="notebook-body"><ul><li>A nearest-neighbor model indexes reference coordinates, then returns distances and row indices for the closest references to each query.</li><li>Feature order and units must remain identical between fitting and querying.</li><li>The returned indices are mappings into the reference table; joining them to road-node metadata turns numerical neighbors into usable entities.</li><li>The hospital-to-road example is a spatial lookup task, not a classification model.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> nearest-neighbor results are only useful when distance geometry and index mapping are correct.</p></div></details>
-
-        <details class="notebook" id="nb-3-06"><summary><span class="filename">3-06_xgboost.ipynb</span><span class="notebook-title">GPU-accelerated gradient boosting</span></summary><div class="notebook-body"><ul><li>XGBoost combines many weak decision trees into a strong nonlinear predictor.</li><li>The objective defines the learning problem; <code>binary:logistic</code> produces infection probabilities, while the CUDA device setting selects GPU execution.</li><li><code>DMatrix</code> is XGBoost’s optimized data representation, and cuDF data can remain on GPU through the training path.</li><li>Feature-importance scores and individual trees offer diagnostic views but are not causal explanations.</li><li>ROC curves and AUC summarize ranking performance across decision thresholds; a held-out test set is required for credible evaluation.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> faster nonlinear modeling does not remove the need for correct objectives, validation, and restrained interpretation.</p></div></details>
-
-        <details class="notebook" id="nb-3-07"><summary><span class="filename">3-07_triton.ipynb</span><span class="notebook-title">Serving and measuring inference</span></summary><div class="notebook-body"><ul><li>Triton Inference Server decouples model serving from model training and supports multiple framework backends.</li><li>A versioned model repository and <code>config.pbtxt</code> declare the model artifact, inputs, outputs, batching, and backend.</li><li>Client/server predictions should be checked against local-model results before performance tuning.</li><li>Latency, throughput, batch size, and concurrency interact; raising concurrency can keep the server busy by overlapping communication and computation.</li><li>Perf Analyzer measures behavior, while Model Analyzer searches server configurations.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> production inference is a systems problem involving correctness, queues, batching, and resource use.</p></div></details>
-
-        <details class="notebook" id="nb-3-08"><summary><span class="filename">3-08_k-means_dask.ipynb</span><span class="notebook-title">Multi-GPU K-means with Dask</span></summary><div class="notebook-body"><ul><li>cuML’s Dask estimator distributes familiar K-means fitting across GPU workers.</li><li>Persisting coordinate partitions keeps repeatedly used training data resident across the cluster.</li><li>Calling <code>fit</code> triggers computation of the lazy workflow; predictions return distributed labels that can be filtered and aggregated.</li><li>Cluster centers must be interpreted by mapping generic output columns back to the original coordinate semantics.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> scaling an algorithm requires deliberate data placement and execution control, not only a distributed estimator.</p></div></details>
-      </section>
-
-      <section class="module" id="section-4">
-        <span class="module-number">Section 4</span>
-        <h2>Integrated biodefense project</h2>
-        <p class="module-intro">The final notebooks combine DataFrame operations, geospatial transformation, clustering, nearest neighbors, and grouped rates in a simulated epidemic. The scenario is pedagogical, not epidemiological evidence.</p>
-
-        <details class="notebook" id="nb-4-01"><summary><span class="filename">4-01_intro.ipynb</span><span class="notebook-title">From techniques to decisions</span></summary><div class="notebook-body"><ul><li>The project organizes three sequential questions: where infections cluster, which facilities are nearest, and which population characteristics are associated with higher infection rates.</li><li>Each task produces a small, machine-checked output from a larger analytical pipeline.</li><li>Kernel restarts between tasks protect limited GPU memory and reduce hidden state.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> an applied workflow must connect a decision question to reproducible transformations and a clearly defined output.</p></div></details>
-
-        <details class="notebook" id="nb-4-02"><summary><span class="filename">4-02_find_infected.ipynb</span><span class="notebook-title">Finding dense infection clusters</span></summary><div class="notebook-body"><ul><li>Load only needed fields, filter infected individuals, reset row indices, and convert latitude/longitude to planar grid coordinates.</li><li>DBSCAN identifies dense groups under explicit neighborhood-distance and minimum-membership assumptions.</li><li>Grouping cluster labels yields centroids and membership counts; the largest cluster is then selected.</li><li>A centroid summarizes a cluster’s center, not its full extent or uncertainty.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> the result depends jointly on preprocessing, coordinate geometry, DBSCAN parameters, and the summary chosen.</p></div></details>
-
-        <details class="notebook" id="nb-4-03"><summary><span class="filename">4-03_nearest_facilities.ipynb</span><span class="notebook-title">Assigning the nearest health facility</span></summary><div class="notebook-body"><ul><li>Hospital and clinic sources are cleaned, aligned to a common schema, concatenated, and converted to the same coordinate system as patients.</li><li>A nearest-neighbor index is fitted on facilities and queried with infected-person or new-patient coordinates.</li><li>Returned indices must be mapped back to facility identifiers; distances and coordinate spot-checks help validate the mapping.</li><li>Geometric proximity is a simplified proxy for access and does not account for roads, capacity, or travel conditions.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> shared geometry and correct index mapping make proximity queries valid; domain decisions may require richer costs.</p></div></details>
-
-        <details class="notebook" id="nb-4-04"><summary><span class="filename">4-04_identify_risk_factors.ipynb</span><span class="notebook-title">Comparing infection rates across groups</span></summary><div class="notebook-body"><ul><li>Encoding infection as 0/1 makes the group mean equal to the infection proportion.</li><li>Rates, rather than raw case counts, permit comparison across employment groups of different sizes.</li><li>Joining employment codes turns category IDs into interpretable labels.</li><li>Grouping jointly by employment and sex probes whether an aggregate pattern differs within subgroups or may be confounded.</li><li>The exercise identifies associations in simulated data; it does not establish individual risk or causal effects.</li></ul><p class="takeaway"><strong>Core takeaway:</strong> choose the correct denominator, inspect intersecting groups, and distinguish association from causation.</p></div></details>
-      </section>
-
-      <footer>Prepared from the 28 Jupyter notebooks directly contained in the course’s <code>fundamentals</code> folder. NVIDIA, RAPIDS, cuDF, cuML, cuGraph, and Triton are names of their respective owners and projects.</footer>
-    </main>
-  </div>
+    <footer>Six static learning pages · 三組資源，共六個靜態頁面</footer>
+  </main>
 </body>
 </html>
