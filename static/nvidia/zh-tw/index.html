@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NVIDIA 加速資料科學基礎課程 28 份 Jupyter Notebook 的概念重點整理。">
+  <title>NVIDIA 加速資料科學｜Notebook 概念重點</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="https://audachang.github.io/">Erik Chang</a>
+      <nav class="lang" aria-label="頁面連結"><a href="../key-terms.html">術語對照表</a> · <a href="../" lang="en">English</a> · <strong>繁體中文</strong></nav>
+    </div>
+  </header>
+
+  <div class="page">
+    <aside class="sidebar" aria-label="課程章節">
+      <h2>課程導覽</h2>
+      <ol>
+        <li><a href="#section-1">資料處理</a></li>
+        <li><a href="#section-2">圖形分析</a></li>
+        <li><a href="#section-3">機器學習</a></li>
+        <li><a href="#section-4">生物防禦專題</a></li>
+      </ol>
+    </aside>
+
+    <main>
+      <p class="eyebrow">加速資料科學基礎</p>
+      <h1>Notebook 背後的核心概念</h1>
+      <p class="dek">依 Notebook 順序整理最重要的觀念：GPU 加速如何改變資料流程、RAPIDS 各套件如何銜接，以及課程如何從資料準備推進到圖形分析、機器學習、模型部署與整合應用。</p>
+      <p class="meta">共 28 份 Notebook · 來源僅限 <code>fundamentals</code> 資料夾第一層的 Notebook · 本頁整理概念，不提供程式碼或作業解答</p>
+      <hr class="rule">
+
+      <section class="module" id="section-1">
+        <span class="module-number">第一章</span>
+        <h2>加速資料處理</h2>
+        <p class="module-intro">核心原則是把工作寫成欄位式、向量化運算，盡可能讓資料留在 GPU，並主動管理記憶體與資料搬移。</p>
+
+        <details class="notebook" id="nb-1-00" open><summary><span class="filename">1-00_introduction.ipynb</span><span class="notebook-title">運算環境與 GPU 工作流程</span></summary><div class="notebook-body"><ul><li>JupyterLab 將 Notebook、檔案、終端機與彼此獨立的 kernel 整合在同一個互動環境。</li><li><code>nvidia-smi</code> 可查看 GPU、記憶體使用量與執行中的程序；運算可能產生暫存配置，因此必須保留餘裕。</li><li><code>%time</code> 與 <code>%%time</code> 讓效能比較建立在實際量測上。</li><li>每份 Notebook 都有自己的 kernel；關閉不用的 kernel，才能釋放整個工作階段占用的 GPU 記憶體。</li></ul><p class="takeaway"><strong>核心重點：</strong>加速的第一步，是看得見硬體狀態並掌握執行環境。</p></div></details>
+
+        <details class="notebook" id="nb-1-01"><summary><span class="filename">1-01_section_overview.ipynb</span><span class="notebook-title">資料處理管線</span></summary><div class="notebook-body"><ul><li>本章依序處理資料操作、記憶體、套件互通、分組、視覺化、ETL，以及可擴充的分散式流程。</li><li>處理完成的資料，會成為後續圖形分析與機器學習的共同基礎。</li></ul><p class="takeaway"><strong>核心重點：</strong>應關注端到端的整體吞吐量，不只加速單一操作。</p></div></details>
+
+        <details class="notebook" id="nb-1-02"><summary><span class="filename">1-02_data_manipulation.ipynb</span><span class="notebook-title">DataFrame、向量化與 cuDF</span></summary><div class="notebook-body"><ul><li>cuDF 提供類似 pandas 的 DataFrame API，可在 GPU 上載入、選取、篩選、合併、彙整與轉換資料。</li><li>DataFrame 是有標籤的二維資料結構，Series 是有標籤的一維陣列；索引對齊可維持跨欄運算的列對應。</li><li>欄位運算、純量廣播、布林遮罩與歸約都能暴露平行性；逐列迭代則違背 GPU 的運算特性。</li><li><code>.loc</code> 用於標籤式選取；無法用內建向量操作表達的邏輯，才考慮 <code>.map()</code> 或 <code>.apply()</code>。</li><li><code>cudf.pandas</code> 可加速相容的 pandas 程式，遇到不支援的操作則回退至 CPU。</li></ul><p class="takeaway"><strong>核心重點：</strong>把計算重寫為整欄批次操作，而不是 Python 迴圈。</p></div></details>
+
+        <details class="notebook" id="nb-1-03"><summary><span class="filename">1-03_memory_management.ipynb</span><span class="notebook-title">記憶體也是演算法設計的一部分</span></summary><div class="notebook-body"><ul><li>GPU 記憶體有限；中間結果的短暫占用可能遠大於最後輸出。</li><li>使用能正確表達資料的最小整數或浮點型別，可降低儲存量並改善速度；降低精度同時也是正確性決策。</li><li>類別型別能緊密編碼重複標籤，也可加速適合的操作。</li><li>載入時就指定所需欄位與型別，可避免讀取及轉換分析用不到的資料。</li></ul><p class="takeaway"><strong>核心重點：</strong>估算峰值記憶體、審慎選擇型別，只載入真正需要的資料。</p></div></details>
+
+        <details class="notebook" id="nb-1-04"><summary><span class="filename">1-04_interoperability.ipynb</span><span class="notebook-title">GPU PyData 生態系的互通性</span></summary><div class="notebook-body"><ul><li>CuPy 將類似 NumPy 的多維陣列 API 帶到 GPU；cuDF 則專門處理具標籤的欄式表格。</li><li>CUDA Array Interface 等 GPU 陣列標準，讓套件能共享裝置端資料，免除昂貴的主機端複製。</li><li>經緯度轉換示範如何把 NumPy 式數值運算移到 CuPy，再將結果接回 cuDF。</li><li>布林陣列索引是陣列工具與 DataFrame 工具共通的向量化選取模式。</li></ul><p class="takeaway"><strong>核心重點：</strong>每一步選用合適的抽象層，同時讓資料留在 GPU。</p></div></details>
+
+        <details class="notebook" id="nb-1-05"><summary><span class="filename">1-05_grouping.ipynb</span><span class="notebook-title">分割、套用、合併</span></summary><div class="notebook-body"><ul><li><code>groupby</code> 依鍵值分割資料，對各組執行計算，再合併結果。</li><li>mean、count、sum 等內建彙整通常比任意的逐組函式更容易平行化，也更有效率。</li><li>分箱把連續數值轉為有分析意義的類別；邊界本身代表假設，必須符合研究問題。</li><li><code>agg</code> 產生摘要，<code>transform</code> 將組別結果回填到各列，<code>apply</code> 最彈性但可能犧牲效能。</li><li>樞紐分析表以矩陣形式表達多維度的分組摘要。</li></ul><p class="takeaway"><strong>核心重點：</strong>選擇能表達問題、同時結構最明確的分組操作。</p></div></details>
+
+        <details class="notebook" id="nb-1-06"><summary><span class="filename">1-06_data_visualization.ipynb</span><span class="notebook-title">大規模資料視覺化</span></summary><div class="notebook-body"><ul><li>圖表應配合問題：長條圖比較類別、直方圖呈現分布、散布圖顯示關係與群集、折線圖呈現有順序的變化。</li><li>大型資料若逐點繪製，不只速度慢，也可能因過度疊圖而誤導。</li><li>Datashader 將觀測值彙整至顯示像素，不必把每一列都送到瀏覽器。</li><li>cuxfilter 連結 GPU 支援的圖表，讓一個圖表上的互動同步篩選其他圖表。</li></ul><p class="takeaway"><strong>核心重點：</strong>視覺化同時是彙整問題與繪製問題。</p></div></details>
+
+        <details class="notebook" id="nb-1-07"><summary><span class="filename">1-07_etl.ipynb</span><span class="notebook-title">擷取、轉換與載入</span></summary><div class="notebook-body"><ul><li>ETL 將來源資料變成乾淨、型別明確、可直接分析的成果：擷取輸入、轉換結構與數值，再載入結果。</li><li>轉換可包含篩選、座標轉換、特徵建立、型別轉換與驗證。</li><li>Parquet 以欄式格式儲存資料，並利用中繼資料略過不需要的欄位與不符合條件的區塊。</li><li>保存設計良好的中間資料集，可避免下游 Notebook 重複昂貴的前處理。</li></ul><p class="takeaway"><strong>核心重點：</strong>應最佳化可重複使用的資料成果，而不只最佳化產出它的 Notebook。</p></div></details>
+
+        <details class="notebook" id="nb-1-08"><summary><span class="filename">1-08_cudf-polars.ipynb</span><span class="notebook-title">以 GPU 執行 Polars 延遲查詢</span></summary><div class="notebook-body"><ul><li>Polars 的即時執行會立刻產生結果；延遲執行則先建立完整查詢計畫。</li><li>完整計畫可進行投影下推與述詞下推，減少不必要的讀取與中間運算。</li><li>cuDF Polars 引擎檢查最佳化後的計畫，將支援的操作交由 GPU 執行。</li><li>加速未必需要重寫分析邏輯，也可能只要更換執行引擎。</li></ul><p class="takeaway"><strong>核心重點：</strong>延後執行，能讓系統針對整體查詢進行最佳化。</p></div></details>
+
+        <details class="notebook" id="nb-1-09"><summary><span class="filename">1-09_dask-cudf.ipynb</span><span class="notebook-title">使用 Dask-cuDF 擴充 DataFrame 工作</span></summary><div class="notebook-body"><ul><li>Dask 將資料分割，並把操作表示成延遲執行的任務圖，由排程器協調 worker。</li><li><code>LocalCUDACluster</code> 配置 GPU worker；Dashboard 可顯示任務進度、記憶體壓力與瓶頸。</li><li><code>compute()</code> 具體產生結果；<code>persist()</code> 則將重複使用的分割資料保留在 worker 記憶體。</li><li>應先建立叢集，再匯入會建立 CUDA context 的套件，以免運算過早綁定單一裝置。</li></ul><p class="takeaway"><strong>核心重點：</strong>分散式加速除了 DataFrame 邏輯，還要處理排程與資料分割。</p></div></details>
+      </section>
+
+      <section class="module" id="section-2">
+        <span class="module-number">第二章</span>
+        <h2>圖形分析</h2>
+        <p class="module-intro">道路表格會轉為圖形結構；拓樸與邊權重共同支撐可達性、旅行時間與中心性分析。</p>
+
+        <details class="notebook" id="nb-2-00"><summary><span class="filename">2-00_introduction.ipynb</span><span class="notebook-title">圖形分析前的環境重設</span></summary><div class="notebook-body"><ul><li>本 Notebook 再次確認 Jupyter 執行方式、計時、GPU 監測與 kernel 生命週期，讓圖形分析章節能獨立運作。</li><li>獨立 kernel 有助實驗重現，但若未關閉，仍會持續占用 GPU 記憶體。</li></ul><p class="takeaway"><strong>核心重點：</strong>開始高記憶體需求的流程前，先確認並重設運算狀態。</p></div></details>
+
+        <details class="notebook" id="nb-2-01"><summary><span class="filename">2-01_section_overview.ipynb</span><span class="notebook-title">從表格走向圖形問題</span></summary><div class="notebook-body"><ul><li>本章從建立圖形資料開始，接著使用 cuGraph 求最短路徑，再以 NetworkX 相容介面加速中心性計算。</li><li>圖形分析同時依賴正確的拓樸，以及能代表問題成本的邊權重。</li></ul><p class="takeaway"><strong>核心重點：</strong>節點、邊與權重的建模若不正確，圖形演算法的結果也不具意義。</p></div></details>
+
+        <details class="notebook" id="nb-2-02"><summary><span class="filename">2-02_prep_graph.ipynb</span><span class="notebook-title">準備加權道路圖</span></summary><div class="notebook-body"><ul><li>圖形的來源與目的節點識別碼必須相容；重新編號可將外部道路節點 ID 映射至一致的 graph ID 空間。</li><li>道路邊決定連結關係；節點表保留位置屬性，供解釋與視覺化使用。</li><li>以距離為權重的圖回答最短距離問題；把道路類型換算成速度，再把距離換成秒數，便可回答最快路徑問題。</li><li>合併並非例行手續：連接是否完整、單位是否一致，會直接決定權重是否有效。</li></ul><p class="takeaway"><strong>核心重點：</strong>拓樸決定有哪些路徑；邊權重決定「最短」代表什麼。</p></div></details>
+
+        <details class="notebook" id="nb-2-03"><summary><span class="filename">2-03_cugraph.ipynb</span><span class="notebook-title">使用 cuGraph 求單一起點最短路徑</span></summary><div class="notebook-body"><ul><li>cuGraph 圖形由 GPU DataFrame 的來源、目的與選用的權重欄位建立。</li><li>單一起點最短路徑（SSSP）計算從一個起點到所有可達節點的最低累積成本。</li><li>把邊權重從道路長度改為旅行時間，便能在不改變拓樸的情況下更換最佳化目標。</li><li>將演算法結果接回節點中繼資料，才能把抽象的距離或時間轉為可解釋的地理結果。</li></ul><p class="takeaway"><strong>核心重點：</strong>區分圖形結構、成本定義、演算法輸出與現實世界解釋。</p></div></details>
+
+        <details class="notebook" id="nb-2-04"><summary><span class="filename">2-04_networkx_cugraph.ipynb</span><span class="notebook-title">以 cuGraph 作為 NetworkX 後端</span></summary><div class="notebook-body"><ul><li>nx-cugraph 可保留熟悉的 NetworkX 呼叫方式，同時加速受支援的演算法。</li><li>可透過環境設定、明確的 backend 參數或型別分派選擇後端。</li><li>中心性指標回答不同問題：degree 計算直接連結；betweenness 找出橋接節點；PageRank、eigenvector 與 Katz 則用不同方式納入鄰近節點的重要性或影響範圍。</li><li>運算加速不會讓各種中心性指標變成同一件事；解釋仍須符合關注的機制。</li></ul><p class="takeaway"><strong>核心重點：</strong>程式介面與執行後端要分開看，指標與其意義也要分開看。</p></div></details>
+      </section>
+
+      <section class="module" id="section-3">
+        <span class="module-number">第三章</span>
+        <h2>機器學習與部署</h2>
+        <p class="module-intro">本章從無監督的空間結構，推進到預測、驗證、可擴充訓練與正式推論服務。</p>
+
+        <details class="notebook" id="nb-3-00"><summary><span class="filename">3-00_introduction.ipynb</span><span class="notebook-title">機器學習前的環境重設</span></summary><div class="notebook-body"><ul><li>重複的設定流程會檢查 GPU、量測執行時間，並在模型訓練前隔離各 Notebook 的 kernel。</li><li>模型流程通常需要額外記憶體，容納訓練／測試副本、暫存陣列與演算法工作空間。</li></ul><p class="takeaway"><strong>核心重點：</strong>預留資源餘裕，是可靠訓練規劃的一部分。</p></div></details>
+
+        <details class="notebook" id="nb-3-01"><summary><span class="filename">3-01_section_overview.ipynb</span><span class="notebook-title">加速機器學習工作流程</span></summary><div class="notebook-body"><ul><li>本章涵蓋群集、迴歸、最近鄰搜尋、提升樹、推論服務與多 GPU 學習。</li><li>cuML 沿用熟悉的 scikit-learn 模式；XGBoost、Dask 與 Triton 則把流程延伸至大規模訓練與部署。</li></ul><p class="takeaway"><strong>核心重點：</strong>加速橫跨資料準備、擬合、預測、評估與服務。</p></div></details>
+
+        <details class="notebook" id="nb-3-02"><summary><span class="filename">3-02_k-means.ipynb</span><span class="notebook-title">K-means 群集</span></summary><div class="notebook-body"><ul><li>K-means 是無監督演算法，依觀測值到中心點的距離，將資料分成預先指定數量的群集，並最小化群內距離。</li><li>群集數量必須事先給定，因此它是分析選擇，而不是模型發現的唯一真相。</li><li>座標尺度與距離幾何會決定「接近」的意義。</li><li>將標籤與中心點視覺化，有助判斷分群結果是否實用。</li></ul><p class="takeaway"><strong>核心重點：</strong>K-means 提供簡潔分割，但結果取決於 <em>k</em>、尺度與幾何。</p></div></details>
+
+        <details class="notebook" id="nb-3-03"><summary><span class="filename">3-03_dbscan.ipynb</span><span class="notebook-title">使用 DBSCAN 進行密度式分群</span></summary><div class="notebook-body"><ul><li>DBSCAN 依鄰域半徑與最少鄰居門檻，從高密度鄰域形成群集。</li><li>它不必預先指定群集數，也能把稀疏觀測標示為雜訊。</li><li>半徑沿用特徵的單位，因此座標系統與尺度格外重要。</li><li>DBSCAN 可捕捉不規則形狀；以中心點為基礎的 K-means 可能不適合這類結構。</li></ul><p class="takeaway"><strong>核心重點：</strong>DBSCAN 以局部密度定義群集，而不是到全域中心的距離。</p></div></details>
+
+        <details class="notebook" id="nb-3-04"><summary><span class="filename">3-04_logistic_regression.ipynb</span><span class="notebook-title">機率、係數與驗證</span></summary><div class="notebook-body"><ul><li>邏輯斯迴歸以輸入特徵建立二元結果的發生機率模型。</li><li>係數正負代表模型中的條件關聯，本身不能證明因果關係。</li><li>依年齡或性別分組計算實際感染率，可與模型解釋交叉檢查。</li><li>訓練／測試分割以保留資料評估預測，有助發現過度擬合。</li><li>類別不平衡時，只看正確率可能誤導；應將預測風險與實際盛行比例比較。</li></ul><p class="takeaway"><strong>核心重點：</strong>即使係數容易解釋，仍須保留資料驗證，並節制因果用語。</p></div></details>
+
+        <details class="notebook" id="nb-3-05"><summary><span class="filename">3-05_knn.ipynb</span><span class="notebook-title">最近鄰搜尋</span></summary><div class="notebook-body"><ul><li>最近鄰模型先索引參考座標，再為每個查詢回傳最接近參考點的距離與列索引。</li><li>擬合與查詢時，特徵順序和單位必須完全一致。</li><li>回傳的索引指向參考表；接回道路節點中繼資料後，數值鄰居才成為可使用的實體。</li><li>醫院到道路的例子是空間查找，不是分類模型。</li></ul><p class="takeaway"><strong>核心重點：</strong>距離幾何與索引映射都正確，最近鄰結果才有用。</p></div></details>
+
+        <details class="notebook" id="nb-3-06"><summary><span class="filename">3-06_xgboost.ipynb</span><span class="notebook-title">GPU 加速梯度提升</span></summary><div class="notebook-body"><ul><li>XGBoost 將許多弱決策樹組合成具非線性預測能力的強模型。</li><li>objective 定義學習問題；<code>binary:logistic</code> 產生感染機率，而 CUDA device 設定選擇 GPU 執行。</li><li><code>DMatrix</code> 是 XGBoost 最佳化的資料表示；cuDF 資料可在訓練流程中持續留在 GPU。</li><li>特徵重要性與個別決策樹可供診斷，但不是因果解釋。</li><li>ROC 曲線與 AUC 摘要不同決策門檻下的排序表現；可信的評估需要保留測試資料。</li></ul><p class="takeaway"><strong>核心重點：</strong>非線性建模變快，不代表可以省略正確目標、驗證與審慎解釋。</p></div></details>
+
+        <details class="notebook" id="nb-3-07"><summary><span class="filename">3-07_triton.ipynb</span><span class="notebook-title">推論服務與效能量測</span></summary><div class="notebook-body"><ul><li>Triton Inference Server 將模型服務與模型訓練分離，並支援多種框架後端。</li><li>具版本的模型倉庫與 <code>config.pbtxt</code> 宣告模型成果、輸入、輸出、批次與後端。</li><li>效能調校前，應先確認用戶端／伺服器預測與本機模型結果一致。</li><li>延遲、吞吐量、批次大小與並行數會彼此影響；提高並行數可重疊通訊與計算，減少伺服器閒置。</li><li>Perf Analyzer 量測行為，Model Analyzer 則搜尋伺服器組態。</li></ul><p class="takeaway"><strong>核心重點：</strong>正式推論是系統問題，涉及正確性、佇列、批次與資源使用。</p></div></details>
+
+        <details class="notebook" id="nb-3-08"><summary><span class="filename">3-08_k-means_dask.ipynb</span><span class="notebook-title">使用 Dask 執行多 GPU K-means</span></summary><div class="notebook-body"><ul><li>cuML 的 Dask estimator 將熟悉的 K-means 擬合分散到多個 GPU worker。</li><li>持久化座標分割，可讓重複使用的訓練資料留在叢集中。</li><li>呼叫 <code>fit</code> 會觸發延遲工作流程的實際計算；預測則產生可進一步篩選與彙整的分散式標籤。</li><li>解釋群集中心時，必須把一般化的輸出欄位對回原始座標語意。</li></ul><p class="takeaway"><strong>核心重點：</strong>演算法要能擴充，除了分散式 estimator，還需審慎安排資料位置與執行時機。</p></div></details>
+      </section>
+
+      <section class="module" id="section-4">
+        <span class="module-number">第四章</span>
+        <h2>整合式生物防禦專題</h2>
+        <p class="module-intro">最後幾份 Notebook 在模擬疫情中整合 DataFrame 操作、地理座標轉換、群集、最近鄰與分組比率。此情境用於教學，不是流行病學證據。</p>
+
+        <details class="notebook" id="nb-4-01"><summary><span class="filename">4-01_intro.ipynb</span><span class="notebook-title">從技術走向決策問題</span></summary><div class="notebook-body"><ul><li>專題依序提出三個問題：感染者集中在哪裡、最近的醫療設施為何、哪些人口特徵與較高感染率相關。</li><li>每個任務都從較大的分析管線產生小型、可由機器檢查的輸出。</li><li>任務之間重啟 kernel，可保護有限的 GPU 記憶體並減少隱藏狀態。</li></ul><p class="takeaway"><strong>核心重點：</strong>應用流程必須把決策問題連到可重現的轉換步驟與定義清楚的輸出。</p></div></details>
+
+        <details class="notebook" id="nb-4-02"><summary><span class="filename">4-02_find_infected.ipynb</span><span class="notebook-title">找出密集感染群集</span></summary><div class="notebook-body"><ul><li>只載入必要欄位、篩選感染者、重設列索引，再把經緯度轉為平面網格座標。</li><li>DBSCAN 依明確的鄰域距離與最少成員假設，辨識高密度群集。</li><li>依群集標籤分組可得到中心點與成員數，再選出人數最多的群集。</li><li>中心點只摘要群集中心，無法表達完整範圍或不確定性。</li></ul><p class="takeaway"><strong>核心重點：</strong>結果由前處理、座標幾何、DBSCAN 參數與摘要方式共同決定。</p></div></details>
+
+        <details class="notebook" id="nb-4-03"><summary><span class="filename">4-03_nearest_facilities.ipynb</span><span class="notebook-title">指派最近的醫療設施</span></summary><div class="notebook-body"><ul><li>先清理醫院與診所資料，對齊共同結構、合併資料，再轉成與病患相同的座標系統。</li><li>以醫療設施擬合最近鄰索引，再用感染者或新病患座標查詢。</li><li>回傳索引必須正確對回設施識別碼；距離與座標抽查可協助驗證映射。</li><li>幾何距離只是可近性的簡化代理，未考慮道路、容量或旅行條件。</li></ul><p class="takeaway"><strong>核心重點：</strong>共同幾何與正確索引映射使距離查詢有效；領域決策可能需要更完整的成本模型。</p></div></details>
+
+        <details class="notebook" id="nb-4-04"><summary><span class="filename">4-04_identify_risk_factors.ipynb</span><span class="notebook-title">比較不同群體的感染率</span></summary><div class="notebook-body"><ul><li>把感染編碼為 0／1 後，組別平均值就等於該組感染比例。</li><li>使用比率而非病例總數，才能比較規模不同的就業群體。</li><li>接回就業代碼表，可將類別 ID 轉為可解釋的標籤。</li><li>同時依就業與性別分組，可檢查整體模式是否在子群體中不同，或可能受到混淆。</li><li>練習辨識的是模擬資料中的關聯，不能證明個人風險或因果效果。</li></ul><p class="takeaway"><strong>核心重點：</strong>選對分母、檢查交叉群體，並區分關聯與因果。</p></div></details>
+      </section>
+
+      <footer>本頁依課程 <code>fundamentals</code> 資料夾第一層的 28 份 Jupyter Notebook 整理。NVIDIA、RAPIDS、cuDF、cuML、cuGraph 與 Triton 為各自所有者及專案的名稱。</footer>
+    </main>
+  </div>
+</body>
+</html>
