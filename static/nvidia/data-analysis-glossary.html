@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NVIDIA DLI Data Analysis Glossary</title>
+  <style>
+    :root { --green:#76b900; --ink:#17211d; --muted:#5d6962; --line:#dce4da; --paper:#fff; --ground:#f4f7f3; --code:#edf3e9; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--ground); color:var(--ink); font:16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    header { background:#111; border-bottom:5px solid var(--green); color:#fff; padding:3.5rem 1.25rem 2.75rem; }
+    .container { width:min(1120px, calc(100% - 2rem)); margin:auto; }
+    h1 { max-width:850px; margin:0; font-size:clamp(2rem, 5vw, 3.4rem); line-height:1.05; letter-spacing:-.035em; }
+    h1 span { color:var(--green); }
+    header p { max-width:780px; margin:.9rem 0 0; color:#cad0cb; font-size:1.05rem; }
+    .summary { display:grid; grid-template-columns:1fr auto; gap:1rem; align-items:center; padding:1.25rem 0; }
+    .summary p { margin:0; color:var(--muted); }
+    #search { width:min(350px, 100%); padding:.7rem .85rem; border:1px solid #aeb9ae; border-radius:4px; background:#fff; font:inherit; }
+    #search:focus { outline:3px solid #cde9a4; border-color:var(--green); }
+    nav { display:flex; gap:.5rem; flex-wrap:wrap; margin:.25rem 0 1.8rem; }
+    nav a { color:#284315; text-decoration:none; border:1px solid #b8cbb0; border-radius:999px; padding:.28rem .7rem; font-size:.88rem; }
+    nav a:hover, nav a:focus { background:#e6f3d8; }
+    .module { margin:0 0 1.5rem; background:var(--paper); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+    .module-head { display:flex; gap:1rem; justify-content:space-between; align-items:baseline; padding:1rem 1.25rem; border-left:6px solid var(--green); background:#fbfdf9; }
+    h2 { margin:0; font-size:1.18rem; letter-spacing:-.01em; }
+    .path { color:var(--muted); font: .8rem ui-monospace, SFMono-Regular, Consolas, monospace; white-space:nowrap; }
+    .terms { margin:0; }
+    .term { display:grid; grid-template-columns:minmax(185px, 25%) 1fr; gap:1.2rem; padding:1rem 1.25rem; border-top:1px solid var(--line); }
+    dt { font-weight:750; }
+    dd { margin:0; color:#303a34; }
+    code { padding:.08em .25em; border-radius:3px; background:var(--code); font: .9em ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .note { border-left:4px solid #a6b69f; margin:1.5rem 0 2.5rem; padding:.6rem 1rem; color:#435047; font-size:.92rem; }
+    .hidden { display:none; }
+    footer { margin-top:3rem; padding:1.75rem 0 3rem; color:var(--muted); font-size:.9rem; }
+    @media (max-width:650px) { .summary { grid-template-columns:1fr; } .term { grid-template-columns:1fr; gap:.25rem; } .module-head { display:block; } .path { display:block; margin-top:.25rem; white-space:normal; } }
+  </style>
+</head>
+<body>
+<header><div class="container">
+  <h1>Data-analysis <span>field glossary</span></h1>
+  <p>Conceptual and practical terms encountered in NVIDIA DLI’s <em>Fundamentals of Accelerated Data Science</em>. Definitions are deliberately tied to the operation each notebook asks learners to perform.</p>
+</div></header>
+<main class="container">
+  <div class="summary"><p>Search across terms and explanations. Sections follow the notebook sequence; the orientation and section-overview notebooks introduce the course but do not add distinct analysis vocabulary.</p><input id="search" type="search" placeholder="Search terms, e.g. overhead" aria-label="Search glossary"></div>
+  <nav aria-label="Course sections"><a href="#data">Data work</a><a href="#graph">Graph analytics</a><a href="#ml">Machine learning</a><a href="#project">Biodefense project</a></nav>
+
+  <div class="note">Scope: this is a learning aid, not a substitute for library documentation. “Memory overhead,” for example, is context-dependent: it means memory consumed in addition to the final data values, and it can arise from parsing, temporary buffers, indexes, allocator pools, or metadata.</div>
+
+  <section id="data" class="module"><div class="module-head"><h2>1-02 · Data Manipulation</h2><span class="path">fundamentals/1-02_data_manipulation.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>cuDF</dt><dd>A GPU DataFrame library in RAPIDS. Here it is used with pandas-like operations so familiar tasks—loading, selecting, filtering, grouping, and creating columns—can execute on GPU-resident data.</dd></div>
+    <div class="term"><dt>DataFrame index</dt><dd>Labels that identify rows. The notebook uses <code>.loc</code> to select by label, rather than by numerical position; this distinction matters after sorting, filtering, or concatenating data.</dd></div>
+    <div class="term"><dt>Boolean mask</dt><dd>A same-length sequence of <code>True</code>/<code>False</code> values used to retain qualifying rows, such as counties north of Sunderland. It is the basis of vectorized filtering.</dd></div>
+    <div class="term"><dt>UDF</dt><dd>A user-defined function. <code>.map()</code> applies it element-by-element, while <code>.apply()</code> can work across a row or column; both are convenient but may be less efficient than built-in vectorized operations.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>1-03 · Memory Management</h2><span class="path">fundamentals/1-03_memory_management.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Memory overhead</dt><dd>Memory beyond the logical values in a DataFrame. In this notebook, GPU usage can exceed the DataFrame’s reported size because CSV parsing and intermediate loading steps allocate additional buffers; leave headroom for these spikes.</dd></div>
+    <div class="term"><dt><code>memory_usage(deep=True)</code></dt><dd>A pandas estimate that includes the memory of objects referenced by string columns. Without <code>deep=True</code>, an object-string column can count pointers but understate the storage of the actual strings.</dd></div>
+    <div class="term"><dt>Downcasting</dt><dd>Changing a value to a smaller compatible type, such as <code>int64</code> to <code>int8</code> or <code>float64</code> to <code>float32</code>. It reduces storage and memory traffic, but is valid only when the value range and required precision are preserved.</dd></div>
+    <div class="term"><dt>Categorical data</dt><dd>Discrete repeated labels stored as a category dictionary plus integer codes. It can save memory and speed operations for low-cardinality text fields, while preserving an optional meaningful order.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>1-04 · GPU PyData Interoperability</h2><span class="path">fundamentals/1-04_interoperability.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>CuPy</dt><dd>A NumPy-compatible GPU array library. The notebook uses it for numerical array work that sits naturally beside cuDF DataFrames, avoiding unnecessary transfers back to CPU NumPy.</dd></div>
+    <div class="term"><dt>British National Grid / OSGB</dt><dd>A projected coordinate reference system used in Great Britain. The latitude/longitude-to-OSGB converter yields <em>easting</em> and <em>northing</em> coordinates in metres, making local distance-based analysis more appropriate than operating directly on angular degrees.</dd></div>
+    <div class="term"><dt>Vectorization</dt><dd>Applying one operation to whole arrays at once instead of Python looping over individual records. In the grid converter, NumPy/CuPy expressions expose enough parallel work for the CPU/GPU library to execute efficiently.</dd></div>
+    <div class="term"><dt>Boolean array indexing</dt><dd>Using a Boolean array to select values from an array. It is the array analogue of DataFrame masking and is useful for filtering values that meet a computed condition.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>1-05 · Grouping</h2><span class="path">fundamentals/1-05_grouping.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Split–apply–combine</dt><dd>The mental model for <code>groupby</code>: split records by a key, apply an aggregation or transformation within each group, then combine the results. Example: mean age per county.</dd></div>
+    <div class="term"><dt>Binning</dt><dd>Converting a continuous numeric variable into intervals, such as age bands. It simplifies summaries and plots but loses within-bin detail; bin boundaries therefore influence the conclusion.</dd></div>
+    <div class="term"><dt><code>transform</code> vs <code>apply</code></dt><dd><code>transform</code> returns an output aligned to the original rows (for example, each person’s group mean); <code>apply</code> is more flexible and may return a reduced or reshaped result.</dd></div>
+    <div class="term"><dt>Pivot table</dt><dd>A cross-tabular summary that arranges groups into rows and columns and fills cells with an aggregation. It is a compact way to inspect how two categorical dimensions relate.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>1-06 · Data Visualization</h2><span class="path">fundamentals/1-06_data_visualization.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Histogram</dt><dd>A count plot of observations in numeric bins. Unlike a bar chart of named categories, the choice of bin width changes the apparent shape of a continuous distribution.</dd></div>
+    <div class="term"><dt>Datashader</dt><dd>A rendering approach for very large point datasets: it aggregates data into display pixels before drawing. This prevents overplotting and keeps plots usable when one mark per row would be too slow or visually opaque.</dd></div>
+    <div class="term"><dt>cuxfilter dashboard</dt><dd>An interactive GPU-oriented visualization dashboard where views can be linked. Filtering or selecting in one view updates the others, supporting exploratory analysis of large data.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>1-07 · Extract, Transform, Load</h2><span class="path">fundamentals/1-07_etl.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>ETL</dt><dd><strong>Extract, Transform, Load</strong>: obtain data from a source, clean/recode/derive analysis-ready fields, then write it to a target system or file. The notebook frames preprocessing as a reproducible pipeline rather than an ad hoc one-off step.</dd></div>
+    <div class="term"><dt>Parquet</dt><dd>A binary, columnar file format. It stores data by column with metadata and compression, so analytical reads can load only the needed columns and typically outperform repeatedly parsing CSV.</dd></div>
+    <div class="term"><dt>Columnar storage</dt><dd>Physical storage by column rather than by row. It is especially effective for analytical scans, aggregations, and compression because values of one field are adjacent and often similar.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>1-08 · cuDF Polars</h2><span class="path">fundamentals/1-08_cudf-polars.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Eager execution</dt><dd>An operation runs immediately and returns a result. It is intuitive for interactive work, but each step commits to an execution plan before later operations are known.</dd></div>
+    <div class="term"><dt>Lazy execution</dt><dd>Operations build a query plan first; execution occurs when <code>collect()</code> is called. Polars can then optimize the whole plan, for example by pushing filters earlier or avoiding unused columns.</dd></div>
+    <div class="term"><dt>Execution graph</dt><dd>A directed representation of the planned data operations and their dependencies. Viewing it helps explain why lazy code can combine or reorder work while preserving the requested result.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>1-09 · Dask cuDF</h2><span class="path">fundamentals/1-09_dask-cudf.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Partition</dt><dd>One chunk of a distributed DataFrame. Dask divides a larger-than-one-GPU dataset into partitions so workers can store and process them in parallel; partition size affects scheduling overhead and memory pressure.</dd></div>
+    <div class="term"><dt>Dask scheduler</dt><dd>The coordinator that turns a task graph into work assignments, respects dependencies, and places tasks on workers. It orchestrates computation; it is not itself where the DataFrame calculations happen.</dd></div>
+    <div class="term"><dt>LocalCUDACluster</dt><dd>A Dask cluster configuration that starts GPU-aware workers on the local machine, generally one per visible GPU, so Dask cuDF tasks can be distributed across them.</dd></div>
+    <div class="term"><dt><code>persist()</code></dt><dd>Materializes a lazy Dask collection into worker memory while retaining it as a distributed collection. Use it for an intermediate reused by later steps, but account for the cluster memory it occupies.</dd></div>
+  </dl></section>
+
+  <section id="graph" class="module"><div class="module-head"><h2>2-02 · Preparing Data for Graph Construction</h2><span class="path">fundamentals/2-02_prep_graph.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Graph, vertex, edge</dt><dd>A graph represents entities as vertices (nodes) and relationships as edges. Here, road junctions are vertices and road segments are edges; analysis depends on ensuring edge endpoint IDs match the vertex IDs.</dd></div>
+    <div class="term"><dt>Edge weight</dt><dd>A numeric cost attached to an edge. The notebook converts road length and road-type speed assumptions into travel time in seconds, so “shortest” can mean fastest rather than physically shortest.</dd></div>
+    <div class="term"><dt>Reindexing nodes</dt><dd>Replacing external node identifiers with a compact, consecutive ID range. It can make graph construction and GPU algorithms more efficient, provided the mapping is retained for interpretation.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>2-03 · cuGraph Single-Source Shortest Path</h2><span class="path">fundamentals/2-03_cugraph.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Single-source shortest path (SSSP)</dt><dd>An algorithm that calculates the minimum total edge weight from one chosen source vertex to every reachable vertex. With time weights in this notebook, it estimates travel time across the road network.</dd></div>
+    <div class="term"><dt>Reachability</dt><dd>Whether a route exists between vertices under the graph’s connectivity and direction rules. An unreachable vertex has no finite path from the source and must not be interpreted as merely “very far away.”</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>2-04 · cuGraph as a NetworkX Backend</h2><span class="path">fundamentals/2-04_networkx_cugraph.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Backend dispatch</dt><dd>A mechanism that lets a NetworkX-style call execute through the accelerated <code>nx-cugraph</code> backend when compatible. The analysis code stays familiar while the computational implementation changes.</dd></div>
+    <div class="term"><dt>Centrality</dt><dd>A family of measures for a vertex’s structural importance. It is not a generic “importance” fact: each metric encodes a different network role and should be selected for a substantive question.</dd></div>
+    <div class="term"><dt>Betweenness / degree / eigenvector / PageRank / Katz</dt><dd>Betweenness counts routes passing through a node; degree counts direct connections; eigenvector and PageRank reward connections to influential nodes; Katz also counts longer walks but discounts them. The notebook compares these non-interchangeable meanings.</dd></div>
+  </dl></section>
+
+  <section id="ml" class="module"><div class="module-head"><h2>3-02 · K-Means</h2><span class="path">fundamentals/3-02_k-means.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>K-means clustering</dt><dd>An unsupervised method that assigns each observation to one of a chosen number <em>k</em> of clusters, iteratively updating cluster centres to reduce within-cluster squared distances.</dd></div>
+    <div class="term"><dt>Centroid</dt><dd>The mean location of all points assigned to a K-means cluster. It is a mathematical centre, not necessarily an observed person or place, and is sensitive to scale and outliers.</dd></div>
+    <div class="term"><dt>Feature scaling</dt><dd>Putting input variables on comparable numerical scales before distance-based learning. Without it, a feature with a larger numeric range can dominate K-means distances regardless of its substantive relevance.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>3-03 · DBSCAN</h2><span class="path">fundamentals/3-03_dbscan.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>DBSCAN</dt><dd><strong>Density-Based Spatial Clustering of Applications with Noise</strong>. It forms clusters from densely packed points, can discover non-spherical shapes, and labels points outside dense regions as noise.</dd></div>
+    <div class="term"><dt><code>eps</code> and <code>min_samples</code></dt><dd><code>eps</code> is the neighbourhood radius; <code>min_samples</code> is the number of nearby points needed for a core point. They jointly define what density counts as a cluster, so their scale must match the units of the features.</dd></div>
+    <div class="term"><dt>Noise label</dt><dd>A DBSCAN assignment for an observation not density-connected to a cluster (commonly <code>-1</code>). It is an algorithmic result, not proof that a measurement is erroneous.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>3-04 · Logistic Regression</h2><span class="path">fundamentals/3-04_logistic_regression.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Logistic regression</dt><dd>A supervised classifier that models the probability of a binary outcome, here infection, from predictors such as age or sex. Its linear score is transformed to the 0–1 probability scale with the logistic function.</dd></div>
+    <div class="term"><dt>Coefficient and odds</dt><dd>A coefficient changes the model’s log-odds, not probability by a fixed amount. Exponentiating it gives an odds ratio, whose interpretation still depends on the model specification and the other included predictors.</dd></div>
+    <div class="term"><dt>Train/test split</dt><dd>Holding out records that are not used for fitting, then evaluating the trained model on them. It estimates generalization to similar unseen data and guards against reporting in-sample performance as predictive ability.</dd></div>
+    <div class="term"><dt>Prevalence</dt><dd>The proportion of people with the outcome in a defined population or subgroup. A higher observed prevalence by age or sex is descriptive; it does not by itself establish a causal risk factor.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>3-05 · K-Nearest Neighbors</h2><span class="path">fundamentals/3-05_knn.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>K-nearest neighbors (KNN)</dt><dd>A distance-based method that retrieves the <em>k</em> closest reference points to each query. Here it maps hospitals to nearby road nodes; no model of the road network itself is learned.</dd></div>
+    <div class="term"><dt>Query vs reference data</dt><dd>Reference data is indexed for searching; query data is looked up against it. Keeping their roles and row indices straight is essential when interpreting returned distances and neighbour indices.</dd></div>
+    <div class="term"><dt>Euclidean distance</dt><dd>Straight-line distance in the supplied feature space. It is useful after suitable projection to metre-based grid coordinates, but it is not road travel distance and can ignore barriers or network constraints.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>3-06 · XGBoost</h2><span class="path">fundamentals/3-06_xgboost.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>XGBoost / gradient boosting</dt><dd>An ensemble method that builds decision trees sequentially, with each new tree correcting errors of the prior ensemble. It is powerful for tabular prediction but needs validation and careful parameter choices to avoid overfitting.</dd></div>
+    <div class="term"><dt>Hyperparameter</dt><dd>A setting chosen before or during fitting rather than learned directly from the training examples, such as tree depth, learning rate, or number of boosting rounds. Tune it using validation—not the final test set.</dd></div>
+    <div class="term"><dt>Feature importance</dt><dd>A model-derived summary of which predictors helped splits or reduced loss. It is useful for inspection but does not establish causality and can be distorted by correlated features or the particular importance definition.</dd></div>
+    <div class="term"><dt>ROC AUC</dt><dd>Area under the receiver-operating-characteristic curve: the probability that a randomly selected positive is scored above a randomly selected negative. It measures ranking discrimination across thresholds, not calibration or real-world utility by itself.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>3-07 · Triton</h2><span class="path">fundamentals/3-07_triton.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Inference server</dt><dd>A service that receives model inputs and returns predictions. Triton packages a trained model for serving, handles requests, and supports multiple model backends; this is distinct from model training.</dd></div>
+    <div class="term"><dt>Model repository and configuration</dt><dd>Triton expects a directory organised by model name and version plus a <code>config.pbtxt</code> file. The configuration declares deployment-facing details such as inputs, outputs, batch limits, and backend settings.</dd></div>
+    <div class="term"><dt>Batch size and concurrency</dt><dd>Batch size is inputs per request; concurrency is simultaneous outstanding requests. Increasing either can improve GPU utilisation and throughput, but may raise latency or exceed memory limits.</dd></div>
+    <div class="term"><dt>Latency, throughput, p50/p95/p99</dt><dd>Latency is time per request; throughput is completed inferences per unit time. Percentiles summarize the latency distribution: p95, for instance, is the value at or below which 95% of measured requests finish.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>3-08 · Multi-GPU K-Means with Dask</h2><span class="path">fundamentals/3-08_k-means_dask.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Multi-GPU training</dt><dd>Fitting one analysis across multiple GPUs by partitioning data and coordinating computation. It can expand capacity and speed, but gains depend on partition balance, communication, and whether the workload is large enough to amortize overhead.</dd></div>
+    <div class="term"><dt>Distributed K-means</dt><dd>K-means run over Dask-managed partitions. Worker-local calculations contribute to globally updated centroids, so the algorithm combines parallel local work with synchronization across the cluster.</dd></div>
+  </dl></section>
+
+  <section id="project" class="module"><div class="module-head"><h2>4-02 · Find Clusters of Infected People</h2><span class="path">fundamentals/4-02_find_infected.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Spatial cluster</dt><dd>A geographically concentrated group of cases. In the project, DBSCAN identifies dense patterns in projected grid coordinates; a detected cluster is a pattern to investigate, not an explanation for why infection occurred.</dd></div>
+    <div class="term"><dt>Largest cluster</dt><dd>The cluster with the greatest number of assigned observations. It is different from the geographically largest area or the cluster with the highest local density, so state the criterion explicitly.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>4-03 · Identify Nearest Health Facilities</h2><span class="path">fundamentals/4-03_nearest_facilities.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Easting and northing</dt><dd>The horizontal and vertical coordinates of a projected grid. In the British National Grid conversion used here, their metre-based scale permits KNN to compute an interpretable straight-line proximity measure.</dd></div>
+    <div class="term"><dt>Nearest facility index</dt><dd>The integer returned by <code>kneighbors</code> that identifies the closest row in the facilities reference DataFrame. It must be used to join back to facility metadata such as <code>OrganisationID</code>; resetting indexes prevents accidental row-label mismatches.</dd></div>
+  </dl></section>
+
+  <section class="module"><div class="module-head"><h2>4-04 · Identify Risk Factors for Infection</h2><span class="path">fundamentals/4-04_identify_risk_factors.ipynb</span></div><dl class="terms">
+    <div class="term"><dt>Stratification</dt><dd>Calculating a summary within subgroups, such as employment code <em>and</em> sex. It checks whether an aggregate pattern is consistent across a relevant grouping and can reveal differences masked by the overall rate.</dd></div>
+    <div class="term"><dt>Risk factor</dt><dd>A characteristic associated with a higher outcome rate in a defined analysis. The project’s grouped infection rates identify candidates for further investigation; observational association alone does not prove that employment or sex causes infection.</dd></div>
+  </dl></section>
+</main>
+<footer class="container">Prepared from the notebook text and exercises in the local course copy of <em>Fundamentals of Accelerated Data Science</em> (NVIDIA DLI). Published as a companion glossary · 2026-08.</footer>
+<script>
+  (() => { const input = document.querySelector('#search'); const modules = [...document.querySelectorAll('.module')]; const rows = [...document.querySelectorAll('.term')];
+    function filter() { const q = input.value.trim().toLowerCase(); rows.forEach(r => r.classList.toggle('hidden', !!q && !r.textContent.toLowerCase().includes(q))); modules.forEach(m => m.classList.toggle('hidden', !!q && !m.querySelector('.term:not(.hidden)'))); }
+    input.addEventListener('input', filter);
+  })();
+</script>
+</body>
+</html>
