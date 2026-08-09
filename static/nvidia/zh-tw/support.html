@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NVIDIA 加速資料科學基礎課程的學員支援指南：設定並啟動實作環境。">
+  <title>NVIDIA 加速資料科學｜學員支援指南</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="https://audachang.github.io/">Erik Chang</a>
+      <nav class="lang" aria-label="頁面連結"><a href="../">資源索引</a> · <a href="../support.html" lang="en">English</a> · <strong>繁體中文</strong></nav>
+    </div>
+  </header>
+
+  <main class="support-page">
+    <p class="eyebrow">加速資料科學基礎</p>
+    <h1>學員支援指南</h1>
+    <p class="dek">請在課程開始前或進行期間，依下列步驟設定並啟動實作環境。</p>
+    <hr class="rule">
+
+    <aside class="support-callout" aria-labelledby="system-heading">
+      <p class="callout-label" id="system-heading">系統建議</p>
+      <p>建議使用 Google Chrome 瀏覽器。</p>
+    </aside>
+
+    <section aria-labelledby="setup-heading">
+      <h2 id="setup-heading">實作環境設定步驟</h2>
+      <ol class="support-steps">
+        <li>
+          <div class="step-copy"><h3>登入 NVIDIA</h3><p>登入或建立您的 <a href="https://www.nvidia.com/en-us/training/academy/login/">NVIDIA 帳號</a>。</p></div>
+        </li>
+        <li>
+          <div class="step-copy"><h3>加入 DLI 活動</h3><p>開啟 <a href="https://learn.nvidia.com/dli-event">DLI Event 頁面</a>，輸入活動代碼：</p><p class="event-code"><code>NCU_RAPIDS_AMBASSADOR_AU26</code></p></div>
+          <figure><img src="../support-assets/01-course-page.png" alt="NVIDIA DLI 加速資料科學基礎課程頁面" loading="lazy"><figcaption>加入 DLI 活動後顯示的課程頁面。</figcaption></figure>
+        </li>
+        <li>
+          <div class="step-copy"><h3>找到實作控制面板</h3><p>進入課程頁面後，向下捲動至投影片下方，找到 <strong>Lab Instructions</strong> 面板。</p></div>
+        </li>
+        <li>
+          <div class="step-copy"><h3>初始化環境</h3><p>點選 <strong>START</strong>，開始初始化互動式環境。</p><aside class="inline-note"><strong>初始化最多可能需要 10 分鐘。</strong>請耐心等候程序完成。</aside></div>
+        </li>
+        <li>
+          <div class="step-copy"><h3>等候 LAUNCH 啟用</h3><p>初始化完成後，<strong>LAUNCH</strong> 按鈕會變成可使用狀態。</p></div>
+          <figure><img src="../support-assets/02-lab-instructions.png" alt="顯示 START 與 LAUNCH 控制項的 Lab Instructions 面板" loading="lazy"><figcaption>Lab Instructions 面板用來控制實作環境。</figcaption></figure>
+        </li>
+        <li>
+          <div class="step-copy"><h3>啟動 JupyterLab</h3><p>點選 <strong>LAUNCH</strong>，稍候片刻。互動式 JupyterLab 環境會自動在新的瀏覽器分頁開啟。</p></div>
+          <figure><img src="../support-assets/03-jupyterlab-launcher.png" alt="JupyterLab 啟動器，左側顯示檔案瀏覽器" loading="lazy"><figcaption>JupyterLab 開啟後，左側會顯示檔案瀏覽器。</figcaption></figure>
+        </li>
+        <li>
+          <div class="step-copy"><h3>開啟第一份 Notebook</h3><p>在左側邊欄的 <strong>File Browser（檔案瀏覽器）</strong>中，按兩下 <code>1-00_introduction.ipynb</code>。接著依每份 Notebook 內的說明完成課程練習。</p></div>
+          <figure><img src="../support-assets/04-first-notebook.png" alt="JupyterLab 中開啟的 1-00 introduction Notebook" loading="lazy"><figcaption>在 JupyterLab 中開啟課程的第一份 Notebook。</figcaption></figure>
+        </li>
+        <li>
+          <div class="step-copy"><h3>留意新增的輸出檔案</h3><p>在課程中執行程式碼時，左側檔案瀏覽器會陸續出現 <code>.csv</code>、<code>.parquet</code>、<code>.svg</code> 等輸出檔案，這是正常現象。</p></div>
+          <figure class="figure-narrow"><img src="../support-assets/05-output-files.png" alt="JupyterLab 檔案瀏覽器中新增的輸出檔案" loading="lazy"><figcaption>產生的檔案會與課程 Notebook 一起顯示。</figcaption></figure>
+        </li>
+      </ol>
+    </section>
+
+    <aside class="support-warning" aria-labelledby="course-note-heading">
+      <p class="callout-label" id="course-note-heading">課程導覽提醒</p>
+      <p><code>1-07_etl.ipynb</code> 最後一個儲存格中的超連結目前無法使用。完成該 Notebook 後，請在左側檔案瀏覽器按兩下 <code>1-08_cudf-polars.ipynb</code>，手動開啟下一份 Notebook。</p>
+    </aside>
+
+    <section class="technical-support" aria-labelledby="technical-heading">
+      <h2 id="technical-heading">技術支援</h2>
+      <p>若實作環境發生技術問題，請參考 <a href="https://www.nvidia.com/en-us/training/dli-faq/">NVIDIA DLI Platform 疑難排解頁面</a>。</p>
+    </section>
+
+    <footer>本頁依課程教材中的 <em>Attendee Support Guide.docx</em> 整理。</footer>
+  </main>
+</body>
+</html>

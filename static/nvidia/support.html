@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Attendee support guide for launching the NVIDIA Fundamentals of Accelerated Data Science hands-on lab.">
+  <title>NVIDIA Accelerated Data Science — Attendee Support Guide</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="https://audachang.github.io/">Erik Chang</a>
+      <nav class="lang" aria-label="Page links"><a href="./">Resource index</a> · <strong>English</strong> · <a href="./zh-tw/support.html" lang="zh-Hant-TW">繁體中文</a></nav>
+    </div>
+  </header>
+
+  <main class="support-page">
+    <p class="eyebrow">Fundamentals of Accelerated Data Science</p>
+    <h1>Attendee support guide</h1>
+    <p class="dek">Follow these steps before or during the session to set up and launch your hands-on lab environment.</p>
+    <hr class="rule">
+
+    <aside class="support-callout" aria-labelledby="system-heading">
+      <p class="callout-label" id="system-heading">System recommendation</p>
+      <p>Google Chrome is the preferred browser.</p>
+    </aside>
+
+    <section aria-labelledby="setup-heading">
+      <h2 id="setup-heading">Step-by-step lab setup</h2>
+      <ol class="support-steps">
+        <li>
+          <div class="step-copy"><h3>Sign in to NVIDIA</h3><p>Log in to or create your <a href="https://www.nvidia.com/en-us/training/academy/login/">NVIDIA account</a>.</p></div>
+        </li>
+        <li>
+          <div class="step-copy"><h3>Join the DLI event</h3><p>Open the <a href="https://learn.nvidia.com/dli-event">DLI Event page</a> and enter the event code:</p><p class="event-code"><code>NCU_RAPIDS_AMBASSADOR_AU26</code></p></div>
+          <figure><img src="./support-assets/01-course-page.png" alt="NVIDIA DLI course page for Fundamentals of Accelerated Data Science" loading="lazy"><figcaption>The course page after joining the DLI event.</figcaption></figure>
+        </li>
+        <li>
+          <div class="step-copy"><h3>Find the lab controls</h3><p>On the course page, scroll below the slides to locate the <strong>Lab Instructions</strong> panel.</p></div>
+        </li>
+        <li>
+          <div class="step-copy"><h3>Initialize the environment</h3><p>Select <strong>START</strong> to begin initializing your interactive environment.</p><aside class="inline-note"><strong>Please allow up to 10 minutes.</strong> Wait until initialization completes.</aside></div>
+        </li>
+        <li>
+          <div class="step-copy"><h3>Wait for LAUNCH</h3><p>When initialization is complete, the <strong>LAUNCH</strong> button becomes active.</p></div>
+          <figure><img src="./support-assets/02-lab-instructions.png" alt="Lab Instructions panel showing START and LAUNCH controls" loading="lazy"><figcaption>The Lab Instructions panel controls the lab session.</figcaption></figure>
+        </li>
+        <li>
+          <div class="step-copy"><h3>Launch JupyterLab</h3><p>Select <strong>LAUNCH</strong> and wait briefly. The interactive JupyterLab environment opens automatically in a new browser tab.</p></div>
+          <figure><img src="./support-assets/03-jupyterlab-launcher.png" alt="JupyterLab launcher with the file browser in the left sidebar" loading="lazy"><figcaption>JupyterLab opens with the file browser on the left.</figcaption></figure>
+        </li>
+        <li>
+          <div class="step-copy"><h3>Open the first notebook</h3><p>In the left sidebar (<strong>File Browser</strong>), double-click <code>1-00_introduction.ipynb</code>. Follow the instructions inside each notebook to proceed through the course exercises.</p></div>
+          <figure><img src="./support-assets/04-first-notebook.png" alt="The 1-00 introduction notebook open in JupyterLab" loading="lazy"><figcaption>The introductory notebook open in JupyterLab.</figcaption></figure>
+        </li>
+        <li>
+          <div class="step-copy"><h3>Expect new output files</h3><p>As you run code during the workshop, additional output files—such as <code>.csv</code>, <code>.parquet</code>, and <code>.svg</code> files—will appear naturally in the left file browser.</p></div>
+          <figure class="figure-narrow"><img src="./support-assets/05-output-files.png" alt="JupyterLab file browser showing newly generated output files" loading="lazy"><figcaption>Generated files appear alongside the course notebooks.</figcaption></figure>
+        </li>
+      </ol>
+    </section>
+
+    <aside class="support-warning" aria-labelledby="course-note-heading">
+      <p class="callout-label" id="course-note-heading">Course navigation note</p>
+      <p>The hyperlink in the final cell of <code>1-07_etl.ipynb</code> is currently not working. After completing that notebook, manually open <code>1-08_cudf-polars.ipynb</code> by double-clicking it in the left file browser.</p>
+    </aside>
+
+    <section class="technical-support" aria-labelledby="technical-heading">
+      <h2 id="technical-heading">Technical support</h2>
+      <p>If you encounter a technical issue with the environment, consult the <a href="https://www.nvidia.com/en-us/training/dli-faq/">NVIDIA DLI Platform troubleshooting page</a>.</p>
+    </section>
+
+    <footer>Adapted from <em>Attendee Support Guide.docx</em> in the course materials.</footer>
+  </main>
+</body>
+</html>
