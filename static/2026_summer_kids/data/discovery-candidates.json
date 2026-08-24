@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-08-17",
+    "updatedAt": "2026-08-24",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
     "lastMessage": "0 new candidate(s) discovered."
