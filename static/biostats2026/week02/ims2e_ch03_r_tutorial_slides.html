@@ -1108,7 +1108,7 @@ margin-right: 0; }
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">R 資料操作入門</h1>
-  <p class="subtitle">Week 02 後半 · IMS 2e Tutorial 1 · Posit Cloud</p>
+  <p class="subtitle">Week 02 · IMS 2e Tutorial 1 · Posit Cloud</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -1141,8 +1141,8 @@ HT3001B 生物統計學與 R
 <h2>本課的工作平台：Posit Cloud</h2>
 <ol type="1">
 <li>登入 <a href="https://posit.cloud/">posit.cloud</a>。</li>
-<li>若 ee-class 提供課程 Space 連結，依連結開啟自己的專案副本。</li>
-<li>若沒有課程 Space 專案，從 <strong>Your Workspace → New Project → New RStudio Project</strong> 建立專案。</li>
+<li>進入自己的 <strong>Your Workspace</strong>。</li>
+<li>選擇 <strong>New Project → New RStudio Project</strong>，自行建立專案。</li>
 <li>將專案命名為 <code>HT3001B_week02</code>。</li>
 </ol>
 <div class="takeaway">
@@ -1181,7 +1181,7 @@ HT3001B 生物統計學與 R
 <tbody>
 <tr class="odd">
 <td>Source</td>
-<td>撰寫與保存 <code>week02_tutorial.R</code></td>
+<td>撰寫與保存<code>week02_tutorial.R</code></td>
 </tr>
 <tr class="even">
 <td>Console</td>
@@ -1257,9 +1257,8 @@ HT3001B 生物統計學與 R
 <section id="操作例子確認套件與資料可以使用" class="slide level2">
 <h2>操作例子：確認套件與資料可以使用</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href></a><span class="fu">library</span>(openintro)</span>
-<span id="cb6-2"><a href></a></span>
-<span id="cb6-3"><a href></a><span class="fu">class</span>(hsb2)</span>
-<span id="cb6-4"><a href></a><span class="fu">head</span>(hsb2, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-2"><a href></a><span class="fu">class</span>(hsb2)</span>
+<span id="cb6-3"><a href></a><span class="fu">head</span>(hsb2, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <p>執行後確認：</p>
 <ul>
 <li><code>class(hsb2)</code> 顯示資料物件的類別。</li>
@@ -1385,7 +1384,8 @@ HT3001B 生物統計學與 R
 <h2>用三個函數快速查看資料</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href></a><span class="fu">dim</span>(hsb2)</span>
 <span id="cb14-2"><a href></a><span class="fu">names</span>(hsb2)</span>
-<span id="cb14-3"><a href></a><span class="fu">head</span>(hsb2)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-3"><a href></a><span class="fu">head</span>(hsb2)</span>
+<span id="cb14-4"><a href></a>?hsb2</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -1405,6 +1405,10 @@ HT3001B 生物統計學與 R
 <tr class="odd">
 <td><code>head()</code></td>
 <td>前幾列資料</td>
+</tr>
+<tr class="even">
+<td><code>?hsb2</code></td>
+<td>查看hsb2說明</td>
 </tr>
 </tbody>
 </table>
@@ -1882,6 +1886,10 @@ HT3001B 生物統計學與 R
 <section id="遇到錯誤時先讀-console" class="slide level2">
 <h2>遇到錯誤時，先讀 Console</h2>
 <table class="caption-top">
+<colgroup>
+<col style="width: 47%">
+<col style="width: 52%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>訊息或現象</th>
@@ -1891,18 +1899,18 @@ HT3001B 生物統計學與 R
 <tbody>
 <tr class="odd">
 <td><code>there is no package called ...</code></td>
-<td>是否先執行 <code>install.packages()</code></td>
+<td>是否先執行<code>install.packages()</code></td>
 </tr>
 <tr class="even">
 <td><code>could not find function ...</code></td>
-<td>是否用 <code>library()</code> 載入套件</td>
+<td>是否用<code>library()</code> 載入套件</td>
 </tr>
 <tr class="odd">
 <td><code>object ... not found</code></td>
 <td>建立物件的前一段程式是否已執行</td>
 </tr>
 <tr class="even">
-<td>出現 <code>+</code> 而不是 <code>&gt;</code></td>
+<td>出現<code>+</code> 而不是 <code>&gt;</code></td>
 <td>括號或引號可能尚未關閉；按 Esc 後重試</td>
 </tr>
 <tr class="odd">
@@ -1960,62 +1968,22 @@ HT3001B 生物統計學與 R
 <p>HT3001B · Week 02 · R Slido · 活動日期：2026-09-16–2026-09-18</p>
 </div>
 </section>
-<section id="slido-1程式應該寫在哪裡" class="slide level2">
-<h2>Slido 1｜程式應該寫在哪裡？</h2>
-<div class="source">
-<p><a href="https://app.sli.do/event/mYJsjv2RF7ixtDGMcWRc39/embed/polls/a587c5ff-5c56-42a1-8739-1c260a61854b" target="_blank" rel="noopener noreferrer">進入本單元 Quiz</a> · 45 秒</p>
-</div>
-<p><strong>單選：</strong>希望下次登入時仍能找到並重新執行程式，最適合把程式寫在哪裡？</p>
-<div class="small">
-<ol type="A">
-<li>Source 中已保存的 R Script</li>
-<li>Console 的提示符號後方</li>
-<li>Plots 面板</li>
-<li>Help 面板</li>
-</ol>
-</div>
-<div class="fragment small takeaway">
-<p><strong>A。</strong>R Script 會保存在 Project；Console 適合顯示執行過程與結果。</p>
-</div>
-<div class="section-ref">
-<p>Posit Cloud RStudio Project · 自編操作題</p>
+<section id="slido-1" class="slide level2">
+<h2>Slido 1</h2>
+<div class="question">
+<p><a href="https://app.sli.do/event/mYJsjv2RF7ixtDGMcWRc39/embed/polls/a587c5ff-5c56-42a1-8739-1c260a61854b" target="_blank" rel="noopener noreferrer">前往 Slido Quiz 作答</a></p>
 </div>
 </section>
-<section id="slido-2這段-pipe-先做什麼" class="slide level2">
-<h2>Slido 2｜這段 pipe 先做什麼？</h2>
-<div class="source">
-<p><a href="https://app.sli.do/event/mYJsjv2RF7ixtDGMcWRc39/embed/polls/a587c5ff-5c56-42a1-8739-1c260a61854b" target="_blank" rel="noopener noreferrer">進入本單元 Quiz</a> · 45 秒</p>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href></a>hsb2 <span class="sc">|&gt;</span></span>
-<span id="cb43-2"><a href></a>  <span class="fu">filter</span>(schtyp <span class="sc">==</span> <span class="st">&quot;public&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb43-3"><a href></a>  <span class="fu">count</span>(prog)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>單選：</strong>第一個資料操作是什麼？</p>
-<div class="small">
-<ol type="A">
-<li>篩選 <code>schtyp</code> 為 <code>&quot;public&quot;</code> 的列</li>
-<li>計算 <code>prog</code> 出現次數</li>
-<li>安裝 <code>hsb2</code></li>
-<li>刪除 <code>prog</code></li>
-</ol>
-</div>
-<div class="fragment small takeaway">
-<p><strong>A。</strong>pipe 由上往下閱讀；<code>count(prog)</code> 使用前一步篩選後的資料。</p>
-</div>
-<div class="section-ref">
-<p>IMS Tutorial 1 · Lesson 1: The pipe operator · 自編程式判讀題</p>
+<section id="slido-2" class="slide level2">
+<h2>Slido 2</h2>
+<div class="question">
+<p><a href="https://app.sli.do/event/mYJsjv2RF7ixtDGMcWRc39/embed/polls/a587c5ff-5c56-42a1-8739-1c260a61854b" target="_blank" rel="noopener noreferrer">前往 Slido Quiz 作答</a></p>
 </div>
 </section>
-<section id="slido-3離開前寫出你的-r-工作流程" class="slide level2">
-<h2>Slido 3｜離開前，寫出你的 R 工作流程</h2>
-<div class="source">
-<p><a href="https://app.sli.do/event/mYJsjv2RF7ixtDGMcWRc39/embed/polls/21961cc0-0bfd-4296-9e01-342a6bcb0223" target="_blank" rel="noopener noreferrer">開啟文字作答</a> · 45 秒文字作答</p>
-</div>
-<p><strong>文字作答：</strong>請用一行文字寫出：重新登入 Posit Cloud 後，如何從開啟 Project、讀入 CSV 到重新產生一張圖？</p>
-<div class="fragment small takeaway">
-<p><strong>參考回答：</strong>開啟 <code>HT3001B_week02</code>，從 Files 打開 <code>week02_tutorial.R</code>，載入套件，以 <code>read_csv()</code> 讀入 Project 內的 CSV，由上往下執行資料處理與 <code>ggplot()</code> 程式，再確認 Console 沒有錯誤且 Plots 出現圖形。</p>
-</div>
-<div class="section-ref">
-<p>IMS Tutorial 1 · Posit Cloud 操作整合 · 自編練習</p>
+<section id="slido-3" class="slide level2">
+<h2>Slido 3</h2>
+<div class="question">
+<p><a href="https://app.sli.do/event/mYJsjv2RF7ixtDGMcWRc39/embed/polls/21961cc0-0bfd-4296-9e01-342a6bcb0223" target="_blank" rel="noopener noreferrer">前往 Slido 文字作答</a></p>
 </div>
 
 </section>
