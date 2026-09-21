@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-09-14",
+    "updatedAt": "2026-09-21",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "0 new candidate(s) discovered."
+    "lastMessage": "1 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -1264,6 +1264,54 @@
           "00/13"
         ],
         "contentHash": "63c5c243c6f2f266"
+      }
+    },
+    {
+      "id": "candidate-taoyuan-52afb7a406",
+      "city": "桃園",
+      "status": "candidate",
+      "title": "活動消息 - 桃園市立圖書館",
+      "url": "https://www.typl.gov.tw/zh-tw/activity",
+      "sourceTitle": "Typl",
+      "description": "[平鎮活動]10/3(六)SEL：閱讀・探索・成長系列活動-正向同理：陪伴情緒，讓孩子感覺到被懂 2026.10.03",
+      "dateSnippets": [
+        "10/3",
+        "2026.10.03",
+        "2026.07.11",
+        "2026.09.05",
+        "2026.10.04",
+        "10/17",
+        "2026.10.17",
+        "10/31",
+        "2026.10.31",
+        "2026.10.11",
+        "2026.09.12",
+        "2026.09.01",
+        "2026.07.25",
+        "2026.08.05"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-09-21",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026.07.11",
+          "2026.09.05",
+          "2026.10.04",
+          "10/17",
+          "2026.10.17",
+          "10/3",
+          "2026.10.03",
+          "10/31",
+          "2026.10.31",
+          "2026.10.11",
+          "2026.09.12",
+          "2026.09.01",
+          "2026.07.25",
+          "2026.08.05"
+        ],
+        "contentHash": "c8988b9bd79010bd"
       }
     }
   ]
