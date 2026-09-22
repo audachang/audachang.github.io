@@ -1,0 +1,84 @@
+:root {
+  color-scheme: light;
+  font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  color: #252525;
+  background: #fafafa;
+}
+* { box-sizing: border-box; }
+body { margin: 0; line-height: 1.75; }
+main { max-width: 920px; margin: auto; padding: 48px 24px; }
+a { color: #914000; text-underline-offset: .2em; }
+a:focus-visible { outline: 3px solid #ad4800; outline-offset: 5px; }
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  background: #fff;
+  padding: 8px 12px;
+}
+.skip:focus { left: 8px; }
+.eyebrow { color: #666; letter-spacing: .08em; font-size: .9rem; margin: 0; }
+h1 { font-size: clamp(1.9rem, 5vw, 2.7rem); line-height: 1.3; margin: 12px 0; }
+h2 { margin: 36px 0 12px; font-size: 1.4rem; }
+h3 { margin: 0 0 8px; font-size: 1.05rem; font-weight: 700; }
+.intro, .meta, .notice, footer, .status, .crumb { color: #555; }
+.crumb { font-size: .95rem; margin: 0 0 16px; }
+.crumb a { color: #555; }
+.lede { color: #555; margin: 0 0 8px; }
+.toc {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #ddd;
+}
+.toc > li {
+  display: grid;
+  grid-template-columns: 7.2rem minmax(0, 1fr);
+  gap: 8px 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid #ddd;
+  align-items: start;
+}
+.week-num { display: block; font-weight: 700; }
+.week-date { display: block; color: #666; font-size: .95rem; }
+.tag {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: .8rem;
+  letter-spacing: .04em;
+  color: #666;
+}
+.decks-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.decks-inline a { font-weight: 700; }
+.status { margin: 8px 0 0; }
+.available { background: transparent; }
+.exam .status { font-style: normal; }
+.decks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+article {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-top: 4px solid #ad4800;
+  padding: 24px;
+  border-radius: 4px;
+}
+article p { margin: 10px 0; }
+.open { display: inline-block; font-weight: 700; margin-top: 12px; }
+.notice { padding: 16px 20px; background: #f0f0f0; margin-top: 24px; }
+footer {
+  border-top: 1px solid #ddd;
+  margin-top: 36px;
+  padding-top: 20px;
+  font-size: .95rem;
+}
+@media (max-width: 640px) {
+  main { padding: 28px 18px; }
+  .toc > li { grid-template-columns: 1fr; gap: 4px; }
+  .decks { grid-template-columns: 1fr; }
+}

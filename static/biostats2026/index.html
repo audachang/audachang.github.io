@@ -3,64 +3,199 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="2026 秋季生物統計學與 R：第二週資料與研究設計、R 資料操作入門投影片。">
+  <meta name="description" content="2026 秋季生物統計學與 R：每週 HTML 投影片目錄。">
   <title>生物統計學與 R｜2026 秋季</title>
-  <style>
-    :root { color-scheme: light; font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif; color: #252525; background: #fafafa; }
-    * { box-sizing: border-box; }
-    body { margin: 0; line-height: 1.75; }
-    main { max-width: 920px; margin: auto; padding: 48px 24px; }
-    a { color: #914000; text-underline-offset: .2em; }
-    a:focus-visible { outline: 3px solid #ad4800; outline-offset: 5px; }
-    .eyebrow { color: #666; letter-spacing: .08em; font-size: .9rem; }
-    h1 { font-size: clamp(1.9rem, 5vw, 2.7rem); line-height: 1.3; margin: 12px 0; }
-    h2 { margin-top: 36px; font-size: 1.4rem; }
-    h3 { margin: 0 0 12px; font-size: 1.2rem; }
-    .intro { color: #555; }
-    .decks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-    article { background: white; border: 1px solid #ddd; border-top: 4px solid #ad4800; padding: 24px; border-radius: 4px; }
-    article p { margin: 10px 0; }
-    .open { display: inline-block; font-weight: bold; margin-top: 12px; }
-    .meta, .notice, footer { color: #555; font-size: .95rem; }
-    .notice { padding: 16px 20px; background: #f0f0f0; margin-top: 24px; }
-    footer { border-top: 1px solid #ddd; margin-top: 36px; padding-top: 20px; }
-    @media (max-width: 640px) { main { padding: 28px 18px; } .decks { grid-template-columns: 1fr; } }
-  </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
+<a class="skip" href="#toc">跳至週次目錄</a>
 <main>
   <header>
     <p class="eyebrow">HT3001B · FALL 2026</p>
     <h1>生物統計學與 R</h1>
     <p class="intro">從研究問題、資料來源與結構，逐步建立分析與推論的依據。</p>
   </header>
-  <section aria-labelledby="week02">
-    <h2 id="week02">第二週｜2026 年 9 月 17 日</h2>
-    <div class="decks">
-      <article>
-        <h3>資料與研究設計</h3>
-        <p>複習七題分析計畫，從支架研究的個別紀錄與摘要，認識變項、抽樣、分派及推論範圍。</p>
-        <p class="meta">IMS 2e 第 1–2 章 · HTML 約 13.9 MB</p>
-        <a class="open" href="week02/ims2e_ch01_ch02_slides.html">開啟統計投影片 →</a>
-      </article>
-      <article>
-        <h3>R 資料操作入門</h3>
-        <p>在 Posit Cloud 與 RStudio 中練習資料讀取、整理與 pipe，將操作接成可重現的工作流程。</p>
-        <p class="meta">IMS Tutorial 1 · HTML 約 4.8 MB</p>
-        <a class="open" href="week02/ims2e_ch03_r_tutorial_slides.html">開啟 R 投影片 →</a>
-      </article>
-    </div>
-    <p class="notice">投影片可直接在瀏覽器閱讀；使用方向鍵或右下角按鈕前進，答案會逐步顯示。手機建議橫向閱讀。Slido 是本次課堂活動，活動期間為 2026/09/16–09/18；能否作答取決於主持人是否開啟題目。</p>
+
+  <section aria-labelledby="toc">
+    <h2 id="toc">每週投影片</h2>
+    <p class="lede">目前公開第 2 週的 HTML 投影片；其餘週次將於上課後陸續放上。</p>
+    <ol class="toc">
+      <li>
+        <div>
+          <span class="week-num">第一週</span>
+          <time class="week-date" datetime="2026-09-10">9 月 10 日</time>
+        </div>
+        <div>
+          <h3>從生醫問題寫出第一份分析計畫</h3>
+          <p class="status">尚未發布 HTML 投影片</p>
+        </div>
+      </li>
+      <li class="available">
+        <div>
+          <span class="week-num">第二週</span>
+          <time class="week-date" datetime="2026-09-17">9 月 17 日</time>
+          <span class="tag">含 R 實習 1</span>
+        </div>
+        <div>
+          <h3><a href="week02/">判斷資料如何產生，以及觀察值是否獨立</a></h3>
+          <ul class="decks-inline">
+            <li><a href="week02/ims2e_ch01_ch02_slides.html">統計：資料與研究設計</a></li>
+            <li><a href="week02/ims2e_ch03_r_tutorial_slides.html">R：資料操作入門</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第三週</span>
+          <time class="week-date" datetime="2026-09-24">9 月 24 日</time>
+        </div>
+        <div>
+          <h3>用圖表描述分布、關係與資料品質</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第四週</span>
+          <time class="week-date" datetime="2026-10-01">10 月 1 日</time>
+          <span class="tag">含 R 實習 2</span>
+        </div>
+        <div>
+          <h3>用模擬觀察重複抽樣造成的變異</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第五週</span>
+          <time class="week-date" datetime="2026-10-08">10 月 8 日</time>
+        </div>
+        <div>
+          <h3>用估計值與區間回答「差多少」</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第六週</span>
+          <time class="week-date" datetime="2026-10-15">10 月 15 日</time>
+          <span class="tag">含 R 實習 3</span>
+        </div>
+        <div>
+          <h3>描述兩個連續變項的關係並建立模型</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第七週</span>
+          <time class="week-date" datetime="2026-10-22">10 月 22 日</time>
+        </div>
+        <div>
+          <h3>判斷群體比較需要哪一類方法</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li class="exam">
+        <div>
+          <span class="week-num">第八週</span>
+          <time class="week-date" datetime="2026-10-29">10 月 29 日</time>
+        </div>
+        <div>
+          <h3>期中考：第 1–7 週</h3>
+          <p class="status">考試週，無課堂投影片</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第九週</span>
+          <time class="week-date" datetime="2026-11-05">11 月 5 日</time>
+          <span class="tag">含 R 實習 4</span>
+        </div>
+        <div>
+          <h3>比較兩組連續結果並檢查結論</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第十週</span>
+          <time class="week-date" datetime="2026-11-12">11 月 12 日</time>
+          <span class="tag">含 R 實習 5</span>
+        </div>
+        <div>
+          <h3>比較多組結果並處理多重比較</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第十一週</span>
+          <time class="week-date" datetime="2026-11-19">11 月 19 日</time>
+        </div>
+        <div>
+          <h3>說明調整前後結果為何可能不同</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第十二週</span>
+          <time class="week-date" datetime="2026-11-26">11 月 26 日</time>
+          <span class="tag">含 R 實習 6</span>
+        </div>
+        <div>
+          <h3>分析二元結果並選擇風險或勝算的表達方式</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第十三週</span>
+          <time class="week-date" datetime="2026-12-03">12 月 3 日</time>
+        </div>
+        <div>
+          <h3>分析事件次數與發生率</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第十四週</span>
+          <time class="week-date" datetime="2026-12-10">12 月 10 日</time>
+          <span class="tag">含 R 實習 7</span>
+        </div>
+        <div>
+          <h3>處理同一人多次觀察或群聚資料</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="week-num">第十五週</span>
+          <time class="week-date" datetime="2026-12-17">12 月 17 日</time>
+          <span class="tag">含 R 實習 8</span>
+        </div>
+        <div>
+          <h3>解讀追蹤時間資料並整合完整分析流程</h3>
+          <p class="status">尚未發布</p>
+        </div>
+      </li>
+      <li class="exam">
+        <div>
+          <span class="week-num">第十六週</span>
+          <time class="week-date" datetime="2026-12-24">12 月 24 日</time>
+        </div>
+        <div>
+          <h3>期末考：第 9–15 週</h3>
+          <p class="status">考試週，無課堂投影片</p>
+        </div>
+      </li>
+    </ol>
   </section>
-  <section aria-labelledby="reading">
-    <h2 id="reading">課後閱讀</h2>
-    <ul>
-      <li><a href="https://openintro-ims.netlify.app/data-hello">IMS 2e：Hello data</a></li>
-      <li><a href="https://openintro-ims.netlify.app/data-design">IMS 2e：Study design</a></li>
-      <li><a href="https://openintro-ims.netlify.app/data-applications">IMS 2e：Applications: Data</a></li>
-      <li><a href="https://openintrostat.github.io/ims-tutorials/01-data/">IMS Tutorial 1：Introduction to data</a></li>
-    </ul>
-  </section>
+
+  <p class="notice">投影片可直接在瀏覽器閱讀；使用方向鍵或右下角按鈕前進，答案會逐步顯示。手機建議橫向閱讀。</p>
+
   <footer>
     <p><strong>教材來源與改編</strong><br>
     統計教材改編自 Mine Çetinkaya-Rundel 與 Johanna Hardin 著作的 <a href="https://openintro-ims.netlify.app/">Introduction to Modern Statistics, Second Edition</a>（OpenIntro）。改編包含繁體中文整理、教學分頁、表格重排、部分圖示中文化及自編練習；各頁保留章節、圖號及補充來源。IMS 改編內容依原書 <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a> 分享。</p>
