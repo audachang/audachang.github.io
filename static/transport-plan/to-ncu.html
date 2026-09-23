@@ -35,11 +35,11 @@
 
     <h3>高鐵路線 <span class="tag hsr">公車 → 萬華 → 板橋 → 桃園 → 173</span></h3>
     <div class="table-wrap"><table class="hsr-route" id="t-out-hsr"></table></div>
-    <p class="muted">173 平日只有 08:05、09:20、10:30、11:40、15:00、16:10、17:30 七班，11:40 到 15:00 之間與 17:30 之後沒有車，這些時段只能從高鐵站搭計程車或改走台鐵路線。</p>
+    <p class="muted">173 平日班次少（見下方公車班表），中午與傍晚有長空檔，這些時段只能從高鐵站搭計程車或改走台鐵路線。</p>
 
     <h3>台鐵路線 <span class="tag tra">公車 → 萬華 → 中壢 → 132/133</span></h3>
     <div class="table-wrap"><table class="tra-route" id="t-out-tra"></table></div>
-    <p class="muted">133 平日末班 15:30，之後只剩 132（16:00、16:30、17:00、18:00、19:00）。133A 經捷運老街溪站，繞較遠，沒有列入推算。</p>
+    <p class="muted">133 平日下午就收班，傍晚只剩 132（見下方公車班表）。133A 經捷運老街溪站，繞較遠，沒有列入推算。</p>
 
     <h3>哪條可以比較晚出門</h3>
     <div class="table-wrap"><table class="compact" id="t-cmp"></table></div>
@@ -57,22 +57,11 @@
     <p class="muted">往萬華：萬大國小站（萬大路北行，距光仁約 190 公尺）上車，萬華車站（康定路）下車，5 站約 6 分鐘，走到台鐵北側入口約 180 公尺。往光仁：萬華車站（康定路，台鐵入口北側約 220 公尺）上車，萬大國小站（南行）下車。205 只有往萬華方向可搭；藍29 雖停光仁國小站，但繞經青年公園，約 23 分鐘。班距是臺北市公車動態 pda5284 公告值，車程是 9/23 中午的兩次抽樣。直接走路約 1.5 公里、20 分鐘。</p>
 
     <h3>173 高鐵桃園站 ⇄ 中央大學</h3>
-    <div class="table-wrap"><table class="bus-tt compact"><tbody>
-      <tr><td>平日 高鐵站發</td><td>08:05、09:20、10:30、11:40、15:00、16:10、17:30</td></tr>
-      <tr><td>平日 中大發</td><td>07:25、08:45、10:00、11:10、14:30、15:40、16:50</td></tr>
-      <tr><td>假日 高鐵站發</td><td>13:20、14:35、15:40、17:00</td></tr>
-      <tr><td>假日 中大發</td><td>12:45、14:00、15:10、16:20</td></tr>
-    </tbody></table></div>
-    <p class="muted">172 平日只剩中大 18:00 發、高鐵站 18:30 發一對班次。172B（中原大學–高鐵桃園站–中央大學，115/09/01 起）平日中原發 07:00、09:20、11:40、13:00、15:10、17:40，經高鐵站的時刻未公告，要看站牌即時動態。</p>
+    <div class="table-wrap"><table class="bus-tt compact"><tbody id="bus-173"></tbody></table></div>
+    <p class="muted">172B（中原大學–高鐵桃園站–中央大學，115/09/01 起）經高鐵站的時刻未公告，要看站牌即時動態，沒有列入推算。</p>
 
     <h3>132 / 133 / 133A 中壢 → 中央大學</h3>
-    <div class="table-wrap"><table class="bus-tt compact"><tbody>
-      <tr><td>132 平日</td><td>07:00、07:30、08:00、09:00、10:00、11:00、12:00、13:00、14:00、15:00、16:00、16:30、17:00、18:00、19:00、20:20、21:40</td></tr>
-      <tr><td>132 假日</td><td>07:00、08:00、09:00、10:00、11:00、12:00、13:00、14:00、15:00、16:00、17:00、18:00、19:00、19:40、20:20、21:40</td></tr>
-      <tr><td>133 平日</td><td>07:45、08:15、08:45、09:15、09:45、10:30、11:35、12:40、13:30、14:30、15:30</td></tr>
-      <tr><td>133 假日、寒暑假</td><td>07:40、08:40、09:40、10:40、15:40、16:40</td></tr>
-      <tr><td>133A 平日</td><td>08:30、16:25、16:45、17:30（經捷運老街溪站）</td></tr>
-    </tbody></table></div>
+    <div class="table-wrap"><table class="bus-tt compact"><tbody id="bus-zl"></tbody></table></div>
     <p class="muted">132 從中壢公車站（桃園客運）發車，133、133A 從中壢客運中壢總站（建國路 100 號）發車，兩處不同。車程一般 15 到 25 分鐘，塞車可能到 30 到 50 分鐘。</p>
   </section>
 
@@ -93,8 +82,8 @@
   </section>
 
   <footer>
-    <p>資料來源：桃園公車動態資訊系統（ebus.tycg.gov.tw，2026-09-23 平日、09-26 假日班表）、中壢客運 133 時刻表（115/02/23 起）、臺北市公車動態 pda5284（重慶幹線、62）、高鐵官網時刻查詢（2026/2/2 起適用時刻表，查詢日 2026-09-24，已排除中秋加開班次）、台鐵官網時刻查詢（2026-09-24）。到校時間為推估，實際以各業者公告與即時動態為準。</p>
-    <p>整理日期 2026-09-23。</p>
+    <p>資料來源：桃園公車動態資訊系統（ebus.tycg.gov.tw）、中壢客運 133 時刻表（115/02/23 起）、臺北市公車動態 pda5284（重慶幹線、62）、高鐵官網時刻查詢（連續兩週查詢，排除少於 3 天的加開班次）、台鐵官網時刻查詢。到校時間為推估，實際以各業者公告與即時動態為準。</p>
+    <p data-updated></p><p>時刻表每週一由 GitHub Actions 自動向各官方來源更新。</p>
   </footer>
 </main>
 
@@ -105,6 +94,16 @@
   var m = CM.m;
   CM.table("out-hsr", document.getElementById("t-out-hsr"));
   CM.table("out-tra", document.getElementById("t-out-tra"));
+  var BB = TT.BUS;
+  document.getElementById("bus-173").innerHTML = CM.busRows([
+    ["173 平日 高鐵站發", BB.b173_to.weekday], ["173 平日 中大發", BB.b173_from.weekday],
+    ["173 假日 高鐵站發", BB.b173_to.holiday], ["173 假日 中大發", BB.b173_from.holiday],
+    ["172 平日 高鐵站發", BB.b172_to.weekday], ["172 平日 中大發", BB.b172_from.weekday]]);
+  document.getElementById("bus-zl").innerHTML = CM.busRows([
+    ["132 平日", BB.b132.weekday], ["132 假日", BB.b132.holiday],
+    ["133 平日", BB.b133.weekday], ["133 假日、寒暑假", BB.b133.holiday],
+    ["133A 平日", BB.b133A.weekday, "（經捷運老街溪站）"]]);
+  CM.stamp();
 
   document.getElementById("t-cmp").innerHTML = "<thead><tr><th>目標到校</th><th>高鐵路線出門</th><th>台鐵路線出門</th><th>較晚出門</th></tr></thead><tbody>" +
     CM.HOURS.map(function (T) {

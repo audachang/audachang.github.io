@@ -35,7 +35,7 @@
 
     <h3>高鐵路線 <span class="tag hsr">173/172 → 桃園 → 板橋 → 萬華 → 公車</span></h3>
     <div class="table-wrap"><table class="hsr-route" id="t-back-hsr"></table></div>
-    <p class="muted">中大往高鐵站平日只有 173 的 07:25、08:45、10:00、11:10、14:30、15:40、16:50，加上 172 的 18:00。錯過一班多半要等 70 分鐘以上，11:10 到 14:30 之間沒有車。</p>
+    <p class="muted">中大往高鐵站平日只有 173 與傍晚一班 172（見下方公車班表），錯過一班多半要等 70 分鐘以上，中午有長空檔。</p>
 
     <h3>台鐵路線 <span class="tag tra">132/133 → 中壢 → 萬華 → 公車</span></h3>
     <div class="table-wrap"><table class="tra-route" id="t-back-tra"></table></div>
@@ -57,11 +57,7 @@
     <p class="muted">往萬華：萬大國小站（萬大路北行，距光仁約 190 公尺）上車，萬華車站（康定路）下車，5 站約 6 分鐘，走到台鐵北側入口約 180 公尺。往光仁：萬華車站（康定路，台鐵入口北側約 220 公尺）上車，萬大國小站（南行）下車。205 只有往萬華方向可搭；藍29 雖停光仁國小站，但繞經青年公園，約 23 分鐘。班距是臺北市公車動態 pda5284 公告值，車程是 9/23 中午的兩次抽樣。直接走路約 1.5 公里、20 分鐘。</p>
 
     <h3>173 / 172 中央大學 → 高鐵桃園站</h3>
-    <div class="table-wrap"><table class="bus-tt compact"><tbody>
-      <tr><td>173 平日 中大發</td><td>07:25、08:45、10:00、11:10、14:30、15:40、16:50</td></tr>
-      <tr><td>173 假日 中大發</td><td>12:45、14:00、15:10、16:20</td></tr>
-      <tr><td>172 平日 中大發</td><td>18:00（假日停駛）</td></tr>
-    </tbody></table></div>
+    <div class="table-wrap"><table class="bus-tt compact"><tbody id="bus-173"></tbody></table></div>
     <p class="muted">173、172 從中央大學警衛室發車，依序經中大湖、依仁堂、後門、觀景台、正門。172B（中原大學–高鐵桃園站–中央大學–高鐵桃園站–中原大學）也經中大往高鐵站，但經中大的時刻未公告，沒有列入推算。</p>
 
     <h3>132 / 133 / 133A 中央大學 → 中壢（推估）</h3>
@@ -79,7 +75,7 @@
       </div>
       <div class="card">
         <h3>台鐵 中壢北上</h3>
-        <p class="muted">中壢發 → 板橋到 → 萬華到，只列有停萬華的班次。</p>
+        <p class="muted">中壢發 → 板橋開 → 萬華到，只列有停萬華的班次。</p>
         <div class="table-wrap"><table class="compact tra-route"><tbody id="tra-list"></tbody></table></div>
       </div>
     </div>
@@ -90,8 +86,8 @@
   </section>
 
   <footer>
-    <p>資料來源：桃園公車動態資訊系統（ebus.tycg.gov.tw，2026-09-23 平日、09-26 假日班表與到站預測）、中壢客運 133 時刻表（115/02/23 起）、臺北市公車動態 pda5284（重慶幹線、62）、高鐵官網時刻查詢（2026/2/2 起適用時刻表，查詢日 2026-09-24，已排除中秋加開班次）、台鐵官網時刻查詢（2026-09-24）。抵達時間為推估，實際以各業者公告與即時動態為準。</p>
-    <p>整理日期 2026-09-23。</p>
+    <p>資料來源：桃園公車動態資訊系統（ebus.tycg.gov.tw，班表與到站預測）、中壢客運 133 時刻表（115/02/23 起）、臺北市公車動態 pda5284（重慶幹線、62）、高鐵官網時刻查詢（連續兩週查詢，排除少於 3 天的加開班次）、台鐵官網時刻查詢。抵達時間為推估，實際以各業者公告與即時動態為準。</p>
+    <p data-updated></p><p>時刻表每週一由 GitHub Actions 自動向各官方來源更新。</p>
   </footer>
 </main>
 
@@ -102,6 +98,10 @@
   var m = CM.m, B = TT.BUS, OFF = CM.P.loop;
   CM.table("back-hsr", document.getElementById("t-back-hsr"));
   CM.table("back-tra", document.getElementById("t-back-tra"));
+  document.getElementById("bus-173").innerHTML = CM.busRows([
+    ["173 平日 中大發", B.b173_from.weekday], ["173 假日 中大發", B.b173_from.holiday],
+    ["172 平日 中大發", B.b172_from.weekday], ["172 假日 中大發", B.b172_from.holiday]]);
+  CM.stamp();
 
   document.getElementById("t-cmp").innerHTML = "<thead><tr><th>目標抵達光仁</th><th>高鐵路線中大上車</th><th>台鐵路線中大上車</th><th>較晚離開</th></tr></thead><tbody>" +
     CM.HOURS.map(function (T) {

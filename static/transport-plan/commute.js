@@ -137,9 +137,27 @@ var CM = (function () {
   };
   var SLACK_WARN = 45;
 
+  var WD = "日一二三四五六";
   function daysLabel(d) {
-    return { "0123456": "", "123456": "週日停駛", "12345": "僅週一至五", "012345": "週六停駛",
-             "01456": "僅週四至一", "46": "僅週四、六", "045": "僅週四、五、日" }[d] || d;
+    if (d.length === 7) return "";
+    if (d === "12345") return "僅週一至五";
+    var off = "0123456".split("").filter(function (x) { return d.indexOf(x) < 0; });
+    if (off.length <= 2) return "週" + off.map(function (x) { return WD[x]; }).join("、") + "停駛";
+    return "僅週" + d.split("").map(function (x) { return WD[x]; }).join("、");
+  }
+
+  // Fill <tbody data-bus="key:dayType,key:dayType"> style tables and [data-updated] stamps
+  function busRows(rows) {
+    return rows.map(function (r) {
+      var xs = r[1];
+      return "<tr><td>" + r[0] + "</td><td>" + (xs && xs.length ? xs.join("、") : "停駛") + (r[2] || "") + "</td></tr>";
+    }).join("");
+  }
+  function stamp() {
+    var M = TT.meta || {};
+    [].forEach.call(document.querySelectorAll("[data-updated]"), function (el) {
+      el.textContent = "資料更新 " + (M.updated || "—") + "（高鐵 " + (M.thsr || "—") + "、台鐵 " + (M.tra || "—") + "、桃園公車 " + (M.bus || "—") + " 班表）";
+    });
   }
 
   function table(key, el) {
@@ -168,5 +186,5 @@ var CM = (function () {
   }
 
   return { P: P, HOURS: HOURS, ROUTES: ROUTES, plan: plan, m: m, hm: hm, runs: runs, legText: legText,
-           table: table, daysLabel: daysLabel, SLACK_WARN: SLACK_WARN, BUS_FROM_NCU_ZL: BUS_FROM_NCU_ZL };
+           table: table, daysLabel: daysLabel, busRows: busRows, stamp: stamp, SLACK_WARN: SLACK_WARN, BUS_FROM_NCU_ZL: BUS_FROM_NCU_ZL };
 })();
