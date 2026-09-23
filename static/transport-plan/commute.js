@@ -155,6 +155,9 @@ var CM = (function () {
   }
   function stamp() {
     var M = TT.meta || {};
+    [].forEach.call(document.querySelectorAll("[data-checked]"), function (el) {
+      el.textContent = "時刻表最後檢查 " + (M.checked || M.updated || "—") + "・內容更新 " + (M.updated || "—") + "（每週一自動向官方來源檢查）";
+    });
     [].forEach.call(document.querySelectorAll("[data-updated]"), function (el) {
       el.textContent = "資料更新 " + (M.updated || "—") + "（高鐵 " + (M.thsr || "—") + "、台鐵 " + (M.tra || "—") + "、桃園公車 " + (M.bus || "—") + " 班表）";
     });
