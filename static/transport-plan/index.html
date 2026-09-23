@@ -3,27 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>萬華 ⇄ 中央大學 通勤規劃</title>
-  <meta name="description" content="萬華與中央大學之間的通勤規劃：選路線與想抵達的整點，推算出門或上車時間與各段班次。">
+  <title>光仁 ⇄ 中央大學 通勤規劃</title>
+  <meta name="description" content="萬華光仁小學一帶與中央大學之間的通勤規劃：選路線與想抵達的整點，推算出門或上車時間與各段班次。">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main>
   <header class="masthead">
-    <h1>萬華 ⇄ 中央大學</h1>
+    <h1>光仁小學 ⇄ 中央大學</h1>
     <p>選路線與想抵達的時刻，推算最晚該出發的時間與每段班次。平日（學期中）班表。</p>
   </header>
 
   <div class="picker">
     <label>路線
       <select id="route">
-        <optgroup label="去程　萬華住處 → 中大">
-          <option value="out-hsr">去程・高鐵（板橋 → 高鐵桃園 → 173）</option>
-          <option value="out-tra">去程・台鐵（萬華 → 中壢 → 132/133）</option>
+        <optgroup label="去程　光仁 → 中大">
+          <option value="out-hsr">去程・高鐵（公車 → 萬華 → 板橋 → 高鐵桃園 → 173）</option>
+          <option value="out-tra">去程・台鐵（公車 → 萬華 → 中壢 → 132/133）</option>
         </optgroup>
-        <optgroup label="回程　中大 → 萬華火車站">
-          <option value="back-hsr">回程・高鐵（173/172 → 高鐵桃園 → 板橋）</option>
-          <option value="back-tra">回程・台鐵（132/133 → 中壢 → 萬華）</option>
+        <optgroup label="回程　中大 → 光仁">
+          <option value="back-hsr">回程・高鐵（173/172 → 高鐵桃園 → 板橋 → 萬華 → 公車）</option>
+          <option value="back-tra">回程・台鐵（132/133 → 中壢 → 萬華 → 公車）</option>
         </optgroup>
       </select>
     </label>
@@ -38,19 +38,19 @@
     <h2>完整班表與說明</h2>
     <div class="two-col">
       <a class="card" href="to-ncu.html">
-        <h3>去程：萬華 → 中央大學</h3>
+        <h3>去程：光仁 → 中央大學</h3>
         <p class="line muted">08:00 到 20:00 每個整點的兩條路線、公車班表、台鐵高鐵南下班次、下一班看板。</p>
       </a>
       <a class="card" href="to-wanhua.html">
-        <h3>回程：中央大學 → 萬華火車站</h3>
+        <h3>回程：中央大學 → 光仁</h3>
         <p class="line muted">08:00 到 20:00 每個整點的兩條路線、中大發車班表、台鐵高鐵北上班次、下一班看板。</p>
       </a>
     </div>
   </section>
 
   <footer>
-    <p>推算假設：出門到萬華上車 26 分鐘；板橋台鐵⇄高鐵、桃園高鐵⇄公車各留 10 分鐘以上；公車車程 20 分鐘；中壢火車站⇄公車站步行 10 分鐘。回程 132/133/133A 的中大發車時間沒有公告，以中壢發車時間加 23 到 24 分鐘推估。</p>
-    <p>資料來源：高鐵官網時刻查詢、台鐵官網時刻查詢（2026-09-24 班表）、桃園公車動態資訊系統（2026-09-23 平日、09-26 假日）、中壢客運 133 時刻表（115/02/23 起）。整理日期 2026-09-23。</p>
+    <p>推算假設：光仁小學走到萬大國小站約 3 分鐘，搭重慶幹線或 62 到萬華車站（5 站）車程抓 8 分鐘，下車走到台鐵萬華站約 3 分鐘；公車等候以剛好錯過一班估算：尖峰（07–09、17–19:30）6 分、離峰 10 分、20:00 後 20 分；板橋台鐵⇄高鐵、桃園高鐵⇄公車各留 10 分鐘以上；173、132/133 車程 20 分鐘；中壢火車站⇄公車站步行 10 分鐘。回程 132/133/133A 的中大發車時間沒有公告，以中壢發車時間加 23 到 24 分鐘推估。</p>
+    <p>資料來源：高鐵官網時刻查詢、台鐵官網時刻查詢（2026-09-24 班表）、桃園公車動態資訊系統（2026-09-23 平日、09-26 假日）、中壢客運 133 時刻表（115/02/23 起）、臺北市公車動態 pda5284（重慶幹線、62 班距）。整理日期 2026-09-23。</p>
   </footer>
 </main>
 
@@ -63,29 +63,38 @@
   hourSel.innerHTML = CM.HOURS.map(function (T) { return '<option value="' + T + '">' + CM.hm(T) + "</option>"; }).join("");
 
   // Restore from hash (#route/HHMM), else default to the next full hour within range
-  var h = location.hash.slice(1).split("/");
-  if (CM.ROUTES[h[0]]) routeSel.value = h[0];
-  var T0 = h[1] ? CM.m(h[1].slice(0, 2) + ":" + h[1].slice(2)) : (new Date().getHours() + 1) * 60;
-  hourSel.value = String(Math.min(Math.max(T0, CM.HOURS[0]), CM.HOURS[CM.HOURS.length - 1]));
+  function fromHash() {
+    var h = location.hash.slice(1).split("/");
+    if (CM.ROUTES[h[0]]) routeSel.value = h[0];
+    var T0 = /^\d{4}$/.test(h[1] || "") ? CM.m(h[1].slice(0, 2) + ":" + h[1].slice(2)) : (new Date().getHours() + 1) * 60;
+    hourSel.value = String(Math.min(Math.max(T0, CM.HOURS[0]), CM.HOURS[CM.HOURS.length - 1]));
+  }
+  fromHash();
 
-  var MODE = { tra: "台鐵", hsr: "高鐵", bus: "公車" };
+  var MODE = { tra: "台鐵", hsr: "高鐵", bus: "公車", city: "公車" };
 
   function steps(key, p) {
     var r = CM.ROUTES[key], items = [];
-    if (r.dir === "out") items.push('<li><span class="t">' + CM.hm(p.start) + "</span>出門<span class=\"d\">步行到萬華站約 " + CM.P.home + " 分鐘</span></li>");
+    if (r.dir === "out") items.push('<li><span class="t">' + CM.hm(p.start) + "</span>出門<span class=\"d\">走到萬大國小站（萬大路北行）約 " + CM.P.city.walkHome + " 分鐘</span></li>");
     p.legs.forEach(function (l, i) {
-      var head = l.mode === "bus" ? l.no + " 公車" : MODE[l.mode] + " " + l.no + " 次";
+      var head = l.mode === "bus" || l.mode === "city" ? l.no + " 公車" : MODE[l.mode] + " " + l.no + " 次";
+      if (l.mode === "city") {
+        items.push('<li class="bus"><span class="t">' + l.dep + "</span>" + head + '<span class="d">' + l.from + " → " + l.to + "（5 站，約 " + CM.P.city.ride + " 分）。" +
+          (l.from === "萬大國小" ? "這是最晚上車時間，已預留等車最多 " + l.hw + " 分；下車後走 3 分鐘進台鐵站" : "台鐵下車後走 3 分鐘到康定路站牌，最多等 " + l.hw + " 分；在萬大國小下車後走 4 分鐘回光仁") +
+          "。趕不上公車時，萬華站與光仁之間步行約 20 分鐘。</span></li>");
+        return;
+      }
       var d = l.from + " " + l.dep + (l.est === "dep" ? "（估）" : "") + " → " + l.to + " " + l.arr + (l.mode === "bus" ? "（估）" : "");
       if (l.origin) d += "；中壢 " + l.origin + " 發車，到中大的時間依系統預測推估，請提早到站";
       items.push('<li class="' + l.mode + '"><span class="t">' + l.dep + "</span>" + head + '<span class="d">' + d + "</span></li>");
     });
-    items.push('<li><span class="t">' + CM.hm(p.arrive) + "</span>" + (r.dir === "out" ? "到校" : "抵達萬華火車站") + "</li>");
+    items.push('<li><span class="t">' + CM.hm(p.arrive) + "</span>" + (r.dir === "out" ? "到校" : "回到光仁小學") + "</li>");
     return '<ol class="steps">' + items.join("") + "</ol>";
   }
 
   function render() {
     var key = routeSel.value, T = +hourSel.value, r = CM.ROUTES[key];
-    document.getElementById("target-label").textContent = r.dir === "out" ? "目標到校" : "目標抵達萬華";
+    document.getElementById("target-label").textContent = r.dir === "out" ? "目標到校" : "目標抵達光仁";
     history.replaceState(null, "", "#" + key + "/" + CM.hm(T).replace(":", ""));
     var res = CM.plan(key, T), p = res.main;
     if (!p) {
@@ -111,6 +120,7 @@
     document.getElementById("swap").onclick = function (e) { e.preventDefault(); routeSel.value = otherKey; render(); };
   }
   routeSel.onchange = hourSel.onchange = render;
+  window.addEventListener("hashchange", function () { fromHash(); render(); });
   render();
 })();
 </script>

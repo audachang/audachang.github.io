@@ -1,7 +1,8 @@
 // Commute planner: 萬華 ⇄ 中央大學. Requires data.js (var TT) loaded first.
 var CM = (function () {
   var P = {
-    home: 26,      // 出門 → 萬華站上車
+    // 光仁小學 ⇄ 萬華車站：萬大國小站 重慶幹線/62，5 站
+    city: { walkHome: 3, ride: 8, walkStn: 3, walkHomeBack: 4 },
     xfer: 10,      // 板橋 台鐵⇄高鐵、桃園 高鐵⇄公車 轉乘
     ride: 20,      // 公車車程（173 中大⇄高鐵站、132/133 中壢⇄中大）
     zlWalk: 10,    // 中壢 火車站⇄公車站
@@ -32,6 +33,21 @@ var CM = (function () {
   var HSR_S = TT.HSR_S.filter(function (r) { return weekdayOnly(r[3]); });
   var HSR_N = TT.HSR_N.filter(function (r) { return weekdayOnly(r[3]); });
 
+  // 重慶幹線 worst-case wait by time of day (pda5284: peak 4-6, off-peak 5-10, after 20:00 15-20)
+  function hw(x) { return (x >= 420 && x < 540) || (x >= 1020 && x < 1170) ? 6 : x >= 1200 ? 20 : 10; }
+  // 去程：趕上 traDep 台鐵要幾點出門（假設剛好錯過一班公車）
+  function cityOut(traDep) {
+    var C = P.city, board = m(traDep) - C.walkStn - C.ride, h = hw(board);
+    return { start: board - h - C.walkHome,
+             leg: { mode: "city", from: "萬大國小", to: "萬華車站", dep: hm(board), arr: hm(board + C.ride), no: "重慶幹線/62", hw: h } };
+  }
+  // 回程：whArr 到萬華後，最晚幾點回到光仁
+  function cityBack(whArr) {
+    var C = P.city, stop = m(whArr) + C.walkStn, h = hw(stop), dep = stop + h;
+    return { arrive: dep + C.ride + C.walkHomeBack,
+             leg: { mode: "city", from: "萬華車站", to: "萬大國小", dep: hm(dep), arr: hm(dep + C.ride), no: "重慶幹線/62", hw: h } };
+  }
+
   function first(rows, pred) { for (var i = 0; i < rows.length; i++) if (pred(rows[i])) return rows[i]; return null; }
 
   // Each route: candidates (first-leg departures) + fwd(candidate) → earliest-arrival chain.
@@ -39,14 +55,15 @@ var CM = (function () {
   // Plan: {start, arrive, legs:[{mode, from, to, dep, arr, no, est}]}
   var ROUTES = {
     "out-hsr": {
-      dir: "out", name: "去程・高鐵", sub: "萬華 → 板橋 → 高鐵桃園 → 173", startLabel: "出門", arriveLabel: "預估到校",
+      dir: "out", name: "去程・高鐵", sub: "光仁 → 萬華 → 板橋 → 高鐵桃園 → 173", startLabel: "出門", arriveLabel: "預估到校",
       cands: TT.TRA_S,
       fwd: function (t) {
         var h = first(HSR_S, function (r) { return m(r[0]) >= m(t[1]) + P.xfer; });
         if (!h) return null;
         var bus = first(TT.BUS.b173_to.weekday, function (x) { return m(x) >= m(h[1]) + P.xfer; });
         if (!bus) return null;
-        return { start: m(t[0]) - P.home, arrive: m(bus) + P.ride, legs: [
+        var c = cityOut(t[0]);
+        return { start: c.start, arrive: m(bus) + P.ride, legs: [c.leg,
           { mode: "tra", from: "萬華", to: "板橋", dep: t[0], arr: t[1], no: t[3] },
           { mode: "hsr", from: "板橋", to: "桃園", dep: h[0], arr: h[1], no: h[2] },
           { mode: "bus", from: "高鐵桃園站", to: "中大", dep: bus, arr: hm(m(bus) + P.ride), no: "173", est: "arr" }
@@ -54,41 +71,44 @@ var CM = (function () {
       }
     },
     "out-tra": {
-      dir: "out", name: "去程・台鐵", sub: "萬華 → 中壢 → 132/133", startLabel: "出門", arriveLabel: "預估到校",
+      dir: "out", name: "去程・台鐵", sub: "光仁 → 萬華 → 中壢 → 132/133", startLabel: "出門", arriveLabel: "預估到校",
       cands: TT.TRA_S.filter(function (r) { return r[2]; }),
       fwd: function (t) {
         var bus = first(BUS_TO_NCU, function (x) { return m(x[0]) >= m(t[2]) + P.zlWalk; });
         if (!bus) return null;
-        return { start: m(t[0]) - P.home, arrive: m(bus[0]) + P.ride, legs: [
+        var c = cityOut(t[0]);
+        return { start: c.start, arrive: m(bus[0]) + P.ride, legs: [c.leg,
           { mode: "tra", from: "萬華", to: "中壢", dep: t[0], arr: t[2], no: t[3] },
           { mode: "bus", from: "中壢", to: "中大", dep: bus[0], arr: hm(m(bus[0]) + P.ride), no: bus[1], est: "arr" }
         ] };
       }
     },
     "back-hsr": {
-      dir: "back", name: "回程・高鐵", sub: "173/172 → 高鐵桃園 → 板橋 → 萬華", startLabel: "中大上車", arriveLabel: "抵達萬華",
+      dir: "back", name: "回程・高鐵", sub: "173/172 → 高鐵桃園 → 板橋 → 萬華 → 光仁", startLabel: "中大上車", arriveLabel: "抵達光仁",
       cands: BUS_FROM_NCU_HSR,
       fwd: function (bus) {
         var h = first(HSR_N, function (r) { return m(r[0]) >= m(bus[0]) + P.ride + P.xfer; });
         if (!h) return null;
         var t = first(TT.TRA_NB, function (r) { return m(r[0]) >= m(h[1]) + P.xfer; });
         if (!t) return null;
-        return { start: m(bus[0]), arrive: m(t[1]), legs: [
+        var c = cityBack(t[1]);
+        return { start: m(bus[0]), arrive: c.arrive, legs: [
           { mode: "bus", from: "中大警衛室", to: "高鐵桃園站", dep: bus[0], arr: hm(m(bus[0]) + P.ride), no: bus[1], est: "arr" },
           { mode: "hsr", from: "桃園", to: "板橋", dep: h[0], arr: h[1], no: h[2] },
-          { mode: "tra", from: "板橋", to: "萬華", dep: t[0], arr: t[1], no: t[2] }
+          { mode: "tra", from: "板橋", to: "萬華", dep: t[0], arr: t[1], no: t[2] }, c.leg
         ] };
       }
     },
     "back-tra": {
-      dir: "back", name: "回程・台鐵", sub: "132/133 → 中壢 → 萬華", startLabel: "中大上車", arriveLabel: "抵達萬華",
+      dir: "back", name: "回程・台鐵", sub: "132/133 → 中壢 → 萬華 → 光仁", startLabel: "中大上車", arriveLabel: "抵達光仁",
       cands: BUS_FROM_NCU_ZL,
       fwd: function (bus) {
         var t = first(TT.TRA_NZ, function (r) { return m(r[0]) >= m(bus[0]) + P.ride + P.zlWalk; });
         if (!t) return null;
-        return { start: m(bus[0]), arrive: m(t[2]), legs: [
+        var c = cityBack(t[2]);
+        return { start: m(bus[0]), arrive: c.arrive, legs: [
           { mode: "bus", from: "中大正門", to: "中壢", dep: bus[0], arr: hm(m(bus[0]) + P.ride), no: bus[1], est: "dep", origin: bus[2] },
-          { mode: "tra", from: "中壢", to: "萬華", dep: t[0], arr: t[2], no: t[3] }
+          { mode: "tra", from: "中壢", to: "萬華", dep: t[0], arr: t[2], no: t[3] }, c.leg
         ] };
       }
     }
@@ -110,10 +130,10 @@ var CM = (function () {
 
   // Table column headers per route (legs in order); back routes' first leg doubles as the start
   var COLS = {
-    "out-hsr": ["台鐵 萬華→板橋", "高鐵 板橋→桃園", "173 高鐵站發"],
-    "out-tra": ["台鐵 萬華→中壢", "公車 中壢發"],
-    "back-hsr": ["中大上車（警衛室）", "高鐵 桃園→板橋", "台鐵 板橋→萬華"],
-    "back-tra": ["中大上車（正門，估）", "台鐵 中壢→萬華"]
+    "out-hsr": ["公車 萬大國小→萬華", "台鐵 萬華→板橋", "高鐵 板橋→桃園", "173 高鐵站發"],
+    "out-tra": ["公車 萬大國小→萬華", "台鐵 萬華→中壢", "公車 中壢發"],
+    "back-hsr": ["中大上車（警衛室）", "高鐵 桃園→板橋", "台鐵 板橋→萬華", "公車 萬華→萬大國小"],
+    "back-tra": ["中大上車（正門，估）", "台鐵 中壢→萬華", "公車 萬華→萬大國小"]
   };
   var SLACK_WARN = 45;
 
@@ -124,7 +144,7 @@ var CM = (function () {
 
   function table(key, el) {
     var r = ROUTES[key], back = r.dir === "back";
-    var head = "<tr><th>" + (back ? "目標抵達萬華" : "目標到校") + "</th>" + (back ? "" : "<th>出門</th>") +
+    var head = "<tr><th>" + (back ? "目標抵達光仁" : "目標到校") + "</th>" + (back ? "" : "<th>出門</th>") +
       COLS[key].map(function (c) { return "<th>" + c + "</th>"; }).join("") +
       "<th>" + r.arriveLabel + "</th><th>餘裕</th></tr>";
     var rows = HOURS.map(function (T) {
@@ -143,6 +163,7 @@ var CM = (function () {
   function legText(l) {
     var s = l.dep + " → " + l.arr;
     if (l.mode === "bus") s = l.no + "　" + l.dep + (l.est === "dep" ? "（估）" : "");
+    if (l.mode === "city") s = (l.from === "萬大國小" ? "最晚 " + l.dep + " 上車" : l.dep + " 前上車") + "（班距 ≤" + l.hw + "）";
     return s;
   }
 

@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>中央大學 → 萬華 回程時刻</title>
-  <meta name="description" content="中央大學回萬華火車站的兩條大眾運輸路線（高鐵、台鐵）班次，與 08:00 到 20:00 每個整點抵達萬華的規劃。">
+  <title>中央大學 → 光仁 回程時刻</title>
+  <meta name="description" content="中央大學回萬華光仁小學一帶的兩條大眾運輸路線（高鐵、台鐵轉公車）班次，與 08:00 到 20:00 每個整點抵達的規劃。">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main>
-  <nav class="crumbs"><a href="./">← 規劃選單</a><a href="to-ncu.html">去程：萬華 → 中大</a></nav>
+  <nav class="crumbs"><a href="./">← 規劃選單</a><a href="to-ncu.html">去程：光仁 → 中大</a></nav>
   <header class="masthead">
-    <h1>中央大學 → 萬華火車站</h1>
-    <p>回程兩條路線的班次與規劃，終點為台鐵萬華站。平日（學期中）班表；週末與寒暑假另列。</p>
+    <h1>中央大學 → 光仁小學</h1>
+    <p>回程兩條路線的班次與規劃：到台鐵萬華站後轉重慶幹線或 62 回光仁小學。平日（學期中）班表；週末與寒暑假另列。</p>
   </header>
 
   <div class="board" id="board">
@@ -30,14 +30,14 @@
   </div>
 
   <section>
-    <h2>依目標抵達萬華時間</h2>
-    <p class="muted">推算方式：對每個目標時刻，找出「最晚離開中大、仍能在目標前抵達萬華火車站」的班次組合。假設 173/172 中大到高鐵站約 20 分鐘，高鐵站下車後留 10 分鐘進站；高鐵板橋到站後轉台鐵留 10 分鐘；132/133 中大到中壢約 20 分鐘，下車後走到中壢火車站留 10 分鐘。黃底表示該時段班次少，會早到 45 分鐘以上。</p>
+    <h2>依目標抵達光仁時間</h2>
+    <p class="muted">推算方式：對每個目標時刻，找出「最晚離開中大、仍能在目標前回到光仁」的班次組合。假設 173/172 中大到高鐵站約 20 分鐘，高鐵站下車後留 10 分鐘進站；高鐵板橋到站後轉台鐵留 10 分鐘；132/133 中大到中壢約 20 分鐘，下車後走到中壢火車站留 10 分鐘；台鐵萬華站下車後走 3 分鐘到康定路站牌，搭重慶幹線或 62 到萬大國小站（車程抓 8 分鐘），再走 4 分鐘到光仁；等車以剛好錯過一班估算：尖峰（07–09、17–19:30）6 分、離峰 10 分、20:00 後 20 分。黃底表示該時段班次少，會早到 45 分鐘以上。</p>
 
-    <h3>高鐵路線 <span class="tag hsr">173/172 → 桃園 → 板橋 → 萬華</span></h3>
+    <h3>高鐵路線 <span class="tag hsr">173/172 → 桃園 → 板橋 → 萬華 → 公車</span></h3>
     <div class="table-wrap"><table class="hsr-route" id="t-back-hsr"></table></div>
     <p class="muted">中大往高鐵站平日只有 173 的 07:25、08:45、10:00、11:10、14:30、15:40、16:50，加上 172 的 18:00。錯過一班多半要等 70 分鐘以上，11:10 到 14:30 之間沒有車。</p>
 
-    <h3>台鐵路線 <span class="tag tra">132/133 → 中壢 → 萬華</span></h3>
+    <h3>台鐵路線 <span class="tag tra">132/133 → 中壢 → 萬華 → 公車</span></h3>
     <div class="table-wrap"><table class="tra-route" id="t-back-tra"></table></div>
     <p class="muted">132、133、133A 是從中壢發車、繞經中大再回中壢的循環線，官方只公告中壢端發車時刻。表中「中大上車」是用中壢發車時間加 23 分鐘（133A 加 24 分鐘）推估的正門回程時間，來源是桃園公車動態系統的到站預測，不是公告時刻；塞車時可能再晚 10 分鐘以上，建議提早到站牌並看即時動態。</p>
 
@@ -46,7 +46,15 @@
   </section>
 
   <section>
-    <h2>中大發車班表 <span class="tag bus">桃園公車動態</span></h2>
+    <h2>公車班表 <span class="tag bus">台北、桃園公車動態</span></h2>
+
+    <h3>重慶幹線 / 62 光仁（萬大國小站）⇄ 萬華車站</h3>
+    <div class="table-wrap"><table class="bus-tt compact"><tbody>
+      <tr><td>重慶幹線 平日</td><td>05:10–22:30；尖峰 4–6 分、離峰 5–10 分、20:00 後 15–20 分一班</td></tr>
+      <tr><td>62 平日</td><td>05:45–23:00；尖峰 8–12 分、離峰 15–20 分一班</td></tr>
+      <tr><td>假日</td><td>重慶幹線 15–20 分；62 尖峰 15 分、離峰 20 分</td></tr>
+    </tbody></table></div>
+    <p class="muted">往萬華：萬大國小站（萬大路北行，距光仁約 190 公尺）上車，萬華車站（康定路）下車，5 站約 6 分鐘，走到台鐵北側入口約 180 公尺。往光仁：萬華車站（康定路，台鐵入口北側約 220 公尺）上車，萬大國小站（南行）下車。205 只有往萬華方向可搭；藍29 雖停光仁國小站，但繞經青年公園，約 23 分鐘。班距是臺北市公車動態 pda5284 公告值，車程是 9/23 中午的兩次抽樣。直接走路約 1.5 公里、20 分鐘。</p>
 
     <h3>173 / 172 中央大學 → 高鐵桃園站</h3>
     <div class="table-wrap"><table class="bus-tt compact"><tbody>
@@ -82,7 +90,7 @@
   </section>
 
   <footer>
-    <p>資料來源：桃園公車動態資訊系統（ebus.tycg.gov.tw，2026-09-23 平日、09-26 假日班表與到站預測）、中壢客運 133 時刻表（115/02/23 起）、高鐵官網時刻查詢（2026/2/2 起適用時刻表，查詢日 2026-09-24，已排除中秋加開班次）、台鐵官網時刻查詢（2026-09-24）。抵達時間為推估，實際以各業者公告與即時動態為準。</p>
+    <p>資料來源：桃園公車動態資訊系統（ebus.tycg.gov.tw，2026-09-23 平日、09-26 假日班表與到站預測）、中壢客運 133 時刻表（115/02/23 起）、臺北市公車動態 pda5284（重慶幹線、62）、高鐵官網時刻查詢（2026/2/2 起適用時刻表，查詢日 2026-09-24，已排除中秋加開班次）、台鐵官網時刻查詢（2026-09-24）。抵達時間為推估，實際以各業者公告與即時動態為準。</p>
     <p>整理日期 2026-09-23。</p>
   </footer>
 </main>
@@ -95,7 +103,7 @@
   CM.table("back-hsr", document.getElementById("t-back-hsr"));
   CM.table("back-tra", document.getElementById("t-back-tra"));
 
-  document.getElementById("t-cmp").innerHTML = "<thead><tr><th>目標抵達萬華</th><th>高鐵路線中大上車</th><th>台鐵路線中大上車</th><th>較晚離開</th></tr></thead><tbody>" +
+  document.getElementById("t-cmp").innerHTML = "<thead><tr><th>目標抵達光仁</th><th>高鐵路線中大上車</th><th>台鐵路線中大上車</th><th>較晚離開</th></tr></thead><tbody>" +
     CM.HOURS.map(function (T) {
       var a = CM.plan("back-hsr", T).main, b = CM.plan("back-tra", T).main;
       var w = !a && !b ? "—" : !a ? "台鐵" : !b ? "高鐵" : a.start > b.start ? "高鐵（晚 " + (a.start - b.start) + " 分）" : b.start > a.start ? "台鐵（晚 " + (b.start - a.start) + " 分）" : "相同";
