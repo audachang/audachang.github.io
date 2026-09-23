@@ -3,297 +3,115 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>萬華 → 中央大學 通勤時刻</title>
-  <meta name="description" content="萬華住處往中央大學的兩條通勤路線（高鐵、台鐵）班次與依目標到校時間的規劃。">
-  <style>
-    :root {
-      --paper: #f1f4f6;
-      --board: #ffffff;
-      --ink: #14232e;
-      --ink-soft: #55656f;
-      --rule: #d3dbe1;
-      --hsr: #d9541c;
-      --hsr-soft: #fbe9df;
-      --tra: #1d5aa0;
-      --tra-soft: #e1ebf7;
-      --bus: #2a7448;
-      --bus-soft: #e0f0e6;
-      --now: #14232e;
-      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
-      font-variant-numeric: tabular-nums;
-      padding-top: env(safe-area-inset-top, 0px);
-      padding-bottom: env(safe-area-inset-bottom, 0px);
-      box-sizing: border-box;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-padding-top: env(safe-area-inset-top, 0px); }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      line-height: 1.6;
-      font-size: 16px;
-    }
-    a { color: var(--tra); }
-    main { width: min(760px, 100% - 2rem); margin: 0 auto; padding: 1.25rem 0 4rem; }
-
-    header.masthead { padding: 0.5rem 0 1rem; border-bottom: 2px solid var(--ink); }
-    header.masthead h1 { margin: 0; font-size: clamp(1.5rem, 5vw, 2.2rem); line-height: 1.2; font-weight: 700; }
-    header.masthead p { margin: 0.35rem 0 0; color: var(--ink-soft); font-size: 0.95rem; }
-
-    /* 下一班看板 */
-    .board {
-      margin: 1.25rem 0 0;
-      background: var(--now);
-      color: #f5f7f9;
-      border-radius: 10px;
-      padding: 1rem 1rem 0.75rem;
-    }
-    .board-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-    .board-head h2 { margin: 0; font-size: 1rem; font-weight: 600; color: #c9d3db; }
-    .board-head .clock { font-size: 1.9rem; font-weight: 700; letter-spacing: 0.02em; }
-    .board-head .daytype { font-size: 0.85rem; color: #c9d3db; margin-left: 0.5rem; }
-    .board ul { list-style: none; margin: 0.75rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
-    .board li {
-      display: grid; grid-template-columns: 6.5rem 1fr; gap: 0.75rem; align-items: baseline;
-      border-top: 1px solid rgba(255,255,255,0.14); padding-top: 0.5rem;
-    }
-    .board li .node { font-size: 0.9rem; color: #c9d3db; }
-    .board li .times { font-size: 1.15rem; font-weight: 600; }
-    .board li .times small { font-size: 0.8rem; font-weight: 400; color: #c9d3db; margin-left: 0.3rem; }
-    .board li .times .none { color: #93a1ab; font-weight: 400; font-size: 0.95rem; }
-    .board .note { margin: 0.75rem 0 0; font-size: 0.8rem; color: #93a1ab; }
-
-    section { margin-top: 2rem; }
-    h2 { font-size: 1.25rem; margin: 0 0 0.5rem; }
-    h2 .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; vertical-align: middle; margin-left: 0.4rem; }
-    .tag.hsr { background: var(--hsr-soft); color: var(--hsr); }
-    .tag.tra { background: var(--tra-soft); color: var(--tra); }
-    .tag.bus { background: var(--bus-soft); color: var(--bus); }
-    p { margin: 0.5rem 0; }
-    .muted { color: var(--ink-soft); font-size: 0.92rem; }
-
-    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0.75rem 0; }
-    table { border-collapse: collapse; width: 100%; min-width: 34rem; background: var(--board); font-size: 0.95rem; }
-    th, td { padding: 0.5rem 0.6rem; text-align: left; border-bottom: 1px solid var(--rule); white-space: nowrap; vertical-align: top; }
-    th { font-weight: 600; color: var(--ink-soft); font-size: 0.85rem; background: #e9eef2; }
-    td.target { font-weight: 700; }
-    tr.na td { color: var(--ink-soft); }
-    .hsr-route th { border-bottom: 2px solid var(--hsr); }
-    .tra-route th { border-bottom: 2px solid var(--tra); }
-    .bus-tt th { border-bottom: 2px solid var(--bus); }
-    table.compact { min-width: 0; }
-    table.compact td:first-child { color: var(--ink-soft); width: 8rem; }
-
-    .two-col { display: grid; gap: 1rem; grid-template-columns: 1fr; }
-    @media (min-width: 640px) { .two-col { grid-template-columns: 1fr 1fr; } }
-    .card { background: var(--board); border: 1px solid var(--rule); border-radius: 8px; padding: 0.75rem 0.9rem; }
-    .card h3 { margin: 0 0 0.35rem; font-size: 1rem; }
-    .card .line { margin: 0.25rem 0; }
-    .card .line b { font-weight: 600; margin-right: 0.35rem; }
-
-    details { margin: 0.75rem 0; }
-    summary { cursor: pointer; font-weight: 600; }
-    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 0.85rem; }
-    footer p { margin: 0.3rem 0; }
-    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-  </style>
+  <title>萬華 ⇄ 中央大學 通勤規劃</title>
+  <meta name="description" content="萬華與中央大學之間的通勤規劃：選路線與想抵達的整點，推算出門或上車時間與各段班次。">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main>
   <header class="masthead">
-    <h1>萬華 → 中央大學</h1>
-    <p>兩條通勤路線的班次與規劃。平日（學期中）班表；週末與寒暑假另列。</p>
+    <h1>萬華 ⇄ 中央大學</h1>
+    <p>選路線與想抵達的時刻，推算最晚該出發的時間與每段班次。平日（學期中）班表。</p>
   </header>
 
-  <div class="board" id="board">
-    <div class="board-head">
-      <h2>下一班</h2>
-      <div><span class="clock" id="clock">--:--</span><span class="daytype" id="daytype"></span></div>
-    </div>
-    <ul>
-      <li><span class="node">萬華 台鐵南下</span><span class="times" id="n-tra"></span></li>
-      <li><span class="node">板橋 高鐵南下</span><span class="times" id="n-hsr"></span></li>
-      <li><span class="node">高鐵桃園站 173</span><span class="times" id="n-173"></span></li>
-      <li><span class="node">中壢 132/133</span><span class="times" id="n-zl"></span></li>
-    </ul>
-    <p class="note">依裝置時間計算，只顯示發車時刻；轉乘與延誤請自行預留。台鐵顯示萬華發車與中壢到達，高鐵顯示板橋發車與桃園到達。</p>
+  <div class="picker">
+    <label>路線
+      <select id="route">
+        <optgroup label="去程　萬華住處 → 中大">
+          <option value="out-hsr">去程・高鐵（板橋 → 高鐵桃園 → 173）</option>
+          <option value="out-tra">去程・台鐵（萬華 → 中壢 → 132/133）</option>
+        </optgroup>
+        <optgroup label="回程　中大 → 萬華火車站">
+          <option value="back-hsr">回程・高鐵（173/172 → 高鐵桃園 → 板橋）</option>
+          <option value="back-tra">回程・台鐵（132/133 → 中壢 → 萬華）</option>
+        </optgroup>
+      </select>
+    </label>
+    <label><span id="target-label">目標抵達</span>
+      <select id="hour"></select>
+    </label>
   </div>
 
+  <div class="result" id="result" aria-live="polite"></div>
+
   <section>
-    <h2>依目標到校時間</h2>
-    <p class="muted">推算假設：出門到萬華上車 26 分鐘；板橋台鐵轉高鐵、桃園高鐵轉公車各留 10 分鐘以上；173 高鐵站到中大約 20 分鐘；中壢站出站走到公車站留 10 分鐘（未實測）；132/133 到校約 20 分鐘。</p>
-
-    <h3>高鐵路線 <span class="tag hsr">板橋 → 桃園 → 173</span></h3>
-    <div class="table-wrap">
-      <table class="hsr-route">
-        <thead><tr><th>目標到校</th><th>出門</th><th>台鐵 萬華→板橋</th><th>高鐵 板橋→桃園</th><th>173 高鐵站發</th><th>預估到校</th></tr></thead>
-        <tbody>
-          <tr><td class="target">09:00</td><td>06:23</td><td>06:49 → 06:54</td><td>07:19 → 07:32</td><td>08:05</td><td>約 08:25</td></tr>
-          <tr><td class="target">10:00</td><td>08:10</td><td>08:36 → 08:41</td><td>08:55 → 09:08</td><td>09:20</td><td>約 09:40</td></tr>
-          <tr><td class="target">11:00</td><td>09:06</td><td>09:32 → 09:37</td><td>09:55 → 10:08</td><td>10:30</td><td>約 10:50</td></tr>
-          <tr><td class="target">12:00</td><td>10:11</td><td>10:37 → 10:42</td><td>10:55 → 11:08</td><td>11:40</td><td>約 12:00</td></tr>
-          <tr class="na"><td class="target">13:00、14:00</td><td colspan="5">11:40 之後 173 停到 15:00，這段沒有公車，只能從高鐵站搭計程車，或改走台鐵路線。</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="muted">09:00 那格只能搭 08:05 的公車，等於提早 35 分鐘到校。12:00 那格到校時間貼著整點，一定要 12 點前到就退到 10:30 的公車。每個目標都可以往前推一班高鐵當後備（例如 10:00 改搭 08:29 → 08:41，台鐵 08:07 → 08:12，出門 07:41），到校時間不變，多 27 分鐘餘裕。</p>
-
-    <h3>台鐵路線 <span class="tag tra">萬華 → 中壢 → 132/133</span></h3>
-    <div class="table-wrap">
-      <table class="tra-route">
-        <thead><tr><th>目標到校</th><th>出門</th><th>台鐵 萬華→中壢</th><th>公車 中壢發</th><th>預估到校</th></tr></thead>
-        <tbody>
-          <tr><td class="target">09:00</td><td>06:41</td><td>07:07 → 07:58</td><td>08:15（133）</td><td>約 08:35</td></tr>
-          <tr><td class="target">10:00</td><td>07:41</td><td>08:07 → 09:00</td><td>09:15（133）</td><td>約 09:35</td></tr>
-          <tr><td class="target">11:00</td><td>08:48</td><td>09:14 → 10:08</td><td>10:30（133）</td><td>約 10:50</td></tr>
-          <tr><td class="target">12:00</td><td>10:01</td><td>10:27 → 11:13</td><td>11:35（133）</td><td>約 11:55</td></tr>
-          <tr><td class="target">13:00</td><td>10:22</td><td>10:48 → 11:41</td><td>12:00（132）</td><td>約 12:20</td></tr>
-          <tr><td class="target">14:00</td><td>11:56</td><td>12:22 → 13:09</td><td>13:30（133）</td><td>約 13:50</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="muted">13:00 若想壓到剛好：11:02 出門、台鐵 11:28 → 12:19、公車 12:40，約 13:00 到校，但沒有餘裕。</p>
-
+    <h2>完整班表與說明</h2>
     <div class="two-col">
-      <div class="card">
-        <h3>哪條比較好</h3>
-        <p class="line">09:00 到校：台鐵路線，出門晚 18 分鐘。</p>
-        <p class="line">10:00 到 12:00：高鐵路線，出門依序晚約 29、18、10 分鐘。</p>
-        <p class="line">13:00 以後：只剩台鐵路線。</p>
-      </div>
-      <div class="card">
-        <h3>容錯</h3>
-        <p class="line">高鐵路線早上 173 只有 08:05、09:20、10:30、11:40，錯過一班等 70 分鐘。</p>
-        <p class="line">台鐵路線中壢端 08:45 到 10:00 之間有五班，錯過一班多半等 15 到 30 分鐘；台鐵區間車 15 到 20 分鐘一班。</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>公車班表 <span class="tag bus">桃園公車動態</span></h2>
-
-    <h3>173 高鐵桃園站 ⇄ 中央大學</h3>
-    <div class="table-wrap">
-      <table class="bus-tt compact">
-        <tbody>
-          <tr><td>平日 高鐵站發</td><td>08:05、09:20、10:30、11:40、15:00、16:10、17:30</td></tr>
-          <tr><td>平日 中大發</td><td>07:25、08:45、10:00、11:10、14:30、15:40、16:50</td></tr>
-          <tr><td>假日 高鐵站發</td><td>13:20、14:35、15:40、17:00</td></tr>
-          <tr><td>假日 中大發</td><td>12:45、14:00、15:10、16:20</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="muted">172 目前平日只剩中大 18:00 發、高鐵站 18:30 發一對班次。172B（中原大學–高鐵桃園站–中央大學）平日中原發 07:00、09:20、11:40、13:00、15:10、17:40，經高鐵站的時刻未公告，要看站牌即時動態。</p>
-
-    <h3>132 / 133 / 133A 中壢 → 中央大學</h3>
-    <div class="table-wrap">
-      <table class="bus-tt compact">
-        <tbody>
-          <tr><td>132 平日</td><td>07:00、07:30、08:00、09:00、10:00、11:00、12:00、13:00、14:00、15:00、16:00、16:30、17:00、18:00、19:00、20:20、21:40</td></tr>
-          <tr><td>132 假日</td><td>07:00、08:00、09:00、10:00、11:00、12:00、13:00、14:00、15:00、16:00、17:00、18:00、19:00、19:40、20:20、21:40</td></tr>
-          <tr><td>133 平日</td><td>07:45、08:15、08:45、09:15、09:45、10:30、11:35、12:40、13:30、14:30、15:30</td></tr>
-          <tr><td>133 假日、寒暑假</td><td>07:40、08:40、09:40、10:40、15:40、16:40</td></tr>
-          <tr><td>133A 平日</td><td>08:30、16:25、16:45、17:30（經捷運老街溪站）</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="muted">132 從中壢公車站（桃園客運）發車，133、133A 從中壢客運中壢總站（建國路 100 號）發車，兩處不同。車程一般 15 到 25 分鐘，塞車可能到 30 到 50 分鐘。</p>
-  </section>
-
-  <section>
-    <h2>台鐵、高鐵早上班次</h2>
-    <div class="two-col">
-      <div class="card">
-        <h3>台鐵 萬華南下（區間車）</h3>
-        <p class="muted">萬華發 → 板橋到 → 中壢到；「—」表示該班不到中壢。</p>
-        <div class="table-wrap"><table class="compact tra-route"><tbody id="tra-list"></tbody></table></div>
-      </div>
-      <div class="card">
-        <h3>高鐵 板橋南下</h3>
-        <p class="muted">板橋發 → 桃園到。標註週日停駛者為 1505 班。</p>
-        <div class="table-wrap"><table class="compact hsr-route"><tbody id="hsr-list"></tbody></table></div>
-      </div>
+      <a class="card" href="to-ncu.html">
+        <h3>去程：萬華 → 中央大學</h3>
+        <p class="line muted">08:00 到 20:00 每個整點的兩條路線、公車班表、台鐵高鐵南下班次、下一班看板。</p>
+      </a>
+      <a class="card" href="to-wanhua.html">
+        <h3>回程：中央大學 → 萬華火車站</h3>
+        <p class="line muted">08:00 到 20:00 每個整點的兩條路線、中大發車班表、台鐵高鐵北上班次、下一班看板。</p>
+      </a>
     </div>
   </section>
 
   <footer>
-    <p>資料來源：桃園公車動態資訊系統（ebus.tycg.gov.tw，2026-09-23 當日班表）、中壢客運 133 時刻表（115/02/23 起）、交通部 TDX 132 班表（版本 20260904）、交通小幫手高鐵時刻資料（版本 2350）與台鐵車站時刻資料。到校時間為推估，實際以各業者公告與即時動態為準。</p>
-    <p>整理日期 2026-09-23。</p>
+    <p>推算假設：出門到萬華上車 26 分鐘；板橋台鐵⇄高鐵、桃園高鐵⇄公車各留 10 分鐘以上；公車車程 20 分鐘；中壢火車站⇄公車站步行 10 分鐘。回程 132/133/133A 的中大發車時間沒有公告，以中壢發車時間加 23 到 24 分鐘推估。</p>
+    <p>資料來源：高鐵官網時刻查詢、台鐵官網時刻查詢（2026-09-24 班表）、桃園公車動態資訊系統（2026-09-23 平日、09-26 假日）、中壢客運 133 時刻表（115/02/23 起）。整理日期 2026-09-23。</p>
   </footer>
 </main>
 
+<script src="data.js"></script>
+<script src="commute.js"></script>
 <script>
 (function () {
-  // 台鐵 萬華南下：[萬華發, 板橋到, 中壢到 或 null]
-  var TRA = [
-    ["06:14","06:19",null],["06:38","06:43","07:23"],["06:49","06:54","07:34"],["07:07","07:12","07:58"],
-    ["07:22","07:27",null],["07:33","07:38","08:18"],["07:39","07:44","08:25"],["07:48","07:53","08:42"],
-    ["08:07","08:12","09:00"],["08:11","08:16",null],["08:21","08:26","09:14"],["08:36","08:41","09:21"],
-    ["08:41","08:46",null],["08:46","08:51","09:31"],["08:59","09:04",null],["09:09","09:14","09:54"],
-    ["09:14","09:19","10:08"],["09:32","09:37","10:23"],["09:47","09:52","10:39"],["09:53","09:58",null],
-    ["10:08","10:13","11:03"],["10:27","10:32","11:13"],["10:37","10:42",null],["10:48","10:53","11:41"],
-    ["11:08","11:13","11:53"],["11:14","11:19",null],["11:28","11:33","12:19"],["11:48","11:53","12:33"],
-    ["11:53","11:58",null],["12:07","12:12","12:59"],["12:22","12:27","13:09"],["12:37","12:42","13:28"],
-    ["12:54","12:59","13:49"],["13:20","13:25","14:06"]
-  ];
-  // 高鐵 板橋南下：[板橋發, 桃園到, 車次, 每日?]
-  var HSR = [
-    ["06:34","06:47","0803",true],["07:00","07:13","0603",true],["07:19","07:32","0805",true],
-    ["07:46","07:59","1505",false],["07:55","08:07","0609",true],["08:19","08:32","0809",true],
-    ["08:29","08:41","0613",true],["08:55","09:08","0615",true],["09:19","09:32","0813",true],
-    ["09:29","09:41","0619",true],["09:55","10:08","0621",true],["10:19","10:32","0817",true],
-    ["10:29","10:41","0625",true],["10:55","11:08","0627",true],["11:19","11:32","0821",true],
-    ["11:55","12:08","0633",true],["12:19","12:32","0825",true],["12:29","12:41","0637",true],
-    ["12:55","13:08","0639",true],["13:19","13:32","0829",true],["13:29","13:41","0643",true]
-  ];
-  var B173 = { weekday: ["08:05","09:20","10:30","11:40","15:00","16:10","17:30"], holiday: ["13:20","14:35","15:40","17:00"] };
-  var B132 = { weekday: ["07:00","07:30","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","16:30","17:00","18:00","19:00","20:20","21:40"],
-               holiday: ["07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","19:40","20:20","21:40"] };
-  var B133 = { weekday: ["07:45","08:15","08:45","09:15","09:45","10:30","11:35","12:40","13:30","14:30","15:30"],
-               holiday: ["07:40","08:40","09:40","10:40","15:40","16:40"] };
-  var B133A = { weekday: ["08:30","16:25","16:45","17:30"], holiday: [] };
+  var routeSel = document.getElementById("route"), hourSel = document.getElementById("hour");
+  var out = document.getElementById("result");
+  hourSel.innerHTML = CM.HOURS.map(function (T) { return '<option value="' + T + '">' + CM.hm(T) + "</option>"; }).join("");
 
-  function mins(t) { var p = t.split(":"); return +p[0] * 60 + +p[1]; }
-  function fmt(el, items, none) { el.innerHTML = items.length ? items.join("") : '<span class="none">' + none + '</span>'; }
+  // Restore from hash (#route/HHMM), else default to the next full hour within range
+  var h = location.hash.slice(1).split("/");
+  if (CM.ROUTES[h[0]]) routeSel.value = h[0];
+  var T0 = h[1] ? CM.m(h[1].slice(0, 2) + ":" + h[1].slice(2)) : (new Date().getHours() + 1) * 60;
+  hourSel.value = String(Math.min(Math.max(T0, CM.HOURS[0]), CM.HOURS[CM.HOURS.length - 1]));
 
-  // 靜態列表
-  var traBody = document.getElementById("tra-list");
-  traBody.innerHTML = TRA.map(function (r) { return "<tr><td>" + r[0] + "</td><td>" + r[1] + " → " + (r[2] || "—") + "</td></tr>"; }).join("");
-  var hsrBody = document.getElementById("hsr-list");
-  hsrBody.innerHTML = HSR.map(function (r) { return "<tr><td>" + r[0] + "</td><td>" + r[1] + "　" + r[2] + (r[3] ? "" : "（週日停駛）") + "</td></tr>"; }).join("");
+  var MODE = { tra: "台鐵", hsr: "高鐵", bus: "公車" };
 
-  function refresh() {
-    var d = new Date();
-    var now = d.getHours() * 60 + d.getMinutes();
-    var wd = d.getDay();
-    var holiday = (wd === 0 || wd === 6);
-    var key = holiday ? "holiday" : "weekday";
-    document.getElementById("clock").textContent = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
-    document.getElementById("daytype").textContent = holiday ? "假日班表" : "平日班表";
-
-    var tra = TRA.filter(function (r) { return r[2] && mins(r[0]) >= now; }).slice(0, 2)
-      .map(function (r) { return "<span>" + r[0] + "<small>板橋 " + r[1] + "　中壢 " + r[2] + "</small></span><br>"; });
-    fmt(document.getElementById("n-tra"), tra, "早上班表已過，請查台鐵 App");
-
-    var hsr = HSR.filter(function (r) { return mins(r[0]) >= now && (r[3] || wd !== 0); }).slice(0, 2)
-      .map(function (r) { return "<span>" + r[0] + "<small>桃園 " + r[1] + "</small></span><br>"; });
-    fmt(document.getElementById("n-hsr"), hsr, "列表已過，請查高鐵 App");
-
-    var b173 = B173[key].filter(function (t) { return mins(t) >= now; }).slice(0, 2)
-      .map(function (t) { return "<span>" + t + "</span><br>"; });
-    fmt(document.getElementById("n-173"), b173, "今天沒有班次了");
-
-    var zl = [].concat(
-      B132[key].map(function (t) { return [t, "132"]; }),
-      B133[key].map(function (t) { return [t, "133"]; }),
-      B133A[key].map(function (t) { return [t, "133A"]; })
-    ).filter(function (x) { return mins(x[0]) >= now; }).sort(function (a, b) { return mins(a[0]) - mins(b[0]); }).slice(0, 3)
-      .map(function (x) { return "<span>" + x[0] + "<small>" + x[1] + "</small></span><br>"; });
-    fmt(document.getElementById("n-zl"), zl, "今天沒有班次了");
+  function steps(key, p) {
+    var r = CM.ROUTES[key], items = [];
+    if (r.dir === "out") items.push('<li><span class="t">' + CM.hm(p.start) + "</span>出門<span class=\"d\">步行到萬華站約 " + CM.P.home + " 分鐘</span></li>");
+    p.legs.forEach(function (l, i) {
+      var head = l.mode === "bus" ? l.no + " 公車" : MODE[l.mode] + " " + l.no + " 次";
+      var d = l.from + " " + l.dep + (l.est === "dep" ? "（估）" : "") + " → " + l.to + " " + l.arr + (l.mode === "bus" ? "（估）" : "");
+      if (l.origin) d += "；中壢 " + l.origin + " 發車，到中大的時間依系統預測推估，請提早到站";
+      items.push('<li class="' + l.mode + '"><span class="t">' + l.dep + "</span>" + head + '<span class="d">' + d + "</span></li>");
+    });
+    items.push('<li><span class="t">' + CM.hm(p.arrive) + "</span>" + (r.dir === "out" ? "到校" : "抵達萬華火車站") + "</li>");
+    return '<ol class="steps">' + items.join("") + "</ol>";
   }
-  refresh();
-  setInterval(refresh, 30000);
+
+  function render() {
+    var key = routeSel.value, T = +hourSel.value, r = CM.ROUTES[key];
+    document.getElementById("target-label").textContent = r.dir === "out" ? "目標到校" : "目標抵達萬華";
+    history.replaceState(null, "", "#" + key + "/" + CM.hm(T).replace(":", ""));
+    var res = CM.plan(key, T), p = res.main;
+    if (!p) {
+      out.innerHTML = '<p><b>' + CM.hm(T) + ' 之前沒有可銜接的班次。</b></p><p class="muted">這條路線當天最早一班公車太晚，請改選較晚的時刻或另一條路線。</p>';
+      return;
+    }
+    var slack = T - p.arrive;
+    var html = '<div class="summary"><div><span class="lbl">' + r.startLabel + '</span><span class="big">' + CM.hm(p.start) + "</span></div>" +
+      '<div><span class="lbl">' + r.arriveLabel + '</span><span class="big">' + CM.hm(p.arrive) + "</span></div>" +
+      '<div><span class="lbl">餘裕</span><span class="big">' + slack + " 分</span></div></div>";
+    if (slack >= CM.SLACK_WARN) html += '<p class="warn">這個時段班次少，最晚一組銜接會早到 ' + slack + " 分鐘，可以比較下方另一條路線。</p>";
+    else if (slack === 0) html += '<p class="warn">抵達時間剛好卡在整點，沒有誤差空間，建議搭下方的前一組。</p>';
+    html += steps(key, p);
+
+    html += '<div class="alt">';
+    if (res.backup) html += "<p><b>前一組（備案）：</b>" + r.startLabel + " " + CM.hm(res.backup.start) + "，約 " + CM.hm(res.backup.arrive) + " 抵達，多 " + (p.arrive - res.backup.arrive) + " 分鐘餘裕。</p>";
+    var otherKey = Object.keys(CM.ROUTES).filter(function (k) { return k !== key && CM.ROUTES[k].dir === r.dir; })[0];
+    var o = CM.plan(otherKey, T).main, or = CM.ROUTES[otherKey];
+    html += "<p><b>" + or.name + "：</b>" + (o ? or.startLabel + " " + CM.hm(o.start) + "，約 " + CM.hm(o.arrive) + " 抵達" +
+      (o.start > p.start ? "（可晚 " + (o.start - p.start) + " 分鐘出發）" : o.start < p.start ? "（要早 " + (p.start - o.start) + " 分鐘出發）" : "（出發時間相同）") : "沒有可銜接的班次") +
+      ' <a href="#" id="swap">改看這條</a></p></div>';
+    out.innerHTML = html;
+    document.getElementById("swap").onclick = function (e) { e.preventDefault(); routeSel.value = otherKey; render(); };
+  }
+  routeSel.onchange = hourSel.onchange = render;
+  render();
 })();
 </script>
 </body>

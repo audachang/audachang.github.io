@@ -1,0 +1,107 @@
+:root {
+  --paper: #f1f4f6;
+  --board: #ffffff;
+  --ink: #14232e;
+  --ink-soft: #55656f;
+  --rule: #d3dbe1;
+  --hsr: #d9541c;
+  --hsr-soft: #fbe9df;
+  --tra: #1d5aa0;
+  --tra-soft: #e1ebf7;
+  --bus: #2a7448;
+  --bus-soft: #e0f0e6;
+  --warn: #8a5a00;
+  --warn-soft: #fdf3dc;
+  --now: #14232e;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  box-sizing: border-box;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body { margin: 0; background: var(--paper); color: var(--ink); line-height: 1.6; font-size: 16px; }
+a { color: var(--tra); }
+main { width: min(760px, 100% - 2rem); margin: 0 auto; padding: 1.25rem 0 4rem; }
+
+nav.crumbs { font-size: 0.9rem; margin-bottom: 0.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+header.masthead { padding: 0.5rem 0 1rem; border-bottom: 2px solid var(--ink); }
+header.masthead h1 { margin: 0; font-size: clamp(1.5rem, 5vw, 2.2rem); line-height: 1.2; font-weight: 700; }
+header.masthead p { margin: 0.35rem 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+
+/* 下一班看板 */
+.board { margin: 1.25rem 0 0; background: var(--now); color: #f5f7f9; border-radius: 10px; padding: 1rem 1rem 0.75rem; }
+.board-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.board-head h2 { margin: 0; font-size: 1rem; font-weight: 600; color: #c9d3db; }
+.board-head .clock { font-size: 1.9rem; font-weight: 700; letter-spacing: 0.02em; }
+.board-head .daytype { font-size: 0.85rem; color: #c9d3db; margin-left: 0.5rem; }
+.board ul { list-style: none; margin: 0.75rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
+.board li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 0.75rem; align-items: baseline; border-top: 1px solid rgba(255,255,255,0.14); padding-top: 0.5rem; }
+.board li .node { font-size: 0.9rem; color: #c9d3db; }
+.board li .times { font-size: 1.15rem; font-weight: 600; }
+.board li .times small { font-size: 0.8rem; font-weight: 400; color: #c9d3db; margin-left: 0.3rem; }
+.board li .times .none { color: #93a1ab; font-weight: 400; font-size: 0.95rem; }
+.board .note { margin: 0.75rem 0 0; font-size: 0.8rem; color: #93a1ab; }
+
+section { margin-top: 2rem; }
+h2 { font-size: 1.25rem; margin: 0 0 0.5rem; }
+h2 .tag, h3 .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; vertical-align: middle; margin-left: 0.4rem; }
+.tag.hsr { background: var(--hsr-soft); color: var(--hsr); }
+.tag.tra { background: var(--tra-soft); color: var(--tra); }
+.tag.bus { background: var(--bus-soft); color: var(--bus); }
+p { margin: 0.5rem 0; }
+.muted { color: var(--ink-soft); font-size: 0.92rem; }
+
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0.75rem 0; }
+table { border-collapse: collapse; width: 100%; min-width: 34rem; background: var(--board); font-size: 0.95rem; }
+th, td { padding: 0.5rem 0.6rem; text-align: left; border-bottom: 1px solid var(--rule); white-space: nowrap; vertical-align: top; }
+th { font-weight: 600; color: var(--ink-soft); font-size: 0.85rem; background: #e9eef2; }
+td.target { font-weight: 700; }
+tr.na td { color: var(--ink-soft); white-space: normal; }
+tr.slack td { background: var(--warn-soft); }
+tr.slack td:last-child { color: var(--warn); font-weight: 600; }
+.hsr-route th { border-bottom: 2px solid var(--hsr); }
+.tra-route th { border-bottom: 2px solid var(--tra); }
+.bus-tt th { border-bottom: 2px solid var(--bus); }
+table.compact { min-width: 0; }
+table.compact td:first-child { color: var(--ink-soft); width: 8rem; }
+table.bus-tt td:last-child { white-space: normal; }
+
+.two-col { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .two-col { grid-template-columns: 1fr 1fr; } }
+.card { background: var(--board); border: 1px solid var(--rule); border-radius: 8px; padding: 0.75rem 0.9rem; }
+.card h3 { margin: 0 0 0.35rem; font-size: 1rem; }
+.card .line { margin: 0.25rem 0; }
+.card .line b { font-weight: 600; margin-right: 0.35rem; }
+a.card { display: block; text-decoration: none; color: inherit; }
+a.card:hover { border-color: var(--ink-soft); }
+
+/* 規劃選單 */
+.picker { display: grid; gap: 0.75rem; grid-template-columns: 1fr; margin-top: 1.25rem; }
+@media (min-width: 560px) { .picker { grid-template-columns: 1.6fr 1fr; } }
+.picker label { display: grid; gap: 0.25rem; font-size: 0.85rem; font-weight: 600; color: var(--ink-soft); }
+.picker select { font: inherit; font-size: 1.05rem; color: var(--ink); padding: 0.55rem 0.6rem; border: 1px solid var(--rule); border-radius: 8px; background: var(--board); min-height: 44px; }
+
+.result { margin-top: 1rem; background: var(--board); border: 1px solid var(--rule); border-radius: 10px; padding: 1rem; }
+.summary { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; align-items: baseline; }
+.summary .big { font-size: 1.6rem; font-weight: 700; }
+.summary .lbl { font-size: 0.85rem; color: var(--ink-soft); margin-right: 0.35rem; }
+.warn { margin: 0.75rem 0 0; padding: 0.5rem 0.75rem; border-radius: 6px; background: var(--warn-soft); color: var(--warn); font-size: 0.92rem; }
+ol.steps { list-style: none; margin: 1rem 0 0; padding: 0; }
+ol.steps li { position: relative; padding: 0 0 0.9rem 1.4rem; border-left: 3px solid var(--rule); margin-left: 0.4rem; }
+ol.steps li:last-child { padding-bottom: 0; border-left-color: transparent; }
+ol.steps li::before { content: ""; position: absolute; left: -0.5rem; top: 0.35rem; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--ink-soft); }
+ol.steps li.tra::before { background: var(--tra); }
+ol.steps li.hsr::before { background: var(--hsr); }
+ol.steps li.bus::before { background: var(--bus); }
+ol.steps .t { font-weight: 700; margin-right: 0.5rem; }
+ol.steps .d { color: var(--ink-soft); font-size: 0.88rem; display: block; }
+.alt { margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--rule); font-size: 0.92rem; }
+.alt p { margin: 0.25rem 0; }
+
+details { margin: 0.75rem 0; }
+summary { cursor: pointer; font-weight: 600; }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--ink-soft); font-size: 0.85rem; }
+footer p { margin: 0.3rem 0; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }

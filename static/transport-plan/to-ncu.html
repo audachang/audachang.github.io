@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>萬華 → 中央大學 通勤時刻</title>
+  <meta name="description" content="萬華住處往中央大學的兩條通勤路線（高鐵、台鐵）班次，與 08:00 到 20:00 每個整點到校的規劃。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <nav class="crumbs"><a href="./">← 規劃選單</a><a href="to-wanhua.html">回程：中大 → 萬華</a></nav>
+  <header class="masthead">
+    <h1>萬華 → 中央大學</h1>
+    <p>兩條通勤路線的班次與規劃。平日（學期中）班表；週末與寒暑假另列。</p>
+  </header>
+
+  <div class="board" id="board">
+    <div class="board-head">
+      <h2>下一班</h2>
+      <div><span class="clock" id="clock">--:--</span><span class="daytype" id="daytype"></span></div>
+    </div>
+    <ul>
+      <li><span class="node">萬華 台鐵南下</span><span class="times" id="n-tra"></span></li>
+      <li><span class="node">板橋 高鐵南下</span><span class="times" id="n-hsr"></span></li>
+      <li><span class="node">高鐵桃園站 173/172</span><span class="times" id="n-173"></span></li>
+      <li><span class="node">中壢 132/133</span><span class="times" id="n-zl"></span></li>
+    </ul>
+    <p class="note">依裝置時間計算，只顯示發車時刻；轉乘與延誤請自行預留。台鐵顯示萬華發車與中壢到達，高鐵顯示板橋發車與桃園到達。</p>
+  </div>
+
+  <section>
+    <h2>依目標到校時間</h2>
+    <p class="muted">推算方式：對每個目標時刻，找出「最晚出門、仍能在目標前到校」的班次組合。假設出門到萬華上車 26 分鐘；板橋台鐵轉高鐵、桃園高鐵轉公車各留 10 分鐘以上；173 高鐵站到中大約 20 分鐘；中壢站出站走到公車站留 10 分鐘（未實測）；132/133 到校約 20 分鐘。黃底表示該時段班次少，會早到 45 分鐘以上。</p>
+
+    <h3>高鐵路線 <span class="tag hsr">板橋 → 桃園 → 173</span></h3>
+    <div class="table-wrap"><table class="hsr-route" id="t-out-hsr"></table></div>
+    <p class="muted">173 平日只有 08:05、09:20、10:30、11:40、15:00、16:10、17:30 七班，11:40 到 15:00 之間與 17:30 之後沒有車，這些時段只能從高鐵站搭計程車或改走台鐵路線。</p>
+
+    <h3>台鐵路線 <span class="tag tra">萬華 → 中壢 → 132/133</span></h3>
+    <div class="table-wrap"><table class="tra-route" id="t-out-tra"></table></div>
+    <p class="muted">133 平日末班 15:30，之後只剩 132（16:00、16:30、17:00、18:00、19:00）。133A 經捷運老街溪站，繞較遠，沒有列入推算。</p>
+
+    <h3>哪條可以比較晚出門</h3>
+    <div class="table-wrap"><table class="compact" id="t-cmp"></table></div>
+  </section>
+
+  <section>
+    <h2>公車班表 <span class="tag bus">桃園公車動態</span></h2>
+
+    <h3>173 高鐵桃園站 ⇄ 中央大學</h3>
+    <div class="table-wrap"><table class="bus-tt compact"><tbody>
+      <tr><td>平日 高鐵站發</td><td>08:05、09:20、10:30、11:40、15:00、16:10、17:30</td></tr>
+      <tr><td>平日 中大發</td><td>07:25、08:45、10:00、11:10、14:30、15:40、16:50</td></tr>
+      <tr><td>假日 高鐵站發</td><td>13:20、14:35、15:40、17:00</td></tr>
+      <tr><td>假日 中大發</td><td>12:45、14:00、15:10、16:20</td></tr>
+    </tbody></table></div>
+    <p class="muted">172 平日只剩中大 18:00 發、高鐵站 18:30 發一對班次。172B（中原大學–高鐵桃園站–中央大學，115/09/01 起）平日中原發 07:00、09:20、11:40、13:00、15:10、17:40，經高鐵站的時刻未公告，要看站牌即時動態。</p>
+
+    <h3>132 / 133 / 133A 中壢 → 中央大學</h3>
+    <div class="table-wrap"><table class="bus-tt compact"><tbody>
+      <tr><td>132 平日</td><td>07:00、07:30、08:00、09:00、10:00、11:00、12:00、13:00、14:00、15:00、16:00、16:30、17:00、18:00、19:00、20:20、21:40</td></tr>
+      <tr><td>132 假日</td><td>07:00、08:00、09:00、10:00、11:00、12:00、13:00、14:00、15:00、16:00、17:00、18:00、19:00、19:40、20:20、21:40</td></tr>
+      <tr><td>133 平日</td><td>07:45、08:15、08:45、09:15、09:45、10:30、11:35、12:40、13:30、14:30、15:30</td></tr>
+      <tr><td>133 假日、寒暑假</td><td>07:40、08:40、09:40、10:40、15:40、16:40</td></tr>
+      <tr><td>133A 平日</td><td>08:30、16:25、16:45、17:30（經捷運老街溪站）</td></tr>
+    </tbody></table></div>
+    <p class="muted">132 從中壢公車站（桃園客運）發車，133、133A 從中壢客運中壢總站（建國路 100 號）發車，兩處不同。車程一般 15 到 25 分鐘，塞車可能到 30 到 50 分鐘。</p>
+  </section>
+
+  <section>
+    <h2>台鐵、高鐵南下班次</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>台鐵 萬華南下</h3>
+        <p class="muted">萬華發 → 板橋到 → 中壢到；「—」表示該班不到中壢。</p>
+        <div class="table-wrap"><table class="compact tra-route"><tbody id="tra-list"></tbody></table></div>
+      </div>
+      <div class="card">
+        <h3>高鐵 板橋南下</h3>
+        <p class="muted">板橋發 → 桃園到。有註記者非每日行駛，推算只用平日每天都開的班次。</p>
+        <div class="table-wrap"><table class="compact hsr-route"><tbody id="hsr-list"></tbody></table></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>資料來源：桃園公車動態資訊系統（ebus.tycg.gov.tw，2026-09-23 平日、09-26 假日班表）、中壢客運 133 時刻表（115/02/23 起）、高鐵官網時刻查詢（2026/2/2 起適用時刻表，查詢日 2026-09-24，已排除中秋加開班次）、台鐵官網時刻查詢（2026-09-24）。到校時間為推估，實際以各業者公告與即時動態為準。</p>
+    <p>整理日期 2026-09-23。</p>
+  </footer>
+</main>
+
+<script src="data.js"></script>
+<script src="commute.js"></script>
+<script>
+(function () {
+  var m = CM.m;
+  CM.table("out-hsr", document.getElementById("t-out-hsr"));
+  CM.table("out-tra", document.getElementById("t-out-tra"));
+
+  document.getElementById("t-cmp").innerHTML = "<thead><tr><th>目標到校</th><th>高鐵路線出門</th><th>台鐵路線出門</th><th>較晚出門</th></tr></thead><tbody>" +
+    CM.HOURS.map(function (T) {
+      var a = CM.plan("out-hsr", T).main, b = CM.plan("out-tra", T).main;
+      var w = !a && !b ? "—" : !a ? "台鐵" : !b ? "高鐵" : a.start > b.start ? "高鐵（晚 " + (a.start - b.start) + " 分）" : b.start > a.start ? "台鐵（晚 " + (b.start - a.start) + " 分）" : "相同";
+      return "<tr><td>" + CM.hm(T) + "</td><td>" + (a ? CM.hm(a.start) : "—") + "</td><td>" + (b ? CM.hm(b.start) : "—") + "</td><td>" + w + "</td></tr>";
+    }).join("") + "</tbody>";
+
+  document.getElementById("tra-list").innerHTML = TT.TRA_S.map(function (r) {
+    return "<tr><td>" + r[0] + "</td><td>" + r[1] + " → " + (r[2] || "—") + "　" + r[3] + "</td></tr>"; }).join("");
+  document.getElementById("hsr-list").innerHTML = TT.HSR_S.map(function (r) {
+    var d = CM.daysLabel(r[3]);
+    return "<tr><td>" + r[0] + "</td><td>" + r[1] + "　" + r[2] + (d ? "（" + d + "）" : "") + "</td></tr>"; }).join("");
+
+  function fmt(el, items, none) { el.innerHTML = items.length ? items.join("") : '<span class="none">' + none + '</span>'; }
+  function refresh() {
+    var d = new Date(), now = d.getHours() * 60 + d.getMinutes(), wd = d.getDay();
+    var key = (wd === 0 || wd === 6) ? "holiday" : "weekday", B = TT.BUS;
+    document.getElementById("clock").textContent = CM.hm(now);
+    document.getElementById("daytype").textContent = key === "holiday" ? "假日班表" : "平日班表";
+
+    fmt(document.getElementById("n-tra"), TT.TRA_S.filter(function (r) { return r[2] && m(r[0]) >= now; }).slice(0, 2)
+      .map(function (r) { return "<span>" + r[0] + "<small>板橋 " + r[1] + "　中壢 " + r[2] + "</small></span><br>"; }), "列表已過，請查台鐵 App");
+    fmt(document.getElementById("n-hsr"), TT.HSR_S.filter(function (r) { return m(r[0]) >= now && CM.runs(r[3], wd); }).slice(0, 2)
+      .map(function (r) { return "<span>" + r[0] + "<small>桃園 " + r[1] + "</small></span><br>"; }), "列表已過，請查高鐵 App");
+    fmt(document.getElementById("n-173"), [].concat(
+      B.b173_to[key].map(function (t) { return [t, "173"]; }),
+      B.b172_to[key].map(function (t) { return [t, "172"]; })
+    ).filter(function (x) { return m(x[0]) >= now; }).sort(function (a, b) { return m(a[0]) - m(b[0]); }).slice(0, 2)
+      .map(function (x) { return "<span>" + x[0] + "<small>" + x[1] + "</small></span><br>"; }), "今天沒有班次了");
+    var zl = [].concat(
+      B.b132[key].map(function (t) { return [t, "132"]; }),
+      B.b133[key].map(function (t) { return [t, "133"]; }),
+      B.b133A[key].map(function (t) { return [t, "133A"]; })
+    ).filter(function (x) { return m(x[0]) >= now; }).sort(function (a, b) { return m(a[0]) - m(b[0]); }).slice(0, 3)
+      .map(function (x) { return "<span>" + x[0] + "<small>" + x[1] + "</small></span><br>"; });
+    fmt(document.getElementById("n-zl"), zl, "今天沒有班次了");
+  }
+  refresh();
+  setInterval(refresh, 30000);
+})();
+</script>
+</body>
+</html>
