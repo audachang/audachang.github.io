@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="2026 秋季生物統計學與 R：第四週第一段談離散、穩健統計、分組比較與資料品質；第二段以台北市長選舉民調說明抽樣誤差與樣本數。">
+  <meta name="description" content="2026 秋季生物統計學與 R：第四週第一段為 R 實作；第二段介紹集中趨勢、變異數、標準差與標準誤，含公式推導及課本、民調案例。">
   <title>第四週｜生物統計學與 R</title>
   <link rel="stylesheet" href="../site.css">
 </head>
@@ -14,32 +14,33 @@
   <header>
     <p class="eyebrow">HT3001B · FALL 2026</p>
     <h1>第四週｜2026 年 10 月 1 日</h1>
-    <p class="intro">用模擬觀察重複抽樣造成的變異。</p>
+    <p class="intro">用 R 描述分布，再理解中心、散布與估計值的抽樣波動。</p>
   </header>
 
   <section aria-labelledby="week04">
     <h2 id="week04">本週投影片</h2>
     <div class="decks">
       <article>
-        <h3>第一段｜看見分布（續）：離散、穩健統計、分組比較與資料品質</h3>
-        <p>接續第三週第三段：變異數與標準差的公式，移動一個極端值時哪些摘要數字會變，分組比較數值、對數轉換與辛普森悖論，最後回到分析前的資料品質檢查。</p>
-        <p class="meta">IMS 2e 第 5 章、§4.6、§3.2 · HTML 約 11.2 MB</p>
-        <a class="open" href="ims2e_ch05_week04_part1_slides.html">開啟第一段投影片 →</a>
+        <h3>第一段｜R 實作：用圖形與數字描述分布</h3>
+        <p>09:00–10:20：讀取 CSV、檢查遺漏與有效筆數、直方圖、分組摘要、盒形圖，以及保存與重跑。</p>
+        <p class="meta">R 實作 · 25 頁（含封面）· HTML 約 5.2 MB</p>
+        <a class="open" href="week04_part1_r_tutorial_slides.html">開啟第一段投影片 →</a>
       </article>
       <article>
-        <h3>第二段｜民調的 ±3% 從哪裡來？</h3>
-        <p>延續第三週的台北市長選舉民調：用模擬看見抽樣分布，推導比例的標準誤與最大誤差 0.98／√n，驗算三份民調、估算所需樣本數，並說明兩人差距的誤差與公式沒有涵蓋的偏差。</p>
-        <p class="meta">IMS 2e 第 13 章、§16.2 · HTML 約 4.4 MB</p>
-        <a class="open" href="ims2e_ch13_poll_error_opening_slides.html">開啟第二段投影片 →</a>
+        <h3>第二段｜集中趨勢、離散程度與標準誤</h3>
+        <p>從左偏、右偏及對稱分配的眾數、中位數、平均數位置開始；逐步推導平均數與變異數公式、n−1 校正，介紹 SD、SE，並使用課本貸款與保存的台北市長民調案例。</p>
+        <p class="meta">IMS 2e §5.2–5.6、Chapter 13／16／19 · 41 頁（含封面）· HTML 約 6.1 MB</p>
+        <a class="open" href="week04_part2_center_dispersion_slides.html">開啟第二段投影片 →</a>
       </article>
     </div>
-    <p class="notice">目前公開本週第一、二段；本週主體（抽樣分布、中央極限定理、bootstrap）與 R 實習 2 將於上課後放上。投影片可直接在瀏覽器閱讀；使用方向鍵或右下角按鈕前進，答案會逐步顯示。民調數字依新聞報導轉述，模擬中的真實支持率 41% 為示意假設。</p>
+    <p class="notice">投影片可直接在瀏覽器閱讀；使用方向鍵或右下角按鈕前進，推導與練習答案會逐步顯示。民調為課程保存的 2026 年 9 月歷史案例，未取得原始報告；SE 計算是簡單抽樣模型示範。Part 1 使用虛構教學 CSV。</p>
   </section>
 
   <section aria-labelledby="reading">
     <h2 id="reading">課後閱讀</h2>
+    <p><a href="week04_r_tutorial.R" download>下載 Part 1 R 程式</a> · <a href="data/week04_completion_times.csv" download>下載教學 CSV</a>（請保存至 Project 的 data 資料夾）</p>
     <ul>
-      <li><a href="https://openintro-ims.netlify.app/explore-numerical">IMS 2e：Exploring numerical data（§5.4–5.9）</a></li>
+      <li><a href="https://openintro-ims.netlify.app/explore-numerical">IMS 2e：Exploring numerical data（§5.2–5.6）</a></li>
       <li><a href="https://openintro-ims.netlify.app/foundations-mathematical">IMS 2e：Inference with mathematical models（§13.1–13.3）</a></li>
       <li><a href="https://openintro-ims.netlify.app/inference-one-prop">IMS 2e：Inference for a single proportion（§16.2）</a></li>
     </ul>
