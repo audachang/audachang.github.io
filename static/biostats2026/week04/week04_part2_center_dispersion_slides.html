@@ -1092,8 +1092,9 @@ margin-right: 0; }
 #title-slide .quarto-title-author-name, #title-slide .date { font-size: .72em; color: #555; }
 @media print { .reveal .fragment { opacity: 1 !important; visibility: visible !important; } }
 @media (prefers-reduced-motion: reduce) { .reveal * { transition: none !important; animation: none !important; } }
-.reveal #p2-15d mjx-container[display="true"] { margin: .4em 0; }
-.reveal #p2-15d .MathJax_Display { margin: .25em 0 !important; }
+.reveal #p2-15c mjx-container[display="true"], .reveal #p2-15c2 mjx-container[display="true"], .reveal #p2-15d mjx-container[display="true"], .reveal #p2-15d1 mjx-container[display="true"], .reveal #p2-15d2 mjx-container[display="true"], .reveal #p2-15e mjx-container[display="true"], .reveal #p2-15e2 mjx-container[display="true"] { margin: .3em 0; }
+.reveal #p2-15c, .reveal #p2-15c2, .reveal #p2-15d, .reveal #p2-15d1, .reveal #p2-15d2, .reveal #p2-15e, .reveal #p2-15e2 { font-size: 30px; }
+.reveal #p2-15c .MathJax_Display, .reveal #p2-15c2 .MathJax_Display, .reveal #p2-15d .MathJax_Display, .reveal #p2-15d1 .MathJax_Display, .reveal #p2-15d2 .MathJax_Display, .reveal #p2-15e .MathJax_Display, .reveal #p2-15e2 .MathJax_Display { margin: .2em 0 !important; }
 </style>
 </head>
 <body class="quarto-light">
@@ -1481,13 +1482,37 @@ HT3001B 生物統計學與 R
 </div>
 </section>
 <section id="p2-15c" class="slide level2">
-<h2>估計中心，會減少平方和</h2>
-<p>大寫 <span class="math inline">\(X_i\)</span>：抽樣前的隨機變項（random variable）；<span class="math inline">\(\mu\)</span>：母體平均數。</p>
+<h2>估計中心，會減少平方和（1）：展開平方</h2>
+<p>大寫 <span class="math inline">\(X_i\)</span>：抽樣前的隨機變項（random variable）；<span class="math inline">\(\mu\)</span>：母體平均數；<span class="math inline">\(\bar X\)</span>：樣本平均數。</p>
+<p><strong>步驟 1</strong>　在每個離差中，先加再減 <span class="math inline">\(\bar X\)</span>：</p>
 <p><span class="math display">\[X_i-\mu=(X_i-\bar X)+(\bar X-\mu)\]</span></p>
-<p>平方加總，交叉項因 <span class="math inline">\(\sum(X_i-\bar X)=0\)</span> 消失：</p>
-<p><span class="math display">\[\sum(X_i-\mu)^2=\sum(X_i-\bar X)^2+n(\bar X-\mu)^2\]</span></p>
 <div class="fragment">
-<p><span class="math display">\[\operatorname{SS}=\sum(X_i-\mu)^2-n(\bar X-\mu)^2\]</span></p>
+<p><strong>步驟 2</strong>　兩邊平方，用 <span class="math inline">\((a+b)^2=a^2+2ab+b^2\)</span>，其中 <span class="math inline">\(a=X_i-\bar X\)</span>、<span class="math inline">\(b=\bar X-\mu\)</span>：</p>
+<p><span class="math display">\[(X_i-\mu)^2=(X_i-\bar X)^2+2(X_i-\bar X)(\bar X-\mu)+(\bar X-\mu)^2\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>步驟 3</strong>　對 <span class="math inline">\(i=1,\dots,n\)</span> 逐項加總：</p>
+<p><span class="math display">\[\sum(X_i-\mu)^2=\sum(X_i-\bar X)^2+\sum 2(X_i-\bar X)(\bar X-\mu)+\sum(\bar X-\mu)^2\]</span></p>
+</div>
+<div class="section-ref">
+<p>本課程補充代數推導；本頁 Σ 均對 i=1,…,n 加總；不要求常態</p>
+</div>
+</section>
+<section id="p2-15c2" class="slide level2">
+<h2>估計中心，會減少平方和（2）：交叉項為零</h2>
+<p>上一頁加總後，中間項與最後一項還要化簡。</p>
+<p><strong>交叉項</strong>：<span class="math inline">\(2(\bar X-\mu)\)</span> 不含 <span class="math inline">\(i\)</span>，可提到 Σ 外面。</p>
+<p><span class="math display">\[\sum 2(X_i-\bar X)(\bar X-\mu)=2(\bar X-\mu)\sum(X_i-\bar X)\]</span></p>
+<div class="fragment">
+<p>離差總和為 0：<span class="math inline">\(\sum(X_i-\bar X)=\sum X_i-n\bar X=n\bar X-n\bar X=0\)</span>，所以交叉項等於 0。</p>
+</div>
+<div class="fragment">
+<p><strong>最後一項</strong>：<span class="math inline">\((\bar X-\mu)^2\)</span> 也不含 <span class="math inline">\(i\)</span>，加 <span class="math inline">\(n\)</span> 次：</p>
+<p><span class="math display">\[\sum(\bar X-\mu)^2=n(\bar X-\mu)^2\]</span></p>
+</div>
+<div class="fragment">
+<p>代回上一頁，並把 <span class="math inline">\(\operatorname{SS}=\sum(X_i-\bar X)^2\)</span> 移項：</p>
+<p><span class="math display">\[\sum(X_i-\mu)^2=\operatorname{SS}+0+n(\bar X-\mu)^2\;\Longrightarrow\;\operatorname{SS}=\sum(X_i-\mu)^2-n(\bar X-\mu)^2\]</span></p>
 <p>樣本平均數讓平方和更小，差額是 <span class="math inline">\(n(\bar X-\mu)^2\)</span>。</p>
 </div>
 <div class="section-ref">
@@ -1495,35 +1520,84 @@ HT3001B 生物統計學與 R
 </div>
 </section>
 <section id="p2-15d" class="slide level2">
-<h2>重複抽樣：平均數有多大變異？</h2>
-<p>假設獨立且同分配（independent and identically distributed），有限變異數為 <span class="math inline">\(\sigma^2\)</span>。</p>
+<h2>重複抽樣：平均數有多大變異？（1）規則與第一步</h2>
+<p>假設 <span class="math inline">\(X_1,\dots,X_n\)</span> 獨立且同分配（independent and identically distributed），每個 <span class="math inline">\(X_i\)</span> 的變異數為 <span class="math inline">\(\sigma^2\)</span>。</p>
+<p>規則：常數倍 <span class="math inline">\(\operatorname{Var}(cY)=c^2\operatorname{Var}(Y)\)</span>；獨立時可加 <span class="math inline">\(\operatorname{Var}\left(\sum X_i\right)=\sum\operatorname{Var}(X_i)\)</span>。</p>
+<div class="fragment">
+<p><strong>第 1 步</strong>　平均數的定義：</p>
+<p><span class="math display">\[\operatorname{Var}(\bar X)=\operatorname{Var}\left(\frac{1}{n}\sum_{i=1}^{n}X_i\right)\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>第 2 步</strong>　常數倍規則，<span class="math inline">\(c=1/n\)</span>，提出時變成 <span class="math inline">\(c^2=(1/n)^2=1/n^2\)</span>：</p>
+<p><span class="math display">\[\operatorname{Var}(\bar X)=\frac{1}{n^2}\operatorname{Var}\left(\sum_{i=1}^{n}X_i\right)\]</span></p>
+</div>
+<div class="section-ref">
+<p>本課程補充推導；接 IMS Chapter 19 p.333 的平均數 SE；非 loan50 抽樣設計查核</p>
+</div>
+</section>
+<section id="p2-15d1" class="slide level2">
+<h2>重複抽樣：平均數有多大變異？（2）代入 σ²</h2>
+<p>接上一頁：<span class="math inline">\(\operatorname{Var}(\bar X)=\dfrac{1}{n^2}\operatorname{Var}\left(\sum X_i\right)\)</span>。</p>
+<p><strong>第 3 步</strong>　<span class="math inline">\(X_i\)</span> 相互獨立，變異數逐項相加：</p>
+<p><span class="math display">\[\operatorname{Var}(\bar X)=\frac{1}{n^2}\sum_{i=1}^{n}\operatorname{Var}(X_i)\]</span></p>
+<div class="fragment">
+<p><strong>第 4 步</strong>　每一項都是 <span class="math inline">\(\operatorname{Var}(X_i)=\sigma^2\)</span>，共 <span class="math inline">\(n\)</span> 項：</p>
+<p><span class="math display">\[\operatorname{Var}(\bar X)=\frac{1}{n^2}\left(\sigma^2+\cdots+\sigma^2\right)=\frac{n\sigma^2}{n^2}=\frac{\sigma^2}{n}\]</span></p>
+</div>
+<div class="fragment">
+<p>開平方，得平均數的標準誤：<span class="math inline">\(\operatorname{SE}(\bar X)=\sqrt{\sigma^2/n}=\sigma/\sqrt n\)</span>。</p>
+</div>
+<div class="section-ref">
+<p>本課程補充推導；接 IMS Chapter 19 p.333 的平均數 SE；非 loan50 抽樣設計查核</p>
+</div>
+</section>
+<section id="p2-15d2" class="slide level2">
+<h2>重複抽樣：平均數有多大變異？（3）期望值</h2>
+<p>期望值（expected value）<span class="math inline">\(\operatorname{E}\)</span> 是重複抽樣的長期平均。規則：加總的期望值等於期望值的加總，不需要獨立。每個 <span class="math inline">\(X_i\)</span> 都來自同一母體，所以 <span class="math inline">\(\operatorname{E}(X_i)=\mu\)</span>。</p>
 <p><span class="math display">\[
 \begin{aligned}
-\operatorname{Var}(\bar X)
-&amp;=\operatorname{Var}\left(\frac{1}{n}\sum_{i=1}^{n}X_i\right)\\
-&amp;=\frac{1}{n^2}\sum_{i=1}^{n}\operatorname{Var}(X_i)\\
-&amp;=\frac{n\sigma^2}{n^2}=\frac{\sigma^2}{n}.
+\operatorname{E}(\bar X)
+&amp;=\operatorname{E}\left(\frac{1}{n}\sum_{i=1}^{n}X_i\right) \quad\text{(a)}\\
+&amp;=\frac{1}{n}\sum_{i=1}^{n}\operatorname{E}(X_i) \quad\text{(b)}\\
+&amp;=\frac{1}{n}\left(\mu+\cdots+\mu\right)=\frac{n\mu}{n}=\mu \quad\text{(c)}
 \end{aligned}
 \]</span></p>
-<p>獨立性使變異數可加總。期望值（expected value）<span class="math inline">\(\operatorname{E}\)</span> 是重複抽樣的長期平均：</p>
-<p><span class="math display">\[\operatorname{E}(\bar X)=\frac{1}{n}\sum_{i=1}^{n}\operatorname{E}(X_i)=\mu\]</span></p>
+<p>（a）平均數的定義　（b）常數提出，期望值逐項加總　（c）每項 <span class="math inline">\(\operatorname{E}(X_i)=\mu\)</span>，共 <span class="math inline">\(n\)</span> 項</p>
+<p>重複抽樣時，樣本平均數的長期平均等於母體平均數 <span class="math inline">\(\mu\)</span>。</p>
 <div class="section-ref">
 <p>本課程補充推導；接 IMS Chapter 19 p.333 的平均數 SE；非 loan50 抽樣設計查核</p>
 </div>
 </section>
 <section id="p2-15e" class="slide level2">
-<h2>除以 n−1，校正平均低估</h2>
-<p><span class="math inline">\(\operatorname{E}\)</span> 表示重複抽樣的長期平均。</p>
-<p>因 <span class="math inline">\(\operatorname{E}(\bar X)=\mu\)</span>，有 <span class="math inline">\(\operatorname{E}[(\bar X-\mu)^2]=\sigma^2/n\)</span>。</p>
+<h2>除以 n−1，校正平均低估（1）：SS 的期望值</h2>
+<p>目標：算出 <span class="math inline">\(\operatorname{E}(\operatorname{SS})\)</span>，其中 <span class="math inline">\(\operatorname{SS}=\sum(X_i-\mu)^2-n(\bar X-\mu)^2\)</span>。對兩項各取期望值。</p>
+<p><strong>第一項</strong>：<span class="math inline">\(\sigma^2\)</span> 的定義就是 <span class="math inline">\(\operatorname{E}[(X_i-\mu)^2]=\sigma^2\)</span>。</p>
+<p><span class="math display">\[\operatorname{E}\left[\sum_{i=1}^{n}(X_i-\mu)^2\right]=\sum_{i=1}^{n}\operatorname{E}[(X_i-\mu)^2]=n\sigma^2\]</span></p>
+<div class="fragment">
+<p><strong>第二項</strong>：因 <span class="math inline">\(\operatorname{E}(\bar X)=\mu\)</span>，<span class="math inline">\(\operatorname{E}[(\bar X-\mu)^2]\)</span> 正是 <span class="math inline">\(\bar X\)</span> 的變異數，即上一組推導的 <span class="math inline">\(\sigma^2/n\)</span>。</p>
+<p><span class="math display">\[\operatorname{E}\left[n(\bar X-\mu)^2\right]=n\cdot\operatorname{E}[(\bar X-\mu)^2]=n\cdot\frac{\sigma^2}{n}=\sigma^2\]</span></p>
+</div>
+<div class="section-ref">
+<p>本課程補充推導；n&gt;1、獨立同分配、有限變異數</p>
+</div>
+</section>
+<section id="p2-15e2" class="slide level2">
+<h2>除以 n−1，校正平均低估（2）：不偏</h2>
+<p>兩項相減：</p>
 <p><span class="math display">\[
 \begin{aligned}
 \operatorname{E}(\operatorname{SS})
-&amp;=n\sigma^2-n\frac{\sigma^2}{n}\\
-&amp;=(n-1)\sigma^2.
+&amp;=\operatorname{E}\left[\sum(X_i-\mu)^2\right]-\operatorname{E}\left[n(\bar X-\mu)^2\right]\\
+&amp;=n\sigma^2-\sigma^2=(n-1)\sigma^2.
 \end{aligned}
 \]</span></p>
 <div class="fragment">
-<p><span class="math display">\[\operatorname{E}(s^2)=\frac{\operatorname{E}(\operatorname{SS})}{n-1}=\sigma^2\]</span></p>
+<p><strong>除以 <span class="math inline">\(n\)</span></strong>：平均而言偏低。</p>
+<p><span class="math display">\[\operatorname{E}\left(\frac{\operatorname{SS}}{n}\right)=\frac{(n-1)\sigma^2}{n}&lt;\sigma^2\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>除以 <span class="math inline">\(n-1\)</span></strong>：剛好校正。</p>
+<p><span class="math display">\[\operatorname{E}(s^2)=\operatorname{E}\left(\frac{\operatorname{SS}}{n-1}\right)=\frac{(n-1)\sigma^2}{n-1}=\sigma^2\]</span></p>
 <p>不偏估計（unbiased estimation）不保證單次樣本估得正確。</p>
 </div>
 <div class="section-ref">
