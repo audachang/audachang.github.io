@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="線上實驗平台的反應時間與刺激呈現時間：穩定度與速度的文獻調查（2026-10-02）。">
+<title>線上實驗平台計時調查</title>
+<style>
+:root{--bg:#f6f4ef;--fg:#1d2329;--mut:#5b6670;--acc:#0b6e69;--acc2:#b4501f;--card:#fff;--line:#d9d5ca;--bar:#0b6e69}
+@media (prefers-color-scheme:dark){:root{--bg:#14181c;--fg:#e8e6df;--mut:#9aa5ae;--acc:#4fc3bb;--acc2:#e89a6b;--card:#1c2228;--line:#2f383f;--bar:#4fc3bb}}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+.deck{height:100%;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;padding:clamp(20px,5vh,56px) clamp(16px,6vw,88px) 64px;display:none;flex-direction:column;overflow-y:auto}
+.slide.on{display:flex}
+.eyebrow{font-size:clamp(11px,1.5vw,14px);letter-spacing:.12em;color:var(--acc);font-weight:600;margin:0 0 8px}
+h1{font-size:clamp(28px,5.2vw,56px);line-height:1.2;margin:0 0 16px}
+h2{font-size:clamp(22px,3.4vw,38px);line-height:1.25;margin:0 0 18px}
+p,li{font-size:clamp(15px,2vw,22px);line-height:1.65}
+.sub{color:var(--mut);font-size:clamp(14px,1.8vw,20px)}
+ul{padding-left:1.2em;margin:.3em 0}
+li{margin:.35em 0}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+.card h3{margin:0 0 6px;font-size:clamp(16px,2vw,21px);color:var(--acc)}
+.card p,.card li{font-size:clamp(14px,1.7vw,18px);margin:.2em 0}
+.big{font-size:clamp(34px,6vw,64px);font-weight:700;color:var(--acc2);line-height:1}
+table{border-collapse:collapse;width:100%;font-size:clamp(12px,1.55vw,17px)}
+th,td{border-bottom:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:.9em}
+.bars{margin:8px 0}
+.row{padding-right:90px;display:grid;grid-template-columns:clamp(80px,14vw,150px) 1fr;align-items:center;gap:10px;margin:9px 0;font-size:clamp(13px,1.7vw,18px)}
+.track{position:relative;height:22px;background:var(--card);border:1px solid var(--line);border-radius:4px}
+.fill{position:absolute;top:3px;bottom:3px;background:var(--bar);border-radius:3px;opacity:.9}
+.lab{position:absolute;top:-1px;font-size:.85em;color:var(--mut);white-space:nowrap}
+.axis{padding-right:90px;display:grid;grid-template-columns:clamp(80px,14vw,150px) 1fr;gap:10px;color:var(--mut);font-size:12px}
+.axis div:last-child{display:flex;justify-content:space-between}
+.note{color:var(--mut);font-size:clamp(12px,1.4vw,15px);margin-top:auto;padding-top:10px}
+.warn{border-left:4px solid var(--acc2);padding-left:14px}
+.nav{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;gap:10px;padding:10px clamp(16px,6vw,88px);background:linear-gradient(transparent,var(--bg) 40%);font-size:14px;color:var(--mut)}
+.nav button{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px 12px;font-size:14px;cursor:pointer}
+.nav button:focus-visible{outline:2px solid var(--acc)}
+.prog{flex:1;height:3px;background:var(--line);border-radius:2px}
+.prog i{display:block;height:100%;background:var(--acc);width:0;border-radius:2px}
+a{color:var(--acc)}
+@media print{.slide{display:flex!important;position:relative;page-break-after:always;height:auto;min-height:100vh}.nav{display:none}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<section class="slide on" aria-label="封面">
+  <p class="eyebrow">ACL@NCU · 文獻調查 · 2026-10-02</p>
+  <h1>線上實驗平台：<br>反應時間與刺激呈現時間的穩定度與速度</h1>
+  <p class="sub">PsychoJS／Pavlovia、jsPsych、Gorilla、lab.js、Testable 等平台的第三方量測證據，以及對研究設計的含意。</p>
+  <p class="sub">張智宏　國立中央大學認知神經科學研究所<br>鍵盤 ← → 或點擊右下按鈕換頁</p>
+  <p class="note">本調查依文獻與官方文件整理，未自行實測；網頁抓取為摘要層級，引用數字前請回原文核對。</p>
+</section>
+
+<section class="slide" aria-label="三個問題">
+  <p class="eyebrow">01 · 問題拆解</p>
+  <h2>線上計時其實是三個互相獨立的問題</h2>
+  <div class="grid">
+    <div class="card"><h3>刺激呈現</h3><p>時長只能是 frame 的整數倍：60 Hz = 16.7 ms，120 Hz = 8.3 ms，144 Hz = 6.9 ms。瀏覽器可能掉 frame，使時長偏長或偏短。</p></div>
+    <div class="card"><h3>反應時間</h3><p>USB 輪詢（一般鍵盤約 8 ms）、作業系統、瀏覽器事件佇列與時間戳疊加。多為固定偏移，少部分是隨機雜訊。</p></div>
+    <div class="card"><h3>音訊</h3><p>Web Audio 輸出延遲因裝置而異，網頁端只能估計，無法精確得知。</p></div>
+  </div>
+  <p>固定偏移在受試者內設計中會相消；隨機雜訊可用少量額外試次補償；<b>掉 frame 與音訊起始漂移</b>才會直接破壞需要精確時長的作業。</p>
+</section>
+
+<section class="slide" aria-label="視覺刺激">
+  <p class="eyebrow">02 · 視覺刺激呈現</p>
+  <h2>多數平台在桌機 Chrome 上，試次間變異只有數毫秒</h2>
+  <p class="sub" style="margin-top:-8px">視覺時長的試次間變異範圍（ms），Bridges et al. (2020) Table 3，跨瀏覽器與作業系統</p>
+  <div class="bars" id="bars"></div>
+  <div class="axis"><div></div><div><span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span><span>12 ms</span></div></div>
+  <ul>
+    <li>Anwyl-Irvine et al. (2021)：lab.js 視覺延遲最大 16.49 ms，即 60 Hz 下一個 frame。</li>
+    <li>Pronk et al. (2020)：rAF 使 81.0% 的試次剛好是要求的時長；CSS animation 僅約 24%。macOS 的 Chrome 與 Safari 在 100 ms 以內的短刺激常偏短。</li>
+  </ul>
+</section>
+
+<section class="slide" aria-label="反應時間">
+  <p class="eyebrow">03 · 反應時間</p>
+  <h2>精密度尚可，絕對延遲才是問題</h2>
+  <div class="grid">
+    <div class="card"><div class="big">&lt; 10 ms</div><p>試次間 SD。Bridges et al.：所有情況皆在 10 ms 內，PsychoJS 在所有組合都低於 4 ms。Gorilla 的 SD 為 8.25 ms（Anwyl-Irvine et al.）。</p></div>
+    <div class="card"><div class="big">25–100 ms</div><p>絕對延遲：比真實反應晚。Gorilla 約 80 ms；Pronk et al. 的觸控與鍵盤裝置約 57–96 ms；iOS 最少，macOS 最多。</p></div>
+    <div class="card"><div class="big">0.12–0.21</div><p>裝置雜訊使絕對 RT 信度的下降幅度；相對 RT（條件差）僅下降 0.012 以下（Pronk et al.）。</p></div>
+  </div>
+  <p class="warn">結論：受試者內、條件相減的分析可靠。絕對 RT 與跨受試者比較，約需多 10% 受試者（Pronk；Reimers &amp; Stewart, 2015）。</p>
+</section>
+
+<section class="slide" aria-label="音訊">
+  <p class="eyebrow">04 · 音訊</p>
+  <h2>瀏覽器平台最弱的一環</h2>
+  <ul>
+    <li>Bridges et al.：「沒有任何線上系統能提供起始時間精確的音訊」，視聽同步所有套件都在苦戰。</li>
+    <li>Gorilla 的音訊延遲依瀏覽器約 88 ms 至 200 ms 以上（取自第二手整理，待核對原表）。</li>
+    <li>Monen et al. (2025)，Electron 桌面版：音訊播放約晚 26–30 ms，錄音起始偏差 59–85 ms。</li>
+  </ul>
+  <p class="warn">需要精確聲音起始或視聽同步的作業，不建議放在線上，或另做外部量測。</p>
+</section>
+
+<section class="slide" aria-label="核心研究">
+  <p class="eyebrow">05 · 核心實證研究</p>
+  <h2>外部硬體量測的證據集中在 2015–2022 年</h2>
+  <table>
+    <tr><th>研究</th><th>量測方式</th><th>要點</th></tr>
+    <tr><td>Bridges et al. 2020 (PeerJ)</td><td>BBTK；5 個線上平台；Win／macOS／Linux</td><td>視覺與 RT 精密度佳；音訊不可靠</td></tr>
+    <tr><td>Anwyl-Irvine et al. 2021 (BRM)</td><td>BBTK 加機械手指；4 平台</td><td>無單一最佳平台；Gorilla RT SD 最低</td></tr>
+    <tr><td>Pronk et al. 2020 (BRM)</td><td>3000 Hz 光學感測加電磁閥；手機、桌機</td><td>rAF 優於 CSS animation；RT 皆高估</td></tr>
+    <tr><td>Reimers &amp; Stewart 2015 (BRM)</td><td>BBTK；約 19 台 Windows</td><td>時長偏長 5–25 ms；受試者內 RT 幾乎不受影響</td></tr>
+    <tr><td>Lukács &amp; Gartus 2022 (BRM)</td><td>光電二極體加邏輯分析儀；60 Hz</td><td>rAF loop 近乎硬體雜訊，但多 1 frame；Linux 較差</td></tr>
+    <tr><td>Semmelmann &amp; Weigelt 2017 (BRM)</td><td>三種情境重做五個範式</td><td>遠端多約 87 ms；masked priming 未複製</td></tr>
+    <tr><td>Monen et al. 2025 (Front Hum Neurosci)</td><td>Frinex（Electron）</td><td>視覺誤差 −5 至 7 ms；RT 延遲 81–136 ms</td></tr>
+  </table>
+</section>
+
+<section class="slide" aria-label="平台比較">
+  <p class="eyebrow">06 · 平台比較（查詢日 2026-10-02）</p>
+  <h2>平台差異小於瀏覽器與硬體組合的差異</h2>
+  <table>
+    <tr><th>平台</th><th>類型</th><th>驗證現況</th><th>費用</th></tr>
+    <tr><td>PsychoJS／Pavlovia</td><td>建構器＋託管</td><td>RT 精密度最佳（&lt;4 ms）；絕對延遲範圍寬</td><td>每位受試者 £0.26，或機構授權 £2,000 起</td></tr>
+    <tr><td>jsPsych</td><td>函式庫</td><td>v6 已測；<b>v8 未能確認</b></td><td>免費（MIT），自備託管</td></tr>
+    <tr><td>Gorilla</td><td>商用，託管</td><td>RT SD 最低；音訊延遲大</td><td>約 £1.09／位（學術，最少 25）</td></tr>
+    <tr><td>lab.js</td><td>函式庫＋建構器</td><td>視覺變異最高 10.22 ms（Ubuntu Firefox）</td><td>授權待確認</td></tr>
+    <tr><td>Testable</td><td>商用，託管</td><td>視覺變異 2.94–8.38 ms</td><td>免費層（限實驗室）；$299／$699 每年</td></tr>
+    <tr><td>Inquisit Web、E-Prime Go</td><td>下載型引擎</td><td>只有官方宣稱與舊驗證</td><td>未能確認</td></tr>
+    <tr><td>OSWeb、Labvanced、FindingFive</td><td>各異</td><td>無第三方量測</td><td>未能確認</td></tr>
+  </table>
+  <p class="note">Qualtrics／SoSci 內建計時準確度約 100 ms 量級，不適合作為精確 RT 的主要平台。</p>
+</section>
+
+<section class="slide" aria-label="穩定度">
+  <p class="eyebrow">07 · 伺服器端穩定度</p>
+  <h2>公開資訊遠少於計時精確度</h2>
+  <ul>
+    <li><b>Pavlovia</b>：2025-12-27 至 28 日因安全更新停機約一天；token 每 2 小時過期；PsychoPy 2025.1.0 之前的版本無法登入。已上線研究的受試者端不受影響（停機時段除外）。</li>
+    <li><b>Gorilla、Testable、Labvanced、FindingFive</b>：未找到 uptime 紀錄或 SLA。</li>
+    <li><b>JATOS</b>（Apache 2.0）：可自架，穩定度取決於機構；ESCoP 的 MindProbe 提供免費雲端實例。</li>
+    <li><b>招募</b>：Prolific 學術服務費 33.3%。有報導稱 MTurk 自 2026-07-30 起不再接新客戶（二手來源，未見 Amazon 公告）。</li>
+  </ul>
+  <p class="warn">穩定度若是關鍵條件，請直接向供應商索取正式 uptime，或先做小規模壓力測試。</p>
+</section>
+
+<section class="slide" aria-label="建議">
+  <p class="eyebrow">08 · 設計與驗證建議</p>
+  <h2>把計時問題轉成可控的設計條件</h2>
+  <div class="grid">
+    <div class="card"><h3>分析</h3><ul><li>受試者內設計，用條件差</li><li>避免跨人比較絕對 RT</li><li>鍵盤雜訊約損失 0.05 的檢定力，可多 5 人或每條件多 5–10 試次（Gómez et al. 2025 預印本）</li></ul></div>
+    <div class="card"><h3>實作</h3><ul><li>以 frame 數指定時長，用 rAF</li><li>預先載入所有素材</li><li>記錄更新率、瀏覽器、OS、裝置</li><li>避免約 50 ms 以下的精確短刺激（如 masked priming）</li></ul></div>
+    <div class="card"><h3>驗證</h3><ul><li>對自己的刺激與典型硬體做光電二極體或機械手指量測</li><li>音訊另行驗證</li><li>在論文中報告驗證結果（Plant &amp; Quinlan, 2013）</li></ul></div>
+  </div>
+</section>
+
+<section class="slide" aria-label="缺口">
+  <p class="eyebrow">09 · 缺口與待核對</p>
+  <h2>最缺的是 2020 年之後的重測</h2>
+  <ul>
+    <li><b>缺口</b>：jsPsych 8、新版 Pavlovia、120／144 Hz 螢幕、新版 Safari 與 Firefox、Android、網頁 VRR、遊戲手把延遲，都沒找到系統性外部量測。</li>
+    <li><b>數字衝突</b>：Bridges et al. 個別數字（如 Gorilla Safari 30.11 ms）與 Table 3 範圍不一致；Pronk et al. RT 高估上限一次讀到約 96 ms、另一次約 115 ms。引用前請回原文逐格核對。</li>
+    <li><b>下一步</b>：用光電二極體加 Arduino，在 Windows Chrome、macOS Safari、macOS Chrome 上測 jsPsych 8、PsychoJS／Pavlovia、Gorilla 的 16.7、50、100 ms 視覺時長與按鍵 RT。</li>
+  </ul>
+  <p class="note">主要文獻：Bridges et al. 2020 PeerJ 9414；Anwyl-Irvine et al. 2021 BRM doi:10.3758/s13428-020-01501-5；Pronk et al. 2020 BRM doi:10.3758/s13428-019-01321-2；Reimers &amp; Stewart 2015 BRM；Lukács &amp; Gartus 2022 BRM doi:10.3758/s13428-022-01835-2；Plant &amp; Quinlan 2013 CABN doi:10.3758/s13415-013-0166-6。完整清單見報告檔案。</p>
+</section>
+
+</div>
+<div class="nav"><button id="prev" aria-label="上一頁">←</button><button id="next" aria-label="下一頁">→</button><div class="prog"><i id="pi"></i></div><span id="pg">1 / 10</span></div>
+<script>
+(function(){
+  var data=[["PsychoJS",0.67,6.47],["Gorilla",0.94,7.15],["jsPsych",4.21,7.04],["lab.js",1.19,10.22],["Testable",2.94,8.38]];
+  var b=document.getElementById("bars");
+  data.forEach(function(d){
+    var r=document.createElement("div");r.className="row";
+    r.innerHTML='<div>'+d[0]+'</div><div class="track"><div class="fill" style="left:'+d[1]*100/12+'%;width:'+(d[2]-d[1])*100/12+'%"></div><span class="lab" style="left:calc('+d[2]*100/12+'% + 6px)">'+d[1]+'–'+d[2]+'</span></div>';
+    b.appendChild(r);
+  });
+  var s=[].slice.call(document.querySelectorAll(".slide")),i=0;
+  function go(n){
+    i=Math.max(0,Math.min(s.length-1,n));
+    s.forEach(function(e,k){e.classList.toggle("on",k===i)});
+    s[i].scrollTop=0;
+    document.getElementById("pg").textContent=(i+1)+" / "+s.length;
+    document.getElementById("pi").style.width=((i+1)/s.length*100)+"%";
+    try{history.replaceState(null,"","#"+(i+1))}catch(e){}
+  }
+  document.getElementById("prev").onclick=function(){go(i-1)};
+  document.getElementById("next").onclick=function(){go(i+1)};
+  document.addEventListener("keydown",function(e){
+    if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){e.preventDefault();go(i+1)}
+    if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();go(i-1)}
+    if(e.key==="Home")go(0);if(e.key==="End")go(s.length-1);
+  });
+  var x0=null;
+  document.addEventListener("touchstart",function(e){x0=e.touches[0].clientX},{passive:true});
+  document.addEventListener("touchend",function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(i+(d<0?1:-1));x0=null});
+  var h=parseInt(location.hash.slice(1),10);if(h)go(h-1);else go(0);
+})();
+</script>
+</body>
+</html>
