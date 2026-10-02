@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Week 02 作業回饋：用實際結果寫結論、核對資料結構，並完成繳交前檢查。">
+<title>Week 02 作業回饋｜HT3001B</title>
+<style>:root {
+  color-scheme: light;
+  --ink: #252525;
+  --muted: #626262;
+  --accent: #9b400d;
+  --line: #dededb;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #f6f6f4;
+  color: var(--ink);
+  font-family: "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+main {
+  max-width: 880px;
+  margin: 44px auto;
+  padding: 46px 64px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+h1, h2 { line-height: 1.45; font-weight: 700; color: #161616; }
+h1 { margin: 0; font-size: 2rem; letter-spacing: .01em; }
+h1 + p { margin-top: .45em; color: var(--muted); }
+h2 { margin: 2em 0 .6em; padding-top: .9em; border-top: 1px solid var(--line); font-size: 1.32rem; }
+p { margin: .8em 0; }
+strong { font-weight: 700; }
+blockquote {
+  margin: 1.1em 0;
+  border-left: 4px solid var(--accent);
+  background: #faf7f3;
+  padding: .4em 1em;
+}
+blockquote strong { color: var(--accent); }
+ul { margin: .7em 0; padding-left: 1.5em; }
+li { margin: .65em 0; padding-left: .1em; }
+code { font-family: Consolas, "Cascadia Code", monospace; font-size: .91em; background: #f0f0ee; padding: .12em .25em; border-radius: 3px; }
+pre { padding: 18px 20px; border: 1px solid var(--line); border-radius: 5px; background: #f7f7f5; overflow-x: auto; overflow-wrap: normal; line-height: 1.65; }
+pre code { background: none; padding: 0; white-space: pre; font-size: 15px; }
+hr { margin-top: 2em; border: 0; border-top: 1px solid var(--line); }
+hr + p { font-size: 14px; color: var(--muted); }
+@media (max-width: 640px) {
+  body { font-size: 17px; background: #fff; }
+  main { width: 100%; margin: 0; padding: 28px 22px; border: 0; border-radius: 0; }
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.22rem; }
+  pre { padding: 14px; }
+  pre code { font-size: 13px; }
+}
+@media print {
+  body { font-size: 11pt; background: #fff; }
+  main { max-width: none; margin: 0; padding: 0; border: 0; }
+  h2 { break-after: avoid; margin-top: 1.2em; }
+  blockquote, pre { break-inside: avoid; }
+  pre { white-space: pre-wrap; }
+  pre code { white-space: pre-wrap; font-size: 9pt; }
+}
+</style>
+</head>
+<body>
+<main aria-label="Week 02 作業回饋">
+<h1>Week 02 作業回饋</h1>
+<p>把分析結果說清楚，讓下一份作業更完整。</p>
+<p>這次 42 份作業中，多數程式已能得到正確結果。接下來最值得加強的是：<strong>用實際輸出回答問題，並交代資料能支持的結論。</strong> 以下五點可直接用在往後的作業。</p>
+<h2>1. 用「對象＋數值＋單位＋方向」寫結論</h2>
+<p>「若平均差為正，代表週末較多」只說明判讀規則。程式跑完後，請改成實際結果，並確認文字、表格與程式輸出一致。</p>
+<blockquote>
+<p><strong>第 1 題示範：</strong> 這 421 位吸菸者平日平均每日 13.75 支、週末 16.41 支；週末減平日的平均差為 <strong>2.66 支／日</strong>。散布圖呈整體正向關係。</p>
+</blockquote>
+<p>平均差描述整體，不能套用到每個人。這份資料有 230 人兩天相同、166 人週末較多、25 人週末較少，所以也不能寫「多數人週末抽得更多」。散布圖的點可能重疊，要比較人數時應由資料計算。</p>
+<h2>2. 每次整理資料後，都確認分析對象</h2>
+<p>讀回 CSV 後，查看列數、欄名與 R 儲存型態；後續使用讀回的資料。篩選吸菸者後，確認 <strong>421 列、兩個支數欄都沒有缺值</strong>。兩欄已是每日支數，不用再除以 5 或 2。</p>
+<pre><code class="language-r">smokers &lt;- smoking_from_file |&gt;
+  filter(smoke == &quot;Yes&quot;)
+nrow(smokers)                        # 421
+sum(is.na(smokers$amt_weekdays))     # 0
+sum(is.na(smokers$amt_weekends))     # 0
+</code></pre>
+<p>小心後面的指定把篩選結果覆蓋掉：即使 <code>na.rm = TRUE</code> 算出的平均數看似正確，資料仍可能包含全部 1,691 人。<strong>數值合理，不代表資料範圍正確。</strong></p>
+<p>第 2 題的次數與比例也要由資料計算，再核對 131＋103＝234；不要直接把範例數字打進程式。</p>
+<h2>3. 七問要交代資料結構與檢查方式</h2>
+<ul>
+<li><strong>第 3 問：欄位、角色、型態都要寫。</strong> 吸菸支數是數值型計數資料，<code>smoke</code> 是篩選用的類別欄位。R 的 <code>double</code> 是儲存型態，不代表統計上一定是連續變項。若用平日支數解釋或預測週末支數，要說明這是關聯問題，不能因此宣稱因果。</li>
+<li><strong>第 5 問：分開談同一人與不同人。</strong> 同一人的平日與週末支數是配對資料（paired data），421 人是 421 組配對。不同受訪者是否因同戶或同地區而相依，需查抽樣資訊；不知道時，寫明待確認。</li>
+<li><strong>第 6 問：至少列出兩項可執行的檢查。</strong> 例如查看缺值、確認單位、核對分組代碼或加總筆數。只算描述性平均數，不必先假設常態分布。</li>
+<li><strong>第 7 問：用結果回答研究問題。</strong> 寫出實際數值，再說明至少一項資料無法支持的結論及理由；不要保留分析前的「預計報告……」。</li>
+</ul>
+<h2>4. 圖表有什麼，結論才說什麼</h2>
+<blockquote>
+<p><strong>第 2 題示範：</strong><code>mpg</code> 的 234 筆車款／規格紀錄中，4WD 有 103 筆，占 <strong>44.02%</strong>。這是資料紀錄的比例，不能直接當成道路車輛的比例。</p>
+</blockquote>
+<p>同一車款可能有多筆紀錄；若想描述路上的車，還需要相應地區與年份的車輛數、抽樣或登錄資料。</p>
+<p>驅動方式次數圖沒有燃油效率資訊。要比較兩組的高速公路燃油效率，需要加入 <code>hwy</code>（英里／加侖），依 <code>drive_group</code> 比較平均數或分布；<code>hwy</code> 越高，代表每加侖能行駛越遠。本題只需提出分析方向。</p>
+<p>同樣地，吸菸調查可以描述差異與關聯，但沒有隨機分派，不能單憑這些結果說「週末休假造成吸菸增加」。</p>
+<h2>5. 交出前，用這份清單走一遍</h2>
+<ul>
+<li>重新啟動 R（Session → Restart R），每題各自從第一行跑完；套件分開載入，所需物件都在該題建立。</li>
+<li>核對篩選後的列數、缺值、單位，以及各類筆數的加總。</li>
+<li>確認提交的文字、表格與圖都是這次程式產生的結果。</li>
+<li>七問寫明觀察單位、配對或可能相依的關係；資訊不足時列出待確認事項。</li>
+<li>結論包含實際數值與適用範圍，避免把平均差寫成每個人的差異，或把關聯寫成因果。</li>
+<li>若使用 AI，依題目要求記錄<strong>提問內容</strong>，可用具體摘要或截圖。另附工具名稱、採用的建議與核對方式，有助於說明你的工作過程。</li>
+</ul>
+<p>下次作業先把這三件事做好：<strong>資料範圍正確、程式能完整重跑、結論對得上輸出。</strong></p>
+<hr>
+<p>HT3001B 生物統計學與 R · 依 Week 02 作業題目、參考解答與全班回饋整理 · 2026/10/02</p>
+
+</main>
+</body>
+</html>
