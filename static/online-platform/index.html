@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="線上實驗平台的反應時間與刺激呈現時間：穩定度與速度的文獻調查（2026-10-02）。">
+<meta name="description" content="Online experiment platform timing survey / 線上實驗平台的反應時間與刺激呈現時間：穩定度與速度的文獻調查（2026-10-02）。">
 <title>線上實驗平台計時調查</title>
 <style>
 :root{--bg:#f6f4ef;--fg:#1d2329;--mut:#5b6670;--acc:#0b6e69;--acc2:#b4501f;--card:#fff;--line:#d9d5ca;--bar:#0b6e69}
@@ -43,13 +43,13 @@ th{color:var(--mut);font-weight:600;font-size:.9em}
 .prog{flex:1;height:3px;background:var(--line);border-radius:2px}
 .prog i{display:block;height:100%;background:var(--acc);width:0;border-radius:2px}
 a{color:var(--acc)}
-@media print{.slide{display:flex!important;position:relative;page-break-after:always;height:auto;min-height:100vh}.nav{display:none}}
+@media print{.slide{display:flex!important;position:relative;page-break-after:always;height:auto;min-height:100vh}html[lang="en"] .slide[data-lang="zh"],html[lang="zh-Hant"] .slide[data-lang="en"]{display:none!important}.nav{display:none}}
 </style>
 </head>
 <body>
 <div class="deck" id="deck">
 
-<section class="slide on" aria-label="封面">
+<section class="slide" data-lang="zh" aria-label="封面">
   <p class="eyebrow">ACL@NCU · 文獻調查 · 2026-10-02</p>
   <h1>線上實驗平台：<br>反應時間與刺激呈現時間的穩定度與速度</h1>
   <p class="sub">PsychoJS／Pavlovia、jsPsych、Gorilla、lab.js、Testable 等平台的第三方量測證據，以及對研究設計的含意。</p>
@@ -57,7 +57,7 @@ a{color:var(--acc)}
   <p class="note">本調查依文獻與官方文件整理，未自行實測；網頁抓取為摘要層級，引用數字前請回原文核對。</p>
 </section>
 
-<section class="slide" aria-label="三個問題">
+<section class="slide" data-lang="zh" aria-label="三個問題">
   <p class="eyebrow">01 · 問題拆解</p>
   <h2>線上計時其實是三個互相獨立的問題</h2>
   <div class="grid">
@@ -68,11 +68,11 @@ a{color:var(--acc)}
   <p>固定偏移在受試者內設計中會相消；隨機雜訊可用少量額外試次補償；<b>掉 frame 與音訊起始漂移</b>才會直接破壞需要精確時長的作業。</p>
 </section>
 
-<section class="slide" aria-label="視覺刺激">
+<section class="slide" data-lang="zh" aria-label="視覺刺激">
   <p class="eyebrow">02 · 視覺刺激呈現</p>
   <h2>多數平台在桌機 Chrome 上，試次間變異只有數毫秒</h2>
   <p class="sub" style="margin-top:-8px">視覺時長的試次間變異範圍（ms），Bridges et al. (2020) Table 3，跨瀏覽器與作業系統</p>
-  <div class="bars" id="bars"></div>
+  <div class="bars"></div>
   <div class="axis"><div></div><div><span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span><span>12 ms</span></div></div>
   <ul>
     <li>Anwyl-Irvine et al. (2021)：lab.js 視覺延遲最大 16.49 ms，即 60 Hz 下一個 frame。</li>
@@ -80,7 +80,7 @@ a{color:var(--acc)}
   </ul>
 </section>
 
-<section class="slide" aria-label="反應時間">
+<section class="slide" data-lang="zh" aria-label="反應時間">
   <p class="eyebrow">03 · 反應時間</p>
   <h2>精密度尚可，絕對延遲才是問題</h2>
   <div class="grid">
@@ -91,7 +91,7 @@ a{color:var(--acc)}
   <p class="warn">結論：受試者內、條件相減的分析可靠。絕對 RT 與跨受試者比較，約需多 10% 受試者（Pronk；Reimers &amp; Stewart, 2015）。</p>
 </section>
 
-<section class="slide" aria-label="音訊">
+<section class="slide" data-lang="zh" aria-label="音訊">
   <p class="eyebrow">04 · 音訊</p>
   <h2>瀏覽器平台最弱的一環</h2>
   <ul>
@@ -102,7 +102,7 @@ a{color:var(--acc)}
   <p class="warn">需要精確聲音起始或視聽同步的作業，不建議放在線上，或另做外部量測。</p>
 </section>
 
-<section class="slide" aria-label="核心研究">
+<section class="slide" data-lang="zh" aria-label="核心研究">
   <p class="eyebrow">05 · 核心實證研究</p>
   <h2>外部硬體量測的證據集中在 2015–2022 年</h2>
   <table>
@@ -117,7 +117,7 @@ a{color:var(--acc)}
   </table>
 </section>
 
-<section class="slide" aria-label="平台比較">
+<section class="slide" data-lang="zh" aria-label="平台比較">
   <p class="eyebrow">06 · 平台比較（查詢日 2026-10-02）</p>
   <h2>平台差異小於瀏覽器與硬體組合的差異</h2>
   <table>
@@ -133,7 +133,7 @@ a{color:var(--acc)}
   <p class="note">Qualtrics／SoSci 內建計時準確度約 100 ms 量級，不適合作為精確 RT 的主要平台。</p>
 </section>
 
-<section class="slide" aria-label="穩定度">
+<section class="slide" data-lang="zh" aria-label="穩定度">
   <p class="eyebrow">07 · 伺服器端穩定度</p>
   <h2>公開資訊遠少於計時精確度</h2>
   <ul>
@@ -145,7 +145,7 @@ a{color:var(--acc)}
   <p class="warn">穩定度若是關鍵條件，請直接向供應商索取正式 uptime，或先做小規模壓力測試。</p>
 </section>
 
-<section class="slide" aria-label="建議">
+<section class="slide" data-lang="zh" aria-label="建議">
   <p class="eyebrow">08 · 設計與驗證建議</p>
   <h2>把計時問題轉成可控的設計條件</h2>
   <div class="grid">
@@ -155,7 +155,7 @@ a{color:var(--acc)}
   </div>
 </section>
 
-<section class="slide" aria-label="缺口">
+<section class="slide" data-lang="zh" aria-label="缺口">
   <p class="eyebrow">09 · 缺口與待核對</p>
   <h2>最缺的是 2020 年之後的重測</h2>
   <ul>
@@ -166,37 +166,172 @@ a{color:var(--acc)}
   <p class="note">主要文獻：Bridges et al. 2020 PeerJ 9414；Anwyl-Irvine et al. 2021 BRM doi:10.3758/s13428-020-01501-5；Pronk et al. 2020 BRM doi:10.3758/s13428-019-01321-2；Reimers &amp; Stewart 2015 BRM；Lukács &amp; Gartus 2022 BRM doi:10.3758/s13428-022-01835-2；Plant &amp; Quinlan 2013 CABN doi:10.3758/s13415-013-0166-6。完整清單見報告檔案。</p>
 </section>
 
+<section class="slide" data-lang="en" aria-label="Title">
+  <p class="eyebrow">ACL@NCU · LITERATURE SURVEY · 2026-10-02</p>
+  <h1>Online experiment platforms:<br>stability and speed of response-time and stimulus-timing</h1>
+  <p class="sub">Third-party measurements of PsychoJS/Pavlovia, jsPsych, Gorilla, lab.js, Testable and others, and what they mean for study design.</p>
+  <p class="sub">Erik Chang · Institute of Cognitive Neuroscience, National Central University<br>Use ← → keys or the buttons at the bottom to navigate</p>
+  <p class="note">Compiled from the literature and official documentation; no hardware measurements were made by the author. Web retrieval was at summary level, so please check numbers against the original papers before citing.</p>
+</section>
+
+<section class="slide" data-lang="en" aria-label="Three problems">
+  <p class="eyebrow">01 · BREAKING DOWN THE PROBLEM</p>
+  <h2>Online timing is really three separate problems</h2>
+  <div class="grid">
+    <div class="card"><h3>Stimulus presentation</h3><p>Durations can only be whole multiples of a frame: 60 Hz = 16.7 ms, 120 Hz = 8.3 ms, 144 Hz = 6.9 ms. Browsers can drop frames, making a stimulus too long or too short.</p></div>
+    <div class="card"><h3>Response time</h3><p>USB polling (about 8 ms for a typical keyboard), the operating system, the browser event queue and timestamp resolution add up. Mostly a fixed offset, with a smaller random component.</p></div>
+    <div class="card"><h3>Audio</h3><p>Web Audio output latency varies by device, and a web page can only estimate it, not know it exactly.</p></div>
+  </div>
+  <p>A fixed offset cancels out in within-subject designs, and random noise can be offset with a few extra trials. <b>Dropped frames and drifting audio onsets</b> are what directly break tasks that need exact durations.</p>
+</section>
+
+<section class="slide" data-lang="en" aria-label="Visual stimuli">
+  <p class="eyebrow">02 · VISUAL STIMULUS PRESENTATION</p>
+  <h2>On desktop Chrome, most platforms show only a few ms of trial-to-trial variability</h2>
+  <p class="sub" style="margin-top:-8px">Range of trial-to-trial variability of visual duration (ms), Bridges et al. (2020) Table 3, across browsers and operating systems</p>
+  <div class="bars"></div>
+  <div class="axis"><div></div><div><span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span><span>12 ms</span></div></div>
+  <ul>
+    <li>Anwyl-Irvine et al. (2021): lab.js had a maximum visual delay of 16.49 ms, one frame at 60 Hz.</li>
+    <li>Pronk et al. (2020): rAF produced exactly the requested duration on 81.0% of trials versus about 24% for CSS animation. On macOS, Chrome and Safari often shortened stimuli under 100 ms.</li>
+  </ul>
+</section>
+
+<section class="slide" data-lang="en" aria-label="Response time">
+  <p class="eyebrow">03 · RESPONSE TIME</p>
+  <h2>Precision is acceptable; absolute latency is the problem</h2>
+  <div class="grid">
+    <div class="card"><div class="big">&lt; 10 ms</div><p>Trial-to-trial SD. Bridges et al.: under 10 ms in all cases, and under 4 ms for PsychoJS in every combination. Gorilla's SD was 8.25 ms (Anwyl-Irvine et al.).</p></div>
+    <div class="card"><div class="big">25–100 ms</div><p>Absolute latency: recorded RTs are later than true responses. Gorilla about 80 ms; touchscreen and keyboard devices in Pronk et al. about 57–96 ms, lowest on iOS and highest on macOS.</p></div>
+    <div class="card"><div class="big">0.12–0.21</div><p>Drop in absolute-RT reliability caused by device noise; relative RT (condition difference) dropped by 0.012 or less (Pronk et al.).</p></div>
+  </div>
+  <p class="warn">Bottom line: within-subject, condition-difference analyses are reliable. Absolute RTs and between-subject comparisons need roughly 10% more participants (Pronk; Reimers &amp; Stewart, 2015).</p>
+</section>
+
+<section class="slide" data-lang="en" aria-label="Audio">
+  <p class="eyebrow">04 · AUDIO</p>
+  <h2>The weakest link on browser platforms</h2>
+  <ul>
+    <li>Bridges et al.: "no online system can yet provide audio stimuli with precisely timed onsets," and audio-visual synchrony is a struggle for every package.</li>
+    <li>Gorilla audio latency was roughly 88 ms to over 200 ms depending on browser (from a secondary summary; check against the original table).</li>
+    <li>Monen et al. (2025), Electron desktop app: audio playback about 26–30 ms late, recording onset off by 59–85 ms.</li>
+  </ul>
+  <p class="warn">Tasks that need precise sound onset or audio-visual synchrony are not recommended online, or should be validated with external measurement.</p>
+</section>
+
+<section class="slide" data-lang="en" aria-label="Core studies">
+  <p class="eyebrow">05 · CORE EMPIRICAL STUDIES</p>
+  <h2>Hardware-based evidence is concentrated in 2015–2022</h2>
+  <table>
+    <tr><th>Study</th><th>Measurement</th><th>Takeaway</th></tr>
+    <tr><td>Bridges et al. 2020 (PeerJ)</td><td>BBTK; 5 online platforms; Win/macOS/Linux</td><td>Good visual and RT precision; audio unreliable</td></tr>
+    <tr><td>Anwyl-Irvine et al. 2021 (BRM)</td><td>BBTK plus robotic finger; 4 platforms</td><td>No single best platform; Gorilla lowest RT SD</td></tr>
+    <tr><td>Pronk et al. 2020 (BRM)</td><td>3000 Hz optical sensor plus solenoid; phones and desktops</td><td>rAF beats CSS animation; RTs always overestimated</td></tr>
+    <tr><td>Reimers &amp; Stewart 2015 (BRM)</td><td>BBTK; about 19 Windows machines</td><td>Durations 5–25 ms too long; within-subject RT barely affected</td></tr>
+    <tr><td>Lukács &amp; Gartus 2022 (BRM)</td><td>Photodiode plus logic analyzer; 60 Hz</td><td>rAF loop near hardware noise but adds 1 frame; Linux worse</td></tr>
+    <tr><td>Semmelmann &amp; Weigelt 2017 (BRM)</td><td>Five paradigms repeated in three settings</td><td>Remote about 87 ms slower; masked priming not replicated</td></tr>
+    <tr><td>Monen et al. 2025 (Front Hum Neurosci)</td><td>Frinex (Electron)</td><td>Visual error −5 to 7 ms; RT latency 81–136 ms</td></tr>
+  </table>
+</section>
+
+<section class="slide" data-lang="en" aria-label="Platform comparison">
+  <p class="eyebrow">06 · PLATFORM COMPARISON (as of 2026-10-02)</p>
+  <h2>Differences between platforms are smaller than differences between browser and hardware combinations</h2>
+  <table>
+    <tr><th>Platform</th><th>Type</th><th>Validation status</th><th>Cost</th></tr>
+    <tr><td>PsychoJS / Pavlovia</td><td>Builder + hosting</td><td>Best RT precision (&lt;4 ms); wide range of absolute latency</td><td>£0.26 per participant, or institutional licence from £2,000</td></tr>
+    <tr><td>jsPsych</td><td>Library</td><td>v6 tested; <b>v8 not confirmed</b></td><td>Free (MIT); bring your own hosting</td></tr>
+    <tr><td>Gorilla</td><td>Commercial, hosted</td><td>Lowest RT SD; large audio latency</td><td>About £1.09 per participant (academic, minimum 25)</td></tr>
+    <tr><td>lab.js</td><td>Library + builder</td><td>Highest visual variability 10.22 ms (Ubuntu Firefox)</td><td>Licence not confirmed</td></tr>
+    <tr><td>Testable</td><td>Commercial, hosted</td><td>Visual variability 2.94–8.38 ms</td><td>Free tier (lab only); $299 / $699 per year</td></tr>
+    <tr><td>Inquisit Web, E-Prime Go</td><td>Downloaded engine</td><td>Vendor claims and old validation only</td><td>Not confirmed</td></tr>
+    <tr><td>OSWeb, Labvanced, FindingFive</td><td>Varies</td><td>No third-party measurement</td><td>Not confirmed</td></tr>
+  </table>
+  <p class="note">Built-in timing in Qualtrics and SoSci is on the order of 100 ms accuracy, so they are not suitable as the main platform for precise RT.</p>
+</section>
+
+<section class="slide" data-lang="en" aria-label="Server stability">
+  <p class="eyebrow">07 · SERVER-SIDE STABILITY</p>
+  <h2>Public information is much thinner than for timing precision</h2>
+  <ul>
+    <li><b>Pavlovia</b>: about one day of downtime on 27–28 Dec 2025 for a security update; tokens expire every 2 hours; PsychoPy versions before 2025.1.0 could not log in. Participants in already-running studies were not affected, outside the downtime window.</li>
+    <li><b>Gorilla, Testable, Labvanced, FindingFive</b>: no uptime record or SLA found.</li>
+    <li><b>JATOS</b> (Apache 2.0): self-hostable, so stability depends on your institution; ESCoP's MindProbe offers a free cloud instance.</li>
+    <li><b>Recruitment</b>: Prolific charges a 33.3% academic service fee. Reports say MTurk stopped accepting new customers on 2026-07-30 (secondary sources; no Amazon announcement seen).</li>
+  </ul>
+  <p class="warn">If stability is a hard requirement, ask the vendor for formal uptime figures or run a small stress test first.</p>
+</section>
+
+<section class="slide" data-lang="en" aria-label="Recommendations">
+  <p class="eyebrow">08 · DESIGN AND VALIDATION RECOMMENDATIONS</p>
+  <h2>Turn timing error into a controllable design condition</h2>
+  <div class="grid">
+    <div class="card"><h3>Analysis</h3><ul><li>Within-subject designs, condition differences</li><li>Avoid comparing absolute RT across people</li><li>Keyboard noise costs about 0.05 power; add 5 participants or 5–10 trials per condition (Gómez et al. 2025 preprint)</li></ul></div>
+    <div class="card"><h3>Implementation</h3><ul><li>Specify durations in frames and use rAF</li><li>Preload all assets</li><li>Log refresh rate, browser, OS, device</li><li>Avoid precise stimuli under about 50 ms (e.g., masked priming)</li></ul></div>
+    <div class="card"><h3>Validation</h3><ul><li>Measure your own stimuli on typical hardware with a photodiode or robotic finger</li><li>Validate audio separately</li><li>Report validation in the paper (Plant &amp; Quinlan, 2013)</li></ul></div>
+  </div>
+</section>
+
+<section class="slide" data-lang="en" aria-label="Gaps">
+  <p class="eyebrow">09 · GAPS AND ITEMS TO CHECK</p>
+  <h2>What is missing most is post-2020 re-testing</h2>
+  <ul>
+    <li><b>Gaps</b>: no systematic external measurements found for jsPsych 8, the current Pavlovia, 120/144 Hz displays, recent Safari and Firefox, Android, web VRR, or gamepad latency.</li>
+    <li><b>Conflicting numbers</b>: some individual Bridges et al. figures (e.g., Gorilla Safari 30.11 ms) disagree with the Table 3 ranges; the upper bound of Pronk et al.'s RT overestimate was read once as about 96 ms and once as about 115 ms. Check the original tables before citing.</li>
+    <li><b>Next step</b>: with a photodiode and Arduino, measure 16.7, 50 and 100 ms visual durations and key-press RT for jsPsych 8, PsychoJS/Pavlovia and Gorilla on Windows Chrome, macOS Safari and macOS Chrome.</li>
+  </ul>
+  <p class="note">Main references: Bridges et al. 2020 PeerJ 9414; Anwyl-Irvine et al. 2021 BRM doi:10.3758/s13428-020-01501-5; Pronk et al. 2020 BRM doi:10.3758/s13428-019-01321-2; Reimers &amp; Stewart 2015 BRM; Lukács &amp; Gartus 2022 BRM doi:10.3758/s13428-022-01835-2; Plant &amp; Quinlan 2013 CABN doi:10.3758/s13415-013-0166-6. Full list in the report file.</p>
+</section>
+
 </div>
-<div class="nav"><button id="prev" aria-label="上一頁">←</button><button id="next" aria-label="下一頁">→</button><div class="prog"><i id="pi"></i></div><span id="pg">1 / 10</span></div>
+<div class="nav"><button id="prev" aria-label="上一頁">←</button><button id="next" aria-label="下一頁">→</button><div class="prog"><i id="pi"></i></div><button id="lang" aria-label="Switch language">EN</button><span id="pg">1 / 10</span></div>
 <script>
 (function(){
   var data=[["PsychoJS",0.67,6.47],["Gorilla",0.94,7.15],["jsPsych",4.21,7.04],["lab.js",1.19,10.22],["Testable",2.94,8.38]];
-  var b=document.getElementById("bars");
-  data.forEach(function(d){
-    var r=document.createElement("div");r.className="row";
-    r.innerHTML='<div>'+d[0]+'</div><div class="track"><div class="fill" style="left:'+d[1]*100/12+'%;width:'+(d[2]-d[1])*100/12+'%"></div><span class="lab" style="left:calc('+d[2]*100/12+'% + 6px)">'+d[1]+'–'+d[2]+'</span></div>';
-    b.appendChild(r);
+  [].forEach.call(document.querySelectorAll(".bars"),function(b){
+    data.forEach(function(d){
+      var r=document.createElement("div");r.className="row";
+      r.innerHTML='<div>'+d[0]+'</div><div class="track"><div class="fill" style="left:'+d[1]*100/12+'%;width:'+(d[2]-d[1])*100/12+'%"></div><span class="lab" style="left:calc('+d[2]*100/12+'% + 6px)">'+d[1]+'\u2013'+d[2]+'</span></div>';
+      b.appendChild(r);
+    });
   });
-  var s=[].slice.call(document.querySelectorAll(".slide")),i=0;
+  var all=[].slice.call(document.querySelectorAll(".slide")),s=[],i=0,lang="zh";
+  var q=(location.search.match(/lang=(zh|en)/)||[])[1];
+  try{lang=q||localStorage.getItem("op-lang")||(/^zh/i.test(navigator.language)?"zh":"en")}catch(e){lang=q||(/^zh/i.test(navigator.language)?"zh":"en")}
+  function setLang(l,keep){
+    lang=l;
+    s=all.filter(function(e){return e.getAttribute("data-lang")===l});
+    all.forEach(function(e){e.classList.remove("on")});
+    document.documentElement.lang=l==="zh"?"zh-Hant":"en";
+    document.title=l==="zh"?"\u7dda\u4e0a\u5be6\u9a57\u5e73\u53f0\u8a08\u6642\u8abf\u67e5":"Online Experiment Platforms: Timing Survey";
+    document.getElementById("lang").textContent=l==="zh"?"EN":"\u4e2d\u6587";
+    document.getElementById("prev").setAttribute("aria-label",l==="zh"?"\u4e0a\u4e00\u9801":"Previous slide");
+    document.getElementById("next").setAttribute("aria-label",l==="zh"?"\u4e0b\u4e00\u9801":"Next slide");
+    try{localStorage.setItem("op-lang",l)}catch(e){}
+    go(keep?i:i);
+  }
   function go(n){
     i=Math.max(0,Math.min(s.length-1,n));
     s.forEach(function(e,k){e.classList.toggle("on",k===i)});
     s[i].scrollTop=0;
     document.getElementById("pg").textContent=(i+1)+" / "+s.length;
     document.getElementById("pi").style.width=((i+1)/s.length*100)+"%";
-    try{history.replaceState(null,"","#"+(i+1))}catch(e){}
+    try{history.replaceState(null,"",location.pathname+location.search+"#"+(i+1))}catch(e){}
   }
   document.getElementById("prev").onclick=function(){go(i-1)};
   document.getElementById("next").onclick=function(){go(i+1)};
+  document.getElementById("lang").onclick=function(){setLang(lang==="zh"?"en":"zh",true)};
   document.addEventListener("keydown",function(e){
     if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){e.preventDefault();go(i+1)}
     if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();go(i-1)}
     if(e.key==="Home")go(0);if(e.key==="End")go(s.length-1);
+    if(e.key==="l"||e.key==="L")setLang(lang==="zh"?"en":"zh",true);
   });
   var x0=null;
   document.addEventListener("touchstart",function(e){x0=e.touches[0].clientX},{passive:true});
   document.addEventListener("touchend",function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(i+(d<0?1:-1));x0=null});
-  var h=parseInt(location.hash.slice(1),10);if(h)go(h-1);else go(0);
+  var h=parseInt(location.hash.slice(1),10);if(h)i=h-1;
+  setLang(lang,true);
 })();
 </script>
 </body>
