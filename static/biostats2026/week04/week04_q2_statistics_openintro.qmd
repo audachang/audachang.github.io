@@ -1,0 +1,65 @@
+---
+title: "第 2 題｜用五筆出生體重理解中心與變異（50 分）"
+subtitle: "HT3001B 生物統計學與 R｜Week 04"
+lang: zh-TW
+format:
+  html:
+    embed-resources: true
+    code-copy: true
+execute:
+  eval: false
+  echo: true
+---
+
+## 資料
+
+下表為教科書 `openintro::births14` 的 `weight` 前五筆原值，單位為磅（lb）。這五筆為手算選取的子集，並非另做隨機抽樣。
+
+| 資料列 | 出生體重（lb） |
+| --- | ---: |
+| 1 | 6.96 |
+| 2 | 8.86 |
+| 3 | 7.51 |
+| 4 | 6.19 |
+| 5 | 6.75 |
+
+可用 `births14$weight[1:5]` 核對。
+
+## 題目與配分
+
+1. **中心指標（15 分）：**計算平均數（mean）與中位數（median），列出算式或找法。這五筆是否有唯一眾數（mode）？若用中位數描述中央位置，數值是多少，與平均數有何差異？
+2. **離差與散布（20 分）：**列出每筆離差 $x_i-\bar{x}$ 與離差平方，再求樣本變異數（sample variance）與標準差（standard deviation，SD）。列出分子、分母與單位，並說明為什麼有 $n-1$ 個離差自由度（degrees of freedom）；是否真的少算了一筆資料？
+
+   $$
+   s^2=\frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1},
+   \qquad s=\sqrt{s^2}.
+   $$
+
+   離差與 SD 的單位為 lb，變異數的單位為 lb²。
+3. **概念判斷（15 分）：**分別判斷並修正以下說法，用計算結果或資料來源支持理由：
+   - 「離差總和是 0，所以這五筆體重沒有散布。」
+   - 「讀入資料表中的前五筆後，其平均數就是美國所有新生兒的平均出生體重。」
+
+可用計算機或 R 核對；計算保留原始精度，最後數值四捨五入到小數二位。
+
+**繳交：**本 QMD，包含計算過程、離差表與概念解釋。
+
+## 作答紀錄
+
+先保存 **A．自行初答**；之後可用 AI 協助除錯或評論，另寫 **B．修訂答**，保留核對結果與修改理由。**C．AI 使用紀錄**簡列工具、主要提問與採納情況；未用 AI 填「X」。
+
+### A．自行初答
+
+在此作答。
+
+### B．修訂答
+
+在此作答；若未修改，寫出查核結果。
+
+### C．AI 使用紀錄
+
+在此填寫。
+
+## 來源
+
+[IMS 2e §20.3](https://openintrostat.github.io/ims/inference-two-means.html)／[openintro births14 資料說明](https://openintrostat.github.io/openintro/reference/births14.html)。本題使用 `openintro::births14`，核對套件版本 2.5.1；題目為課程自編，僅練習 Week04 的描述統計。

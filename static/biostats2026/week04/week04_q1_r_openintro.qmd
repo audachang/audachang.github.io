@@ -1,0 +1,64 @@
+---
+title: "第 1 題｜用 R 比較新生兒出生體重（50 分）"
+subtitle: "HT3001B 生物統計學與 R｜Week 04"
+lang: zh-TW
+format:
+  html:
+    embed-resources: true
+    code-copy: true
+execute:
+  eval: false
+  echo: true
+---
+
+## 資料
+
+使用教科書 `openintro` 套件的 `births14`。套件說明指出，這是從美國 2014 年出生紀錄抽取的 1,000 筆樣本；一列是一筆出生紀錄。
+
+| 欄位 | 意義 |
+| --- | --- |
+| `habit` | 母親吸菸狀態：`nonsmoker` 不吸菸、`smoker` 吸菸；`NA` 表示遺漏 |
+| `weight` | 新生兒出生體重，單位為磅（lb） |
+
+這是觀察資料，吸菸狀態不是隨機分派。尚未安裝套件時，先執行一次 `install.packages("openintro")`。
+
+## 題目與配分
+
+開始前，用一小段交代分析問題、變項、觀察單位、資料來源、方法及結論範圍。
+
+1. **分組摘要（25 分）：**載入資料，確認總列數及兩個欄位的遺漏筆數。按 `habit` 列出每組的總列數、有效體重筆數、體重遺漏筆數、平均數（mean）、中位數（median）與標準差（standard deviation，SD）；吸菸狀態遺漏者也列為一組。保存為 `output/q1_summary.csv`。用 1–2 句說明 `n()` 與 `na.rm = TRUE` 的作用。
+2. **盒形圖（15 分）：**使用吸菸狀態與體重皆有紀錄的資料，畫兩組的體重盒形圖（box plot），疊上全部有效觀察點並標示單位。保存為 `output/q1_boxplot.png`。交代未畫出的筆數與原因，並說明 `outlier.shape = NA` 是否等於刪除資料。
+3. **結果解讀（10 分）：**用 3–4 句比較兩組的中心與散布，交代樣本數及遺漏資訊，說明為什麼不能只憑這張圖判定吸菸造成體重差異。
+
+程式可寫在本 QMD，或另存 `week04_q1.R`。以下提供起點；確認能在新的 R 工作階段從頭產生結果。
+
+```{r}
+library(openintro)
+library(dplyr)
+library(ggplot2)
+
+data("births14", package = "openintro")
+dat <- births14
+```
+
+**繳交：**本 QMD、程式、摘要 CSV 與盒形圖 PNG。程式寫入 QMD 者，完成後將 `eval: false` 改為 `eval: true`，並附 Render 的 HTML；另存 R 檔者，在 QMD 附實際表、圖與文字解釋。
+
+## 作答紀錄
+
+先保存 **A．自行初答**；之後可用 AI 協助除錯或評論，另寫 **B．修訂答**，保留核對結果與修改理由。**C．AI 使用紀錄**簡列工具、主要提問與採納情況；未用 AI 填「X」。
+
+### A．自行初答
+
+在此作答。
+
+### B．修訂答
+
+在此作答；若未修改，寫出查核結果。
+
+### C．AI 使用紀錄
+
+在此填寫。
+
+## 來源
+
+[IMS 2e §20.3](https://openintrostat.github.io/ims/inference-two-means.html)／[openintro births14 資料說明](https://openintrostat.github.io/openintro/reference/births14.html)。本題使用 `openintro::births14`，核對套件版本 2.5.1；題目為課程自編，僅練習 Week04 的描述統計。
