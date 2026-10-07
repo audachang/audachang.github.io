@@ -9,11 +9,11 @@ disableAnchoredHeadings: true
 
 ---
 
-**Chang, E. C.**\*, Chen, L., & Chen, S. Y. (2026). The universal trend and shifts of digital learning: Big data analysis for academic literature. *Universal Access in the Information Society*, *25*, 69. https://doi.org/10.1007/s10209-026-01336-5
+**Chang, E. C.**, Chen, L., & Chen, S. Y.\* (2026). The universal trend and shifts of digital learning: Big data analysis for academic literature. *Universal Access in the Information Society*, *25*, 69. https://doi.org/10.1007/s10209-026-01336-5
 
 Tien, H.-P., & **Chang, E. C.** (2025). The application of information theory in studying motor control. In *Cognitive and Neural Foundations of Chinese Reading* (Chinese Language Learning Sciences, pp. 199–211). Springer. https://doi.org/10.1007/978-981-96-6669-0_12
 
-Lin, W.-J., & **Chang, E. C.**\* (2025). Differential contributions of global and local object landmarks in human wayfinding behavior. *Memory & Cognition*. https://doi.org/10.3758/s13421-025-01807-9
+Lin, W.-J., & **Chang, E. C.**\* (2026). Differential contributions of global and local object landmarks in human wayfinding behavior. *Memory & Cognition, 54*(4), 1232–1245. https://doi.org/10.3758/s13421-025-01807-9
 
 Tien, H.-P., & **Chang, E. C.**\* (2024). Inequivalent and uncorrelated response priming in motor imagery and execution. *Frontiers in Psychology*, *15*, 1363495. https://doi.org/10.3389/fpsyg.2024.1363495
 
@@ -40,3 +40,15 @@ Chouinard, P. A., Large, M., **Chang, E.**, & Goodale, M. A. (2009). Dissociable
 **Chang, E.**, & Ro, T. (2005). Inhibition of return in perception and action. *Visual Cognition*, *12*, 443–472. https://doi.org/10.1080/13506280444000391
 
 Ro, T., Farnè, A., & **Chang, E.** (2003). Inhibition of return and the human frontal eye fields. *Experimental Brain Research*, *150*, 290–296. https://doi.org/10.1007/s00221-003-1470-0
+
+## Conference and workshop contributions 2026
+
+Conference and workshop contributions are listed separately from peer-reviewed journal articles. See [Conferences and Workshops](/activities/) for participation and research visits.
+
+Li, C.-Y., Kung, C.-C., & **Chang, E. C.** (2026). *Decoding the brain, or decoding the pipeline? A four-pipeline multiverse re-analysis of a public visuomotor adaptation dataset* [Poster contribution]. The 2026 Taiwan Open Brain Science Workshop, National Cheng Kung University, Tainan, Taiwan.
+
+Chang, Y., **Chang, E. C.**, & Wu, D. H. (2026). *Universality of Neural Representation in Human Vision Predicts Sensory Valuation of Natural Scenes* [Poster contribution]. Organization for Human Brain Mapping 2026 Annual Meeting, Bordeaux, France.
+
+Chan, C.-E., **Chang, E. C.**, & Wu, D. H. (2026). *When Stability Meets Change: Neural Dissociation of Statistical Learning and Adaptive Flexibility in the Motor Domain* [Poster contribution]. Cognitive Neuroscience Society 33rd Annual Meeting, Vancouver, Canada.
+
+At the 2026 Taiwan Society of Cognitive Neuroscience annual meeting, I co-authored six contributions on face attractiveness, psycholinguistic modeling, motor imagery, visuomotor adaptation, resting-state EEG, and motor sequence learning.
