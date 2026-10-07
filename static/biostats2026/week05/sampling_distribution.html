@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>抽樣分布｜Sampling distributions</title>
+<style>
+:root{--ink:#202020;--muted:#626262;--line:#ddd;--paper:#fff;--ground:#f5f5f3;--accent:#b44708;--soft:#fff2e8;--bar:#484848;--blue:#246180}
+*{box-sizing:border-box}body{margin:0;background:var(--ground);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.5}main{max-width:1200px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;align-items:start;gap:24px;margin-bottom:16px}h1{font-size:28px;margin:0;font-weight:650}header p{margin:4px 0 0;color:var(--muted)}.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}button,select,input{font:inherit}button,select{border:1px solid #aaa;background:var(--paper);color:var(--ink);border-radius:4px;padding:6px 10px;min-height:36px}button{cursor:pointer}button:hover{background:var(--ground)}button.primary{background:var(--ink);color:#fff;border-color:var(--ink)}button:disabled{opacity:.5;cursor:wait}button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible,svg:focus-visible{outline:3px solid var(--accent);outline-offset:3px}label{display:block;font-size:13px;color:var(--muted)}select{width:100%;margin-top:4px}.panel{display:grid;grid-template-columns:160px minmax(0,1fr) 240px;gap:20px;background:var(--paper);padding:16px 20px;border:1px solid var(--line);border-top:0;align-items:center}.panel:first-of-type{border-top:1px solid var(--line);border-radius:6px 6px 0 0}.panel:last-of-type{border-radius:0 0 6px 6px}.panel h2{font-size:16px;margin:0 0 4px;font-weight:600}.index{display:inline-block;font-size:11px;font-weight:700;margin-right:8px;color:var(--muted)}.sub{font-size:12px;color:var(--muted);margin:0}.stats{font-variant-numeric:tabular-nums;font-size:13px}dl{margin:8px 0 0}dl div{display:flex;justify-content:space-between;gap:8px}dt{color:var(--muted)}dd{margin:0;font-weight:550}.chart{min-width:0}.chart svg{display:block;width:100%;height:auto;touch-action:pan-y}.population svg{touch-action:none;cursor:crosshair}.control-stack{display:grid;gap:8px}.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.buttons{display:grid;grid-template-columns:1fr 1fr;gap:6px}.fit{display:flex;align-items:center;gap:6px;margin-top:4px;color:var(--ink);font-size:13px}.fit input{width:16px;height:16px;accent-color:var(--accent)}.sd-card{padding:12px 16px;background:var(--soft);border-left:3px solid var(--accent)}.sd-card h3{font-size:14px;margin:0}.sd-value{font-size:36px;line-height:1.2;font-weight:650;color:var(--accent);font-variant-numeric:tabular-nums;margin:4px 0}.formula{font-size:12px;color:var(--muted);margin:4px 0}.status-row{display:flex;justify-content:space-between;gap:16px;align-items:center;margin:12px 0;color:var(--muted);font-size:13px;min-height:24px}progress{width:120px;accent-color:var(--accent)}.legend{font-size:12px;color:var(--muted)}.key{display:inline-block;width:18px;height:2px;background:var(--accent);vertical-align:middle;margin:0 4px 3px 12px}.key:first-child{margin-left:0}.key.dashed{background:var(--ink)}details{border:1px solid var(--line);border-radius:4px;padding:12px 16px;background:var(--paper);margin-top:12px}summary{cursor:pointer;font-size:14px;font-weight:550}details p,details li{font-size:14px;color:var(--muted)}details p{margin:8px 0}a{color:var(--blue)}footer{margin-top:16px;font-size:12px;color:var(--muted)}.custom{display:none;margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}.custom.open{display:block}.custom input{width:100%;accent-color:var(--accent)}#sample-values{overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.hint{font-size:12px;color:var(--muted);margin:6px 0 0}.plot-text{font-family:system-ui,"Microsoft JhengHei",sans-serif;font-size:var(--plot-font,12px);fill:var(--muted)}
+@media(min-width:1400px){main{padding-top:32px}}@media(max-width:850px){main{padding:16px}.panel{grid-template-columns:120px minmax(0,1fr);gap:12px}.controls{grid-column:2}.sd-card{grid-column:2}.panel{padding:12px}.stats{align-self:start}header{gap:12px}h1{font-size:24px}}@media(max-width:520px){main{padding:12px}header{display:block}header button{margin-top:12px}.panel{grid-template-columns:minmax(0,1fr)}.stats dl{display:flex;gap:12px;flex-wrap:wrap}.stats dl div{gap:6px}.controls,.sd-card{grid-column:1}.status-row{flex-wrap:wrap}.chart svg{min-height:140px}.panel h2{font-size:17px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main>
+<header><div><div class="eyebrow">STATISTICS LAB / 統計互動示範</div><h1>抽樣分布 <span style="font-weight:400;color:var(--muted)">Sampling distributions</span></h1><p>從母體抽出一份樣本，再把每次的統計量累積成分布。</p></div><button id="clear">清除下方三個面板</button></header>
+<section class="panel" aria-labelledby="parent-title">
+ <div class="stats"><h2 id="parent-title"><span class="index">01</span>母體</h2><p class="sub">Parent population</p><dl id="parent-stats"></dl></div>
+ <div class="chart population"><svg id="parent-chart" viewBox="0 0 600 160" role="img" tabindex="0" aria-label="母體分布；拖曳長條可改變分布，或使用右側自訂權重控制"></svg></div>
+ <div class="controls"><label>母體分布<select id="population"><option value="normal">常態 Normal</option><option value="uniform">均勻 Uniform</option><option value="skewed">右偏 Skewed</option><option value="custom">自訂 Custom</option></select></label><p class="hint">可在母體圖上拖曳修改權重。修改後會清除下方結果。</p><div id="custom-editor" class="custom"><label>調整哪個數值<select id="custom-bin"></select></label><label for="custom-weight">相對權重 <output id="weight-value">1</output></label><input id="custom-weight" type="range" min="0" max="100" step="1" value="50"></div></div>
+</section>
+<section class="panel" aria-labelledby="sample-title">
+ <div class="stats"><h2 id="sample-title"><span class="index">02</span>當次樣本</h2><p class="sub">Sample data · n=<span id="sample-n">5</span></p><dl id="sample-stats"></dl></div>
+ <div class="chart"><svg id="sample-chart" viewBox="0 0 600 160" role="img" aria-label="目前樣本的次數分布"></svg><div class="legend"><span class="key"></span>樣本平均數 ± SD</div></div>
+ <aside class="sd-card" aria-labelledby="sd-title"><h3 id="sd-title">當次樣本的標準差（SD）</h3><output id="sample-sd" class="sd-value" style="display:block">—</output><label>計算方式<select id="sd-method"><option value="s">s：分母 n−1（R 的 sd）</option><option value="sdN">SDₙ：分母 n（原示範）</option></select></label><p class="formula" id="sd-formula">s = √[Σ(xᵢ − x̄)² / (n−1)]</p><div class="formula" id="other-sd">另一種算法：—</div><div class="buttons" style="margin-top:8px"><button class="primary" id="animated">動畫抽樣 1 次</button><button data-batch="5">抽樣 5 次</button><button data-batch="10000">抽樣 10,000 次</button><button data-batch="100000">抽樣 100,000 次</button></div></aside>
+</section>
+<section class="panel" aria-labelledby="dist3-title">
+ <div class="stats"><h2 id="dist3-title"><span class="index">03</span>抽樣分布 A</h2><p class="sub" id="desc3">平均數 · n=5</p><dl id="stats3"></dl></div>
+ <div class="chart"><svg id="chart3" viewBox="0 0 600 160" role="img" aria-label="抽樣分布 A"></svg></div>
+ <div class="controls control-stack"><label>統計量<select id="stat3"></select></label><label>每份樣本的數量 n<select id="n3"></select></label><label class="fit"><input id="fit3" type="checkbox">疊加常態曲線 Fit normal</label></div>
+</section>
+<section class="panel" aria-labelledby="dist4-title">
+ <div class="stats"><h2 id="dist4-title"><span class="index">04</span>抽樣分布 B</h2><p class="sub" id="desc4">選擇統計量開始比較</p><dl id="stats4"></dl></div>
+ <div class="chart"><svg id="chart4" viewBox="0 0 600 160" role="img" aria-label="抽樣分布 B"></svg></div>
+ <div class="controls control-stack"><label>比較統計量<select id="stat4"></select></label><label>每份樣本的數量 n<select id="n4"></select></label><label class="fit"><input id="fit4" type="checkbox">疊加常態曲線 Fit normal</label></div>
+</section>
+<div class="status-row"><span id="status" role="status" aria-live="polite">先按「動畫抽樣 1 次」，觀察一份樣本如何形成一個統計量。</span><progress id="progress" max="100" value="0" hidden aria-label="批次抽樣進度"></progress><span class="legend"><span class="key"></span>當次統計量／常態曲線 <span class="key dashed"></span>母體平均數（平均數分布）</span></div>
+<details><summary>如何操作？SD 和 SE 有什麼不同？</summary><ol><li>先抽樣 1 次：第二面板顯示當次樣本，右側 SD 描述這份樣本中個別數值的分散程度。</li><li>再抽樣 10,000 次：第三、四面板各累積每次樣本的一個統計量。Reps 是樣本份數，n 是每份樣本的數量。</li><li>選擇平均數時，「分布 SD」描述不同樣本平均數的分散程度，對應平均數的標準誤（standard error, SE）；理論值為母體 σ/√n。</li><li>比較 n=5 與 n=20：母體不變，平均數的 SE 通常變小；當次樣本 SD 仍會有隨機波動。</li></ol><p>動畫與批次抽樣都更新第二面板；批次時它顯示最後一份 A 樣本。更改 A 的 n 或統計量會清除當次樣本及 A 分布；更改 B 設定只清除 B 分布。更改 SD 算法不會重新抽樣。</p><p>本頁從 0–32 的離散數值母體獨立、有放回抽樣。Normal 為離散常態形狀（μ=16、σ=5），並非無界連續常態。拖曳可修改母體；鍵盤使用者可選 Custom 後以滑桿修改各值權重。A、B 使用同一份較大樣本的前 n 筆；n 相同時使用相同樣本。常態曲線依累積統計量的平均與 SD 配適，疊加曲線不表示分布必然常態。</p></details>
+<details><summary>查看當次樣本的數值</summary><p id="sample-values">尚未抽樣。</p></details>
+<footer>互動設計參考 <a href="https://onlinestatbook.com/stat_sim/sampling_dist/index.html" target="_blank" rel="noopener noreferrer">Online Statistics Education：Sampling Distributions</a>。本課程獨立重製，新增第二面板的樣本 SD。可離線使用；數值保留兩位小數。</footer>
+</main>
+<script id="simulation-core">
+'use strict';
+const Simulation = (() => {
+  function summary(values) {
+    const n = values.length;
+    if (!n) return {n:0,mean:null,sdN:null,s:null,variance:null,unbiased:null};
+    // Welford's algorithm avoids cancellation when values have a large offset.
+    let mean = 0, m2 = 0;
+    values.forEach((x,i) => { const d=x-mean; mean+=d/(i+1); m2+=d*(x-mean); });
+    const variance=Math.max(0,m2/n), unbiased=n>1?Math.max(0,m2/(n-1)):null;
+    return {n,mean,variance,unbiased,sdN:Math.sqrt(variance),s:unbiased===null?null:Math.sqrt(unbiased)};
+  }
+  function median(values) { const a=[...values].sort((x,y)=>x-y), n=a.length; return n?(a[(n-1)>>1]+a[n>>1])/2:null; }
+  function statistic(a,key) {
+    if (key==='median') return median(a);
+    if (key==='range') return Math.max(...a)-Math.min(...a);
+    const s=summary(a);
+    if (key==='mad') return a.reduce((sum,x)=>sum+Math.abs(x-s.mean),0)/a.length;
+    return s[key];
+  }
+  function normalize(weights) {
+    if (!weights.length || weights.some(x=>!Number.isFinite(x)||x<0)) throw new Error('Invalid population weights');
+    const total=weights.reduce((a,b)=>a+b,0);
+    if (!total) throw new Error('Population needs at least one positive weight');
+    return weights.map(x=>x/total);
+  }
+  function populationSummary(weights) {
+    const p=normalize(weights),mean=p.reduce((s,w,x)=>s+x*w,0);
+    const variance=p.reduce((s,w,x)=>s+(x-mean)**2*w,0),sdN=Math.sqrt(variance);
+    let cumulative=0,med=0; for(let i=0;i<p.length;i++){cumulative+=p[i];if(cumulative>=.5){med=i;break;}}
+    return {mean,median:med,sdN,variance};
+  }
+  function population(type) {
+    let weights;
+    if (type==='uniform') weights=Array(33).fill(1);
+    else if(type==='skewed') weights=Array.from({length:33},(_,x)=>Math.exp(-x/5));
+    else {
+      let lo=5,hi=6;
+      for(let i=0;i<50;i++){const scale=(lo+hi)/2;const w=Array.from({length:33},(_,x)=>Math.exp(-.5*((x-16)/scale)**2));if(populationSummary(w).sdN<5)lo=scale;else hi=scale;}
+      weights=Array.from({length:33},(_,x)=>Math.exp(-.5*((x-16)/((lo+hi)/2))**2));
+    }
+    return {weights:normalize(weights)};
+  }
+  function draw(weights,n,rng=Math.random) {
+    const cdf=[];let c=0;normalize(weights).forEach(w=>{c+=w;cdf.push(c);});
+    return Array.from({length:n},()=>{const u=rng();let lo=0,hi=cdf.length-1;while(lo<hi){const mid=(lo+hi)>>1;if(u<cdf[mid])hi=mid;else lo=mid+1;}return lo;});
+  }
+  function histogram(values,min,max,bins) {const a=Array(bins).fill(0);for(const x of values){const k=Math.min(bins-1,Math.max(0,Math.floor((x-min)/(max-min)*bins)));a[k]++;}return a;}
+  return {summary,median,statistic,normalize,population,populationSummary,draw,histogram};
+})();
+</script>
+<script>
+'use strict';
+const $=id=>document.getElementById(id), fmt=x=>x===null||!Number.isFinite(x)?'—':x.toFixed(2);
+const labels={mean:'平均數 Mean',median:'中位數 Median',sdN:'SDₙ（分母 n）',s:'樣本 s（分母 n−1）',variance:'變異數（分母 n）',unbiased:'不偏變異數（分母 n−1）',mad:'平均絕對離差 MAD',range:'全距 Range'};
+for(const p of [3,4]) {
+  $(p===3?'stat3':'stat4').innerHTML=(p===4?'<option value="none">不比較 None</option>':'')+Object.entries(labels).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');
+  $('n'+p).innerHTML=[2,5,10,16,20,25,50,100].map(n=>`<option value="${n}" ${n===5?'selected':''}>n=${n}</option>`).join('');
+}
+$('custom-bin').innerHTML=Array.from({length:33},(_,i)=>`<option value="${i}">${i}</option>`).join('');
+const state={weights:Simulation.population('normal').weights,sample:[],d3:[],d4:[],busy:false,token:0};
+const getN=p=>Number($('n'+p).value), key=p=>$('stat'+p).value;
+function statsHTML(rows){return rows.map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');}
+function plot(id,counts,min,max,{empty='',mean=null,sd=null,reference=null,normal=null,probability=false}={}) {
+  const svg=$(id),W=600,H=160,narrow=svg.getBoundingClientRect().width<360,L=narrow?64:40,R=10,T=10,B=32,PW=W-L-R,PH=H-T-B;
+  svg.style.setProperty("--plot-font",narrow?"24px":"12px");
+  const top=probability?Math.max(.01,...counts)*1.18:Math.max(4,Math.ceil(Math.max(1,...counts)*1.18)),x=v=>L+(v-min)/(max-min)*PW,y=v=>T+PH*(1-v/top),bw=PW/counts.length;
+  let text='';for(let i=0;i<=4;i++){const v=top*i/4,yy=y(v);text+=`<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="#e9e9e9"/><text class="plot-text" x="${L-6}" y="${yy+4}" text-anchor="end">${probability?(v*100).toFixed(0)+'%':v<5?v.toFixed(1):Math.round(v)}</text>`;}
+  counts.forEach((v,i)=>{if(v)text+=`<rect x="${L+i*bw+1}" y="${y(v)}" width="${Math.max(1,bw-1.5)}" height="${y(0)-y(v)}" fill="var(--bar)"/>`;});
+  text+=`<line x1="${L}" y1="${y(0)}" x2="${W-R}" y2="${y(0)}" stroke="#666"/>`;
+  const ticks=narrow?4:8; for(let i=0;i<=ticks;i++){const v=min+(max-min)*i/ticks; text+=`<text class="plot-text" x="${x(v)}" y="${H-8}" text-anchor="middle">${Number.isInteger(v)?v:v.toFixed(1)}</text>`;}
+  const mx=v=>Math.max(L,Math.min(W-R,x(v)));
+  if(reference!==null)text+=`<line x1="${x(reference)}" y1="${T}" x2="${x(reference)}" y2="${y(0)}" stroke="#222" stroke-dasharray="4 4"/>`;
+  if(mean!==null){const xx=mx(mean);text+=`<line x1="${xx}" y1="${T}" x2="${xx}" y2="${y(0)}" stroke="var(--accent)" stroke-width="2"/>`;if(sd!==null)text+=`<path d="M ${mx(mean-sd)},${y(0)-4} V ${y(0)-10} H ${mx(mean+sd)} V ${y(0)-4}" fill="none" stroke="var(--accent)" stroke-width="2"/>`;}
+  if(normal&&normal.sdN>0&&normal.n>1){let d='';for(let i=0;i<=220;i++){const v=min+(max-min)*i/220;const height=normal.n*bw/PW*(max-min)/(normal.sdN*Math.sqrt(2*Math.PI))*Math.exp(-.5*((v-normal.mean)/normal.sdN)**2);d+=`${i?'L':'M'}${x(v)},${Math.max(T,y(height))} `;}text+=`<path d="${d}" fill="none" stroke="var(--accent)" stroke-width="2"/>`;}
+  if(empty)text+=`<text class="plot-text" x="${L+PW/2}" y="${T+PH/2}" text-anchor="middle">${empty}</text>`;
+  svg.innerHTML=text;
+}
+function renderParent(){const p=Simulation.populationSummary(state.weights);$('parent-stats').innerHTML=statsHTML([['平均 μ',fmt(p.mean)],['中位數',fmt(p.median)],['母體 SD σ',fmt(p.sdN)]]);plot('parent-chart',state.weights,0,32,{mean:p.mean,sd:p.sdN,probability:true});}
+function renderSample(partial=null){const a=partial||state.sample,s=Simulation.summary(a),chosen=$('sd-method').value;
+  $('sample-n').textContent=getN(3);$('sample-stats').innerHTML=statsHTML([['顯示筆數',a.length],['平均 x̄',fmt(s.mean)],['中位數',fmt(Simulation.median(a))]]);
+  $('sample-sd').textContent=fmt(s[chosen]);$('sd-formula').textContent=chosen==='s'?'s = √[Σ(xᵢ − x̄)² / (n−1)]':'SDₙ = √[Σ(xᵢ − x̄)² / n]';
+  $('other-sd').textContent=(chosen==='s'?'SDₙ（分母 n）：':'s（分母 n−1）：')+fmt(s[chosen==='s'?'sdN':'s']);
+  plot('sample-chart',Simulation.histogram(a,0,32,33),0,32,{empty:a.length?'':'按「動畫抽樣 1 次」開始',mean:s.mean,sd:s[chosen]});
+  $('sample-values').textContent=a.length?a.join('、'):'尚未抽樣。';
+}
+function renderDist(p){const k=key(p),a=state['d'+p],n=getN(p),s=Simulation.summary(a),parent=Simulation.populationSummary(state.weights);let max=32;
+  if(k==='variance')max=256;if(k==='unbiased')max=256*n/(n-1);if(k==='sdN'||k==='mad')max=16;if(k==='s')max=Math.sqrt(256*n/(n-1));
+  $('desc'+p).textContent=k==='none'?'選擇統計量開始比較':labels[k]+' · n='+n;
+  $('stats'+p).innerHTML=statsHTML([['Reps',a.length.toLocaleString()],['分布平均',fmt(s.mean)],['分布 SD',fmt(s.sdN)],...(k==='mean'?[['理論 SE σ/√n',fmt(parent.sdN/Math.sqrt(n))]]:[])]);
+  plot('chart'+p,Simulation.histogram(a,0,max,33),0,max,{empty:k==='none'?'選擇右側統計量啟用比較':a.length?'':'尚未累積樣本',reference:k==='mean'?parent.mean:null,mean:a.length?a[a.length-1]:null,normal:$('fit'+p).checked?s:null});
+}
+function render(){renderParent();renderSample();renderDist(3);renderDist(4);}
+function busy(on){state.busy=on;document.querySelectorAll('select,input,button').forEach(e=>{if(e.id!=='clear')e.disabled=on;});$('parent-chart').setAttribute('aria-disabled',String(on));$('progress').hidden=!on;}
+function clear(message='已清除下方結果，可重新抽樣。'){state.token++;state.sample=[];state.d3=[];state.d4=[];busy(false);render();$('status').textContent=message;}
+function sample(){const n=Math.max(getN(3),key(4)==='none'?0:getN(4)),a=Simulation.draw(state.weights,n);return {a:a.slice(0,getN(3)),b:a.slice(0,getN(4))};}
+function record(a){state.sample=a.a;state.d3.push(Simulation.statistic(a.a,key(3)));if(key(4)!=='none')state.d4.push(Simulation.statistic(a.b,key(4)));}
+const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function run(reps,animate=false){if(state.busy)return;busy(true);const token=++state.token;$('progress').value=0;
+  if(animate&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const a=sample();for(let i=1;i<=a.a.length;i++){if(token!==state.token)return;renderSample(a.a.slice(0,i));$('status').textContent=`抽出第 ${i} / ${a.a.length} 筆資料…`;$('progress').value=i/a.a.length*100;await pause(Math.min(150,1200/a.a.length));}if(token!==state.token)return;record(a);}
+  else{for(let done=0;done<reps;){if(token!==state.token)return;const end=Math.min(done+500,reps);for(;done<end;done++)record(sample());$('progress').value=done/reps*100;$('status').textContent=`正在抽樣：${done.toLocaleString()} / ${reps.toLocaleString()} 份…`;await pause(0);}}
+  if(token!==state.token)return;renderSample();renderDist(3);renderDist(4);busy(false);$('status').textContent=`新增 ${reps.toLocaleString()} 份樣本。A 累積 ${state.d3.length.toLocaleString()} 份；第二面板顯示最後一份 A 樣本（n=${getN(3)}）。`;
+}
+$('clear').addEventListener('click',()=>clear());$('animated').addEventListener('click',()=>run(1,true));document.querySelectorAll('[data-batch]').forEach(b=>b.addEventListener('click',()=>run(Number(b.dataset.batch))));
+$('sd-method').addEventListener('change',()=>renderSample());
+for(const p of [3,4]){for(const control of ['stat','n'])$(control+p).addEventListener('change',()=>{state['d'+p]=[];if(p===3){state.sample=[];renderSample();}renderDist(p);$('status').textContent=`已清除${p===3?' A 與當次樣本':' B'}；新設定從下一次抽樣生效。`;});$('fit'+p).addEventListener('change',()=>renderDist(p));}
+function syncCustom(){const m=Math.max(...state.weights);$('custom-weight').value=Math.round(state.weights[Number($('custom-bin').value)]/m*100);$('weight-value').textContent=$('custom-weight').value;}
+$('population').addEventListener('change',()=>{const type=$('population').value;if(type!=='custom')state.weights=Simulation.population(type).weights;$('custom-editor').classList.toggle('open',type==='custom');syncCustom();clear('母體已更新，下方結果已清除。');});
+$('custom-bin').addEventListener('change',syncCustom);
+$('custom-weight').addEventListener('input',()=>{const a=[...state.weights],m=Math.max(...a);a[Number($('custom-bin').value)]=Number($('custom-weight').value)/100*m;if(a.some(v=>v>0)){state.weights=Simulation.normalize(a);$('weight-value').textContent=$('custom-weight').value;clear('自訂母體已更新，下方結果已清除。');}else{syncCustom();$('status').textContent='母體至少需要一個正權重；已保留最後一個數值。';}});
+let dragging=false;
+function editPopulation(e){const rect=$('parent-chart').getBoundingClientRect(),x=(e.clientX-rect.left)/rect.width*600,y=(e.clientY-rect.top)/rect.height*160,L=rect.width<360?64:40;if(x<L||x>590)return;const bin=Math.max(0,Math.min(32,Math.floor((x-L)/(590-L)*33)));const a=[...state.weights],top=Math.max(...a)*1.18;a[bin]=Math.max(0,Math.min(1,(128-y)/118))*top;if(!a.some(v=>v>0))return;state.weights=Simulation.normalize(a);$('population').value='custom';$('custom-editor').classList.add('open');$('custom-bin').value=bin;syncCustom();clear('拖曳修改母體；下方結果已清除。');}
+$('parent-chart').addEventListener('pointerdown',e=>{if(state.busy)return;dragging=true;$('parent-chart').setPointerCapture(e.pointerId);editPopulation(e);});$('parent-chart').addEventListener('pointermove',e=>{if(dragging)editPopulation(e);});for(const event of ['pointerup','pointercancel','lostpointercapture'])$('parent-chart').addEventListener(event,()=>{dragging=false;});
+let resizeFrame; window.addEventListener("resize",()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(render);});
+render();
+</script>
+</body>
+</html>
