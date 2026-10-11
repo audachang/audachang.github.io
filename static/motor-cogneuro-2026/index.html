@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head>
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/tabby.min.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.42">
+
+  <meta name="author" content="Erik Chang, PhD（張智宏）">
+  <title>Action Neuroscience</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-b033ebeb1070a755345fa633e0430690.css">
+  <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section data-background-color="#0b1e2d" data-background-image="images/s01-image1.jpg" data-background-opacity="0.45" data-background-size="cover" class="quarto-title-block center">
+  <h1 class="title">Action Neuroscience</h1>
+  <p class="subtitle">人類動作控制導論｜Introduction to Human Motor Control</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Erik Chang, PhD（張智宏） 
+</div>
+        <p class="quarto-title-affiliation">
+            國立中央大學 認知神經科學研究所
+          </p>
+    </div>
+</div>
+
+</section>
+<section>
+<section class="title-slide slide level1 section-slide center" data-background-color="#12263a">
+<h1>開場：一項需要很多功能的技能</h1>
+
+</section>
+<section class="slide level2">
+<h2>Sport Stacking <span class="en">競技疊杯</span></h2>
+<video data-src="videos/sport-stacking-world-record.mp4" poster="images/s02-image2.png" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+<div class="caption">
+<p>Chu-Chun Yang — Overall female Sport Stacking Cycle 世界紀錄 5.824 秒</p>
+</div>
+<div class="fragment question">
+<p>這項技能牽涉到哪些功能？<span class="en">What functions are involved in this skill?</span></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>疊杯涉及的訊息處理 <span class="en">Information Processing</span></h2>
+<div class="columns">
+<div class="column" style="width:62%;">
+<ul>
+<li><strong>目標與環境</strong> Target / Environment
+<ul>
+<li>杯子的大小、重量、硬度、表面特性、位置、堆疊的配置</li>
+<li>重力、風、濕度、光線</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><strong>動作器的特性</strong> Effector properties
+<ul>
+<li>最佳姿勢 optimal posture、動作順序 movement sequence</li>
+<li>手與手臂的狀態</li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="width:38%;">
+<p><img data-src="images/s03-image3.png" class="fig h-lg"></p>
+</div></div>
+<aside class="notes">
+<p>需要的處理：知覺分析、視覺、觸覺、手眼協調、序列記憶。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section class="title-slide slide level1 section-slide center" data-background-color="#12263a">
+<h1>大腦如何產生一個動作</h1>
+<div class="sub">
+<p>規劃 Planning → 準備 Preparation → 執行 Execution</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>行動的空間地圖：PPC <span class="en">The Spatial Map for Action</span></h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><img data-src="images/s04-image4.png" class="fig h-lg"></p>
+</div><div class="column" style="width:52%;">
+<p>後頂葉皮質 <strong>Posterior Parietal Cortex (PPC)</strong> 是 <strong>cross-modal integration</strong> 的樞紐：</p>
+<ul>
+<li>視覺：杯子的位置</li>
+<li>本體感覺 proprioception：手臂與手的位置</li>
+<li>觸覺 tactile feedback：來自指尖的回饋</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>PPC：以行動為中心的表徵 <span class="en">Action-centered Representation</span></h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="images/s04-image4.png" class="fig h-lg"></p>
+</div><div class="column" style="width:55%;">
+<ul>
+<li>編碼「<strong>可能的動作</strong>」，而不只是物體的靜態位置</li>
+</ul>
+<div class="fragment">
+<ul>
+<li><span class="strike">一個位於 (30, 50, −7) 的杯子</span> ✗</li>
+<li>一個「<strong>可以被抓起來</strong>」的杯子 ✓</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>把視覺場景轉成一張「動作可能性」的地圖
+<ul>
+<li>→ <strong>affordances</strong>（環境提供給行動者的動作機會）</li>
+</ul></li>
+</ul>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>行動的計畫（一）：Premotor Cortex <span class="en">PMC</span></h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="images/s07-image5.png" class="fig h-lg"></p>
+</div><div class="column" style="width:55%;">
+<p>前運動皮質 <strong>Premotor Cortex (PMC)</strong></p>
+<ul>
+<li>使用 PPC 提供的空間地圖，準備特定的動作</li>
+<li>建立身體與肩膀的正確 <strong>postural set</strong>（姿勢設定）</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>行動的計畫（二）：Supplementary Motor Area <span class="en">SMA</span></h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="images/s07-image5.png" class="fig h-lg"></p>
+</div><div class="column" style="width:55%;">
+<p>輔助運動區 <strong>Supplementary Motor Area (SMA)</strong></p>
+<ul>
+<li>計畫與組織複雜、熟練、<strong>bimanual</strong>（雙手）的動作序列</li>
+<li><strong>Selection of action sequences</strong>：選擇要執行的動作序列</li>
+<li><strong>Coordinating bilateral effectors</strong>：協調左右兩側的動作器</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>在 <strong>mental rehearsal</strong>（心中預演）時也會活化，不只在實際執行時</li>
+</ul>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>動作的複雜度與參與的皮質區 <span class="en">Complexity of Actions</span></h2>
+<video data-src="videos/sma-complexity.mp4" poster="images/s09-image6.png" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+<div class="caption">
+<p>簡單動作（simple）→ 複雜動作（complex）→ 只「想像」複雜動作（imagined）：比較 M1/S1 與 SMA 的活化</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>植物人狀態下的動作想像 <span class="en">Motor Imagery in the Vegetative State</span></h2>
+
+<img data-src="images/s10-image7.png" class="fig h-lg r-stretch"><div class="caption">
+<p>想像打網球（tennis imagery）→ SMA；想像在空間中走動（spatial navigation imagery）→ PMC、PPC、PPA。病人（上）與控制組（下）的活化模式相似。</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>動作執行：Primary Motor Cortex <span class="en">M1</span></h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img data-src="images/s11-image8.png" class="fig h-lg"></p>
+</div><div class="column" style="width:58%;">
+<p>初級運動皮質 <strong>M1</strong>：動作的「發射台」motor <em>launch pad</em></p>
+<ul>
+<li>把 PMC 與 SMA 的抽象計畫，轉成具體的 <strong>motor commands</strong>
+<ul>
+<li>力量 <strong>force</strong></li>
+<li>方向 <strong>direction</strong></li>
+</ul></li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>M1：族群編碼與即時修正</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img data-src="images/s11-image8.png" class="fig h-lg"></p>
+</div><div class="column" style="width:58%;">
+<ul>
+<li><strong>Population coding</strong>
+<ul>
+<li>最終的動作方向，由一大群神經元加權後的整體活動決定</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><strong>Real-time correction</strong>
+<ul>
+<li>透過 <strong>long-loop reflexes</strong> 接收感覺回饋</li>
+<li>對突發事件快速調整，例如杯子快要滑掉</li>
+</ul></li>
+</ul>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>錐體路徑 <span class="en">The Pyramidal Pathway</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/s12-image9.jpg" class="fig h-lg"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/s12-image10.png" class="fig h-lg"></p>
+</div></div>
+<div class="caption">
+<p>Upper motor neuron（M1）→ 延髓錐體 medullary pyramid → <strong>pyramidal decussation</strong>（交叉）→ lower motor neuron → 骨骼肌</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>M1 的身體地圖 <span class="en">Primary Motor Cortex</span></h2>
+
+<img data-src="images/s13-image11.jpg" class="fig h-lg r-stretch"><div class="caption">
+<p>Corticospinal tract 與 corticobulbar tract；身體各部位在 M1 上的對應（homunculus）</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>個人化的動作地圖 <span class="en">Individual Motor Maps</span></h2>
+
+<img data-src="images/s14-image12.png" class="fig h-lg r-stretch"><div class="cite">
+<p>Gordon EM et al.&nbsp;(2023). A somato-cognitive action network alternates with effector regions in motor cortex. <em>Nature</em>, 617(7960), 351–359. doi:10.1038/s41586-023-05964-2</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>更新版的 Homunculus <span class="en">Updated Homunculus</span></h2>
+
+<img data-src="images/s15-image13.png" class="fig h-lg r-stretch"><div class="caption">
+<p>左：Penfield 的 homunculus（1948）；右：integrate–isolate model（2022）</p>
+</div>
+<div class="cite">
+<p>Gordon EM et al.&nbsp;(2023). <em>Nature</em>, 617(7960), 351–359. doi:10.1038/s41586-023-05964-2</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>運動細胞的方向調性 <span class="en">Directional Tuning of Motor Cells</span></h2>
+
+<img data-src="images/s16-image14.jpg" class="fig h-lg r-stretch"></section>
+<section class="slide level2">
+<h2>單一神經元的調性曲線 <span class="en">Tuning Curve</span></h2>
+
+<img data-src="images/s17-image15.jpg" class="fig h-md r-stretch"><div class="caption">
+<p>每個 M1 神經元都有一個 <strong>preferred direction</strong>：往這個方向動時發放最多，偏離越遠發放越少</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>族群編碼（一） <span class="en">Population Coding</span></h2>
+
+<img data-src="images/s18-image15.jpg" class="fig h-lg r-stretch"><div class="cite">
+<p>Georgopoulos (1990)</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>族群編碼（二） <span class="en">Population Coding</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/s19-image15.jpg" class="fig h-lg"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/s19-image16.png" class="fig h-md"></p>
+<div class="small fragment">
+<p>把每個神經元的「偏好方向 × 發放率」向量加總，得到的 <strong>population vector</strong> 就指向實際的動作方向。</p>
+</div>
+</div></div>
+<div class="cite">
+<p>Georgopoulos (1990)</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>腦機介面 <span class="en">Brain-Computer Interface</span></h2>
+<video data-src="videos/bci-idea-practice.mp4" poster="images/s20-image17.png" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+</section>
+<section class="slide level2">
+<h2>BCI 機械手臂 <span class="en">BCI Robotic Arm</span></h2>
+<video data-src="videos/bci-robotic-arm.mp4" poster="videos/bci-robotic-arm.jpg" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+<div class="caption">
+<p>Mind-controlled robotic arm</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>機械手臂的觸覺回饋 <span class="en">Feedback of Touch from Robotic Arm</span></h2>
+<video data-src="videos/bci-touch-feedback.mp4" poster="videos/bci-touch-feedback.jpg" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+<div class="caption">
+<p>BCI-controlled robotic arm returns sense of touch to a quadriplegic patient</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>動作神經系統的階層 <span class="en">Hierarchy in the Motor Neural System</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/s23-image20.png" class="fig h-lg"></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><strong>Descending systems</strong>（上運動神經元）
+<ul>
+<li>Motor cortex：計畫、啟動與引導隨意動作</li>
+<li>Brainstem centers：基本動作與姿勢控制</li>
+</ul></li>
+<li><strong>調控迴路</strong>
+<ul>
+<li>Basal ganglia：動作啟動的「閘門」</li>
+<li>Cerebellum：進行中動作的感覺–動作協調</li>
+</ul></li>
+<li><strong>Spinal cord &amp; brainstem circuits</strong>
+<ul>
+<li>Local circuit neurons → motor neuron pools → 骨骼肌</li>
+</ul></li>
+</ul>
+</div></div>
+</section></section>
+<section>
+<section class="title-slide slide level1 section-slide center" data-background-color="#12263a">
+<h1>動作控制的核心理論問題</h1>
+
+</section>
+<section class="slide level2">
+<h2>Core Theoretical Issues of Motor Control</h2>
+<p>動作控制系統如何解決下列問題？</p>
+<div>
+<ul>
+<li class="fragment">自由度 <strong>Degrees of freedom</strong></li>
+<li class="fragment">序列與時序 <strong>Sequencing and timing</strong></li>
+<li class="fragment">知覺–動作耦合 <strong>Perceptual-motor coupling</strong></li>
+<li class="fragment">動作技能學習 <strong>Motor skill learning</strong></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+<h2>自由度 <span class="en">Degrees of Freedom</span></h2>
+<div class="question">
+<p>摸摸你的鼻子！<span class="en">Touch your nose!</span></p>
+</div>
+<div class="grid3">
+<p><img data-src="images/s25-image22.jpg" class="h-sm"></p>
+<p><img data-src="images/s25-image23.png" class="h-sm"></p>
+<p><img data-src="images/s25-image21.jpg" class="h-sm"></p>
+</div>
+<div class="fragment caption">
+<p>同一個目標可以用無數種關節角度的組合達成，大腦怎麼選？</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>動作序列 <span class="en">Motor Sequencing</span></h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>打字：<strong>3, 2, 4, 3, 5, 4, 6, 5</strong></p>
+<div class="fragment">
+<p>其實是 <strong>[3,2], [4,3], [5,4], [6,5]</strong></p>
+<p><img data-src="images/s25-image24.png" class="fig"></p>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="fragment">
+<p>試著記下這串字母：</p>
+<p><strong>FB, ICI, AKG, BTW, A.</strong></p>
+</div>
+<div class="fragment">
+<p>重新切分後：</p>
+<p><strong>FBI, CIA, KGB, TWA</strong></p>
+<p>→ 序列以 <strong>chunks</strong>（組塊）與階層的方式被表徵</p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>動作技能學習 <span class="en">Motor Skill Learning</span></h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>如何從這裡⋯⋯</strong></p>
+<video data-src="videos/chopsticks-novice.mp4" poster="images/s26-image25.png" class="vid vid-sm" controls="" preload="metadata" playsinline="">
+</video>
+</div><div class="column" style="width:55%;">
+<p><strong>⋯⋯到那裡？</strong></p>
+<video data-src="videos/chopsticks-tutorial.mp4" poster="images/s26-image26.png" class="vid vid-sm" controls="" preload="metadata" playsinline="">
+</video>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>影響學習的因素 <span class="en">Factors Modulating Learning</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>個別差異</strong> Individual differences
+<ul>
+<li>運動員 vs.&nbsp;一般人</li>
+<li>老年人 vs.&nbsp;年輕人</li>
+<li>男性 vs.&nbsp;女性</li>
+</ul></li>
+<li><strong>作業特性</strong> Task characteristics
+<ul>
+<li>Open-loop vs.&nbsp;closed-loop</li>
+<li>目標 target、工具 tools</li>
+<li>雙手 bilateral 或單手 unilateral</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><strong>學習時程</strong> Learning schedule
+<ul>
+<li>密集 dense 或分散 sporadic</li>
+<li>隨機 random 或規律 regular</li>
+<li>總練習時間</li>
+</ul></li>
+<li><strong>回饋</strong> Feedback
+<ul>
+<li>形式 forms</li>
+<li>感覺通道 sensory modalities</li>
+</ul></li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>練習時有幫助的，不一定在實戰中有幫助</h2>
+<video data-src="videos/practice-vs-game.mp4" poster="images/s28-image27.png" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+<div class="caption">
+<p>What facilitates your progress in practice does not necessarily help in real games</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>雙手協調：一項新的動作技能 <span class="en">Bimanual Coordination</span></h2>
+
+<img data-src="images/s29-image28.png" class="fig r-stretch"><div class="caption">
+<p>兩手手指擺動的相位差 φ：0° in-phase、180° anti-phase、90° out-of-phase。 in-phase 與 anti-phase 是人自然就能做到的模式，90° 則需要學習。</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>操弄回饋的形式與感覺通道 <span class="en">Form &amp; Modality of Feedback</span></h2>
+<div class="person bl">
+<p><img data-src="images/s30-image31.png"> Sylvia Chiou</p>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>連續回饋</strong> Continuous Feedback</p>
+<video data-src="videos/bimanual-continuous-feedback.mp4" poster="images/s30-image29.png" class="vid vid-sm" controls="" preload="metadata" playsinline="">
+</video>
+</div><div class="column" style="width:50%;">
+<p><strong>離散回饋</strong> Discrete Feedback</p>
+<video data-src="videos/bimanual-discrete-feedback.mp4" poster="images/s30-image30.png" class="vid vid-sm" controls="" preload="metadata" playsinline="">
+</video>
+</div></div>
+<div class="caption">
+<p>上方：左右手的動作；下方：受試者看到的回饋</p>
+</div>
+<div class="cite">
+<p>Chiou &amp; Chang (2016). <em>PLoS One</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>回饋有助練習，卻不利保留 <span class="en">Good for Learning, Not for Retention</span></h2>
+
+<img data-src="images/s31-image32.png" class="fig h-md r-stretch"><div class="caption">
+<p>A：Lissajous 圖形（視覺、連續）；B：顏色（視覺、離散）；C：聲音 tone（聽覺、離散）</p>
+</div>
+<div class="cite">
+<p>Chiou &amp; Chang (2016). <em>PLoS One</em>, 11(2). doi:10.1371/journal.pone.0149221</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>結果（一）：三天的練習曲線</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<p><img data-src="images/s32-image33.png" class="fig h-lg"></p>
+</div><div class="column" style="width:42%;">
+<p><img data-src="images/s32-image33-legend.png" class="fig h-xs"></p>
+<p>表現指標：相對於目標相位 90° 的誤差</p>
+<p><img data-src="images/s32-image34.png" class="fig"></p>
+<div class="fragment small">
+<p>Lissajous 組練習時誤差最低；但在最後的 <strong>No-FB test</strong>（移除回饋）中，誤差明顯上升。</p>
+</div>
+</div></div>
+<div class="cite">
+<p>Chiou &amp; Chang (2016). <em>PLoS One</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>結果（二）：移除回饋後的轉移測驗</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img data-src="images/s32-image35.png" class="fig h-lg"></p>
+</div><div class="column" style="width:45%;">
+<ul>
+<li><strong>Lissajous</strong>（視覺、連續）：移除回饋後表現顯著變差</li>
+<li><strong>Color</strong>（視覺、離散）：移除回饋後表現反而較好</li>
+<li><strong>Tone</strong>（聽覺、離散）：沒有顯著差異</li>
+</ul>
+<div class="fragment small">
+<p>→ 連續回饋讓學習者依賴回饋；離散回饋較有利於技能的保留</p>
+</div>
+</div></div>
+<div class="cite">
+<p>Chiou &amp; Chang (2016). <em>PLoS One</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>動作想像的客觀指標 <span class="en">Objective Index for Motor Imagery</span></h2>
+<div class="person">
+<p><img data-src="images/s33-image36.png"> Hsin-Ping Tien</p>
+</div>
+<p><br></p>
+<p><img data-src="images/s33-image37.png" class="fig"></p>
+<div class="caption">
+<p>Prime 階段分為執行 Execution、想像 Imagery、知覺 Perception 三種條件；probe 的顏色與 prime 相同（repeated）或不同（non-repeated）</p>
+</div>
+<div class="cite">
+<p>Tien &amp; Chang (2024). <em>Frontiers in Psychology</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>動作想像也會產生重複促發效應</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="images/s34-image39.png" class="fig"></p>
+<div class="small">
+<p><strong>Response repetition effect</strong>：probe 與 prime 相同時，反應較快</p>
+</div>
+</div><div class="column" style="width:55%;">
+<p><img data-src="images/s34-image38.png" class="fig h-lg"></p>
+</div></div>
+<div class="fragment caption">
+<p>Execution 與 Imagery 都有顯著的重複效應，Perception 則沒有 → 動作想像可以用反應時間客觀檢驗</p>
+</div>
+<div class="cite">
+<p>Tien &amp; Chang (2024). <em>Frontiers in Psychology</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>動作想像需要更多空間工作記憶</h2>
+<div class="person">
+<p><img data-src="images/s33-image36.png"> Hsin-Ping Tien</p>
+</div>
+<p><br></p>
+<p><img data-src="images/s35-image40.png" class="fig"></p>
+<div class="caption">
+<p>Repetition priming 範式 + 次要的空間記憶保留作業（memory maintenance task）</p>
+</div>
+<div class="cite">
+<p>Tien &amp; Chang (in preparation)</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>記憶負荷降低了想像的促發效應</h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<p><img data-src="images/s36-image42.png" class="fig h-md"></p>
+</div><div class="column" style="width:48%;">
+<p><img data-src="images/s36-image41.png" class="fig h-md"></p>
+</div></div>
+<div class="fragment caption">
+<p>記憶負荷（Pure → Span 2 → Span 4）增加時，Imagery 的重複效應下降，Execution 則不受影響</p>
+</div>
+<div class="cite">
+<p>Tien &amp; Chang (in preparation)</p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 section-slide center" data-background-color="#12263a">
+<h1>知覺與動作的關係</h1>
+<div class="sub">
+<p>Relationship between perception &amp; action</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>人類視覺系統 <span class="en">Human Visual System</span></h2>
+
+<img data-src="images/s38-image43.jpg" class="fig h-sm r-stretch"><ul>
+<li><strong>Dorsal pathway</strong>（背側路徑）：V1 → 後頂葉皮質 PPC，「where」</li>
+<li><strong>Ventral pathway</strong>（腹側路徑）：V1 → 下顳葉皮質 IT，「what」</li>
+</ul>
+<div class="fragment small">
+<p>Goodale &amp; Milner 的觀點：dorsal pathway 更像是 <strong>vision for action</strong>（how），ventral pathway 則是 <strong>vision for perception</strong></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>背側路徑受損 <span class="en">Damage to the Dorsal Pathway</span></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Optic ataxia</strong>（視覺性運動失調）</p>
+<ul>
+<li>由後頂葉皮質 PPC 受損造成</li>
+<li>無法正確地伸手抓取物體</li>
+<li>但可以說出物體名稱、描述它的功能</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="images/s39-image43-dorsal.jpg" class="fig"></p>
+<div class="caption">
+<p>受損位置：dorsal pathway</p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>腹側路徑受損 <span class="en">Damage to the Ventral Pathway</span></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Visual form agnosia</strong>（視覺形狀失認症）</p>
+<ul>
+<li>無法辨認熟悉的物體
+<ul>
+<li>但用觸摸就能認出來</li>
+</ul></li>
+<li>語言記憶與智力正常</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="images/s40-image43-ventral.jpg" class="fig"></p>
+<div class="caption">
+<p>受損位置：ventral pathway</p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>病人 DF <span class="en">Patient DF</span></h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img data-src="images/s41-image44.png" class="fig h-sm"></p>
+<blockquote>
+<p>“It’s made out of metal – is it aluminium? It’s got red plastic on it.”</p>
+<p>“Is it some sort of kitchen utensil?”</p>
+</blockquote>
+<div class="small">
+<p>「它是金屬做的⋯⋯是鋁嗎？上面有紅色塑膠。」「是某種廚房用具嗎？」</p>
+</div>
+</div><div class="column" style="width:45%;">
+<p><img data-src="images/s41-image45.png" class="fig"></p>
+<div class="caption">
+<p>DF 的病灶位於枕葉外側（藍色區域）</p>
+</div>
+</div></div>
+<div class="cite">
+<p>Humphrey, Goodale, Jakobson, &amp; Servos (1994). <em>Perception</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>投信箱作業 <span class="en">The Slot Task</span></h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img data-src="images/s42-image46.png" class="fig h-lg"></p>
+</div><div class="column" style="width:45%;">
+<ul>
+<li>左欄 <strong>Matching</strong>：把卡片轉到與槽口相同的方向（知覺判斷）</li>
+<li>右欄 <strong>Posting</strong>：把卡片投進槽口（動作）</li>
+<li>上排：<strong>DF</strong>；下排：<strong>Control</strong></li>
+</ul>
+<div class="fragment">
+<p>DF 無法「配對」方向，卻能準確地「投遞」</p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>視覺性運動失調病人 <span class="en">Optic Ataxia Patient</span></h2>
+
+<img data-src="images/s43-image47.png" class="fig h-lg r-stretch"><div class="fragment caption">
+<p>與 DF 相反：知道槽口的方向，卻無法把手調整到正確方向</p>
+</div>
+<div class="cite">
+<p>Perenin &amp; Vighetto (1988). <em>Brain</em></p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>物體辨識的腦造影 <span class="en">Brain Imaging of Object Recognition</span></h2>
+
+<img data-src="images/s44-image48.png" class="fig h-lg r-stretch"><div class="caption">
+<p>完整物體 minus 打散的物體 → Lateral Occipital area（LO）活化</p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>伸手抓取的腦造影 <span class="en">Reach-to-grasp</span></h2>
+<p><img data-src="images/s45-image49.jpg" class="fig h-sm"></p>
+<div class="grid2">
+<p><img data-src="images/s45-image50.png" class="h-xs"></p>
+<p><img data-src="images/s45-image51.png" class="h-xs"></p>
+</div>
+<div class="caption">
+<p>左：抓取 Grasping；右：伸手 Reaching</p>
+</div>
+<div class="cite">
+<p>Culham, Danckert, DeSouza, Gati, Menon &amp; Goodale (2003). <em>Experimental Brain Research</em></p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>物體辨識：DF vs.&nbsp;一般人 <span class="en">Object Recognition</span></h2>
+
+<img data-src="images/s46-image52.png" class="fig h-lg r-stretch"><div class="cite">
+<p>Culham et al.&nbsp;(2003). <em>Experimental Brain Research</em></p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>抓取：DF vs.&nbsp;一般人 <span class="en">Grasping</span></h2>
+
+<img data-src="images/s47-image45.png" class="fig h-lg r-stretch"><div class="caption">
+<p>DF 抓取時 dorsal pathway 的活化正常（Grasp &gt; Reach）</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>動作調節知覺 <span class="en">Action Modulates Perception</span></h2>
+
+<img data-src="images/s48-image53.png" class="fig h-lg r-stretch"><div class="fragment question">
+<p>背著重物時，眼前的坡看起來會比較陡嗎？</p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 section-slide center" data-background-color="#12263a">
+<h1>運動能提升一般人的大腦與認知嗎？</h1>
+<div class="sub">
+<p>Can exercise enhance ordinary people’s brain &amp; cognition?</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>成績的迴歸模型 <span class="en">Regression Model of Grades</span></h2>
+<div style="font-size:0.86em">
+<p><span class="math display">\[
+\begin{aligned}
+\text{Grades}_{required} = {} &amp; -0.4 \times \text{Number}_{required} + 0.54 \times \text{Grades}_{elected} - 0.09 \times \text{Number}_{elected} \\
+&amp; + 0.09 \times \text{Grades}_{GA} - 0.22 \times \text{Number}_{GA} \\
+&amp; + {\color{#d62728}{0.33}} \times {\color{#1f77b4}{\text{Grade}_{PE}}} + {\color{#d62728}{0.58}} \times \text{Number}_{PE} + 7.43
+\end{aligned}
+\]</span></p>
+</div>
+<p>Adjusted <span class="math inline">\(R^2 = .7036\)</span>，<span class="math inline">\(F_{7,\,19072} = 6471\)</span>，<span class="math inline">\(p &lt; 2.2 \times 10^{-16}\)</span></p>
+<div class="fragment question">
+<p>體育課（PE）的兩個係數都是正的</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>銀髮族身體活動促進 <span class="en">2013 北投社區大學</span></h2>
+<div class="grid4">
+<p><img data-src="images/s51-image57.jpg" class="h-grid"></p>
+<p><img data-src="images/s51-image54.jpg" class="h-grid"></p>
+<p><img data-src="images/s51-image55.jpg" class="h-grid"></p>
+<p><img data-src="images/s51-image56.jpg" class="h-grid"></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>執行功能 <span class="en">Executive Function</span></h2>
+
+<img data-src="images/s52-image58.png" class="fig h-lg r-stretch"><div class="caption">
+<p>RT difference（困難 − 簡單）：實驗組訓練後下降，控制組沒有</p>
+</div>
+<div class="cite">
+<p>Chang &amp; Wang (2013) SfN</p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>提升體能、大腦活動與認知控制</h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<p><strong>老年人（訓練前）</strong> Elderly (pre-training)</p>
+<p><img data-src="images/s53-image60.png" class="fig"></p>
+</div><div class="column" style="width:48%;">
+<p><strong>每日步數</strong> Daily steps</p>
+<p><img data-src="images/s53-image59.png" class="fig"></p>
+</div></div>
+<div class="cite">
+<p>Chang &amp; Wang (2013) SfN</p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>促進身體活動 → 促進大腦活化</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>老年人（訓練後）</strong> Elderly (post-training)</p>
+<p><img data-src="images/s54-image61.png" class="fig"></p>
+</div><div class="column" style="width:50%;">
+<p><strong>年輕人</strong> Young</p>
+<p><img data-src="images/s54-image62.png" class="fig"></p>
+</div></div>
+<div class="cite">
+<p>Chang &amp; Wang (2013) SfN</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>代償性的活化模式 <span class="en">Compensatory Pattern of Activation</span></h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="images/s55-image63.png" class="fig h-lg"></p>
+</div><div class="column" style="width:55%;">
+<ul>
+<li>表現好的老年人會額外動用另一側半球</li>
+<li><strong>HAROLD</strong>：hemispheric asymmetry reduction in older adults</li>
+</ul>
+<div class="fragment small">
+<p>這種不對稱性的降低，可能是一種代償（compensation），也可能反映了去分化（dedifferentiation）。</p>
+</div>
+</div></div>
+<div class="cite">
+<p>Cabeza et al.&nbsp;(2002)</p>
+</div>
+<aside class="notes">
+<p>前額葉中許多與 GABA 抑制性神經傳導相關的基因，會隨年齡而大幅下調，可能改變抑制與興奮之間的平衡。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>小結 <span class="en">Summary</span></h2>
+<div>
+<ul>
+<li class="fragment">提升身體活動量，可以改善注意力網路中的執行控制表現</li>
+<li class="fragment">老年人 BOLD 反應的增強，可能來自身體活動的介入
+<ul>
+<li class="fragment">雙側 MFC 的徵用 → 代償機制</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+<h2>慢性運動對認知的後設分析 <span class="en">Meta-analyses</span></h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>執行功能</strong> Executive Functions</p>
+<p><img data-src="images/s57-image64-exec.png" class="fig" style="height:470px;width:auto"></p>
+</div><div class="column" style="width:45%;">
+<p><strong>記憶</strong> Memory</p>
+<p><img data-src="images/s57-image64-memory.png" class="fig" style="height:400px;width:auto"></p>
+</div></div>
+<div class="caption">
+<p>← 偏向控制組 Control+　｜　偏向訓練組 Trained+ →</p>
+</div>
+<div class="cite">
+<p>Sanders et al.&nbsp;(2019). <em>PLoS One</em>. doi:10.1371/journal.pone.0210036</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>80% 的灰質受身體活動調節 <span class="en">Gray Matter &amp; Physical Activity</span></h2>
+
+<img data-src="images/s58-image65.png" class="fig r-stretch"><div class="caption">
+<p>研究數 Number of studies = 53</p>
+</div>
+<div class="cite">
+<p>Batouli &amp; Saba (2017). <em>Behavioural Brain Research</em>. doi:10.1016/j.bbr.2017.06.002</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>為何運動對大腦有益？（一）短期 <span class="en">Short-term</span></h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<p><strong>平衡神經傳導物質</strong> Balancing neurotransmitters</p>
+<ul>
+<li>正腎上腺素 <strong>Norepinephrine</strong> → 注意力控制 attentional control</li>
+<li>血清素 <strong>Serotonin</strong> → 情緒調節 emotional regulation</li>
+<li>多巴胺 <strong>Dopamine</strong> → 連結獎賞與學習</li>
+</ul>
+</div><div class="column" style="width:42%;">
+<p><img data-src="images/s59-image67.jpg" class="fig"></p>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>為何運動對大腦有益？（二）長期 <span class="en">Long-term</span></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>增加神經滋養因子的生成，促進可塑性</strong> Neurotrophins</p>
+<ul>
+<li>腦衍生神經滋養因子 <strong>BDNF</strong> → 形成神經元與突觸</li>
+<li>第一型類胰島素生長因子 <strong>IGF-1</strong> → 促進 BDNF</li>
+<li>血管內皮生長因子 <strong>VEGF</strong> → 形成新的微血管</li>
+<li>纖維母細胞生長因子 <strong>FGF-2</strong> → 強化新生的神經元</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="images/s59-image66.jpg" class="fig"></p>
+</div></div>
+<aside class="notes">
+<p>BDNF 屬於 neurotrophin 家族。運動會增加 BDNF 的分泌；肌肉收縮也會分泌 BDNF，參與肌肉修復與再生。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>你的休閒活動是什麼？ <span class="en">What are your leisure activities?</span></h2>
+<div class="grid2">
+<p><img data-src="images/s60-image68.jpg" class="h-md"></p>
+<p><img data-src="images/s60-image69.jpg" class="h-md"></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>有氧運動的定義 <span class="en">Definition of Aerobic Exercise</span></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/s61-image70.png" class="fig h-lg"></p>
+</div><div class="column" style="width:60%;">
+<p>最大心跳率的 <strong>65%–75%</strong>（次／分）</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">年齡</th>
+<th style="text-align: center;">目標心跳</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">20 歲</td>
+<td style="text-align: center;">130 – 150</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">30 歲</td>
+<td style="text-align: center;">124 – 143</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">40 歲</td>
+<td style="text-align: center;">117 – 135</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">50 歲</td>
+<td style="text-align: center;">111 – 128</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">60 歲</td>
+<td style="text-align: center;">104 – 120</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>有氧運動的例子 <span class="en">Examples of Aerobic Exercise</span></h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><img data-src="images/s62-image72.png" class="fig h-lg"></p>
+</div><div class="column" style="width:70%;">
+<p><img data-src="images/s62-image73.png" class="fig"></p>
+<div class="question">
+<p>注意：這是<strong>最低</strong>要求！</p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>依強度區分的運動建議 <span class="en">Exercise Guidelines</span></h2>
+<div class="columns">
+<div class="column" style="width:72%;">
+<p><img data-src="images/s63-image75.jpg" class="fig h-lg"></p>
+</div><div class="column" style="width:28%;">
+<div class="small">
+<p>18–64 歲成人在有氧訓練與阻力訓練上，依強度區分的身體活動與運動建議</p>
+</div>
+<p><img data-src="images/s63-image74.png" width="110"></p>
+</div></div>
+<div class="cite">
+<p>Lehtonen E et al.&nbsp;(2022). <em>BMJ Open Sport Exerc Med</em>, 8, e001339. ©2022 BMJ Publishing Group Ltd</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>運動與認知研究的挑戰 <span class="en">Challenges</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>特定訓練與特定認知功能之間的關係</li>
+<li><strong>Adaptive exercise prescriptions</strong>
+<ul>
+<li>最佳參數
+<ul>
+<li>個別差異</li>
+<li>運動類型、頻率、強度⋯⋯</li>
+</ul></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>長期運動計畫的持續性 <strong>adherence</strong>
+<ul>
+<li>軟硬體的設計</li>
+<li>獎勵機制</li>
+<li>社群經營</li>
+</ul></li>
+</ul>
+<p><img data-src="images/s64-image76.png" class="fig h-xs"></p>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>跨領域整合 → Exergaming</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="images/s65-image80.png" class="fig"></p>
+</div><div class="column" style="width:40%;">
+<div class="grid2">
+<p><img data-src="images/s65-image79.jpg"></p>
+<p><img data-src="images/s65-image77.jpg"></p>
+</div>
+<p><img data-src="images/s65-image78.jpg" class="fig h-xs"></p>
+</div></div>
+</section>
+<section class="slide level2 center">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:38%;">
+<p><img data-src="images/s66-image82.jpg" class="fig h-md"></p>
+<div class="caption">
+<p><strong>Plato</strong>（約 428 – 348 BC）</p>
+</div>
+</div><div class="column" style="width:62%;">
+<blockquote>
+<p>“In order for man to succeed in life, God provided him with two means, <strong>education</strong> and <strong>physical activity</strong>. Not separately, one for the soul and the other for the body, but for the two together. With these means, man can attain <strong>perfection</strong>.”</p>
+</blockquote>
+<div class="small">
+<p>「為了讓人在生命中成功，神給了人兩種方法：<strong>教育</strong>與<strong>身體活動</strong>。不是分開的，一個給靈魂、一個給身體，而是兩者合一。藉由這兩者，人可以臻於完美。」</p>
+</div>
+<p><img data-src="images/s66-image81.png" class="fig h-xs"></p>
+</div></div>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>ICN Cognitive Psychology · Human Motor Control · <a href="en.html">English</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="index_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="index_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="index_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="index_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="index_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="index_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="index_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="index_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': false,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 6.0e-2,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "已复制");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "已复制");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

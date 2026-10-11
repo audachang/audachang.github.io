@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="en_files/libs/clipboard/clipboard.min.js"></script>
+<script src="en_files/libs/quarto-html/tabby.min.js"></script>
+<script src="en_files/libs/quarto-html/popper.min.js"></script>
+<script src="en_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="en_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="en_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="en_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.42">
+
+  <meta name="author" content="Erik Chang, PhD">
+  <title>Action Neuroscience</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="en_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="en_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="en_files/libs/revealjs/dist/theme/quarto-b033ebeb1070a755345fa633e0430690.css">
+  <link href="en_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="en_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="en_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="en_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section data-background-color="#0b1e2d" data-background-image="images/s01-image1.jpg" data-background-opacity="0.45" data-background-size="cover" class="quarto-title-block center">
+  <h1 class="title">Action Neuroscience</h1>
+  <p class="subtitle">Introduction to Human Motor Control</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Erik Chang, PhD 
+</div>
+        <p class="quarto-title-affiliation">
+            Institute of Cognitive Neuroscience, NCU
+          </p>
+    </div>
+</div>
+
+</section>
+<section>
+<section class="title-slide slide level1 section-slide center" data-background-color="#12263a">
+<h1>Opening: A Skill That Needs Many Functions</h1>
+
+</section>
+<section class="slide level2">
+<h2>Sport Stacking</h2>
+<video data-src="videos/sport-stacking-world-record.mp4" poster="images/s02-image2.png" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+<div class="caption">
+<p>Chu-Chun Yang — Overall female Sport Stacking Cycle World Record 5.824 s</p>
+</div>
+<div class="fragment question">
+<p>What functions are involved in this skill?</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Information Processing Involved in Sport Stacking</h2>
+<div class="columns">
+<div class="column" style="width:62%;">
+<ul>
+<li><strong>Target / Environment</strong>
+<ul>
+<li>Size, weight, toughness, surface properties, positions, configurations of the stack</li>
+<li>Gravity, wind, humidity, lighting</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><strong>Effector properties</strong>
+<ul>
+<li>Optimal postures, movement sequence, conditions of hands &amp; arms</li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="width:38%;">
+<p><img data-src="images/s03-image3.png" class="fig h-lg"></p>
+</div></div>
+<aside class="notes">
+<p>Perceptual analysis, vision, touch, hand–eye coordination, sequence memory.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section class="title-slide slide level1 section-slide center" data-background-color="#12263a">
+<h1>How the Brain Produces an Action</h1>
+<div class="sub">
+<p>Planning → Preparation → Execution</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>The Spatial Map for Action: PPC</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><img data-src="images/s04-image4.png" class="fig h-lg"></p>
+</div><div class="column" style="width:52%;">
+<p>The <strong>Posterior Parietal Cortex (PPC)</strong> is a hub for <strong>cross-modal integration</strong>:</p>
+<ul>
+<li>visual data about the cups’ locations</li>
+<li><strong>proprioceptive</strong> information about arm and hand positions</li>
+<li><strong>tactile feedback</strong> from the fingertips</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>The Spatial Map for Action: PPC</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="images/s04-image4.png" class="fig h-lg"></p>
+</div><div class="column" style="width:55%;">
+<ul>
+<li>Forming an <strong>action-centered representation</strong> of the environment
+<ul>
+<li>coding for <strong>potential actions</strong> rather than just static object locations</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><span class="strike">a cup at (30, 50, −7)</span> ✗</li>
+<li>a cup <em>to be grasped</em> ✓</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>turning the visual scene into a map of motor possibilities
+<ul>
+<li>→ <strong>affordances</strong></li>
+</ul></li>
+</ul>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>The Plan for Action (1): Premotor Cortex</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="images/s07-image5.png" class="fig h-lg"></p>
+</div><div class="column" style="width:55%;">
+<p><strong>Premotor Cortex (PMC)</strong></p>
+<ul>
+<li>uses the spatial map from the PPC to prepare specific movements</li>
+<li>establishes the correct <strong>postural set</strong> for the body and shoulders</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>The Plan for Action (2): Supplementary Motor Area</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="images/s07-image5.png" class="fig h-lg"></p>
+</div><div class="column" style="width:55%;">
+<p><strong>Supplementary Motor Area (SMA)</strong></p>
+<ul>
+<li>crucial for planning and organizing complex, well-learned, and <strong>bimanual</strong> sequences</li>
+<li><strong>Selection of action sequences</strong></li>
+<li><strong>Coordinating bilateral effectors</strong></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>active even during <strong>mental rehearsal</strong> of a sequence, not just during physical performance</li>
+</ul>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Complexity of Actions and Involved Cortical Areas</h2>
+<video data-src="videos/sma-complexity.mp4" poster="images/s09-image6.png" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+<div class="caption">
+<p>Simple movement → complex movement → imagined complex movement: compare activity in M1/S1 and SMA</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Motor Imagery in the Vegetative State</h2>
+
+<img data-src="images/s10-image7.png" class="fig h-lg r-stretch"><div class="caption">
+<p>Tennis imagery → SMA; spatial navigation imagery → PMC, PPC, PPA. The patient (top) shows a pattern similar to controls (bottom).</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Motor Execution: The Primary Motor Cortex (M1)</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img data-src="images/s11-image8.png" class="fig h-lg"></p>
+</div><div class="column" style="width:58%;">
+<p>M1 as the motor <em>“launch pad”</em></p>
+<ul>
+<li>translating the abstract plan from the PMC and SMA into specific <strong>motor commands</strong>
+<ul>
+<li><strong>force</strong></li>
+<li><strong>direction</strong></li>
+</ul></li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>M1: Population Coding and Real-time Correction</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img data-src="images/s11-image8.png" class="fig h-lg"></p>
+</div><div class="column" style="width:58%;">
+<ul>
+<li><strong>Population coding</strong>
+<ul>
+<li>the final movement direction is determined by the combined, weighted activity of a large group of neurons</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><strong>Real-time correction</strong>
+<ul>
+<li>receiving sensory feedback through <strong>long-loop reflexes</strong></li>
+<li>rapid adjustments to unexpected events, like a cup slipping</li>
+</ul></li>
+</ul>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>The Pyramidal Pathway</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/s12-image9.jpg" class="fig h-lg"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/s12-image10.png" class="fig h-lg"></p>
+</div></div>
+<div class="caption">
+<p>Upper motor neuron (M1) → medullary pyramid → <strong>pyramidal decussation</strong> → lower motor neuron → skeletal muscle</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Primary Motor Cortex</h2>
+
+<img data-src="images/s13-image11.jpg" class="fig h-lg r-stretch"><div class="caption">
+<p>Corticospinal and corticobulbar tracts; the body map (homunculus) in M1</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Individual Motor Maps</h2>
+
+<img data-src="images/s14-image12.png" class="fig h-lg r-stretch"><div class="cite">
+<p>Gordon EM et al.&nbsp;(2023). A somato-cognitive action network alternates with effector regions in motor cortex. <em>Nature</em>, 617(7960), 351–359. doi:10.1038/s41586-023-05964-2</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Updated Homunculus</h2>
+
+<img data-src="images/s15-image13.png" class="fig h-lg r-stretch"><div class="caption">
+<p>Left: Penfield’s homunculus (1948); right: integrate–isolate model (2022)</p>
+</div>
+<div class="cite">
+<p>Gordon EM et al.&nbsp;(2023). <em>Nature</em>, 617(7960), 351–359. doi:10.1038/s41586-023-05964-2</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Directional Tuning of Motor Cells</h2>
+
+<img data-src="images/s16-image14.jpg" class="fig h-lg r-stretch"></section>
+<section class="slide level2">
+<h2>Tuning Curve of a Single Neuron in the Motor Cortex</h2>
+
+<img data-src="images/s17-image15.jpg" class="fig h-md r-stretch"><div class="caption">
+<p>Each M1 neuron has a <strong>preferred direction</strong>: it fires most for movements in that direction and less as the direction deviates from it</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Population Coding (1)</h2>
+
+<img data-src="images/s18-image15.jpg" class="fig h-lg r-stretch"><div class="cite">
+<p>Georgopoulos (1990)</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Population Coding (2)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/s19-image15.jpg" class="fig h-lg"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/s19-image16.png" class="fig h-md"></p>
+<div class="small fragment">
+<p>Summing each neuron’s vector (preferred direction × firing rate) gives a <strong>population vector</strong> that points in the actual movement direction.</p>
+</div>
+</div></div>
+<div class="cite">
+<p>Georgopoulos (1990)</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Brain-Computer Interface</h2>
+<video data-src="videos/bci-idea-practice.mp4" poster="images/s20-image17.png" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+</section>
+<section class="slide level2">
+<h2>BCI Robotic Arm</h2>
+<video data-src="videos/bci-robotic-arm.mp4" poster="videos/bci-robotic-arm.jpg" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+<div class="caption">
+<p>Mind-controlled robotic arm</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Feedback of Touch from Robotic Arm</h2>
+<video data-src="videos/bci-touch-feedback.mp4" poster="videos/bci-touch-feedback.jpg" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+<div class="caption">
+<p>BCI-controlled robotic arm returns sense of touch to a quadriplegic patient</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Hierarchy in the Motor Neural System</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="images/s23-image20.png" class="fig h-lg"></p>
+</div><div class="column" style="width:50%;">
+<div style="font-size:0.85em">
+<ul>
+<li><strong>Descending systems</strong> (upper motor neurons)
+<ul>
+<li>Motor cortex: planning, initiating, directing voluntary movements</li>
+<li>Brainstem centers: basic movements, postural control</li>
+</ul></li>
+<li><strong>Basal ganglia</strong>: gating proper initiation of movement</li>
+<li><strong>Cerebellum</strong>: sensory motor coordination of ongoing movement</li>
+<li><strong>Spinal cord &amp; brainstem circuits</strong>
+<ul>
+<li>Local circuit neurons → motor neuron pools → skeletal muscles</li>
+</ul></li>
+</ul>
+</div>
+</div></div>
+</section></section>
+<section>
+<section class="title-slide slide level1 section-slide center" data-background-color="#12263a">
+<h1>Core Theoretical Issues of Motor Control</h1>
+
+</section>
+<section class="slide level2">
+<h2>Core Theoretical Issues of Motor Control</h2>
+<p>How does the motor control system solve the following issues?</p>
+<div>
+<ul>
+<li class="fragment"><strong>Degree of freedom</strong></li>
+<li class="fragment"><strong>Sequencing and timing</strong></li>
+<li class="fragment"><strong>Perceptual-motor coupling</strong></li>
+<li class="fragment"><strong>Motor skill learning</strong></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+<h2>Degree of Freedom</h2>
+<div class="question">
+<p>Touch your nose!</p>
+</div>
+<div class="grid3">
+<p><img data-src="images/s25-image22.jpg" class="h-sm"></p>
+<p><img data-src="images/s25-image23.png" class="h-sm"></p>
+<p><img data-src="images/s25-image21.jpg" class="h-sm"></p>
+</div>
+<div class="fragment caption">
+<p>The same goal can be reached with countless combinations of joint angles. How does the brain choose one?</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Motor Sequencing</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Typing <strong>3, 2, 4, 3, 5, 4, 6, 5</strong></p>
+<div class="fragment">
+<p>is actually <strong>[3,2], [4,3], [5,4], [6,5]</strong></p>
+<p><img data-src="images/s25-image24.png" class="fig"></p>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="fragment">
+<p>Try to remember:</p>
+<p><strong>FB, ICI, AKG, BTW, A.</strong></p>
+</div>
+<div class="fragment">
+<p>Regrouped:</p>
+<p><strong>FBI, CIA, KGB, TWA</strong></p>
+<p>→ sequences are represented as <strong>chunks</strong> organized hierarchically</p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Motor Skill Learning</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>How do we get from here…</strong></p>
+<video data-src="videos/chopsticks-novice.mp4" poster="images/s26-image25.png" class="vid vid-sm" controls="" preload="metadata" playsinline="">
+</video>
+</div><div class="column" style="width:55%;">
+<p><strong>…to there?</strong></p>
+<video data-src="videos/chopsticks-tutorial.mp4" poster="images/s26-image26.png" class="vid vid-sm" controls="" preload="metadata" playsinline="">
+</video>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Factors Modulating Learning</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Individual differences</strong>
+<ul>
+<li>Athletes vs.&nbsp;the ordinary</li>
+<li>Elderly vs.&nbsp;young</li>
+<li>Males vs.&nbsp;females</li>
+</ul></li>
+<li><strong>Task characteristics</strong>
+<ul>
+<li>Open vs.&nbsp;closed loop</li>
+<li>Target</li>
+<li>Tools</li>
+<li>Bilateral or unilateral</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><strong>Learning schedule</strong>
+<ul>
+<li>Dense or sporadic</li>
+<li>Random or regular</li>
+<li>Total amount of time</li>
+</ul></li>
+<li><strong>Feedback</strong>
+<ul>
+<li>Forms</li>
+<li>Sensory modalities</li>
+</ul></li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>What Facilitates Your Progress in Practice Does Not Necessarily Help in Real Games</h2>
+<video data-src="videos/practice-vs-game.mp4" poster="images/s28-image27.png" class="vid" controls="" preload="metadata" playsinline="">
+</video>
+</section>
+<section class="slide level2">
+<h2>Bimanual Coordination: A Novel Motor Skill</h2>
+
+<img data-src="images/s29-image28.png" class="fig r-stretch"><div class="caption">
+<p>Relative phase φ between the two fingers: 0° in-phase, 180° anti-phase, 90° out-of-phase. In-phase and anti-phase come naturally; 90° has to be learned.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Manipulating Form and Modality of Feedback</h2>
+<div class="person bl">
+<p><img data-src="images/s30-image31.png"> Sylvia Chiou</p>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Continuous Feedback</strong></p>
+<video data-src="videos/bimanual-continuous-feedback.mp4" poster="images/s30-image29.png" class="vid vid-sm" controls="" preload="metadata" playsinline="">
+</video>
+</div><div class="column" style="width:50%;">
+<p><strong>Discrete Feedback</strong></p>
+<video data-src="videos/bimanual-discrete-feedback.mp4" poster="images/s30-image30.png" class="vid vid-sm" controls="" preload="metadata" playsinline="">
+</video>
+</div></div>
+<div class="caption">
+<p>Top: left- and right-hand movement; bottom: the feedback participants see</p>
+</div>
+<div class="cite">
+<p>Chiou &amp; Chang (2016). <em>PLoS One</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Feedback Good for Learning But Not for Retention</h2>
+
+<img data-src="images/s31-image32.png" class="fig h-md r-stretch"><div class="caption">
+<p>A: Lissajous figure (visual, continuous); B: color (visual, discrete); C: tone (auditory, discrete)</p>
+</div>
+<div class="cite">
+<p>Chiou &amp; Chang (2016). <em>PLoS One</em>, 11(2). doi:10.1371/journal.pone.0149221</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Results (1): Learning Curves over Three Days</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<p><img data-src="images/s32-image33.png" class="fig h-lg"></p>
+</div><div class="column" style="width:42%;">
+<p><img data-src="images/s32-image33-legend.png" class="fig h-xs"></p>
+<p>Performance: error relative to the 90° target phase</p>
+<p><img data-src="images/s32-image34.png" class="fig"></p>
+<div class="fragment small">
+<p>The Lissajous group had the lowest error during practice, but its error rose sharply in the <strong>No-FB test</strong>.</p>
+</div>
+</div></div>
+<div class="cite">
+<p>Chiou &amp; Chang (2016). <em>PLoS One</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Results (2): Immediate Transfer Test without Feedback</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img data-src="images/s32-image35.png" class="fig h-lg"></p>
+</div><div class="column" style="width:45%;">
+<ul>
+<li><strong>Lissajous</strong> (visual, continuous): significantly worse once feedback is removed</li>
+<li><strong>Color</strong> (visual, discrete): better once feedback is removed</li>
+<li><strong>Tone</strong> (auditory, discrete): no significant difference</li>
+</ul>
+<div class="fragment small">
+<p>→ Continuous feedback breeds dependence on it; discrete feedback favors retention</p>
+</div>
+</div></div>
+<div class="cite">
+<p>Chiou &amp; Chang (2016). <em>PLoS One</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Objective Index for Motor Imagery</h2>
+<div class="person">
+<p><img data-src="images/s33-image36.png"> Hsin-Ping Tien</p>
+</div>
+<p><br></p>
+<p><img data-src="images/s33-image37.png" class="fig"></p>
+<div class="caption">
+<p>Prime conditions: Execution, Imagery, Perception. The probe color is the same as (repeated) or different from (non-repeated) the prime.</p>
+</div>
+<div class="cite">
+<p>Tien &amp; Chang (2024). <em>Frontiers in Psychology</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Motor Imagery Produces a Repetition Effect</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="images/s34-image39.png" class="fig"></p>
+<div class="small">
+<p><strong>Response repetition effect</strong>: faster responses when the probe repeats the prime</p>
+</div>
+</div><div class="column" style="width:55%;">
+<p><img data-src="images/s34-image38.png" class="fig h-lg"></p>
+</div></div>
+<div class="fragment caption">
+<p>Execution and Imagery both show a significant repetition effect; Perception does not → motor imagery can be measured objectively with RT</p>
+</div>
+<div class="cite">
+<p>Tien &amp; Chang (2024). <em>Frontiers in Psychology</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Motor Imagery Involves More Spatial Working Memory</h2>
+<div class="person bl">
+<p><img data-src="images/s33-image36.png"> Hsin-Ping Tien</p>
+</div>
+<p><img data-src="images/s35-image40.png" class="fig"></p>
+<div class="caption">
+<p>Repetition priming paradigm + secondary memory maintenance task</p>
+</div>
+<div class="cite">
+<p>Tien &amp; Chang (in preparation)</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Motor Imagery Involves More Spatial Memory</h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<p><img data-src="images/s36-image42.png" class="fig h-md"></p>
+</div><div class="column" style="width:48%;">
+<p><img data-src="images/s36-image41.png" class="fig h-md"></p>
+</div></div>
+<div class="fragment caption">
+<p>As memory load increases (Pure → Span 2 → Span 4), the repetition effect shrinks for Imagery but not for Execution</p>
+</div>
+<div class="cite">
+<p>Tien &amp; Chang (in preparation)</p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 section-slide center" data-background-color="#12263a">
+<h1>Relationship between Perception &amp; Action</h1>
+
+</section>
+<section class="slide level2">
+<h2>Human Visual System</h2>
+
+<img data-src="images/s38-image43.jpg" class="fig h-sm r-stretch"><ul>
+<li><strong>Dorsal (where) pathway</strong>: V1 → Posterior Parietal Cortex</li>
+<li><strong>Ventral (what) pathway</strong>: V1 → Inferior Temporal Cortex</li>
+</ul>
+<div class="fragment small">
+<p>Goodale &amp; Milner: the dorsal pathway serves <strong>vision for action</strong> (how); the ventral pathway serves <strong>vision for perception</strong></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Damage to the Dorsal Pathway</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Optic Ataxia</strong></p>
+<ul>
+<li>Caused by damage to posterior parietal cortex</li>
+<li>Incapable of reach-for-grasp objects, but can name them and describe their functions</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="images/s39-image43-dorsal.jpg" class="fig"></p>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Damage to the Ventral Pathway</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Visual form agnosia</strong></p>
+<ul>
+<li>Failure to identify familiar objects
+<ul>
+<li>But can recognize them by touching</li>
+</ul></li>
+<li>Normal in verbal memory and intelligence</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="images/s40-image43-ventral.jpg" class="fig"></p>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Patient DF</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img data-src="images/s41-image44.png" class="fig h-sm"></p>
+<blockquote>
+<p>“It’s made out of metal – is it aluminium? It’s got red plastic on it.”</p>
+<p>“Is it some sort of kitchen utensil?”</p>
+</blockquote>
+</div><div class="column" style="width:45%;">
+<p><img data-src="images/s41-image45.png" class="fig"></p>
+<div class="caption">
+<p>DF’s lesion in lateral occipital cortex (blue)</p>
+</div>
+</div></div>
+<div class="cite">
+<p>Humphrey, Goodale, Jakobson, &amp; Servos (1994). <em>Perception</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>The Slot Task</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img data-src="images/s42-image46.png" class="fig h-lg"></p>
+</div><div class="column" style="width:45%;">
+<ul>
+<li>Left column — <strong>Matching</strong>: rotate the card to match the slot’s orientation</li>
+<li>Right column — <strong>Posting</strong>: post the card through the slot</li>
+<li>Top row: <strong>DF</strong>; bottom row: <strong>Control</strong></li>
+</ul>
+<div class="fragment">
+<p>DF cannot match the orientation, yet posts the card accurately</p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Optic Ataxia Patient</h2>
+
+<img data-src="images/s43-image47.png" class="fig h-lg r-stretch"><div class="fragment caption">
+<p>The opposite of DF: knows the slot’s orientation but cannot orient the hand to it</p>
+</div>
+<div class="cite">
+<p>Perenin &amp; Vighetto (1988). <em>Brain</em></p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>Brain Imaging of Object Recognition</h2>
+
+<img data-src="images/s44-image48.png" class="fig h-lg r-stretch"><div class="caption">
+<p>Intact objects minus scrambled objects → Lateral Occipital area (LO) activation</p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>Neuroimaging of Reach-to-grasp Movement</h2>
+<p><img data-src="images/s45-image49.jpg" class="fig h-sm"></p>
+<div class="grid2">
+<p><img data-src="images/s45-image50.png" class="h-xs"></p>
+<p><img data-src="images/s45-image51.png" class="h-xs"></p>
+</div>
+<div class="caption">
+<p>Left: Grasping; right: Reaching</p>
+</div>
+<div class="cite">
+<p>Culham, Danckert, DeSouza, Gati, Menon &amp; Goodale (2003). <em>Experimental Brain Research</em></p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>Object Recognition: DF vs.&nbsp;Normal</h2>
+
+<img data-src="images/s46-image52.png" class="fig h-lg r-stretch"><div class="cite">
+<p>Culham et al.&nbsp;(2003). <em>Experimental Brain Research</em></p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>Grasping: DF vs.&nbsp;Normal</h2>
+
+<img data-src="images/s47-image45.png" class="fig h-lg r-stretch"><div class="caption">
+<p>DF shows normal dorsal-pathway activation during grasping (Grasp &gt; Reach)</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Action Modulates Perception</h2>
+
+<img data-src="images/s48-image53.png" class="fig h-lg r-stretch"><div class="fragment question">
+<p>Does a hill look steeper when you carry a heavy backpack?</p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 section-slide center" data-background-color="#12263a">
+<h1>Can Exercise Enhance Ordinary People’s Brain &amp; Cognition?</h1>
+
+</section>
+<section class="slide level2">
+<h2>Regression Model of Grades</h2>
+<div style="font-size:0.86em">
+<p><span class="math display">\[
+\begin{aligned}
+\text{Grades}_{required} = {} &amp; -0.4 \times \text{Number}_{required} + 0.54 \times \text{Grades}_{elected} - 0.09 \times \text{Number}_{elected} \\
+&amp; + 0.09 \times \text{Grades}_{GA} - 0.22 \times \text{Number}_{GA} \\
+&amp; + {\color{#d62728}{0.33}} \times {\color{#1f77b4}{\text{Grade}_{PE}}} + {\color{#d62728}{0.58}} \times \text{Number}_{PE} + 7.43
+\end{aligned}
+\]</span></p>
+</div>
+<p>Adjusted <span class="math inline">\(R^2 = .7036\)</span>, <span class="math inline">\(F_{7,\,19072} = 6471\)</span>, <span class="math inline">\(p &lt; 2.2 \times 10^{-16}\)</span></p>
+<div class="fragment question">
+<p>Both PE coefficients are positive</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>2013 北投社區大學 銀髮族身體活動促進</h2>
+<div class="grid4">
+<p><img data-src="images/s51-image57.jpg" class="h-grid"></p>
+<p><img data-src="images/s51-image54.jpg" class="h-grid"></p>
+<p><img data-src="images/s51-image55.jpg" class="h-grid"></p>
+<p><img data-src="images/s51-image56.jpg" class="h-grid"></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Executive Function</h2>
+
+<img data-src="images/s52-image58.png" class="fig h-lg r-stretch"><div class="caption">
+<p>RT difference (difficult − easy): reduced after training in the experimental group, not in controls</p>
+</div>
+<div class="cite">
+<p>Chang &amp; Wang (2013) SfN</p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>Enhancing Physical Fitness, Brain Activity, and Cognitive Control</h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<p><strong>Elderly (Pre-training)</strong></p>
+<p><img data-src="images/s53-image60.png" class="fig"></p>
+</div><div class="column" style="width:48%;">
+<p><strong>Daily Steps</strong></p>
+<p><img data-src="images/s53-image59.png" class="fig"></p>
+</div></div>
+<div class="cite">
+<p>Chang &amp; Wang (2013) SfN</p>
+</div>
+</section>
+<section class="slide level2 dark" data-background-color="black">
+<h2>Promoting Physical Activities → Promoting Brain Activation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Elderly (Post-training)</strong></p>
+<p><img data-src="images/s54-image61.png" class="fig"></p>
+</div><div class="column" style="width:50%;">
+<p><strong>Young</strong></p>
+<p><img data-src="images/s54-image62.png" class="fig"></p>
+</div></div>
+<div class="cite">
+<p>Chang &amp; Wang (2013) SfN</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Compensatory Pattern of Activation</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="images/s55-image63.png" class="fig h-lg"></p>
+</div><div class="column" style="width:55%;">
+<ul>
+<li>High-performing older adults recruit additional brain areas in the other hemisphere</li>
+<li><strong>HAROLD</strong>: hemispheric asymmetry reduction in older adults</li>
+</ul>
+<div class="fragment small">
+<p>Age-related hemispheric asymmetry reductions may have a compensatory function, or they may reflect a dedifferentiation process.</p>
+</div>
+</div></div>
+<div class="cite">
+<p>Cabeza et al.&nbsp;(2002)</p>
+</div>
+<aside class="notes">
+<p>In prefrontal cortex, many genes involved in inhibitory neurotransmission mediated by GABA (γ-aminobutyric acid) are strongly downregulated with age, potentially altering the balance between inhibitory and excitatory neurotransmission.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Summary</h2>
+<div>
+<ul>
+<li class="fragment">Promoting level of physical activity improves performance in the executive control of the attentional network.</li>
+<li class="fragment">Enhanced level of BOLD responses in the elderly may be attributable to the intervention of physical activity.
+<ul>
+<li class="fragment">Bilateral MFC recruitment → compensatory mechanism</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+<h2>Meta Analyses on Effect of Chronic Exercise on Cognition</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>Executive Functions</strong></p>
+<p><img data-src="images/s57-image64-exec.png" class="fig" style="height:420px;width:auto"></p>
+</div><div class="column" style="width:45%;">
+<p><strong>Memory</strong></p>
+<p><img data-src="images/s57-image64-memory.png" class="fig" style="height:360px;width:auto"></p>
+</div></div>
+<div class="caption">
+<p>← Control+　|　Trained+ →</p>
+</div>
+<div class="cite">
+<p>Sanders et al.&nbsp;(2019). <em>PLoS One</em>. doi:10.1371/journal.pone.0210036</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>80% of Gray Matters Are Modulated by Physical Activities</h2>
+
+<img data-src="images/s58-image65.png" class="fig r-stretch"><div class="caption">
+<p>Number of studies = 53</p>
+</div>
+<div class="cite">
+<p>Batouli &amp; Saba (2017). <em>Behavioural Brain Research</em>. doi:10.1016/j.bbr.2017.06.002</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Why Exercise is Beneficial for the Brain? <span class="en">(1) Short-term</span></h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<p><strong>Balancing Neurotransmitters</strong></p>
+<ul>
+<li><strong>Norepinephrine</strong> → Attentional Control</li>
+<li><strong>Serotonin</strong> → Emotional Regulation</li>
+<li><strong>Dopamine</strong> → Association between reward and learning</li>
+</ul>
+</div><div class="column" style="width:42%;">
+<p><img data-src="images/s59-image67.jpg" class="fig"></p>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Why Exercise is Beneficial for the Brain? <span class="en">(2) Long-term</span></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Enhancing the production of neurotrophins for plasticity</strong></p>
+<ul>
+<li><strong>BDNF</strong> (brain-derived neurotrophic factor) → forming neurons and synapses</li>
+<li><strong>IGF-1</strong> (insulin-like growth factor 1) → facilitating BDNF</li>
+<li><strong>VEGF</strong> (vascular endothelial growth factor) → forming new capillaries</li>
+<li><strong>FGF-2</strong> (fibroblast growth factor 2) → strengthening new neurons</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="images/s59-image66.jpg" class="fig"></p>
+</div></div>
+<aside class="notes">
+<p>BDNF is a member of the neurotrophin family. Exercise increases BDNF secretion; BDNF secreted by contracting muscle also plays a role in muscle repair and regeneration.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>What Are Your Leisure Activities?</h2>
+<div class="grid2">
+<p><img data-src="images/s60-image68.jpg" class="h-md"></p>
+<p><img data-src="images/s60-image69.jpg" class="h-md"></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Definition of Aerobic Exercise</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/s61-image70.png" class="fig h-lg"></p>
+</div><div class="column" style="width:60%;">
+<p><strong>65%–75%</strong> of maximal heart rate (beats/min)</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Age</th>
+<th style="text-align: center;">Target heart rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">20 yrs</td>
+<td style="text-align: center;">130 – 150</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">30 yrs</td>
+<td style="text-align: center;">124 – 143</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">40 yrs</td>
+<td style="text-align: center;">117 – 135</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">50 yrs</td>
+<td style="text-align: center;">111 – 128</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">60 yrs</td>
+<td style="text-align: center;">104 – 120</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Examples of Aerobic Exercise</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><img data-src="images/s62-image72.png" class="fig h-lg"></p>
+</div><div class="column" style="width:70%;">
+<p><img data-src="images/s62-image73.png" class="fig"></p>
+<div class="question">
+<p>Note: Minimal Requirement!</p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Exercise Guidelines across Intensity Domains</h2>
+<div class="columns">
+<div class="column" style="width:72%;">
+<p><img data-src="images/s63-image75.jpg" class="fig h-lg"></p>
+</div><div class="column" style="width:28%;">
+<div class="small">
+<p>Physical activity and exercise guidelines across intensity domains for aerobic and resistance training for individuals aged from 18 to 64 years old.</p>
+</div>
+<p><img data-src="images/s63-image74.png" width="110"></p>
+</div></div>
+<div class="cite">
+<p>Lehtonen E et al.&nbsp;(2022). <em>BMJ Open Sport Exerc Med</em>, 8, e001339. ©2022 BMJ Publishing Group Ltd</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Challenges for Exercise and Cognition Research</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Relationship between specific training and cognitive functions</li>
+<li><strong>Adaptive exercise prescriptions</strong>
+<ul>
+<li>Optimal parameters
+<ul>
+<li>Individual differences</li>
+<li>Types, frequency, intensity…</li>
+</ul></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><strong>Adherence</strong> to chronic exercise program
+<ul>
+<li>Design of software and hardware</li>
+<li>Rewarding scheme</li>
+<li>Community management</li>
+</ul></li>
+</ul>
+<p><img data-src="images/s64-image76.png" class="fig h-xs"></p>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Inter-disciplinary Integration → Exergaming</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="images/s65-image80.png" class="fig"></p>
+</div><div class="column" style="width:40%;">
+<div class="grid2">
+<p><img data-src="images/s65-image79.jpg"></p>
+<p><img data-src="images/s65-image77.jpg"></p>
+</div>
+<p><img data-src="images/s65-image78.jpg" class="fig h-xs"></p>
+</div></div>
+</section>
+<section class="slide level2 center">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:38%;">
+<p><img data-src="images/s66-image82.jpg" class="fig h-md"></p>
+<div class="caption">
+<p><strong>Plato</strong> (c.&nbsp;428 – 348 BC)</p>
+</div>
+</div><div class="column" style="width:62%;">
+<blockquote>
+<p>“In order for man to succeed in life, God provided him with two means, <strong>education</strong> and <strong>physical activity</strong>. Not separately, one for the soul and the other for the body, but for the two together. With these means, man can attain <strong>perfection</strong>.”</p>
+</blockquote>
+<p><img data-src="images/s66-image81.png" class="fig h-xs"></p>
+</div></div>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>ICN Cognitive Psychology · Human Motor Control · <a href="index.html">中文</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="en_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="en_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="en_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="en_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="en_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="en_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="en_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="en_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="en_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="en_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': false,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 6.0e-2,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
