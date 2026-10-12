@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 330" width="1060" height="330">
+<rect width="1060" height="330" fill="#fff"/>
+<g font-family="Arial, Helvetica, 'Liberation Sans', sans-serif" font-size="54" fill="#000" text-anchor="middle">
+<line x1="30" y1="245" x2="1030" y2="245" stroke="#c8c8c8" stroke-width="2" stroke-linecap="round"/>
+<path d="M120.0,245 V197 Q120.0,193 124.0,193 H156.0 Q160.0,193 160.0,197 V245 Z" fill="#9cc7d4"/>
+<text x="140.0" y="171" dominant-baseline="central" font-size="28" fill="#6b6b6b">−1</text>
+<path d="M250.0,245 V145 Q250.0,141 254.0,141 H286.0 Q290.0,141 290.0,145 V245 Z" fill="#1b7f9b"/>
+<text x="270.0" y="119" dominant-baseline="central" font-size="28" fill="#6b6b6b">+1</text>
+<path d="M380.0,245 V197 Q380.0,193 384.0,193 H416.0 Q420.0,193 420.0,197 V245 Z" fill="#9cc7d4"/>
+<text x="400.0" y="171" dominant-baseline="central" font-size="28" fill="#6b6b6b">−1</text>
+<path d="M510.0,245 V93 Q510.0,89 514.0,89 H546.0 Q550.0,89 550.0,93 V245 Z" fill="#1b7f9b"/>
+<text x="530.0" y="67" dominant-baseline="central" font-size="28" fill="#6b6b6b">+2</text>
+<path d="M640.0,245 V197 Q640.0,193 644.0,193 H676.0 Q680.0,193 680.0,197 V245 Z" fill="#9cc7d4"/>
+<text x="660.0" y="171" dominant-baseline="central" font-size="28" fill="#6b6b6b">−1</text>
+<path d="M770.0,245 V145 Q770.0,141 774.0,141 H806.0 Q810.0,141 810.0,145 V245 Z" fill="#1b7f9b"/>
+<text x="790.0" y="119" dominant-baseline="central" font-size="28" fill="#6b6b6b">+1</text>
+<path d="M900.0,245 V197 Q900.0,193 904.0,193 H936.0 Q940.0,193 940.0,197 V245 Z" fill="#9cc7d4"/>
+<text x="920.0" y="171" dominant-baseline="central" font-size="28" fill="#6b6b6b">−1</text>
+<text x="75" y="293" dominant-baseline="central" >3</text>
+<text x="205" y="293" dominant-baseline="central" >2</text>
+<text x="335" y="293" dominant-baseline="central" >4</text>
+<text x="465" y="293" dominant-baseline="central" >3</text>
+<text x="595" y="293" dominant-baseline="central" >5</text>
+<text x="725" y="293" dominant-baseline="central" >4</text>
+<text x="855" y="293" dominant-baseline="central" >6</text>
+<text x="985" y="293" dominant-baseline="central" >5</text>
+</g>
+</svg>

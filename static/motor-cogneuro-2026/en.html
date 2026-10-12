@@ -495,6 +495,75 @@ Erik Chang, PhD
 </div></div>
 </section>
 <section class="slide level2">
+<h2>Same Sequence, Two Structures</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Chain of chunks</strong></p>
+<p><img data-src="images/s25-seq-chain.svg" class="fig"></p>
+<div class="small">
+<p>Each chunk is the previous chunk <strong>+1</strong>. The two middle −1 nodes each have two parents: the upper level is still chaining, only the units are now chunks.</p>
+</div>
+</div><div class="column fragment" style="width:50%;">
+<p><strong>Hierarchical tree</strong></p>
+<p><img data-src="images/s25-seq-tree.svg" class="fig"></p>
+<div class="small">
+<p>[3,2] <strong>+1</strong> → [3,2,4,3]; the whole first half <strong>+2</strong> → [5,4,6,5]. Every node has exactly one parent.</p>
+</div>
+</div></div>
+<div class="fragment caption">
+<p>Both structures produce the same key presses; they differ only in how the upper levels are organized</p>
+</div>
+<aside class="notes">
+<p>Left: the figure from the previous slide, redrawn in the same style. It has two levels: −1 within a chunk, and +1 chaining chunk to chunk, so [4,3] and [5,4] each have two parents. Strictly speaking it is not a tree. Right: a strict hierarchical tree. −1 makes the pairs, +1 groups pairs into four-key units, and +2 copies the first half into the second half. Check: 3+2=5, 2+2=4, 4+2=6, 3+2=5. This rule-based tree description of sequences comes from Restle’s (1970) structural trees.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Where Is the Longest Pause?</h2>
+<div class="question">
+<p>After practice, where would you pause longest while typing these 8 keys?</p>
+</div>
+<div class="small">
+<p>Bars: predicted pause length (schematic, not real data); labels: the node crossed between two keys</p>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Chain</strong> predicts</p>
+<p><img data-src="images/s25-iri-chain.svg" class="fig"></p>
+</div><div class="column fragment" style="width:50%;">
+<p><strong>Tree</strong> predicts</p>
+<p><img data-src="images/s25-iri-tree.svg" class="fig"></p>
+</div></div>
+<div class="fragment caption">
+<p>The higher the node crossed, the longer the pause and the more errors → inter-response intervals reveal which structure a learner uses</p>
+</div>
+<div class="cite">
+<p>Restle (1970); Restle &amp; Brown (1970); Povel &amp; Collard (1982); Rosenbaum, Kenny &amp; Derr (1983)</p>
+</div>
+<aside class="notes">
+<p>Let students guess before revealing the right panel. Chain: all three chunk boundaries (2→4, 3→5, 4→6) cross a +1 node, so pauses should be equal. Tree: 3→5 crosses the top +2 node and should be longest; 2→4 and 4→6 cross +1; within-pair transitions cross only −1 and are shortest. Restle &amp; Brown found errors concentrated at higher-level boundaries; Rosenbaum et al.&nbsp;(1983) explained keypress latencies by tree traversal; Povel &amp; Collard (1982) found finger-tapping latencies followed the structural code participants adopted. Bar heights are schematic; real data are also shaped by the biomechanics of finger transitions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
 <h2>Motor Skill Learning</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
@@ -1119,14 +1188,19 @@ Erik Chang, PhD
 <blockquote>
 <p>“In order for man to succeed in life, God provided him with two means, <strong>education</strong> and <strong>physical activity</strong>. Not separately, one for the soul and the other for the body, but for the two together. With these means, man can attain <strong>perfection</strong>.”</p>
 </blockquote>
-<p><img data-src="images/s66-image81.png" class="fig h-xs"></p>
+<div style="display:flex; justify-content:center; align-items:flex-end; gap:32px; margin-top:0.4em">
+<p><img data-src="images/s66-image81.png" style="height:150px; width:auto; margin:0"></p>
+<div style="text-align:center; font-size:0.42em; line-height:1.3; color:#555">
+<p><img data-src="images/qr-motor-cogneuro-2026-en.svg" style="height:150px; width:150px; margin:0 auto; display:block"> Slides online<br>audachang.github.io/motor-cogneuro-2026/en.html</p>
+</div>
+</div>
 </div></div>
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>ICN Cognitive Psychology · Human Motor Control · <a href="index.html">中文</a></p>
+<p>ICN Cognitive Psychology · Human Motor Control</p>
 </div>
 </div></div>
 

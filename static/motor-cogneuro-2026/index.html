@@ -494,6 +494,75 @@ Erik Chang, PhD（張智宏）
 </div></div>
 </section>
 <section class="slide level2">
+<h2>同一串序列，兩種結構 <span class="en">Chain vs.&nbsp;Hierarchical Tree</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>鏈狀</strong> <span class="en">Chain of chunks</span></p>
+<p><img data-src="images/s25-seq-chain.svg" class="fig"></p>
+<div class="small">
+<p>每個 chunk 由前一個 chunk <strong>+1</strong> 得到。中間兩個 −1 節點各有兩個 parent：上層其實仍是 chaining，只是串接的單位換成 chunk。</p>
+</div>
+</div><div class="column fragment" style="width:50%;">
+<p><strong>階層樹</strong> <span class="en">Hierarchical tree</span></p>
+<p><img data-src="images/s25-seq-tree.svg" class="fig"></p>
+<div class="small">
+<p>[3,2] <strong>+1</strong> → [3,2,4,3]；前半段整體 <strong>+2</strong> → [5,4,6,5]。每個節點只有一個 parent。</p>
+</div>
+</div></div>
+<div class="fragment caption">
+<p>兩種結構產生完全相同的按鍵順序，差別只在上層怎麼組織</p>
+</div>
+<aside class="notes">
+<p>左邊是前一張投影片的圖，畫成同樣風格。它其實是兩層：chunk 內是 −1，chunk 之間用 +1 一個接一個串起來，所以 [4,3] 和 [5,4] 各有兩個 parent，嚴格說不是樹。 右邊是嚴格的階層樹：−1 產生 pair，+1 把 pair 組成四個鍵的單位，+2 再把前半段複製成後半段。檢查：3+2=5、2+2=4、4+2=6、3+2=5。 這種用規則描述序列的樹，來自 Restle (1970) 的 structural tree。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>哪裡會停最久？ <span class="en">Predicting Inter-Response Intervals</span></h2>
+<div class="question">
+<p>熟練之後連續按這 8 個鍵，哪兩個鍵之間會停最久？</p>
+</div>
+<div class="small">
+<p>長條：預測的停頓長度（示意，非實際資料）；長條上的數字：兩鍵之間跨越的節點</p>
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>鏈狀</strong>的預測</p>
+<p><img data-src="images/s25-iri-chain.svg" class="fig"></p>
+</div><div class="column fragment" style="width:50%;">
+<p><strong>階層樹</strong>的預測</p>
+<p><img data-src="images/s25-iri-tree.svg" class="fig"></p>
+</div></div>
+<div class="fragment caption">
+<p>跨越的節點層級越高，停頓越長、越容易出錯 → 用按鍵時間就能檢驗受試者採用哪一種結構</p>
+</div>
+<div class="cite">
+<p>Restle (1970); Restle &amp; Brown (1970); Povel &amp; Collard (1982); Rosenbaum, Kenny &amp; Derr (1983)</p>
+</div>
+<aside class="notes">
+<p>先讓學生猜，再翻出右邊。 鏈狀結構：三個 chunk boundary（2→4、3→5、4→6）都只跨越 +1，預測停頓一樣長。 階層樹：3→5 跨越最上層的 +2，停頓最長；2→4、4→6 跨越 +1，次之；pair 內部只跨越 −1，最短。 Restle &amp; Brown 的序列學習研究發現錯誤集中在高層級的邊界；Rosenbaum 等人 (1983) 用 tree traversal 解釋按鍵時間；Povel &amp; Collard (1982) 用 finger tapping 發現反應時間符合受試者採用的結構編碼。 長條高度只是示意，實際資料還會受手指轉換的生物力學影響。</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
 <h2>動作技能學習 <span class="en">Motor Skill Learning</span></h2>
 <div class="columns">
 <div class="column" style="width:45%;">
@@ -1138,14 +1207,19 @@ Erik Chang, PhD（張智宏）
 <div class="small">
 <p>「為了讓人在生命中成功，神給了人兩種方法：<strong>教育</strong>與<strong>身體活動</strong>。不是分開的，一個給靈魂、一個給身體，而是兩者合一。藉由這兩者，人可以臻於完美。」</p>
 </div>
-<p><img data-src="images/s66-image81.png" class="fig h-xs"></p>
+<div style="display:flex; justify-content:center; align-items:flex-end; gap:32px; margin-top:0.4em">
+<p><img data-src="images/s66-image81.png" style="height:150px; width:auto; margin:0"></p>
+<div style="text-align:center; font-size:0.42em; line-height:1.3; color:#555">
+<p><img data-src="images/qr-motor-cogneuro-2026.svg" style="height:150px; width:150px; margin:0 auto; display:block"> 投影片網址<br>audachang.github.io/motor-cogneuro-2026</p>
+</div>
+</div>
 </div></div>
 
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>ICN Cognitive Psychology · Human Motor Control · <a href="en.html">English</a></p>
+<p>ICN Cognitive Psychology · Human Motor Control</p>
 </div>
 </div></div>
 
