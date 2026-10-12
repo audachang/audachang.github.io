@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-10-05",
+    "updatedAt": "2026-10-12",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "0 new candidate(s) discovered."
+    "lastMessage": "3 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -1346,6 +1346,100 @@
           "10月4日"
         ],
         "contentHash": "1bb7a471682dc6d9"
+      }
+    },
+    {
+      "id": "candidate-taoyuan-299685d5f3",
+      "city": "桃園",
+      "status": "candidate",
+      "title": "2026桃園兒童藝術節 | 桃園觀光導覽網",
+      "url": "https://travel.tycg.gov.tw/zh-tw/event/calendardetail/6676",
+      "sourceTitle": "Taichung Tourism",
+      "description": "￭相關內容請洽本府文化局03-3322592#83172026桃園兒童藝術節 🎮想像力上線，冒險開始！🎮最受大小朋友期待的「桃園兒童藝術節」即將要開始啦！快來看看這次五力藝文精靈要帶大家去哪裡玩？🚗🚗🚗 2026桃園兒童藝術節以「想像力上線，冒險開始！」為主題，7月4日至26日連續4個週末，邀請孩子們登入冒險地圖，一起穿梭充滿驚喜、魔法與冒險的遊戲世界...",
+      "dateSnippets": [
+        "7月4日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-10-12",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [],
+        "contentHash": "adf200e943fabe9f"
+      }
+    },
+    {
+      "id": "candidate-taipei-b61496a671",
+      "city": "台北",
+      "status": "candidate",
+      "title": "臺北市立東湖國民中學全球資訊網",
+      "url": "https://www.dhjh.tp.edu.tw/newstype/7",
+      "sourceTitle": "Tp",
+      "description": "2026-05-29📰轉知社團法人台北市原住民關懷協會辦理115年「原住民家庭暨青少年兒童關懷服務計畫暑期才藝營」 · 2026-05-28📰轉知臺北市政府教育局114學年度「高級中等以下學校動物保育生命關懷推動計畫『來和動物藝起玩一天』暑期一日營隊活動」",
+      "dateSnippets": [
+        "2026-05-29",
+        "2026-05-28",
+        "2026-10-08",
+        "2026-09-08",
+        "2026-09-04",
+        "2026-09-03",
+        "2026-08-28",
+        "2026-08-25",
+        "2026-08-20",
+        "2026-07-28",
+        "2026-06-30",
+        "2026-06-17",
+        "2026-06-16",
+        "2026-06-10",
+        "2026-06-08",
+        "2026-06-05"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-10-12",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026-10-08",
+          "2026-09-08",
+          "2026-09-04",
+          "2026-09-03",
+          "2026-08-28",
+          "2026-08-25",
+          "2026-08-20",
+          "2026-07-28",
+          "2026-06-30",
+          "2026-06-17",
+          "2026-06-16",
+          "2026-06-10",
+          "2026-06-08",
+          "2026-06-05",
+          "2026-06-03",
+          "2026-06-02"
+        ],
+        "contentHash": "3e4314befae89380"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-638a141f33",
+      "city": "新北",
+      "status": "candidate",
+      "title": "http://www.library.ntpc.gov.tw/htmlcnt/ea807ca60c5...",
+      "url": "http://www.library.ntpc.gov.tw/htmlcnt/ea807ca60c5c43f5b405a8fcdcd156a6",
+      "sourceTitle": "Ntpc",
+      "description": "2026閱讀MVP正式開跑！ 4/21至5/17至新北市立圖書館總館及新莊中港分館借書，就有機會進場看球賽！還有特別任務，加碼抽，讓我們用閱讀應援，用書本進場！ · 新北市立圖書館電子書新書上架囉! 本館將分散各平臺的電子書加以統整，只要點擊書籍封面，就可以輕鬆連結借閱。此外，也提供附有QR code的完整新到電子書書單，随點随掃任您選，歡迎讀者踴躍借閱!",
+      "dateSnippets": [
+        "4/21",
+        "5/17"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-10-12",
+      "pageCheck": {
+        "ok": false,
+        "status": null,
+        "dateSnippets": [],
+        "contentHash": null,
+        "error": "fetch failed"
       }
     }
   ]
