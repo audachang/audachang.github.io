@@ -1,0 +1,115 @@
+---
+title: "Week 06 R 實習：散布圖、相關與迴歸"
+author: "你的姓名、學號"
+date: "2026-10-15"
+lang: zh-Hant
+format:
+  html:
+    embed-resources: true
+    toc: true
+execute:
+  echo: true
+---
+
+## 問題與資料
+
+資料：`openintro::births14`，美國 2014 年出生紀錄中抽出的 1,000 筆，每列一筆出生。
+
+- 問題 A（相關）：母親年齡（`mage`）與父親年齡（`fage`）是否一起變動？
+- 問題 B（迴歸）：用懷孕週數（`weeks`）預測出生體重（`weight`，磅），每多一週平均差多少？
+
+執行程式前，先用兩三句寫下你的暫答：預期的方向、大約多強，以及這份資料不能回答什麼。
+
+（在此作答）
+
+```{r}
+#| label: setup
+#| message: false
+library(openintro)
+library(dplyr)
+library(ggplot2)
+library(readr)
+
+data("births14", package = "openintro")
+dat <- births14
+```
+
+## 1. 遺漏值
+
+```{r}
+#| label: missing
+# 用 summarise() 數總列數，以及 mage、fage、weeks、weight 各自的遺漏筆數
+
+```
+
+## 2. 問題 A：散布圖與相關
+
+```{r}
+#| label: ages
+# 建立 ages（兩個年齡都有紀錄），確認筆數
+# 畫散布圖，找出 fage >= 60 的列
+# 計算 Pearson 與 Spearman 相關；用 cor.test() 讀 95% CI
+
+```
+
+用一兩句描述散布圖的方向、形式、強度與異常點：
+
+（在此作答）
+
+## 3. 問題 B：簡單線性迴歸
+
+```{r}
+#| label: regression
+# 建立 bw，確認筆數與 weeks 的範圍
+# 畫抖動散布圖並疊上迴歸線
+# fit <- lm(weight ~ weeks, data = bw)，讀 coef() 與 summary() 的係數、R²
+# 以 r、兩個 SD 核對斜率；以 SST、SSE 核對 R²
+
+```
+
+用一句寫出斜率的意思（含單位），並說明截距能否解讀：
+
+（在此作答）
+
+## 4. 殘差
+
+```{r}
+#| label: residuals
+# 用 mutate() 加入 fitted(fit) 與 resid(fit)
+# 畫殘差圖，並依週數區間摘要平均殘差與殘差 SD
+
+```
+
+殘差圖顯示直線哪裡不合適？
+
+（在此作答）
+
+## 5. 限制對象、交換方向與預測
+
+```{r}
+#| label: sensitivity
+# 只取 weeks >= 37 重配迴歸，比較斜率、R² 與週數 SD
+# 交換 x、y 重配迴歸，核對兩個斜率的乘積
+# 用 predict() 預測 39 週與 10 週
+
+```
+
+請解釋：限制週數後，研究對象與範圍如何改變？為何不能只按 R² 選模型？兩個方向的斜率為何不是倒數？
+
+（在此作答）
+
+39 週的預測可否當成每位新生兒體重的保證？在資料範圍內，是否就代表直線預測準確？請用平均與個別差異、殘差圖說明。
+
+（在此作答）
+
+## 6. 結論
+
+用三句話寫結論：分析筆數、數值與單位、至少一項限制（例如非線性、少數點的影響、觀察資料不能推因果）。
+
+（在此作答）
+
+## AI 使用紀錄
+
+工具、主要提問、採用或修改了哪些內容；未使用 AI 填「無」。
+
+（在此填寫）
