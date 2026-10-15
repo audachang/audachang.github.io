@@ -1,6 +1,57 @@
-# Week 06 Part 1｜R 實作：散布圖、相關與簡單線性迴歸
+# Week 06 Part 1｜R 實作：Bootstrap、相關與簡單線性迴歸
 # HT3001B 生物統計學與 R｜2026-10-15
 # 資料：openintro::births14（openintro 2.5.1 核對）。在 Project 根目錄執行。
+
+# ---- Bootstrap：第五週方法的 R 實現（只用 base R）----
+# 自編 12 筆資料只示範步驟；小樣本不能保證 CI 的涵蓋率。
+x <- c(9.1, 10.4, 11.8, 8.7, 14.2, 10.9,
+       12.5, 9.8, 23.0, 10.1, 11.2, 9.5)
+n <- length(x)
+mean(x)
+
+set.seed(73)
+boot_one <- sample(x, size = n, replace = TRUE)
+boot_one
+mean(boot_one)
+
+# 每個區塊自行固定 seed，不依賴第五週先執行其他模擬的狀態。
+set.seed(1008)
+B <- 10000
+boot_means <- replicate(
+  B, mean(sample(x, size = n, replace = TRUE))
+)
+length(boot_means)
+head(boot_means)
+
+hist(boot_means, breaks = 30, col = "grey80",
+     main = "Bootstrap means", xlab = "Resampled mean")
+abline(v = mean(x), col = "darkorange", lwd = 2)
+
+sd(x)  # 原始觀察值的散布
+boot_se <- sd(boot_means)  # 平均數的 bootstrap SE
+boot_ci <- quantile(boot_means, probs = c(0.025, 0.975))
+boot_se
+boot_ci
+sd(x) / sqrt(n)  # 與第五週平均數 SE 公式比較
+
+set.seed(1008)
+boot_medians <- replicate(
+  B, median(sample(x, size = n, replace = TRUE))
+)
+median(x)
+sd(boot_medians)
+quantile(boot_medians, probs = c(0.025, 0.975))
+
+# 練習的核對：不放回抽完全部資料，只會改變順序。
+set.seed(1008)
+wrong <- replicate(
+  B, mean(sample(x, size = n, replace = FALSE))
+)
+sd(wrong)
+
+# 選讀：第五週的 SE 法；僅在 bootstrap 分布近似對稱鐘形時考慮。
+# 此示範的平均數分布偏右，不能只看程式可執行就認定方法合適。
+mean(x) + c(-1, 1) * 1.96 * boot_se
 
 # ---- 0. 套件與資料 ----
 # install.packages(c("openintro", "dplyr", "ggplot2", "readr"))  # 尚未安裝時執行一次
@@ -11,6 +62,18 @@ library(readr)
 
 data("births14", package = "openintro")
 dat <- births14
+
+# ---- 套用 bootstrap：平均出生體重（不是個別體重範圍）----
+w <- dat$weight[!is.na(dat$weight)]
+set.seed(1008)
+boot_weight <- replicate(
+  B, mean(sample(w, size = length(w), replace = TRUE))
+)
+length(w)
+mean(w)
+sd(boot_weight)
+quantile(boot_weight, probs = c(0.025, 0.975))
+# 將每列視為獨立且具代表性的觀察；bootstrap 無法補救抽樣偏差。
 
 glimpse(dat)
 

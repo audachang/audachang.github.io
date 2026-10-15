@@ -1,5 +1,5 @@
 ---
-title: "Week 06 R 實習：散布圖、相關與迴歸"
+title: "Week 06 R 實習：Bootstrap、相關與迴歸"
 author: "你的姓名、學號"
 date: "2026-10-15"
 lang: zh-Hant
@@ -34,6 +34,50 @@ data("births14", package = "openintro")
 dat <- births14
 ```
 
+## 0. 第五週的 Bootstrap：用 R 重抽樣
+
+沿用第五週的 12 筆自編示範資料；數字沒有指定單位，只用來練習方法。
+
+```{r}
+#| label: bootstrap-mean
+x <- c(9.1, 10.4, 11.8, 8.7, 14.2, 10.9,
+       12.5, 9.8, 23.0, 10.1, 11.2, 9.5)
+n <- length(x)
+set.seed(73)
+boot_one <- sample(x, size = n, replace = TRUE)
+mean(x)
+mean(boot_one)
+
+set.seed(1008)
+B <- 10000
+boot_means <- replicate(
+  B, mean(sample(x, size = n, replace = TRUE))
+)
+hist(boot_means, breaks = 30, col = "grey80",
+     main = "Bootstrap means", xlab = "Resampled mean")
+abline(v = mean(x), col = "darkorange", lwd = 2)
+sd(x)
+sd(boot_means)
+quantile(boot_means, probs = c(0.025, 0.975))
+```
+
+請說明 `n` 與 `B` 各代表什麼，以及 `sd(x)` 與 `sd(boot_means)` 描述的變動有何不同。
+
+（在此作答）
+
+```{r}
+#| label: bootstrap-median-practice
+# 固定 seed = 1008，將每次 mean() 改為 median()
+# 計算原樣本中位數、中位數的 bootstrap SE 與百分位 95% CI
+
+```
+
+若每次用 `replace = FALSE` 抽完全部 n 筆，平均數的分布會怎樣？12 筆自編資料有何推論限制？
+
+（在此作答）
+
+來源：Week 05 Part 2 自編資料與 bootstrap 方法；IMS 2e §12.1.2、§12.3.2、§19.1.5。這個小樣本只示範步驟，不能據此保證區間的涵蓋率。
+
 ## 1. 遺漏值
 
 ```{r}
@@ -41,6 +85,20 @@ dat <- births14
 # 用 summarise() 數總列數，以及 mage、fage、weeks、weight 各自的遺漏筆數
 
 ```
+
+### 套用到平均出生體重
+
+```{r}
+#| label: bootstrap-birthweight-practice
+# 排除 dat$weight 的遺漏值，存為 w
+# 固定 seed = 1008，重抽 B 次；每份筆數為 length(w)
+# 計算樣本平均、bootstrap SE 與百分位 95% CI（單位：磅）
+
+```
+
+這個區間描述的是母體平均體重，還是個別新生兒的體重範圍？樣本的代表性與觀察值獨立性為何仍需考慮？
+
+（在此作答）
 
 ## 2. 問題 A：散布圖與相關
 
