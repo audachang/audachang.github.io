@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>115-0004 Institutional Data: Data Dictionary</title>
+<meta name="description" content="National Central University course enrollment allocation, course offerings, and faculty journal and conference publications — column definitions, value ranges and join keys">
+<style>
+:root{--bg:#fbfaf7;--fg:#1f2328;--muted:#5d646d;--line:#dcd8cf;--head:#f1eee7;--accent:#1d5c8a;--code:#efece5}
+@media (prefers-color-scheme:dark){:root{--bg:#16181b;--fg:#e6e3dd;--muted:#a4a9b0;--line:#33373d;--head:#1f2226;--accent:#7fb6e0;--code:#24272b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:32px 16px 80px}
+header{border-bottom:2px solid var(--fg);padding-bottom:16px;margin-bottom:8px}
+h1{font-size:1.75rem;line-height:1.3;margin:0 0 6px}
+.sub{color:var(--muted);margin:0}
+.bar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin:12px 0 0;font-size:.92rem}
+.bar a{color:var(--accent)}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.92rem;padding:12px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:2}
+nav.toc a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
+nav.toc a:hover{color:var(--accent);border-color:var(--accent)}
+h2{font-size:1.3rem;margin:44px 0 10px;padding-top:8px;scroll-margin-top:56px}
+p,li{max-width:76ch}
+a{color:var(--accent)}
+code{background:var(--code);padding:1px 5px;border-radius:3px;font-size:.88em}
+.tw{overflow-x:auto;margin:14px 0 22px;border:1px solid var(--line);border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;line-height:1.5}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{background:var(--head);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;min-width:9em}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>115-0004 Institutional Data: Data Dictionary</h1>
+<p class="sub">National Central University course enrollment allocation, course offerings, and faculty journal and conference publications — column definitions, value ranges and join keys</p>
+<div class="bar"><span>Reviewed: 2026-10-16</span><a href="index.html" hreflang="zh-Hant">中文</a></div>
+</header>
+<nav class="toc"><a href="#overview">Overview</a><a href="#enrollment">Enrollment allocation</a><a href="#courses">Course offerings</a><a href="#publications">Publications</a><a href="#joins">Joins & data quality</a></nav>
+<h2 id="overview">Dataset overview</h2>
+<p><code>115-0004.zip</code> (572 MB; about 2.5 GB uncompressed) holds one folder, <code>115-0004/</code>, with 179 CSV files of institutional data exported from National Central University (NCU). The files fall into four groups. All are UTF-8 with a BOM, comma-separated, with column names in the first row. Student IDs and teacher national ID numbers have been replaced with 64-character hexadecimal hashes. Column names below are kept in the original Chinese, as they appear in the files, followed by an English gloss.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Files</th>
+<th>Coverage</th>
+<th>One row is</th>
+<th>Columns</th>
+<th>Rows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>115-0004_…_選課分發歷程_YYYS(NN).csv (course-enrollment allocation history)</td>
+<td class="n">176</td>
+<td>18 semesters, AY104-1 to AY113-2</td>
+<td>One student's request for one course in one allocation round, and its outcome</td>
+<td class="n">14</td>
+<td>100,000 per file (last file of each semester is shorter); about 17 million in total (estimate)</td>
+</tr>
+<tr>
+<td>115-0004_…_開課資料_1031~1142).csv (course offerings)</td>
+<td class="n">1</td>
+<td>24 semesters, AY103-1 to AY114-2</td>
+<td>One course section in one semester</td>
+<td class="n">52</td>
+<td class="n">53,197</td>
+</tr>
+<tr>
+<td>115-0005_…_期刊論文著述_2015~2025).csv (journal articles)</td>
+<td class="n">1</td>
+<td>Published 2015–2025</td>
+<td>One faculty member × one journal article</td>
+<td class="n">21</td>
+<td class="n">17,514</td>
+</tr>
+<tr>
+<td>115-0005_…_研討會著作_2015~2025).csv (conference papers)</td>
+<td class="n">1</td>
+<td>Published 2015–2025</td>
+<td>One faculty member × one conference paper</td>
+<td class="n">28</td>
+<td class="n">6,979</td>
+</tr>
+</tbody>
+</table></div>
+<p>In the enrollment file names, YYYS is the ROC academic year plus semester (1092 = academic year 109, spring semester, i.e. spring 2021), and (NN) is a part number from splitting by row count. Parts per semester: 10 each for 1041, 1061, 1062, 1071, 1081, 1091, 1112, 1122, 1131 and 1132; 13 for 1101; 9 each for the other seven semesters. <strong>There are no enrollment files for 1111 (fall 2022) or 1121 (fall 2023)</strong>, although the course-offerings file covers both. The two publication files carry request number 115-0005 but are packed inside the 115-0004 archive.</p>
+<p>Scope of this review: all 179 file names, plus the six files actually opened (course offerings, both publication files, and enrollment parts 1092(01), 1122(02) and 1132(10)). Value ranges and proportions for the enrollment data come from those three parts only and do not represent whole semesters. The package contains no official codebook; meanings below are inferred from column names and observed values, and items marked "inferred" should be confirmed with the data provider.</p>
+<h2 id="enrollment">Course-enrollment allocation history (14 columns)</h2>
+<p>Each row is one student's request for one course in one allocation round, so the same student–course pair can appear in several rows across rounds (in part 1122(02), 31,454 rows repeat a student–course pair). Parts appear to be ordered by allocation round: 1092(01) contains only round codes 574 and 575, and 1132(10) only 728, so outcome distributions in any single part are skewed toward particular rounds.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Example</th>
+<th>Meaning</th>
+<th>Observed values and notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>學號 (student ID)</td>
+<td>(64-character hash)</td>
+<td>De-identified student code</td>
+<td>Same length as a SHA-256 hex digest; whether it is salted is unknown. Consistent across semesters: parts 1092(01) and 1122(02) share 1,380 values, so students can be followed over time</td>
+</tr>
+<tr>
+<td>課程屬性名稱 (course type for this student)</td>
+<td>必修</td>
+<td>Required (必修) or elective (選修) for this student</td>
+<td>Agrees with 課程屬性 in the course-offerings file about 98% of the time; 2–10% of courses have both required and elective rows within one file, presumably depending on the student's department (inferred)</td>
+</tr>
+<tr>
+<td>分發代碼 (allocation round code)</td>
+<td class="n">574</td>
+<td>ID of one computerized allocation run</td>
+<td>Three-digit integer that increases over time (574–575 in 109-2, 674–675 in 112-2, 728 in 113-2); one-to-one with the next column</td>
+</tr>
+<tr>
+<td>結束的分發時間 (round end date)</td>
+<td class="n">2021-01-27</td>
+<td>Date the allocation round closed</td>
+<td>YYYY-MM-DD, date only</td>
+</tr>
+<tr>
+<td>志願序 (preference rank)</td>
+<td class="n">1</td>
+<td>Rank the student gave this course; 1 = top choice</td>
+<td>1–66. "已上另一門" almost always occurs at rank &gt; 1, suggesting grouped courses (PE, languages) are allocated in preference order (inferred)</td>
+</tr>
+<tr>
+<td>籤號 (lottery number)</td>
+<td class="n">23</td>
+<td>Random number drawn for lottery allocation</td>
+<td>0–859; 0 is the most frequent value. Not always unique within a round and course. Whether low or high numbers win is unconfirmed</td>
+</tr>
+<tr>
+<td>選課的結果 (outcome)</td>
+<td>中選(初選)</td>
+<td>Result of this request</td>
+<td>10 categories; see the table below</td>
+</tr>
+<tr>
+<td>學期別 (semester)</td>
+<td class="n">1092</td>
+<td>ROC academic year (3 digits) + semester (1 = fall, 2 = spring)</td>
+<td>One semester per file</td>
+</tr>
+<tr>
+<td>課號 (course serial number)</td>
+<td class="n">1001</td>
+<td>Course serial number within the semester</td>
+<td>1–5 digits. Matches 課程流水號 in the course-offerings file for the same semester in 98.4–99.8% of rows; never matches the 6-character 課程代碼</td>
+</tr>
+<tr>
+<td>學生班別 (class section)</td>
+<td class="n">1</td>
+<td>Student's section within the department (A/B/C)</td>
+<td>1 / 2 / 3; about half blank. Departments with several sections (e.g. Mechanical Engineering 1–3, Computer Science 1–2) have values; single-section departments (e.g. Economics, English) are blank (inferred)</td>
+</tr>
+<tr>
+<td>學生所屬系所 (student's department)</td>
+<td>資訊工程學系</td>
+<td>Department and program name</td>
+<td>60+ units, including bachelor's, master's, in-service master's and PhD programs</td>
+</tr>
+<tr>
+<td>學生所屬系所代碼 (department code)</td>
+<td class="n">5002</td>
+<td>Department code, one-to-one with the name</td>
+<td>4 digits. First digit = college (1 Liberal Arts, 2 Science, 3 Engineering, 4 Management, 5 EECS, 6 Earth Sciences, 7 Hakka Studies, 8 Health Sciences &amp; Technology, 9 Sustainability); second digit 0 = bachelor's, 2 = master's, 3 = in-service master's, 4 = PhD (inferred). <strong>Entirely blank in 1092(01)</strong>; populated in 1122 and 1132</td>
+</tr>
+<tr>
+<td>學生性別 (sex)</td>
+<td>男</td>
+<td>Student sex</td>
+<td>男 (male) / 女 (female)</td>
+</tr>
+<tr>
+<td>學生年級 (year of study)</td>
+<td class="n">1</td>
+<td>Year of study in that semester</td>
+<td>1–6; 5 and 6 are rare, presumably students extending their studies</td>
+</tr>
+</tbody>
+</table></div>
+<p>Outcome categories (選課的結果) found in the three sample parts (meanings inferred from the labels and their distribution):</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Inferred meaning</th>
+<th>1092(01)</th>
+<th>1122(02)</th>
+<th>1132(10)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中選(初選)</td>
+<td>Allocated in the initial selection phase</td>
+<td class="n">51,877</td>
+<td class="n">70,543</td>
+<td class="n">11,566</td>
+</tr>
+<tr>
+<td>中選</td>
+<td>Allocated in a later phase (add/drop)</td>
+<td class="n">0</td>
+<td class="n">4,261</td>
+<td class="n">8,182</td>
+</tr>
+<tr>
+<td>中選(密碼)</td>
+<td>Added with an instructor-issued authorization code</td>
+<td class="n">0</td>
+<td class="n">93</td>
+<td class="n">5,586</td>
+</tr>
+<tr>
+<td>人工加選</td>
+<td>Added manually by the department or registrar</td>
+<td class="n">1,490</td>
+<td class="n">3,427</td>
+<td class="n">1,529</td>
+</tr>
+<tr>
+<td>落選</td>
+<td>Entered the lottery but not allocated</td>
+<td class="n">17,718</td>
+<td class="n">12,393</td>
+<td class="n">454</td>
+</tr>
+<tr>
+<td>已上另一門</td>
+<td>A higher-ranked choice was already allocated; this request was skipped</td>
+<td class="n">11,704</td>
+<td class="n">2,967</td>
+<td class="n">57</td>
+</tr>
+<tr>
+<td>資格不符</td>
+<td>Not eligible (department, year, prerequisite restrictions)</td>
+<td class="n">9,431</td>
+<td class="n">4,121</td>
+<td class="n">87</td>
+</tr>
+<tr>
+<td>超過上限</td>
+<td>Exceeded the credit or course limit</td>
+<td class="n">7,032</td>
+<td class="n">2,195</td>
+<td class="n">101</td>
+</tr>
+<tr>
+<td>課程停開</td>
+<td>Course cancelled</td>
+<td class="n">582</td>
+<td class="n">0</td>
+<td class="n">0</td>
+</tr>
+<tr>
+<td>不處理</td>
+<td>Not processed</td>
+<td class="n">166</td>
+<td class="n">0</td>
+<td class="n">0</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="courses">Course offerings (52 columns)</h2>
+<p>Each row is one course section in one semester, covering 24 semesters from 103-1 to 114-2, about 2,060–2,380 sections per semester. Twenty rows are shifted because quotation marks and file paths inside text fields break the CSV structure; they can be dropped by keeping rows where 開課學校名稱 equals 國立中央大學, leaving 53,177 rows. The value ranges below are after that filter.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Meaning</th>
+<th>Observed values and notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>學年學期 (semester)</td>
+<td>Semester offered</td>
+<td>1031–1142; same coding as 學期別 in the enrollment files</td>
+</tr>
+<tr>
+<td>課程流水號 (course serial number)</td>
+<td>Course serial number within the semester</td>
+<td>1–5 digits; nearly unique within a semester (one duplicate: 21086 in 1052). Joins to 課號 in the enrollment files</td>
+</tr>
+<tr>
+<td>分發流水號 (allocation serial number)</td>
+<td>Serial number used for allocation</td>
+<td>Equals 課程流水號 in 95.4% of rows; the reason for the rest is unknown</td>
+</tr>
+<tr>
+<td>課程代碼 (course code)</td>
+<td>Course code that is stable across semesters</td>
+<td>2 letters + 4 digits (e.g. CL0201); the prefix is the offering unit (PE physical education, LN languages, PH physics, …). Multiple sections share one code</td>
+</tr>
+<tr>
+<td>課程名稱 (course title)</td>
+<td>Course title</td>
+<td>5,909 distinct titles</td>
+</tr>
+<tr>
+<td>開課班級 (section)</td>
+<td>Section label within a course</td>
+<td><code>*</code> = single section; A–Z or digits = multiple sections</td>
+</tr>
+<tr>
+<td>開課系所名稱 / 開課系所代碼 (offering unit / code)</td>
+<td>Unit offering the course</td>
+<td>95 units; 4-digit codes from the same scheme as the student department code (e.g. 3003 Mechanical Engineering). Codes starting with 0 are university-level centers (0001 Physical Education Office, 0009 General Education Center, 0010 Language Center)</td>
+</tr>
+<tr>
+<td>所屬學制名稱 (program level)</td>
+<td>Degree level of the course</td>
+<td>Bachelor's, joint master's/PhD, master's, PhD, in-service master's, teacher education</td>
+</tr>
+<tr>
+<td>開課類別名稱 (offering type)</td>
+<td>Delivery category</td>
+<td>Regular (98%), summer session, TA-funded, synchronous / asynchronous distance learning, advance enrollment, micro-course</td>
+</tr>
+<tr>
+<td>課程屬性 (required/elective)</td>
+<td>Required or elective at the course level</td>
+<td>Elective 30,861 / required 22,316</td>
+</tr>
+<tr>
+<td>課程群組名稱 (course group)</td>
+<td>Allocation group</td>
+<td>No group, PE, core general education, service learning, Chinese writing, calculus and others (28 groups). Grouped courses are the likely source of "已上另一門" in the enrollment data</td>
+</tr>
+<tr>
+<td>開課年級 (target year)</td>
+<td>Recommended year or general-education domain</td>
+<td>Mostly "不分類" (unclassified); otherwise year 1–4 or a domain name</td>
+</tr>
+<tr>
+<td>開課學程名稱 (program)</td>
+<td>Whether the course belongs to the home department</td>
+<td>主系 (home department) / 不分類 (unclassified)</td>
+</tr>
+<tr>
+<td>全學年課程 (full-year course)</td>
+<td>Whether the course runs all year</td>
+<td>不是(半年) one semester / 是(全年) full year</td>
+</tr>
+<tr>
+<td>開課狀態 (status)</td>
+<td>Whether the course actually ran</td>
+<td>正常 (ran) 51,632 / 停開 (cancelled) 1,545</td>
+</tr>
+<tr>
+<td>授課週數 (weeks)</td>
+<td>Weeks of instruction</td>
+<td>18 (almost all), 16, 17</td>
+</tr>
+<tr>
+<td>授課時數 (lecture hours)</td>
+<td>Weekly lecture hours</td>
+<td>0–5. <strong>There is no credits column in this file</strong>; this column may approximate credits, but that needs confirmation</td>
+</tr>
+<tr>
+<td>實驗時數 (lab hours)</td>
+<td>Weekly lab/practicum hours</td>
+<td class="n">0–6</td>
+</tr>
+<tr>
+<td>授課鐘點 (teaching load hours)</td>
+<td>Teaching hours credited to the instructor</td>
+<td>0–6 with decimals (e.g. 1.5, 3.6, 4.8), presumably including weighting for English-taught or large classes (inferred)</td>
+</tr>
+<tr>
+<td>授課型態 (course format)</td>
+<td>Format</td>
+<td>Lecture / lab / other</td>
+</tr>
+<tr>
+<td>授課方式:講授, 研討, 實習/實驗, 個別指導, 其他 (5 columns)</td>
+<td>Whether the course uses lecture, seminar, lab/practicum, individual supervision, other</td>
+<td>是 (yes) / 不是 (no); multiple can be yes</td>
+</tr>
+<tr>
+<td>授課語言 (language of instruction)</td>
+<td>Language of instruction</td>
+<td>Mandarin, English, partly English, French, Hakka, partly Hakka, Japanese</td>
+</tr>
+<tr>
+<td>授課教師 (instructor)</td>
+<td>Instructor name(s)</td>
+<td><strong>Plain-text names</strong>, separated by 「、」; also generic entries such as 教授群 (faculty team) and 指導教授 (advisor)</td>
+</tr>
+<tr>
+<td>授課教師人數 (number of instructors)</td>
+<td>Number of instructors</td>
+<td>0 to 14+; 91% are 1</td>
+</tr>
+<tr>
+<td>成績評分方式 (grading scheme)</td>
+<td>Grading scheme</td>
+<td>0–100 scale / pass–fail</td>
+</tr>
+<tr>
+<td>評量配分比重 (grade weighting)</td>
+<td>Description of grade components</td>
+<td>Free text with HTML <code>&lt;br/&gt;</code></td>
+</tr>
+<tr>
+<td>教科書/參考書 (textbooks)</td>
+<td>Reading list</td>
+<td>Free text, up to about 65,000 characters; 無, N/A, TBA etc. mean missing</td>
+</tr>
+<tr>
+<td>課程目標 (course objectives)</td>
+<td>Course objectives</td>
+<td>Free text with line breaks and HTML</td>
+</tr>
+<tr>
+<td>自編教材比例(%) (share of self-made materials)</td>
+<td>Share of instructor-made materials</td>
+<td>0–100; some entered as the string "100%", needs cleaning</td>
+</tr>
+<tr>
+<td>程式設計課程(程式實作 / 程式應用 / 程式邏輯與運算思維) (3 columns)</td>
+<td>Whether the course counts as a programming course (implementation / application / logic and computational thinking)</td>
+<td>是 / 不是; about 8–11% yes for each</td>
+</tr>
+<tr>
+<td>高教深耕類別名稱 / 代碼 (Higher Education Sprout tags)</td>
+<td>Course tags under the Ministry of Education's Higher Education Sprout Project</td>
+<td>About 20% filled; multiple values comma-separated. Codes: 0 none, 1 STEAM, 2 humanistic care, 3 cross-disciplinary, 4 problem-based, 5 capstone, 8 self-directed learning</td>
+</tr>
+<tr>
+<td>SDGs目標 / SDGs目標代碼 (SDGs)</td>
+<td>UN Sustainable Development Goals addressed</td>
+<td>About 26% filled; multiple values; codes are SDG numbers 1–17</td>
+</tr>
+<tr>
+<td>學分學程名稱 / 學分學程代碼 (credit program)</td>
+<td>Credit (minor-like) programs the course counts toward</td>
+<td>About 8–11% filled; multiple values; 4-digit codes</td>
+</tr>
+<tr>
+<td>合開專業學程1–5 (5 columns)</td>
+<td>Co-offered professional program codes</td>
+<td>4-digit program codes filled in order; 17% filled in column 1, under 1% in column 5</td>
+</tr>
+<tr>
+<td>產學合作課程 (industry collaboration)</td>
+<td>Industry–academia collaboration course</td>
+<td>Yes 347 / no</td>
+</tr>
+<tr>
+<td>是否開放社會人士 (open to the public)</td>
+<td>Whether non-students may enroll</td>
+<td>開放 (open) / 不開放 (closed)</td>
+</tr>
+<tr>
+<td>校際遠距課程 (inter-university distance course)</td>
+<td>Inter-university distance course</td>
+<td>All valid rows are "否(or 非校際課程)" (no)</td>
+</tr>
+<tr>
+<td>開課學校名稱 (institution)</td>
+<td>Offering institution</td>
+<td>All valid rows are 國立中央大學; useful as a misalignment check</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="publications">Journal articles (21 columns) and conference papers (28 columns)</h2>
+<p>In both files each row is "one NCU faculty member × one publication", so a paper with several NCU authors appears in several rows: 4,901 of the 17,514 journal rows repeat an earlier title. The journal file covers 957 faculty members and the conference file 597, with 503 in both. Columns shared by both files are listed first.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Column</th>
+<th>File</th>
+<th>Meaning</th>
+<th>Observed values and notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>教師身份證字號 (faculty ID)</td>
+<td>Both</td>
+<td>De-identified faculty code</td>
+<td>64-character hex hash. Links the two publication files, but cannot be linked to the plain-text instructor names in the course-offerings file</td>
+</tr>
+<tr>
+<td>作者總數 (number of authors)</td>
+<td>Both</td>
+<td>Number of authors</td>
+<td>Journals 1–5,286 (median 5; very large high-energy-physics collaborations create a long tail); conference median 3</td>
+</tr>
+<tr>
+<td>作者序 (author position)</td>
+<td>Both</td>
+<td>This faculty member's author position</td>
+<td>41 journal rows have a position larger than the author count (data errors)</td>
+</tr>
+<tr>
+<td>教師所屬單位 / 代碼 (faculty unit / code)</td>
+<td>Both</td>
+<td>Faculty member's unit</td>
+<td>Names include the college (e.g. 理學院物理學系, Dept. of Physics, College of Science). Codes are T + 3 digits (T2xx Science, T3xx Engineering, T4xx Management, T5xx EECS, T6xx Earth Sciences; inferred) or R + 3 digits for research centers. This scheme differs from the 4-digit department codes in the teaching files</td>
+</tr>
+<tr>
+<td>著作發表單位 / 代碼 (affiliation on the paper)</td>
+<td>Both</td>
+<td>NCU unit named on the publication</td>
+<td>Multiple values possible; about 2–5% blank</td>
+</tr>
+<tr>
+<td>是否為通訊作者 (corresponding author)</td>
+<td>Both</td>
+<td>Whether this faculty member is a corresponding author</td>
+<td>是 (yes) / 否 (no)</td>
+</tr>
+<tr>
+<td>是否為跨國(地區)合作 (international collaboration)</td>
+<td>Both</td>
+<td>Whether any co-author is affiliated abroad</td>
+<td>Journals 42% yes; conferences 11% yes</td>
+</tr>
+<tr>
+<td>摘要 / 關鍵字 (abstract / keywords)</td>
+<td>Both</td>
+<td>Abstract and keywords</td>
+<td>Free text; 無, N/A, 請修改 ("please edit"), 123 etc. are missing-value placeholders</td>
+</tr>
+<tr>
+<td>使用語言 (language)</td>
+<td>Both</td>
+<td>Language of the publication</td>
+<td>Mostly English, then Chinese</td>
+</tr>
+<tr>
+<td>著作類型 (document type)</td>
+<td>Both</td>
+<td>Document type</td>
+<td>Journals: Journal Article / Article / Review / Editorial and others (10 types); conferences: Conference Paper / Conference Review</td>
+</tr>
+<tr>
+<td>發表年度 (year)</td>
+<td>Both</td>
+<td>Publication year</td>
+<td class="n">2015–2025</td>
+</tr>
+<tr>
+<td>SDGs目標 / 代碼 (SDGs)</td>
+<td>Both</td>
+<td>Sustainable Development Goals addressed</td>
+<td>34% filled for journals, 52% for conferences; multiple values</td>
+</tr>
+<tr>
+<td>期刊論文著作名稱 (article title)</td>
+<td>Journal</td>
+<td>Article title</td>
+<td>12,613 distinct titles</td>
+</tr>
+<tr>
+<td>期刊名稱 / 出版者 (journal / publisher)</td>
+<td>Journal</td>
+<td>Journal title and publisher</td>
+<td>Publisher names are not normalized (Elsevier / Elsevier Ltd. / Elsevier BV all appear)</td>
+</tr>
+<tr>
+<td>收錄資料庫 (indexing databases)</td>
+<td>Journal</td>
+<td>Indexes covering the journal</td>
+<td>65% filled; "[code]:name" entries joined by commas, e.g. S1 Scopus, S2 SCIE, S3 SSCI, S5 ESCI, E2 EI Compendex, T1 TSSCI, T3 TCI, L1 College of Liberal Arts list 2c</td>
+</tr>
+<tr>
+<td>FWCI</td>
+<td>Journal</td>
+<td>Field-Weighted Citation Impact: citations normalized by field, year and document type (1 = world average)</td>
+<td>67% filled; source presumably Scopus / SciVal; retrieval date not stated</td>
+</tr>
+<tr>
+<td>研討會著作名稱 (paper title)</td>
+<td>Conference</td>
+<td>Paper title</td>
+<td>5,527 distinct titles</td>
+</tr>
+<tr>
+<td>會議名稱 / 會議刊物 (conference / proceedings)</td>
+<td>Conference</td>
+<td>Conference name and proceedings title</td>
+<td>Proceedings title 47% filled</td>
+</tr>
+<tr>
+<td>會議舉行日期-起 / -迄 (start / end date)</td>
+<td>Conference</td>
+<td>Conference dates</td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>會議舉行地區 / 國家 / 國家代碼 (city / country / country code)</td>
+<td>Conference</td>
+<td>Conference location</td>
+<td>City is free text in mixed Chinese and English; Taiwan (中華民國) is most common at 42%; <strong>country code is entirely blank</strong></td>
+</tr>
+<tr>
+<td>是否為國際性重要學術會議 (major international conference)</td>
+<td>Conference</td>
+<td>Whether NCU classifies it as a major international conference</td>
+<td>Y 5,386 / N 1,593</td>
+</tr>
+<tr>
+<td>線上／實體 (online / in person)</td>
+<td>Conference</td>
+<td>Attendance mode</td>
+<td>In person 6,545 / online 434</td>
+</tr>
+<tr>
+<td>ISBN</td>
+<td>Conference</td>
+<td>Proceedings ISBN</td>
+<td>39% filled</td>
+</tr>
+<tr>
+<td>出版社 (publisher)</td>
+<td>Conference</td>
+<td>Proceedings publisher</td>
+<td>50% filled; some values have e-mail addresses or postal addresses appended and need cleaning</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="joins">Join keys and data-quality notes</h2>
+<p>Enrollment and course offerings join directly. The publication files can only be related to teaching data at the unit level, and that requires building a unit-code crosswalk.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Join</th>
+<th>Key</th>
+<th>Match rate or limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enrollment → course offerings</td>
+<td>學期別 = 學年學期 and 課號 = 課程流水號</td>
+<td>98.4–99.8% in the three sample parts</td>
+</tr>
+<tr>
+<td>Enrollment across semesters</td>
+<td>學號 (hash)</td>
+<td>Hash is consistent across semesters, allowing student-level longitudinal tracking</td>
+</tr>
+<tr>
+<td>Student department → offering unit</td>
+<td>4-digit department code</td>
+<td>Same scheme, so home-department and outside courses can be distinguished</td>
+</tr>
+<tr>
+<td>Journal ↔ conference</td>
+<td>教師身份證字號 (hash)</td>
+<td>503 faculty members appear in both</td>
+</tr>
+<tr>
+<td>Publications ↔ course offerings</td>
+<td>No shared faculty key</td>
+<td>Hashes on one side, names on the other; unit codes also use two schemes (T/R codes vs. 4 digits), so a crosswalk must be built from unit names</td>
+</tr>
+</tbody>
+</table></div>
+<p>Issues to handle before analysis:</p>
+<ul>
+<li>Enrollment data are missing semesters 1111 and 1121, leaving gaps in longitudinal analyses.</li>
+<li>學生所屬系所代碼 is entirely blank in part 1092(01); other semesters have not been checked. It can be back-filled from the department name.</li>
+<li>The same student–course pair can appear across several allocation rounds; to get the final enrollment state, take the latest round per pair. The data contain no drops or grades.</li>
+<li>Twenty course-offering rows are misaligned; filter on 開課學校名稱 after loading.</li>
+<li>Course offerings have no credits column, and 授課教師 contains plain-text names that should be de-identified before any sharing or export.</li>
+<li>Text fields contain HTML tags, line breaks and several missing-value spellings (無, N/A, TBA, None, -) that need to be unified.</li>
+<li>41 publication rows have author position &gt; author count; publication counts should be de-duplicated by title first.</li>
+<li>Whether the hashes are salted, how 籤號 relates to priority, and the official definitions of the outcome categories all need confirmation from the data provider.</li>
+</ul>
+<footer>This page describes column structure and aggregate statistics only; it contains no row-level data about any student or faculty member. Most meanings are inferred from column names and values; the data provider's definitions take precedence.</footer>
+</main>
+</body>
+</html>

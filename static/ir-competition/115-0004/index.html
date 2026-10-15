@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>115-0004 校務拋轉資料欄位說明</title>
+<meta name="description" content="國立中央大學 選課分發歷程、開課資料、教師期刊與研討會著作 — 欄位定義、值域與串接方式">
+<style>
+:root{--bg:#fbfaf7;--fg:#1f2328;--muted:#5d646d;--line:#dcd8cf;--head:#f1eee7;--accent:#1d5c8a;--code:#efece5}
+@media (prefers-color-scheme:dark){:root{--bg:#16181b;--fg:#e6e3dd;--muted:#a4a9b0;--line:#33373d;--head:#1f2226;--accent:#7fb6e0;--code:#24272b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:32px 16px 80px}
+header{border-bottom:2px solid var(--fg);padding-bottom:16px;margin-bottom:8px}
+h1{font-size:1.75rem;line-height:1.3;margin:0 0 6px}
+.sub{color:var(--muted);margin:0}
+.bar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin:12px 0 0;font-size:.92rem}
+.bar a{color:var(--accent)}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.92rem;padding:12px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:2}
+nav.toc a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
+nav.toc a:hover{color:var(--accent);border-color:var(--accent)}
+h2{font-size:1.3rem;margin:44px 0 10px;padding-top:8px;scroll-margin-top:56px}
+p,li{max-width:76ch}
+a{color:var(--accent)}
+code{background:var(--code);padding:1px 5px;border-radius:3px;font-size:.88em}
+.tw{overflow-x:auto;margin:14px 0 22px;border:1px solid var(--line);border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;line-height:1.5}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{background:var(--head);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;min-width:9em}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+footer{margin-top:56px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>115-0004 校務拋轉資料欄位說明</h1>
+<p class="sub">國立中央大學 選課分發歷程、開課資料、教師期刊與研討會著作 — 欄位定義、值域與串接方式</p>
+<div class="bar"><span>檢視日期：2026-10-16</span><a href="en.html" hreflang="en">English</a></div>
+</header>
+<nav class="toc"><a href="#overview">資料集概觀</a><a href="#enrollment">選課分發歷程</a><a href="#courses">開課資料</a><a href="#publications">期刊與研討會著作</a><a href="#joins">串接鍵與資料品質</a></nav>
+<h2 id="overview">資料集概觀</h2>
+<p><code>115-0004.zip</code>（572 MB，解壓後約 2.5 GB）內只有一個資料夾 <code>115-0004/</code>，共 179 個 CSV，全部是國立中央大學的校務拋轉資料，分成四類。檔案皆為 UTF-8（含 BOM）、逗號分隔、第一列為欄名；學生學號與教師身分證字號都已替換成 64 字元的十六進位雜湊值。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>檔案</th>
+<th>檔數</th>
+<th>涵蓋期間</th>
+<th>每列代表</th>
+<th>欄位數</th>
+<th>列數</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>115-0004_…_選課分發歷程_YYYS(NN).csv</td>
+<td class="n">176</td>
+<td>104-1 至 113-2，共 18 學期</td>
+<td>一位學生在某一分發梯次對某一課程的一筆選課志願與結果</td>
+<td class="n">14</td>
+<td>每檔 100,000 列（每學期最後一檔不足）；全部合計估計約 1,700 萬列</td>
+</tr>
+<tr>
+<td>115-0004_…_開課資料_1031~1142).csv</td>
+<td class="n">1</td>
+<td>103-1 至 114-2，共 24 學期</td>
+<td>一門開課班次（某學期的一個課程流水號）</td>
+<td class="n">52</td>
+<td class="n">53,197</td>
+</tr>
+<tr>
+<td>115-0005_…_期刊論文著述_2015~2025).csv</td>
+<td class="n">1</td>
+<td>發表年 2015–2025</td>
+<td>一位教師 × 一篇期刊論文</td>
+<td class="n">21</td>
+<td class="n">17,514</td>
+</tr>
+<tr>
+<td>115-0005_…_研討會著作_2015~2025).csv</td>
+<td class="n">1</td>
+<td>發表年 2015–2025</td>
+<td>一位教師 × 一篇研討會論文</td>
+<td class="n">28</td>
+<td class="n">6,979</td>
+</tr>
+</tbody>
+</table></div>
+<p>選課檔名中的 YYYS 是民國學年加學期（1092 = 109 學年第 2 學期），(NN) 是依列數切出的分檔序號。各學期分檔數：1041、1061、1062、1071、1081、1091、1112、1122、1131、1132 各 10 檔，1101 有 13 檔，其餘 7 個學期各 9 檔。<strong>111-1（1111）與 112-1（1121）沒有選課檔</strong>，但開課資料裡有這兩個學期。另外，著作兩檔的申請編號是 115-0005，卻打包在 115-0004 的 zip 裡。</p>
+<p>檢視範圍：本文件依據全部 179 個檔名，以及實際開啟的 6 個檔案（開課資料、兩個著作檔、選課檔 1092(01)、1122(02)、1132(10)）。選課檔的值域與比例只來自這三個分檔，不代表整個學期。資料包內沒有官方欄位定義書，下文欄位意義是依欄名與實際值推定，標「推測」者需向資料提供單位確認。</p>
+<h2 id="enrollment">選課分發歷程（14 欄）</h2>
+<p>每一列是一位學生在一個分發梯次對一門課的志願與結果，所以同一學生、同一課程可能因不同梯次出現多列（例如 1122(02) 中「學號＋課號」重複的列有 31,454 列）。分檔看起來依分發梯次排序：1092(01) 只含代碼 574、575，1132(10) 只含 728，因此單一分檔的結果分布會偏向特定梯次。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>欄位</th>
+<th>範例值</th>
+<th>意義</th>
+<th>觀察到的值域與備註</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>學號</td>
+<td>（64 字元雜湊值）</td>
+<td>去識別後的學生代碼</td>
+<td>長度與 SHA-256 十六進位相同，是否加鹽不明。跨學期一致：1092(01) 與 1122(02) 有 1,380 個相同值，可追蹤同一學生</td>
+</tr>
+<tr>
+<td>課程屬性名稱</td>
+<td>必修</td>
+<td>此課對該生的修別</td>
+<td>必修 / 選修。與開課資料「課程屬性」約 98% 一致；2–10% 的課在同一檔內同時有必修與選修列，推測是依學生系所判定</td>
+</tr>
+<tr>
+<td>分發代碼</td>
+<td class="n">574</td>
+<td>分發梯次（一次電腦分發作業）的編號</td>
+<td>3 位整數，隨時間遞增（109-2 為 574–575，112-2 為 674–675，113-2 為 728），與下一欄一對一</td>
+</tr>
+<tr>
+<td>結束的分發時間</td>
+<td class="n">2021-01-27</td>
+<td>該梯次分發結束的日期</td>
+<td>YYYY-MM-DD，只有日期、沒有時間</td>
+</tr>
+<tr>
+<td>志願序</td>
+<td class="n">1</td>
+<td>學生對此課填的志願順位，1 為最優先</td>
+<td>1–66。「已上另一門」幾乎都出現在志願序 &gt; 1，推測群組課程（體育、外語等）是依序分發</td>
+</tr>
+<tr>
+<td>籤號</td>
+<td class="n">23</td>
+<td>抽籤分發時取得的亂數號</td>
+<td>0–859，0 的列數最多。同一梯次同一課內不一定唯一，數值大小與優先順序的關係（小號優先或相反）待確認</td>
+</tr>
+<tr>
+<td>選課的結果</td>
+<td>中選(初選)</td>
+<td>該筆志願的處理結果</td>
+<td>共 10 種，見下表</td>
+</tr>
+<tr>
+<td>學期別</td>
+<td class="n">1092</td>
+<td>民國學年（3 碼）＋學期（1 上、2 下）</td>
+<td>每檔只有一個學期</td>
+</tr>
+<tr>
+<td>課號</td>
+<td class="n">1001</td>
+<td>該學期的開課流水號</td>
+<td>1–5 位數字。與開課資料「課程流水號」同學期可對上 98.4–99.8%；與 6 碼的「課程代碼」完全對不上</td>
+</tr>
+<tr>
+<td>學生班別</td>
+<td class="n">1</td>
+<td>學生所屬的系內班別（甲乙丙班）</td>
+<td>1 / 2 / 3，約一半空白。有分班的系（如機械 1–3、資工 1–2）有值，只有一班的系（如經濟、英美語文）空白（推測）</td>
+</tr>
+<tr>
+<td>學生所屬系所</td>
+<td>資訊工程學系</td>
+<td>學生的系所班制名稱</td>
+<td>含學士班、碩士班、在職專班、博士班等 60 餘個單位</td>
+</tr>
+<tr>
+<td>學生所屬系所代碼</td>
+<td class="n">5002</td>
+<td>系所代碼，與名稱一對一</td>
+<td>4 碼：首碼為學院（1 文、2 理、3 工、4 管理、5 資訊電機、6 地球科學、7 客家、8 生醫理工、9 永續），第二碼 0 為學士班、2 碩士班、3 在職專班、4 博士班（推測）。<strong>1092(01) 整欄空白</strong>，1122、1132 有值</td>
+</tr>
+<tr>
+<td>學生性別</td>
+<td>男</td>
+<td>學生性別</td>
+<td>男 / 女</td>
+</tr>
+<tr>
+<td>學生年級</td>
+<td class="n">1</td>
+<td>當學期年級</td>
+<td>1–6；5、6 極少，推測為延修生</td>
+</tr>
+</tbody>
+</table></div>
+<p>「選課的結果」在三個樣本檔出現的類別（定義為依字面與分布推定）：</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>值</th>
+<th>推定意義</th>
+<th>1092(01)</th>
+<th>1122(02)</th>
+<th>1132(10)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中選(初選)</td>
+<td>初選階段分發中選</td>
+<td class="n">51,877</td>
+<td class="n">70,543</td>
+<td class="n">11,566</td>
+</tr>
+<tr>
+<td>中選</td>
+<td>初選以後的階段（加退選）中選</td>
+<td class="n">0</td>
+<td class="n">4,261</td>
+<td class="n">8,182</td>
+</tr>
+<tr>
+<td>中選(密碼)</td>
+<td>以授課教師提供的密碼（授權碼）加選</td>
+<td class="n">0</td>
+<td class="n">93</td>
+<td class="n">5,586</td>
+</tr>
+<tr>
+<td>人工加選</td>
+<td>由系所或註冊組人工登錄</td>
+<td class="n">1,490</td>
+<td class="n">3,427</td>
+<td class="n">1,529</td>
+</tr>
+<tr>
+<td>落選</td>
+<td>參加分發但未中選</td>
+<td class="n">17,718</td>
+<td class="n">12,393</td>
+<td class="n">454</td>
+</tr>
+<tr>
+<td>已上另一門</td>
+<td>更優先的志願已中選，此志願不再處理</td>
+<td class="n">11,704</td>
+<td class="n">2,967</td>
+<td class="n">57</td>
+</tr>
+<tr>
+<td>資格不符</td>
+<td>不符修課限制（系級、年級、擋修等）</td>
+<td class="n">9,431</td>
+<td class="n">4,121</td>
+<td class="n">87</td>
+</tr>
+<tr>
+<td>超過上限</td>
+<td>超過學分或課程數上限</td>
+<td class="n">7,032</td>
+<td class="n">2,195</td>
+<td class="n">101</td>
+</tr>
+<tr>
+<td>課程停開</td>
+<td>該課停開</td>
+<td class="n">582</td>
+<td class="n">0</td>
+<td class="n">0</td>
+</tr>
+<tr>
+<td>不處理</td>
+<td>未進入分發</td>
+<td class="n">166</td>
+<td class="n">0</td>
+<td class="n">0</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="courses">開課資料（52 欄）</h2>
+<p>每一列是一個學期的一個開課班次，涵蓋 103-1 至 114-2 共 24 學期，每學期約 2,060–2,380 筆。有 20 列因文字欄內的引號與檔案路徑造成欄位錯位，可用「開課學校名稱 ≠ 國立中央大學」篩出，剔除後為 53,177 列。下表的值域是剔除錯位列之後的結果。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>欄位</th>
+<th>意義</th>
+<th>觀察到的值域與備註</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>學年學期</td>
+<td>開課學期</td>
+<td>1031–1142，編碼同選課檔「學期別」</td>
+</tr>
+<tr>
+<td>課程流水號</td>
+<td>該學期的開課流水號</td>
+<td>1–5 位數字，學期內幾乎唯一（只有 1052 的 21086 重複一次）；對應選課檔「課號」</td>
+</tr>
+<tr>
+<td>分發流水號</td>
+<td>選課分發用的流水號</td>
+<td>95.4% 與課程流水號相同，其餘不同的原因不明</td>
+</tr>
+<tr>
+<td>課程代碼</td>
+<td>跨學期固定的課程編號</td>
+<td>2 英文＋4 數字（如 CL0201），前綴為開課單位（PE 體育、LN 語言、PH 物理…）；同一課多班會共用同一代碼</td>
+</tr>
+<tr>
+<td>課程名稱</td>
+<td>課名</td>
+<td>5,909 個不同課名</td>
+</tr>
+<tr>
+<td>開課班級</td>
+<td>同一課的分班代號</td>
+<td><code>*</code> 表示不分班；A–Z 或數字為分班</td>
+</tr>
+<tr>
+<td>開課系所名稱 / 開課系所代碼</td>
+<td>開課單位</td>
+<td>95 個單位；代碼 4 碼，與選課檔學生系所代碼同一套（如 3003 機械）；0 開頭為校級中心（0001 體育室、0009 通識教育中心、0010 語言中心）</td>
+</tr>
+<tr>
+<td>所屬學制名稱</td>
+<td>課程所屬學制</td>
+<td>學士班、碩博同修、碩士班、博士班、碩士在職專班、師資培育</td>
+</tr>
+<tr>
+<td>開課類別名稱</td>
+<td>開課形式</td>
+<td>一般課程（98%）、暑修、獎助生、同步 / 非同步遠距教學、預修、微課程</td>
+</tr>
+<tr>
+<td>課程屬性</td>
+<td>必修或選修（課程層級）</td>
+<td>選修 30,861 / 必修 22,316</td>
+</tr>
+<tr>
+<td>課程群組名稱</td>
+<td>分發用的課程群組</td>
+<td>不設群組、體育課程、核心通識、服務學習、中文寫作、微積分等 28 類；群組課推測即選課檔「已上另一門」的來源</td>
+</tr>
+<tr>
+<td>開課年級</td>
+<td>建議修讀年級或通識領域</td>
+<td>多為「不分類」；其餘為一至四年級或通識領域名稱</td>
+</tr>
+<tr>
+<td>開課學程名稱</td>
+<td>是否屬主系課程</td>
+<td>主系 / 不分類</td>
+</tr>
+<tr>
+<td>全學年課程</td>
+<td>是否為全學年課</td>
+<td>不是(半年) / 是(全年)</td>
+</tr>
+<tr>
+<td>開課狀態</td>
+<td>是否實際開課</td>
+<td>正常 51,632 / 停開 1,545</td>
+</tr>
+<tr>
+<td>授課週數</td>
+<td>學期上課週數</td>
+<td>18（絕大多數）、16、17</td>
+</tr>
+<tr>
+<td>授課時數</td>
+<td>每週講授時數</td>
+<td>0–5。<strong>本檔沒有「學分數」欄</strong>，此欄或可當學分的近似，需確認</td>
+</tr>
+<tr>
+<td>實驗時數</td>
+<td>每週實驗（習）時數</td>
+<td class="n">0–6</td>
+</tr>
+<tr>
+<td>授課鐘點</td>
+<td>教師計入的授課鐘點</td>
+<td>0–6 的小數（如 1.5、3.6、4.8），推測含英語授課或大班加成</td>
+</tr>
+<tr>
+<td>授課型態</td>
+<td>課程型態</td>
+<td>講授課程 / 實驗(習)課程 / 其他課程</td>
+</tr>
+<tr>
+<td>授課方式:講授、研討、實習/實驗、個別指導、其他（5 欄）</td>
+<td>是否採用該授課方式，可複選</td>
+<td>是 / 不是</td>
+</tr>
+<tr>
+<td>授課語言</td>
+<td>授課語言</td>
+<td>國語、英語、部份英語、法語、客語、部份客語、日語</td>
+</tr>
+<tr>
+<td>授課教師</td>
+<td>授課教師姓名</td>
+<td><strong>為明碼姓名</strong>，多位以「、」分隔；也有「教授群」「指導教授」等泛稱</td>
+</tr>
+<tr>
+<td>授課教師人數</td>
+<td>授課教師數</td>
+<td>0–14 以上，91% 為 1</td>
+</tr>
+<tr>
+<td>成績評分方式</td>
+<td>評分制</td>
+<td>百分制 / 通過不通過</td>
+</tr>
+<tr>
+<td>評量配分比重</td>
+<td>成績組成說明</td>
+<td>自由文字，含 HTML <code>&lt;br/&gt;</code></td>
+</tr>
+<tr>
+<td>教科書/參考書</td>
+<td>教材清單</td>
+<td>自由文字，最長約 6.5 萬字元；「無」「N/A」「TBA」等都代表缺值</td>
+</tr>
+<tr>
+<td>課程目標</td>
+<td>課程目標說明</td>
+<td>自由文字，含換行與 HTML</td>
+</tr>
+<tr>
+<td>自編教材比例(%)</td>
+<td>自編教材占比</td>
+<td>0–100，部分寫成「100%」字串，需清理</td>
+</tr>
+<tr>
+<td>程式設計課程(程式實作 / 程式應用 / 程式邏輯與運算思維)（3 欄）</td>
+<td>是否歸為該類程式設計課</td>
+<td>是 / 不是；各約 8–11% 為是</td>
+</tr>
+<tr>
+<td>高教深耕類別名稱 / 代碼</td>
+<td>高教深耕計畫的課程標註</td>
+<td>約 20% 有值；可複選、逗號分隔。代碼對照：0 無、1 STEAM、2 人文關懷、3 跨域課程、4 問題導向、5 總整課程、8 自主學習課程</td>
+</tr>
+<tr>
+<td>SDGs目標 / SDGs目標代碼</td>
+<td>課程對應的聯合國永續發展目標</td>
+<td>約 26% 有值；可複選，代碼為 SDG 編號 1–17</td>
+</tr>
+<tr>
+<td>學分學程名稱 / 學分學程代碼</td>
+<td>課程列入的學分學程</td>
+<td>約 8–11% 有值；可複選，代碼 4 碼</td>
+</tr>
+<tr>
+<td>合開專業學程1–5（5 欄）</td>
+<td>合開的專業學程代碼</td>
+<td>4 碼學程代碼，依序填入；第 1 欄 17% 有值，第 5 欄不到 1%</td>
+</tr>
+<tr>
+<td>產學合作課程</td>
+<td>是否為產學合作課</td>
+<td>是 347 / 否</td>
+</tr>
+<tr>
+<td>是否開放社會人士</td>
+<td>是否開放校外人士修課</td>
+<td>開放 / 不開放</td>
+</tr>
+<tr>
+<td>校際遠距課程</td>
+<td>是否為校際遠距課</td>
+<td>有效列全為「否(or 非校際課程)」</td>
+</tr>
+<tr>
+<td>開課學校名稱</td>
+<td>開課學校</td>
+<td>有效列全為「國立中央大學」，可當錯位檢查欄</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="publications">期刊論文著述（21 欄）與研討會著作（28 欄）</h2>
+<p>兩檔的每一列都是「一位中央大學教師 × 一篇著作」，同一篇論文若有多位本校教師就會出現多列：期刊檔 17,514 列中有 4,901 列的篇名與前面重複。期刊檔有 957 位教師、研討會檔有 597 位，兩檔共同 503 位。兩檔共用的欄位先列在一起。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>欄位</th>
+<th>所在檔案</th>
+<th>意義</th>
+<th>觀察到的值域與備註</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>教師身份證字號</td>
+<td>兩檔</td>
+<td>去識別後的教師代碼</td>
+<td>64 字元十六進位雜湊值；兩檔可互相串接，但無法對到開課資料的明碼教師姓名</td>
+</tr>
+<tr>
+<td>作者總數</td>
+<td>兩檔</td>
+<td>該著作的作者人數</td>
+<td>期刊 1–5,286（中位數 5，高能物理大型合作使上端極長）；研討會中位數 3</td>
+</tr>
+<tr>
+<td>作者序</td>
+<td>兩檔</td>
+<td>該教師的作者排序</td>
+<td>期刊檔有 41 列作者序大於作者總數，屬錯誤資料</td>
+</tr>
+<tr>
+<td>教師所屬單位 / 代碼</td>
+<td>兩檔</td>
+<td>教師的所屬單位</td>
+<td>名稱含學院（如「理學院物理學系」）；代碼為 T＋3 碼（T2xx 理學院、T3xx 工學院、T4xx 管理學院、T5xx 資電學院、T6xx 地科學院，依觀察推定）或 R＋3 碼研究中心。這套代碼與選課、開課檔的 4 碼系所代碼不同</td>
+</tr>
+<tr>
+<td>著作發表單位 / 代碼</td>
+<td>兩檔</td>
+<td>著作上署名的本校單位</td>
+<td>可複選；約 2–5% 空白</td>
+</tr>
+<tr>
+<td>是否為通訊作者</td>
+<td>兩檔</td>
+<td>該教師是否為通訊作者</td>
+<td>是 / 否</td>
+</tr>
+<tr>
+<td>是否為跨國(地區)合作</td>
+<td>兩檔</td>
+<td>作者是否含國外機構</td>
+<td>期刊 42% 是；研討會 11% 是</td>
+</tr>
+<tr>
+<td>摘要 / 關鍵字</td>
+<td>兩檔</td>
+<td>著作摘要、關鍵字</td>
+<td>自由文字；「無」「N/A」「請修改」「123」等都是缺值佔位</td>
+</tr>
+<tr>
+<td>使用語言</td>
+<td>兩檔</td>
+<td>著作語言</td>
+<td>英文為主，其次中文</td>
+</tr>
+<tr>
+<td>著作類型</td>
+<td>兩檔</td>
+<td>文獻類型</td>
+<td>期刊：Journal Article / Article / Review / Editorial 等 10 類；研討會：Conference Paper / Conference Review</td>
+</tr>
+<tr>
+<td>發表年度</td>
+<td>兩檔</td>
+<td>發表年（西元）</td>
+<td class="n">2015–2025</td>
+</tr>
+<tr>
+<td>SDGs目標 / 代碼</td>
+<td>兩檔</td>
+<td>對應的永續發展目標</td>
+<td>期刊 34%、研討會 52% 有值；可複選</td>
+</tr>
+<tr>
+<td>期刊論文著作名稱</td>
+<td>期刊</td>
+<td>篇名</td>
+<td>12,613 個不同篇名</td>
+</tr>
+<tr>
+<td>期刊名稱 / 出版者</td>
+<td>期刊</td>
+<td>刊名與出版商</td>
+<td>出版商名稱未正規化（Elsevier / Elsevier Ltd. / Elsevier BV 並存）</td>
+</tr>
+<tr>
+<td>收錄資料庫</td>
+<td>期刊</td>
+<td>刊物被哪些索引收錄</td>
+<td>65% 有值；格式為「[代碼]:名稱」以逗號串接，如 S1 Scopus、S2 SCIE、S3 SSCI、S5 ESCI、E2 EI Compendex、T1 TSSCI、T3 TCI、L1 文學院訂 2c 類</td>
+</tr>
+<tr>
+<td>FWCI</td>
+<td>期刊</td>
+<td>Field-Weighted Citation Impact，依領域、年份、文獻類型標準化的被引指標（1 = 世界平均）</td>
+<td>67% 有值；資料來源推測為 Scopus / SciVal，擷取日未註明</td>
+</tr>
+<tr>
+<td>研討會著作名稱</td>
+<td>研討會</td>
+<td>論文題目</td>
+<td>5,527 個不同題目</td>
+</tr>
+<tr>
+<td>會議名稱 / 會議刊物</td>
+<td>研討會</td>
+<td>會議全名、論文集名稱</td>
+<td>會議刊物 47% 有值</td>
+</tr>
+<tr>
+<td>會議舉行日期-起 / -迄</td>
+<td>研討會</td>
+<td>會議起訖日</td>
+<td>YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>會議舉行地區 / 國家 / 國家代碼</td>
+<td>研討會</td>
+<td>會議地點</td>
+<td>地區為自由文字（中英混用）；國家以中華民國 42% 最多；<strong>國家代碼整欄空白</strong></td>
+</tr>
+<tr>
+<td>是否為國際性重要學術會議</td>
+<td>研討會</td>
+<td>校內認定的國際重要會議</td>
+<td>Y 5,386 / N 1,593</td>
+</tr>
+<tr>
+<td>線上／實體</td>
+<td>研討會</td>
+<td>參與形式</td>
+<td>實體 6,545 / 線上 434</td>
+</tr>
+<tr>
+<td>ISBN</td>
+<td>研討會</td>
+<td>論文集 ISBN</td>
+<td>39% 有值</td>
+</tr>
+<tr>
+<td>出版社</td>
+<td>研討會</td>
+<td>論文集出版者</td>
+<td>50% 有值；部分值黏了電子郵件或地址，需清理</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="joins">串接鍵與資料品質注意事項</h2>
+<p>選課與開課可以直接串接；著作兩檔只能在單位層級與教學資料對應，而且需要自建單位代碼對照表。</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>串接</th>
+<th>鍵</th>
+<th>對上比例或限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>選課 → 開課</td>
+<td>學期別 = 學年學期，課號 = 課程流水號</td>
+<td>三個樣本分檔對上 98.4–99.8%</td>
+</tr>
+<tr>
+<td>選課跨學期</td>
+<td>學號（雜湊）</td>
+<td>雜湊跨學期一致，可做學生層級的縱貫追蹤</td>
+</tr>
+<tr>
+<td>學生系所 → 開課系所</td>
+<td>4 碼系所代碼</td>
+<td>同一套代碼，可區分本系課與外系課</td>
+</tr>
+<tr>
+<td>期刊 ↔ 研討會</td>
+<td>教師身份證字號（雜湊）</td>
+<td>503 位教師兩檔皆有</td>
+</tr>
+<tr>
+<td>著作 ↔ 開課</td>
+<td>無共同教師鍵</td>
+<td>著作端是雜湊、開課端是姓名；單位代碼也是兩套（T/R 編碼 vs. 4 碼），需用單位名稱自建對照</td>
+</tr>
+</tbody>
+</table></div>
+<p>使用前需處理的問題：</p>
+<ul>
+<li>選課檔缺 111-1 與 112-1 兩個學期，縱貫分析會有缺口。</li>
+<li>選課檔 1092(01) 的「學生所屬系所代碼」整欄空白，其他學期是否也如此尚未檢查，可用系所名稱回補。</li>
+<li>同一學生同一課會因多個分發梯次出現多列；要取「最終是否修到」需依分發代碼取最後狀態，且本資料不含退選與成績。</li>
+<li>開課資料有 20 列欄位錯位，讀檔後先以「開課學校名稱」篩除。</li>
+<li>開課資料沒有學分數；「授課教師」是明碼姓名，對外分享或輸出前應去識別。</li>
+<li>文字欄含 HTML 標籤、換行與多種缺值寫法（無、N/A、TBA、None、-），分析前需統一。</li>
+<li>著作檔的「作者序 &gt; 作者總數」有 41 列；篇數統計要先依篇名去重。</li>
+<li>雜湊是否加鹽、「籤號」大小與優先順序的關係、各結果類別的正式定義，都需向資料提供單位確認。</li>
+</ul>
+<footer>本頁只描述欄位結構與彙總統計，不含任何個別學生或教師的資料列。欄位意義多為依欄名與實際值推定，正式定義以資料提供單位為準。</footer>
+</main>
+</body>
+</html>
