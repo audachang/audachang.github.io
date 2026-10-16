@@ -2213,7 +2213,6 @@ vertical-align: -.125em;
   <li><a href="#作答方式" id="toc-作答方式" class="nav-link active" data-scroll-target="#作答方式">作答方式</a>
   <ul class="collapse">
   <li><a href="#先自行作答再使用-ai" id="toc-先自行作答再使用-ai" class="nav-link" data-scroll-target="#先自行作答再使用-ai">先自行作答，再使用 AI</a></li>
-  <li><a href="#配分" id="toc-配分" class="nav-link" data-scroll-target="#配分">配分</a></li>
   </ul></li>
   <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">第 1 題｜重複一萬次，就有一萬份樣本嗎？（50 分）</a>
   <ul class="collapse">
@@ -2228,7 +2227,6 @@ vertical-align: -.125em;
   <li><a href="#限制範圍與預測哪些結論需要重寫15-分" id="toc-限制範圍與預測哪些結論需要重寫15-分" class="nav-link" data-scroll-target="#限制範圍與預測哪些結論需要重寫15-分">2-3｜限制範圍與預測：哪些結論需要重寫？（15 分）</a></li>
   </ul></li>
   <li><a href="#繳交內容" id="toc-繳交內容" class="nav-link" data-scroll-target="#繳交內容">繳交內容</a></li>
-  <li><a href="#來源" id="toc-來源" class="nav-link" data-scroll-target="#來源">來源</a></li>
   </ul>
 </nav>
 </div>
@@ -2259,7 +2257,7 @@ vertical-align: -.125em;
 <p><a href="week06_answer_template.qmd" download="week06_answer_template.qmd"><strong>下載空白作答模板（QMD）</strong></a></p>
 <p>請將模板另存為 <code>學號_week06.qmd</code>，在 RStudio 開啟後作答。</p>
 <p>本作業使用第六週 R Tutorial 的 <code>openintro::births14</code>，一列是一筆出生紀錄，共 1,000 筆。這是從美國 2014 年出生紀錄抽取的觀察資料，並非隨機分派懷孕週數的實驗。</p>
-<p>兩題各 50 分，各含三個小題。請使用本週教過的 R 方法，將程式、實際輸出、圖形與自己的解釋放在同一份 QMD。可以查閱講義、修改課堂範例，不要求從零寫程式。不必分析 p 值、係數檢定或個別預測區間。</p>
+<p>兩題各 50 分，各含三個小題。請使用本週教過的 R 方法，將程式、實際輸出、圖形與自己的解釋放在同一份 QMD。可以查閱講義、修改課堂範例，不要求從零寫程式。</p>
 <section id="先自行作答再使用-ai" class="level3">
 <h3 class="anchored" data-anchor-id="先自行作答再使用-ai">先自行作答，再使用 AI</h3>
 <ol type="1">
@@ -2267,11 +2265,8 @@ vertical-align: -.125em;
 <li>保存初答後，可使用 AI 解釋概念、協助寫程式或除錯、評論你的分析。所有採用的程式都要實際執行；結果解釋須依自己的輸出撰寫，並能說明每段程式。</li>
 <li>每題至少查核一項具體主張，指出你的程式、表、圖或講義條件支持或反駁哪一部分。題目中的待查核說法都是<strong>本課程自編</strong>，不代表某個 AI 實際說過。未使用 AI 者直接查核題目說法即可；不能只以另一個 AI 也同意作為證據。</li>
 <li>使用 AI 者另交 <strong>B．修訂答、C．修訂說明與 AI 使用紀錄</strong>。C 合併記錄 AI 的協助、你的查核、採用或不採用的判斷，以及修改或保留原答的理由。保留初答，不要覆寫；不要為了寫修訂紀錄而刻意製造錯誤。</li>
-<li>全程未使用 AI 者只需交 A，C 填「X」，B 不必填寫。不得把可識別個人的健康資料、未公開或受限制資料傳給外部 AI。</li>
+<li>全程未使用 AI 者只需交 A，C 填「X」，B 不必填寫。 ### 配分</li>
 </ol>
-</section>
-<section id="配分" class="level3">
-<h3 class="anchored" data-anchor-id="配分">配分</h3>
 <p>沿用第五週作業的 50／30／20 計分比例；本週將修訂說明與 AI 使用紀錄合併為 C。A 與 B 都先按兩題內容評為滿分 100 分，再換算：</p>
 <table class="caption-top table">
 <thead>
@@ -2375,20 +2370,11 @@ vertical-align: -.125em;
 </section>
 <section id="繳交內容" class="level2">
 <h2 class="anchored" data-anchor-id="繳交內容">繳交內容</h2>
-<p>使用 <a href="week06_answer_template.qmd" download="week06_answer_template.qmd">空白作答 QMD</a>，另存為 <code>學號_week06.qmd</code>。繳交 QMD 與你在 RStudio 手動 Render 的 HTML，程式須嵌入 QMD 並從頭執行。表與圖直接放在報告內，不必另外繳交 CSV 或 PNG。</p>
+<p>使用 <a href="week06_answer_template.qmd" download="week06_answer_template.qmd">空白作答 QMD</a>，另存為 <code>學號_week06.qmd</code>。繳交 QMD，程式須嵌入 QMD 並從頭執行。表與圖直接放在報告內，不必另外繳交 CSV 或 PNG。</p>
 <ul>
 <li>使用 AI 者保留初答的原始程式與輸出，再交完整修訂答；初答中無法執行的嘗試可用普通程式碼區塊保留，不要讓它中斷整份文件。</li>
 <li>最終採用的程式必須能在新的 R 工作階段重跑，不能依賴只在 Console 建立的物件。兩題的變式都要留下執行前的預測與執行後的比較。</li>
 <li>文字以能交代主張、證據與理由為準，不以篇幅或排版華麗程度給分。截止時間與繳交位置以教師公告為準。</li>
-</ul>
-</section>
-<section id="來源" class="level2">
-<h2 class="anchored" data-anchor-id="來源">來源</h2>
-<p>本課程自編作業，依 Week 06 R Tutorial 的 bootstrap、<code>births14</code>、相關、迴歸、殘差與範圍比較設計。資料與課堂範例核對版本為 openintro 2.5.1。</p>
-<ul>
-<li><a href="https://audachang.github.io/biostats2026/week06/week06_part1_r_tutorial_slides.html">第六週 R Tutorial</a>／<a href="https://audachang.github.io/biostats2026/week06/week06_r_tutorial.R">課堂 R 程式</a>。</li>
-<li>課程大綱「生成式 AI 使用規範」；<a href="https://audachang.github.io/biostats2026/week05/week05_concept_homework.html">第五週作業</a>：初答與修訂計分方式。</li>
-<li><a href="https://openintrostat.github.io/openintro/reference/births14.html">births14 套件資料說明</a>。</li>
 </ul>
 </section>
 
