@@ -7,7 +7,7 @@ disableAnchoredHeadings: true
 
 ## 2026
 
-Updated 7 October 2026. [Download my CV](/ErikChang_CV_20261007_short_ENG.pdf).
+Updated 21 October 2026. [Download my CV](/ErikChang_CV_20261021_short_ENG.pdf).
 
 ### The 2026 Taiwan Open Brain Science Workshop
 
