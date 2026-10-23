@@ -77,6 +77,8 @@ params:
               url: courses/
             - name: Data & Tools
               url: data/
+            - name: Concepts
+              url: concepts/
             - name: Conferences & Workshops
               url: activities/
             - name: Awards
