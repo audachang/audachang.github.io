@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>用置換檢定估計 RT 實驗的樣本數｜Erik Chang</title>
+  <meta name="description" content="用模擬加置換檢定估計反應時間（RT）實驗所需的受試者人數，並說明每人的 trial 數為什麼會影響 power。含可以拖曳的互動說明。">
+  <link rel="alternate" hreflang="en" href="en.html">
+  <link rel="alternate" hreflang="zh-Hant-TW" href="./">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preload" href="fonts/bricolage-grotesque-wdth.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/atkinson-hyperlegible-next-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="concepts.css">
+</head>
+<body>
+<a class="skip" href="#main">跳到內文</a>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <nav class="crumbs" aria-label="路徑">
+      <a href="/">Erik Chang</a><span aria-hidden="true">/</span><span>Concepts</span>
+    </nav>
+    <nav class="lang-switch" aria-label="語言 Language">
+      <a href="./" lang="zh-Hant-TW" aria-current="page">中文</a>
+      <a href="en.html" lang="en" hreflang="en">English</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap hero">
+    <h1>用置換檢定估計 RT 實驗的樣本數</h1>
+    <p class="dek">每位受試者做幾個 trial，會決定你需要幾位受試者。拉動下面的滑桿，看雜訊怎麼縮小，以及人數為什麼最後降不下去。</p>
+    <p class="byline">Erik Chang，國立中央大學 Action &amp; Cognition Laboratory，<time datetime="2026-10-23">2026 年 10 月 23 日</time></p>
+  </div>
+
+  <div class="wrap">
+    <section class="stage" aria-labelledby="exp-h">
+      <div class="stage-in">
+        <h2 class="stage-title" id="exp-h">每人收幾個 trial，要收幾位受試者？</h2>
+        <p class="stage-note">配對（受試者內）設計，雙尾 α = 0.05，目標 power = 0.80。參數是假設值，來源見下方「資料生成模型」。</p>
+        <noscript><p class="stage-note">這個互動需要 JavaScript。下方的表格列出同樣的結果。</p></noscript>
+        <div class="exp">
+          <div>
+            <div class="ctl">
+              <label for="exp-n"><span>每人每條件的 trial 數 <span class="m"><i>n</i></span></span><output id="exp-n-out" for="exp-n">40</output></label>
+              <input id="exp-n" type="range" min="0" max="14" step="1" value="6" aria-valuetext="n = 40">
+            </div>
+            <div class="ctl">
+              <label for="exp-d"><span>平均效果 <span class="m"><i>δ</i></span><small>不一致 − 一致的 RT 差</small></span><output id="exp-d-out" for="exp-d">15 ms</output></label>
+              <input id="exp-d" type="range" min="10" max="40" step="1" value="15" aria-valuetext="15 ms">
+            </div>
+            <div class="mix">
+              <div class="mix-bar" role="img" aria-label="d_i 的變異組成：藍色為受試者間變異，朱紅色為 trial 雜訊"><i class="mix-b" id="mix-b"></i><i class="mix-o" id="mix-o"></i></div>
+              <p class="mix-cap" id="mix-cap"></p>
+            </div>
+            <div class="answer" aria-live="polite">
+              <div class="answer-item">
+                <p class="answer-n"><span id="ans-need">30</span><span class="answer-u">位</span></p>
+                <p class="answer-l">受試者可達 power 0.80（目前的 <span class="m"><i>n</i></span>）</p>
+              </div>
+              <div class="answer-item">
+                <p class="answer-n is-floor"><span id="ans-floor">16</span><span class="answer-u">位</span></p>
+                <p class="answer-l">trial 無限多時的下限</p>
+              </div>
+              <p class="answer-foot" id="ans-foot"></p>
+            </div>
+          </div>
+          <figure class="chart">
+            <div id="exp-chart"></div>
+            <figcaption>
+              <span class="k-b"></span>藍色虛線是受試者間變異決定的下限。<span class="k-o"></span>朱紅色區域是多收 trial 還能省下的人數。
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <div class="prose">
+      <p>本文用 flanker 或 Stroop 類型的反應時間（RT）實驗當例子，示範怎麼用模擬加置換檢定估計所需的受試者人數，並說明每人的 trial 數為什麼會左右結果。</p>
+      <p>文中所有參數（RT 分布、效果大小、受試者間變異）都是我假設的，沒有一項是從真實資料估計的。拿去規劃自己的實驗時，請換成 pilot 資料或文獻中的估計值，並至少加跑一組比預期更小的效果。</p>
+    </div>
+
+    <section class="sec" aria-labelledby="s-flow">
+      <h2 id="s-flow">決策規則和效果，要分開處理</h2>
+      <div class="prose">
+        <p>置換檢定沒有現成的 power 公式。它對手上的資料重新分配標籤或正負號來建立虛無分布，這個步驟本身不會產生「真的有效果」的資料。所以估計 power 要拆成兩件事：置換檢定提供決策規則，決定一份資料算不算顯著；效果則由你假設的資料生成模型提供。對資料做置換會把效果洗掉，因此不能用置換造出 H1 的資料。</p>
+        <p>把兩者接起來，重複很多次，顯著的比例就是 power。</p>
+      </div>
+      <div class="pipe-wrap">
+        <ol class="pipe">
+          <li><span class="grp">資料生成：你的假設</span><b>假設真實效果</b>平均 <span class="m"><i>δ</i></span>，受試者間標準差 <span class="m"><i>σ</i><sub>b</sub></span></li>
+          <li><span class="grp">資料生成：你的假設</span><b>模擬 trial</b>每人兩個條件各產生 <span class="m"><i>n</i></span> 個 RT</li>
+          <li><span class="grp">決策規則：置換檢定</span><b>每人壓成一個差值</b>不一致的平均減一致的平均，得到 <span class="m"><i>d</i><sub>i</sub></span></li>
+          <li><span class="grp">決策規則：置換檢定</span><b>符號翻轉置換</b>重複 <span class="m"><i>B</i></span> 次建立虛無分布，算出 p 值</li>
+          <li><span class="grp">重複</span><b>重複 S 次</b>顯著的比例就是 power。換一個 <span class="m"><i>N</i></span> 再做一輪</li>
+        </ol>
+        <div class="pipe-groups" aria-hidden="true"><span>資料生成：你的假設</span><span>決策規則：置換檢定</span><span>重複</span></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s-model">
+      <h2 id="s-model">資料生成模型</h2>
+      <div class="prose">
+        <p>每位受試者在兩個條件（一致、不一致）各有 <span class="m"><i>n</i></span> 個 trial。基準 RT 對兩個條件相同，相減時抵消，不影響 power；真實資料中基準較慢的人常有較大的效果，這個相關這裡沒有模擬。受試者 <span class="m"><i>i</i></span> 的真實效果 <span class="m"><i>θ</i><sub>i</sub></span> 服從平均 <span class="m"><i>δ</i></span>、標準差 <span class="m"><i>σ</i><sub>b</sub></span> 的常態分布。</p>
+        <p>分析時每人只保留一個數字：</p>
+      </div>
+      <div class="eq"><i>d</i><sub>i</sub> = <span class="eq-words">不一致條件的平均 RT</span> − <span class="eq-words">一致條件的平均 RT</span><span class="eq-note">對每位受試者 <i>i</i></span></div>
+      <div class="prose">
+        <p>平均了 <span class="m"><i>n</i></span> 個 trial 之後，<span class="m"><i>d</i><sub>i</sub></span> 近似常態，可以寫成「真實效果」加上「估計誤差」：</p>
+      </div>
+      <div class="eq">
+        <i>d</i><sub>i</sub> ≈ <span class="t-b"><i>θ</i><sub>i</sub></span> + <span class="t-o"><i>ε</i><sub>i</sub></span>，
+        <span class="t-o">Var(<i>ε</i><sub>i</sub>) = <span class="frac"><span>2<i>σ</i><span class="ss"><span>2</span><span>t</span></span></span><span><i>n</i></span></span></span>
+      </div>
+      <dl class="params">
+        <dt><i>δ</i></dt><dd>平均效果。模擬 25 ms 與 15 ms 兩種。</dd>
+        <dt><i>σ</i><sub>b</sub> = 20 ms</dt><dd>真實效果在受試者間的標準差。</dd>
+        <dt><i>σ</i><sub>t</sub> ≈ 89.4 ms</dt><dd>單一 trial 的 RT 標準差。RT 取高斯（SD 40 ms）加指數尾（τ = 80 ms），也就是常見的右偏 ex-Gaussian，所以 <i>σ</i><sub>t</sub> = √(40² + 80²)。</dd>
+        <dt>基準 RT</dt><dd>平均 550 ms，標準差 60 ms，兩個條件相同。</dd>
+        <dt><i>B</i> = 2000，<i>S</i> = 1000</dt><dd>每次實驗置換 2000 次；每組設定重複 1000 次模擬實驗。</dd>
+      </dl>
+    </section>
+
+    <section class="sec" aria-labelledby="s-perm">
+      <h2 id="s-perm">置換檢定做了什麼</h2>
+      <div class="prose">
+        <p>配對設計的虛無假設是：差值 <span class="m"><i>d</i><sub>i</sub></span> 的分布對 0 對稱。成立的話，把某位受試者的差值換成相反的正負號，資料的機率不變。所以做法是保留每個 <span class="m">|<i>d</i><sub>i</sub>|</span>，隨機決定每人的正負號，重算組平均，重複 <span class="m"><i>B</i></span> 次，得到「虛無假設成立時，組平均會長什麼樣」的分布。</p>
+        <p>p 值是這個分布中絕對值不小於觀察值的比例，分子分母各加 1，避免 p = 0。</p>
+        <p>下面用一次模擬實驗示範：12 位受試者、每條件 40 個 trial、真實平均效果 25 ms，觀察到的組平均是 26.3 ms。</p>
+      </div>
+
+      <section class="stage" aria-labelledby="flip-h">
+        <div class="stage-in">
+          <h3 class="stage-title" id="flip-h" style="margin-top:0">自己翻翻看</h3>
+          <p class="stage-note">實心點保留原本的正負號，空心點是被翻轉的受試者，灰色小點標出原本的位置。右圖累積每次翻轉後的組平均，斜線區是絕對值不小於觀察值的尾端。這 12 個差值取自一次模擬實驗（隨機種子 2，組平均接近真實效果，算是一次典型的結果）。</p>
+          <noscript><p class="stage-note">這個互動需要 JavaScript。</p></noscript>
+          <div class="btns">
+            <button type="button" class="btn primary" data-flip="1">翻轉一次</button>
+            <button type="button" class="btn" data-flip="100">翻轉 100 次</button>
+            <button type="button" class="btn" data-flip="5000">翻轉 5,000 次</button>
+            <button type="button" class="btn" data-flip="reset">重設</button>
+          </div>
+          <div class="flip-grid">
+            <figure class="chart"><p class="panel-title">12 位受試者的 <span class="m"><i>d</i><sub>i</sub></span></p><div id="flip-dots"></div></figure>
+            <figure class="chart"><p class="panel-title">組平均的虛無分布</p><div id="flip-hist"></div></figure>
+          </div>
+          <p class="flip-read" id="flip-read" aria-live="polite"></p>
+        </div>
+      </section>
+    </section>
+
+    <section class="sec" aria-labelledby="s-n">
+      <h2 id="s-n">掃描 N，得到 power</h2>
+      <div class="prose">
+        <p>固定每人每條件 40 個 trial，對每個候選的 <span class="m"><i>N</i></span> 各跑 1000 次模擬實驗，真實平均效果取 25 ms 和 15 ms。</p>
+        <p>為了對照，另外寫出 <span class="m"><i>d</i><sub>i</sub></span> 近似常態時的解析近似：標準化效果量如下，代入配對 t 檢定的 power（非中心 t 分布）。它不是置換檢定本身，但兩者在 <span class="m"><i>d</i><sub>i</sub></span> 接近常態時非常接近，可以拿來檢查模擬有沒有寫錯，也能快速掃過很多組參數。</p>
+      </div>
+      <div class="eq">
+        <i>d</i><sub>z</sub> = <span class="frac"><span><i>δ</i></span><span><span class="sqrt">√<span><span class="t-b"><i>σ</i><span class="ss"><span>2</span><span>b</span></span></span> + <span class="t-o">2<i>σ</i><span class="ss"><span>2</span><span>t</span></span> / <i>n</i></span></span></span></span></span>
+      </div>
+
+      <figure class="chart">
+        <div class="legend">
+          <span class="lg"><span class="lg-dot"></span>置換檢定模擬，δ = 25 ms</span>
+          <span class="lg"><span class="lg-sq"></span>置換檢定模擬，δ = 15 ms</span>
+          <span class="lg"><span class="lg-dash ink"></span>配對 t 近似，δ = 25 ms</span>
+          <span class="lg"><span class="lg-dash"></span>配對 t 近似，δ = 15 ms</span>
+        </div>
+        <div id="chart-power-n"></div>
+        <figcaption>每條件 40 個 trial 時，power 隨受試者人數的變化。每個模擬點為 1000 次模擬實驗；虛線為解析近似；點線為 0.80。</figcaption>
+      </figure>
+      <details class="data">
+        <summary>顯示數據表</summary>
+        <div class="tbl-wrap">
+          <table>
+            <caption>置換檢定的模擬 power（每格 1000 次模擬實驗）</caption>
+            <thead><tr><th>N</th><th>δ = 25 ms</th><th>δ = 15 ms</th></tr></thead>
+            <tbody>
+              <tr><td>8</td><td>0.519</td><td>0.223</td></tr>
+              <tr><td>10</td><td>0.715</td><td>0.298</td></tr>
+              <tr><td>12</td><td>0.795</td><td>0.346</td></tr>
+              <tr><td>15</td><td>0.895</td><td>0.471</td></tr>
+              <tr><td>18</td><td>0.946</td><td>0.570</td></tr>
+              <tr><td>20</td><td>0.965</td><td>0.614</td></tr>
+              <tr><td>25</td><td>0.987</td><td>0.758</td></tr>
+              <tr><td>30</td><td>0.997</td><td>0.798</td></tr>
+              <tr><td>40</td><td>1.000</td><td>0.915</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <div class="prose" style="margin-top:1.6rem">
+        <p>以 power 達 0.80 為目標：效果 25 ms 時，模擬在 N = 12 為 0.795、N = 15 為 0.895，解析近似給出的最小 N 是 13；效果 15 ms 時，模擬在 N = 30 為 0.798，解析近似的最小 N 是 30。同一個設計，真實效果從 25 ms 縮到 15 ms，所需人數從 13 位左右增加到 30 位左右，是兩倍以上。效果量的假設對結論的影響，比其他任何設定都大。</p>
+        <p>模擬和解析近似大致吻合，只有 N = 8 時模擬（0.519）明顯低於近似（0.576）。我的推測是人數太少時符號翻轉只有 2<sup>8</sup> = 256 種組合，p 值解析度很粗，檢定偏保守；這只是推測，沒有另外驗證。每個模擬點有約 0.01 到 0.016 的 Monte Carlo 誤差（S = 1000），小於這個量級的差距不需要解讀。</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s-trial">
+      <h2 id="s-trial">為什麼 trial 數會影響 power</h2>
+      <div class="prose">
+        <p>置換檢定只看到每位受試者的一個差值 <span class="m"><i>d</i><sub>i</sub></span>，不知道背後有幾個 trial。trial 數是透過 <span class="m"><i>d</i><sub>i</sub></span> 的雜訊間接影響 power。由上面的模型，<span class="m"><i>d</i><sub>i</sub></span> 的變異分成兩項：</p>
+      </div>
+      <div class="eq">
+        Var(<i>d</i><sub>i</sub>) = <span class="t-b"><i>σ</i><span class="ss"><span>2</span><span>b</span></span></span> + <span class="t-o"><span class="frac"><span>2<i>σ</i><span class="ss"><span>2</span><span>t</span></span></span><span><i>n</i></span></span></span>
+      </div>
+      <div class="prose">
+        <p><span class="t-b">藍色那項</span>是人與人之間真實的差異，不隨 <span class="m"><i>n</i></span> 改變；<span class="t-o">朱紅色那項</span>是 trial 雜訊，隨 <span class="m"><i>n</i></span> 增加而縮小。頁首的互動畫的就是這兩項。<span class="m"><i>n</i></span> 小的時候朱紅色占大部分，多收 trial 能大幅縮小總變異；<span class="m"><i>n</i></span> 夠大之後只剩藍色，<span class="m"><i>d</i><sub>z</sub></span> 逼近上限 <span class="m"><i>δ</i> / <i>σ</i><sub>b</sub></span>，再多的 trial 也越不過去。</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <caption>Var(d<sub>i</sub>) 的兩個來源，以及 δ = 15 ms 與 δ = 25 ms 時的 d<sub>z</sub></caption>
+          <thead><tr><th>n（每條件 trial 數）</th><th class="h-b">σ<sub>b</sub>² (ms²)</th><th class="h-o">2σ<sub>t</sub>²/n (ms²)</th><th>SD(d<sub>i</sub>) (ms)</th><th>d<sub>z</sub>，δ = 15</th><th>d<sub>z</sub>，δ = 25</th></tr></thead>
+          <tbody>
+            <tr><td>5</td><td>400</td><td>3200</td><td>60.0</td><td>0.25</td><td>0.42</td></tr>
+            <tr><td>10</td><td>400</td><td>1600</td><td>44.7</td><td>0.34</td><td>0.56</td></tr>
+            <tr><td>20</td><td>400</td><td>800</td><td>34.6</td><td>0.43</td><td>0.72</td></tr>
+            <tr><td>40</td><td>400</td><td>400</td><td>28.3</td><td>0.53</td><td>0.88</td></tr>
+            <tr><td>80</td><td>400</td><td>200</td><td>24.5</td><td>0.61</td><td>1.02</td></tr>
+            <tr><td>160</td><td>400</td><td>100</td><td>22.4</td><td>0.67</td><td>1.12</td></tr>
+            <tr><td>320</td><td>400</td><td>50</td><td>21.2</td><td>0.71</td><td>1.18</td></tr>
+            <tr><td>640</td><td>400</td><td>25</td><td>20.6</td><td>0.73</td><td>1.21</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prose">
+        <p>下圖驗證這個推論：固定 N = 20、δ = 15 ms，只改變 trial 數。</p>
+      </div>
+      <figure class="chart">
+        <div class="legend">
+          <span class="lg"><span class="lg-line"></span>置換檢定模擬</span>
+          <span class="lg"><span class="lg-dash"></span>配對 t 近似</span>
+          <span class="lg"><span class="lg-dash blue"></span>trial 無限多時的上限</span>
+          <span class="lg"><span class="lg-area"></span>被 trial 雜訊拿走的 power</span>
+        </div>
+        <div id="chart-power-t"></div>
+        <figcaption>N = 20、δ = 15 ms 時，power 隨每條件 trial 數的變化。點線為 0.80。</figcaption>
+      </figure>
+      <details class="data">
+        <summary>顯示數據表</summary>
+        <div class="tbl-wrap">
+          <table>
+            <caption>N = 20、δ = 15 ms；模擬每列 1000 次實驗</caption>
+            <thead><tr><th>n</th><th>置換檢定模擬</th><th>配對 t 近似</th></tr></thead>
+            <tbody>
+              <tr><td>10</td><td>0.303</td><td>0.297</td></tr>
+              <tr><td>20</td><td>0.439</td><td>0.452</td></tr>
+              <tr><td>40</td><td>0.630</td><td>0.614</td></tr>
+              <tr><td>80</td><td>0.738</td><td>0.738</td></tr>
+              <tr><td>160</td><td>0.844</td><td>0.812</td></tr>
+              <tr><td>320</td><td>0.843</td><td>0.851</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <div class="prose" style="margin-top:1.6rem">
+        <p>trial 數從 10 增加到 80 時 power 上升得很快（0.30 到 0.74），之後趨緩。模擬在 160 和 320 的數值幾乎相同（0.844 和 0.843），解析近似則分別是 0.812 和 0.851。這個差距在 Monte Carlo 誤差（約 0.011）的範圍內，並不表示 power 在 160 之後停止上升，而是上升得很慢。</p>
+        <p>藍色虛線是 <span class="m"><i>d</i><sub>z</sub></span> 達到上限 0.75 時對應的 power（約 0.89）。在 N = 20、δ = 15 ms 的條件下，不論每人收多少 trial，power 都不會超過這個值；要再往上，只能增加受試者。</p>
+      </div>
+
+      <h3>多收受試者，還是多收 trial</h3>
+      <div class="prose">
+        <p>把 <span class="m"><i>d</i><sub>z</sub></span> 的式子代入解析近似，可以算出每種 trial 數下達到 80% power 的最小 N。頁首互動中的曲線，就是這張表的連續版本。</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <caption>各 trial 數下，達到 80% power（雙尾 α = 0.05）所需的最小受試者人數（解析近似）。灰底列是前面模擬使用的每條件 40 個 trial。</caption>
+          <thead><tr><th>n（每條件 trial 數）</th><th>δ = 25 ms</th><th>δ = 15 ms</th></tr></thead>
+          <tbody>
+            <tr><td>10</td><td>28</td><td>72</td></tr>
+            <tr><td>20</td><td>18</td><td>44</td></tr>
+            <tr class="hl"><td>40</td><td>13</td><td>30</td></tr>
+            <tr><td>80</td><td>10</td><td>23</td></tr>
+            <tr><td>160</td><td>9</td><td>20</td></tr>
+            <tr><td>320</td><td>8</td><td>18</td></tr>
+            <tr><td>640</td><td>8</td><td>17</td></tr>
+            <tr><td>無限多</td><td>8</td><td>16</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>以 δ = 15 ms 為例，每人每條件 10 個 trial 需要約 72 位受試者，40 個 trial 需要 30 位，160 個 trial 需要 20 位，即使 trial 數無限多也還需要 16 位。δ = 25 ms 時對應的人數是 28、13、9 和 8。</p>
+        <p>規劃時可以先決定受試者人數和每人 trial 數的組合，再對照這張表看 power 夠不夠。招募受試者比較貴的話，增加 trial 可以省人，但省下的人數有下限，兩種效果量的下限分別是 16 位和 8 位。這張表來自解析近似，正式採用前，建議用原始檔裡的 <code>power()</code> 在你要用的組合上實際模擬一次。</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s-use">
+      <h2 id="s-use">實際使用時</h2>
+      <div class="prose">
+        <ol>
+          <li><b>換成自己的資料生成模型。</b>有 pilot 資料的話，可以對受試者做 bootstrap，取代參數式生成，再和這裡的結果比較。兩者差距大，代表假設的分布形狀有問題。bootstrap 無法外推到比 pilot 更大的 <span class="m"><i>N</i></span>。</li>
+          <li><b>換成自己要用的統計量。</b>正式分析用的若是中位數差、trimmed mean 或最大統計量校正，只需要改 <code>perm_p</code> 裡的統計量，其餘流程不變。這是模擬法相對於解析公式的主要好處。</li>
+          <li><b>效果量跑一個範圍。</b>pilot 的效果量通常偏高，建議至少再跑一組縮小後的值（例如 pilot 估計的一半到三分之二），報告 N 的範圍。</li>
+          <li><b>留意 Monte Carlo 誤差。</b>power 約 0.8 時，S = 1000 的標準誤差約 0.013；相鄰兩個 N 的差距若小於這個量級，不要過度解讀。</li>
+          <li><b>檢查 B。</b>置換 p 值的最小值是 1/(B+1)。改用更嚴格的 α（例如多重比較校正後）時，B 要跟著增加。</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s-limit">
+      <h2 id="s-limit">限制</h2>
+      <div class="prose">
+        <ul>
+          <li>所有結論以假設的模型為條件：trial 彼此獨立、效果在受試者間近似常態、基準 RT 與效果量無相關。真實 RT 資料常有練習效果、疲勞和序列相依，這些會讓 trial 雜訊不再以 1/<span class="m"><i>n</i></span> 的速度縮小。</li>
+          <li><span class="m"><i>σ</i><sub>b</sub></span> = 20 ms 是假設。受試者間變異越小，增加 trial 的效益持續得越久；越大，上限來得越早。</li>
+          <li>這裡的置換單位是受試者（符號翻轉受試者層級的差值）。如果正式分析是 trial 層級（例如混合效果模型，或在受試者內置換條件標籤），可交換單位和模擬方式都要重新設計，本文的結果不能直接套用。</li>
+          <li>解析近似只是檢查工具。受試者數很少、差值明顯偏態或有離群值時，置換檢定與 t 檢定的 power 會出現差異，應以模擬結果為準。</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>模擬程式與完整輸出：<a href="rt_permutation_power.qmd" download>rt_permutation_power.qmd</a>（Quarto，Python 3、numpy、scipy、matplotlib）。頁面上的數字與該檔案的輸出一致。</p>
+    <p>字型為 Bricolage Grotesque 與 Atkinson Hyperlegible Next，皆採 SIL Open Font License 1.1。</p>
+    <p><a href="/">回到 Erik Chang 的網站</a>　<a href="en.html" lang="en" hreflang="en">English version</a></p>
+  </div>
+</footer>
+
+<script>
+window.CONCEPT_I18N = {
+  xTrials: "每條件 trial 數 n",
+  yReqN: "所需受試者數 N（power 0.80）",
+  floor: "下限 {v} 位",
+  here: "n = {n}：需要 {need} 位",
+  mixCap: "d<sub>i</sub> 的標準差約 <strong>{sd} ms</strong>，標準化效果量 d<sub>z</sub> = <strong>{dz}</strong>。藍色是不隨 n 改變的受試者間變異（{between} ms²），朱紅色是 trial 雜訊（{noise} ms²）。條的長度以 n = 5 時的總變異為 100%。",
+  footMore: "trial 加到無限多，最多還能再省 {save} 位。",
+  footDone: "已經貼近下限，再增加 trial 也省不了人。",
+  xN: "受試者人數 N",
+  yPower: "power",
+  ceiling: "trial 無限多時的上限 {v}",
+  flipX: "d_i（ms）",
+  histX: "置換後的組平均（ms）",
+  histY: "次數",
+  observed: "觀察值 {v}",
+  meanLab: "平均 {v}",
+  flipIdle: "按「翻轉一次」開始。每次翻轉，每位受試者各有一半機率換成相反的正負號。",
+  flipRun: "已翻轉 <strong>{n}</strong> 次，其中 <strong>{k}</strong> 次的組平均絕對值不小於觀察值 {obs} ms。<br>p = ({k} + 1) / ({n} + 1) = <strong>{p}</strong>",
+  chartExp: "所需受試者人數隨每條件 trial 數變化的曲線，含下限與目前設定的標記",
+  chartFlipDots: "12 位受試者的差值與目前一次符號翻轉後的位置",
+  chartFlipHist: "累積的符號翻轉組平均直方圖，標出觀察值與兩側尾端",
+  chartPowerN: "power 隨受試者人數變化的曲線，含模擬點與解析近似",
+  chartPowerT: "power 隨每條件 trial 數變化的曲線，含無限多 trial 的上限"
+};
+</script>
+<script src="data.js"></script>
+<script src="concepts.js"></script>
+</body>
+</html>

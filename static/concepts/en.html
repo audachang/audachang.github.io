@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Estimating sample size for an RT experiment with permutation tests | Erik Chang</title>
+  <meta name="description" content="How to estimate the number of subjects a reaction-time experiment needs using simulation and a permutation test, and why the number of trials per subject changes the answer. Includes interactive explainers.">
+  <link rel="alternate" hreflang="zh-Hant-TW" href="./">
+  <link rel="alternate" hreflang="en" href="en.html">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preload" href="fonts/bricolage-grotesque-wdth.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/atkinson-hyperlegible-next-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="concepts.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Erik Chang</a><span aria-hidden="true">/</span><span>Concepts</span>
+    </nav>
+    <nav class="lang-switch" aria-label="Language 語言">
+      <a href="./" lang="zh-Hant-TW" hreflang="zh-Hant-TW">中文</a>
+      <a href="en.html" lang="en" aria-current="page">English</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap hero">
+    <h1>Estimating sample size for an RT experiment with permutation tests</h1>
+    <p class="dek">How many trials each subject completes changes how many subjects you need. Drag the sliders to watch the noise shrink, and to see why the number of people eventually stops falling.</p>
+    <p class="byline">Erik Chang, Action &amp; Cognition Laboratory, National Central University. <time datetime="2026-10-23">October 23, 2026</time></p>
+  </div>
+
+  <div class="wrap">
+    <section class="stage" aria-labelledby="exp-h">
+      <div class="stage-in">
+        <h2 class="stage-title" id="exp-h">How many trials per person, and how many people?</h2>
+        <p class="stage-note">Paired (within-subject) design, two-sided α = 0.05, target power = 0.80. The parameters are assumptions; see “The generative model” below.</p>
+        <noscript><p class="stage-note">This explorer needs JavaScript. The tables below list the same results.</p></noscript>
+        <div class="exp">
+          <div>
+            <div class="ctl">
+              <label for="exp-n"><span>Trials per condition, per subject <span class="m"><i>n</i></span></span><output id="exp-n-out" for="exp-n">40</output></label>
+              <input id="exp-n" type="range" min="0" max="14" step="1" value="6" aria-valuetext="n = 40">
+            </div>
+            <div class="ctl">
+              <label for="exp-d"><span>Mean effect <span class="m"><i>δ</i></span><small>incongruent − congruent RT</small></span><output id="exp-d-out" for="exp-d">15 ms</output></label>
+              <input id="exp-d" type="range" min="10" max="40" step="1" value="15" aria-valuetext="15 ms">
+            </div>
+            <div class="mix">
+              <div class="mix-bar" role="img" aria-label="Composition of the variance of d_i: blue is between-subject variance, vermilion is trial noise"><i class="mix-b" id="mix-b"></i><i class="mix-o" id="mix-o"></i></div>
+              <p class="mix-cap" id="mix-cap"></p>
+            </div>
+            <div class="answer" aria-live="polite">
+              <div class="answer-item">
+                <p class="answer-n" id="ans-need">30</p>
+                <p class="answer-l">subjects reach power 0.80 at the current <span class="m"><i>n</i></span></p>
+              </div>
+              <div class="answer-item">
+                <p class="answer-n is-floor" id="ans-floor">16</p>
+                <p class="answer-l">subjects is the floor with unlimited trials</p>
+              </div>
+              <p class="answer-foot" id="ans-foot"></p>
+            </div>
+          </div>
+          <figure class="chart">
+            <div id="exp-chart"></div>
+            <figcaption>
+              <span class="k-b"></span>The blue dashed line is the floor set by between-subject variance. <span class="k-o"></span>The vermilion area is what more trials can still save.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <div class="prose">
+      <p>This page uses a flanker- or Stroop-style reaction-time (RT) experiment to show how to estimate the number of subjects you need with simulation and a permutation test, and why the number of trials per subject changes the answer.</p>
+      <p>Every parameter here (the RT distribution, the effect size, the between-subject variability) is an assumption of mine, not an estimate from real data. Before using this to plan your own study, replace them with values from pilot data or the literature, and run at least one effect size smaller than you expect.</p>
+    </div>
+
+    <section class="sec" aria-labelledby="s-flow">
+      <h2 id="s-flow">Keep the decision rule and the effect separate</h2>
+      <div class="prose">
+        <p>There is no ready-made power formula for a permutation test. It builds its null distribution by reshuffling labels or signs in the data you already have, and that step never produces data in which an effect really exists. So estimating power splits into two jobs: the permutation test supplies the decision rule that says whether a dataset counts as significant, and a generative model you assume supplies the effect. Permuting data washes the effect out, so permutation cannot be used to create H1 data.</p>
+        <p>Connect the two, repeat many times, and the share of significant results is the power.</p>
+      </div>
+      <div class="pipe-wrap">
+        <ol class="pipe">
+          <li><span class="grp">Data generation: your assumptions</span><b>Assume a true effect</b>Mean <span class="m"><i>δ</i></span>, between-subject SD <span class="m"><i>σ</i><sub>b</sub></span></li>
+          <li><span class="grp">Data generation: your assumptions</span><b>Simulate trials</b><span class="m"><i>n</i></span> RTs per condition for every subject</li>
+          <li><span class="grp">Decision rule: permutation test</span><b>One difference per subject</b>Incongruent mean minus congruent mean gives <span class="m"><i>d</i><sub>i</sub></span></li>
+          <li><span class="grp">Decision rule: permutation test</span><b>Sign-flip permutation</b><span class="m"><i>B</i></span> flips build the null distribution and give a p value</li>
+          <li><span class="grp">Iterate</span><b>Repeat S times</b>The share of significant runs is power. Change <span class="m"><i>N</i></span> and go again</li>
+        </ol>
+        <div class="pipe-groups" aria-hidden="true"><span>Data generation: your assumptions</span><span>Decision rule: permutation test</span><span>Iterate</span></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s-model">
+      <h2 id="s-model">The generative model</h2>
+      <div class="prose">
+        <p>Each subject has <span class="m"><i>n</i></span> trials in each of two conditions (congruent, incongruent). Baseline RT is the same in both conditions, so it cancels in the subtraction and does not affect power; in real data, slower people often show larger effects, a correlation not simulated here. Subject <span class="m"><i>i</i></span>’s true effect <span class="m"><i>θ</i><sub>i</sub></span> is normal with mean <span class="m"><i>δ</i></span> and standard deviation <span class="m"><i>σ</i><sub>b</sub></span>.</p>
+        <p>Each subject is reduced to one number:</p>
+      </div>
+      <div class="eq"><i>d</i><sub>i</sub> = <span class="ov">RT</span><sub>incongruent, i</sub> − <span class="ov">RT</span><sub>congruent, i</sub></div>
+      <div class="prose">
+        <p>After averaging <span class="m"><i>n</i></span> trials, <span class="m"><i>d</i><sub>i</sub></span> is approximately normal and can be written as the true effect plus estimation error:</p>
+      </div>
+      <div class="eq">
+        <i>d</i><sub>i</sub> ≈ <span class="t-b"><i>θ</i><sub>i</sub></span> + <span class="t-o"><i>ε</i><sub>i</sub></span>,
+        <span class="t-o">Var(<i>ε</i><sub>i</sub>) = <span class="frac"><span>2<i>σ</i><span class="ss"><span>2</span><span>t</span></span></span><span><i>n</i></span></span></span>
+      </div>
+      <dl class="params">
+        <dt><i>δ</i></dt><dd>Mean effect. Simulated at 25 ms and 15 ms.</dd>
+        <dt><i>σ</i><sub>b</sub> = 20 ms</dt><dd>Standard deviation of the true effect across subjects.</dd>
+        <dt><i>σ</i><sub>t</sub> ≈ 89.4 ms</dt><dd>SD of a single-trial RT. RT is Gaussian (SD 40 ms) plus an exponential tail (τ = 80 ms), the usual right-skewed ex-Gaussian, so <i>σ</i><sub>t</sub> = √(40² + 80²).</dd>
+        <dt>Baseline RT</dt><dd>Mean 550 ms, SD 60 ms, identical in both conditions.</dd>
+        <dt><i>B</i> = 2000, <i>S</i> = 1000</dt><dd>2000 permutations per experiment; 1000 simulated experiments per setting.</dd>
+      </dl>
+    </section>
+
+    <section class="sec" aria-labelledby="s-perm">
+      <h2 id="s-perm">What the permutation test does</h2>
+      <div class="prose">
+        <p>The null hypothesis in a paired design is that the distribution of the differences <span class="m"><i>d</i><sub>i</sub></span> is symmetric around 0. If that holds, flipping the sign of any subject’s difference leaves the data just as probable. So keep every <span class="m">|<i>d</i><sub>i</sub>|</span>, choose each subject’s sign at random, recompute the group mean, and repeat <span class="m"><i>B</i></span> times. The result is the distribution of group means you would see if the null were true.</p>
+        <p>The p value is the proportion of that distribution whose absolute value is at least the observed one, with 1 added to numerator and denominator so p is never 0.</p>
+        <p>The demo below uses one simulated experiment: 12 subjects, 40 trials per condition, a true mean effect of 25 ms, and an observed group mean of 26.3 ms.</p>
+      </div>
+
+      <section class="stage" aria-labelledby="flip-h">
+        <div class="stage-in">
+          <h3 class="stage-title" id="flip-h" style="margin-top:0">Flip it yourself</h3>
+          <p class="stage-note">Filled dots keep their original sign; hollow dots were flipped; small grey dots mark the original position. The right panel accumulates the group mean after every flip, and the hatched areas are the tails at least as extreme as the observed mean. The 12 differences come from one simulated experiment (random seed 2, group mean close to the true effect, so a typical result).</p>
+          <noscript><p class="stage-note">This demo needs JavaScript.</p></noscript>
+          <div class="btns">
+            <button type="button" class="btn primary" data-flip="1">Flip once</button>
+            <button type="button" class="btn" data-flip="100">Flip 100 times</button>
+            <button type="button" class="btn" data-flip="5000">Flip 5,000 times</button>
+            <button type="button" class="btn" data-flip="reset">Reset</button>
+          </div>
+          <div class="flip-grid">
+            <figure class="chart"><p class="panel-title"><span class="m"><i>d</i><sub>i</sub></span> for 12 subjects</p><div id="flip-dots"></div></figure>
+            <figure class="chart"><p class="panel-title">Null distribution of the group mean</p><div id="flip-hist"></div></figure>
+          </div>
+          <p class="flip-read" id="flip-read" aria-live="polite"></p>
+        </div>
+      </section>
+    </section>
+
+    <section class="sec" aria-labelledby="s-n">
+      <h2 id="s-n">Sweeping N to get power</h2>
+      <div class="prose">
+        <p>Hold every subject at 40 trials per condition, run 1000 simulated experiments for each candidate <span class="m"><i>N</i></span>, and use true mean effects of 25 ms and 15 ms.</p>
+        <p>For comparison there is also an analytic approximation that holds when <span class="m"><i>d</i><sub>i</sub></span> is roughly normal: the standardized effect below, plugged into the power of a paired t-test (noncentral t distribution). It is not the permutation test itself, but the two agree closely when <span class="m"><i>d</i><sub>i</sub></span> is near normal, so it works as a check on the simulation and a fast way to scan many parameter sets.</p>
+      </div>
+      <div class="eq">
+        <i>d</i><sub>z</sub> = <span class="frac"><span><i>δ</i></span><span><span class="sqrt">√<span><span class="t-b"><i>σ</i><span class="ss"><span>2</span><span>b</span></span></span> + <span class="t-o">2<i>σ</i><span class="ss"><span>2</span><span>t</span></span> / <i>n</i></span></span></span></span></span>
+      </div>
+
+      <figure class="chart">
+        <div class="legend">
+          <span class="lg"><span class="lg-dot"></span>Permutation (simulated), δ = 25 ms</span>
+          <span class="lg"><span class="lg-sq"></span>Permutation (simulated), δ = 15 ms</span>
+          <span class="lg"><span class="lg-dash ink"></span>Paired-t approximation, δ = 25 ms</span>
+          <span class="lg"><span class="lg-dash"></span>Paired-t approximation, δ = 15 ms</span>
+        </div>
+        <div id="chart-power-n"></div>
+        <figcaption>Power against number of subjects at 40 trials per condition. Each simulated point is 1000 experiments; dashed lines are the analytic approximation; the dotted line marks 0.80.</figcaption>
+      </figure>
+      <details class="data">
+        <summary>Show the data table</summary>
+        <div class="tbl-wrap">
+          <table>
+            <caption>Simulated power of the permutation test (1000 simulated experiments per cell)</caption>
+            <thead><tr><th>N</th><th>δ = 25 ms</th><th>δ = 15 ms</th></tr></thead>
+            <tbody>
+              <tr><td>8</td><td>0.519</td><td>0.223</td></tr>
+              <tr><td>10</td><td>0.715</td><td>0.298</td></tr>
+              <tr><td>12</td><td>0.795</td><td>0.346</td></tr>
+              <tr><td>15</td><td>0.895</td><td>0.471</td></tr>
+              <tr><td>18</td><td>0.946</td><td>0.570</td></tr>
+              <tr><td>20</td><td>0.965</td><td>0.614</td></tr>
+              <tr><td>25</td><td>0.987</td><td>0.758</td></tr>
+              <tr><td>30</td><td>0.997</td><td>0.798</td></tr>
+              <tr><td>40</td><td>1.000</td><td>0.915</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <div class="prose" style="margin-top:1.6rem">
+        <p>With 0.80 as the target: at an effect of 25 ms, the simulation gives 0.795 at N = 12 and 0.895 at N = 15, and the analytic approximation puts the smallest N at 13. At 15 ms the simulation gives 0.798 at N = 30, and the analytic smallest N is 30. For the same design, shrinking the true effect from 25 ms to 15 ms raises the required number from about 13 to about 30, more than double. The assumed effect size matters more than any other setting.</p>
+        <p>Simulation and approximation agree closely, except at N = 8, where the simulation (0.519) is clearly below the approximation (0.576). My guess is that with so few subjects there are only 2<sup>8</sup> = 256 sign patterns, p values are coarse, and the test is conservative; this is a guess I have not checked. Each simulated point carries a Monte Carlo error of about 0.01 to 0.016 (S = 1000), so smaller differences should not be read into.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s-trial">
+      <h2 id="s-trial">Why the number of trials matters</h2>
+      <div class="prose">
+        <p>The permutation test sees one difference <span class="m"><i>d</i><sub>i</sub></span> per subject and does not know how many trials stand behind it. Trial count affects power only through the noise in <span class="m"><i>d</i><sub>i</sub></span>. From the model above, the variance of <span class="m"><i>d</i><sub>i</sub></span> has two terms:</p>
+      </div>
+      <div class="eq">
+        Var(<i>d</i><sub>i</sub>) = <span class="t-b"><i>σ</i><span class="ss"><span>2</span><span>b</span></span></span> + <span class="t-o"><span class="frac"><span>2<i>σ</i><span class="ss"><span>2</span><span>t</span></span></span><span><i>n</i></span></span></span>
+      </div>
+      <div class="prose">
+        <p><span class="t-b">The blue term</span> is the real difference between people and does not change with <span class="m"><i>n</i></span>; <span class="t-o">the vermilion term</span> is trial noise and shrinks as <span class="m"><i>n</i></span> grows. The explorer at the top of the page draws exactly these two terms. When <span class="m"><i>n</i></span> is small the vermilion part dominates and more trials shrink the total variance a lot; once <span class="m"><i>n</i></span> is large only the blue part is left, <span class="m"><i>d</i><sub>z</sub></span> approaches its ceiling <span class="m"><i>δ</i> / <i>σ</i><sub>b</sub></span>, and no number of extra trials can get past it.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <caption>The two sources of Var(d<sub>i</sub>), and d<sub>z</sub> at δ = 15 ms and δ = 25 ms</caption>
+          <thead><tr><th>n (trials per condition)</th><th class="h-b">σ<sub>b</sub>² (ms²)</th><th class="h-o">2σ<sub>t</sub>²/n (ms²)</th><th>SD(d<sub>i</sub>) (ms)</th><th>d<sub>z</sub>, δ = 15</th><th>d<sub>z</sub>, δ = 25</th></tr></thead>
+          <tbody>
+            <tr><td>5</td><td>400</td><td>3200</td><td>60.0</td><td>0.25</td><td>0.42</td></tr>
+            <tr><td>10</td><td>400</td><td>1600</td><td>44.7</td><td>0.34</td><td>0.56</td></tr>
+            <tr><td>20</td><td>400</td><td>800</td><td>34.6</td><td>0.43</td><td>0.72</td></tr>
+            <tr><td>40</td><td>400</td><td>400</td><td>28.3</td><td>0.53</td><td>0.88</td></tr>
+            <tr><td>80</td><td>400</td><td>200</td><td>24.5</td><td>0.61</td><td>1.02</td></tr>
+            <tr><td>160</td><td>400</td><td>100</td><td>22.4</td><td>0.67</td><td>1.12</td></tr>
+            <tr><td>320</td><td>400</td><td>50</td><td>21.2</td><td>0.71</td><td>1.18</td></tr>
+            <tr><td>640</td><td>400</td><td>25</td><td>20.6</td><td>0.73</td><td>1.21</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prose">
+        <p>The figure below checks this: N = 20 and δ = 15 ms are fixed, and only the trial count varies.</p>
+      </div>
+      <figure class="chart">
+        <div class="legend">
+          <span class="lg"><span class="lg-line"></span>Permutation (simulated)</span>
+          <span class="lg"><span class="lg-dash"></span>Paired-t approximation</span>
+          <span class="lg"><span class="lg-dash blue"></span>Ceiling with unlimited trials</span>
+          <span class="lg"><span class="lg-area"></span>Power taken by trial noise</span>
+        </div>
+        <div id="chart-power-t"></div>
+        <figcaption>Power against trials per condition at N = 20 and δ = 15 ms. The dotted line marks 0.80.</figcaption>
+      </figure>
+      <details class="data">
+        <summary>Show the data table</summary>
+        <div class="tbl-wrap">
+          <table>
+            <caption>N = 20, δ = 15 ms; 1000 simulated experiments per row</caption>
+            <thead><tr><th>n</th><th>Permutation (simulated)</th><th>Paired-t approximation</th></tr></thead>
+            <tbody>
+              <tr><td>10</td><td>0.303</td><td>0.297</td></tr>
+              <tr><td>20</td><td>0.439</td><td>0.452</td></tr>
+              <tr><td>40</td><td>0.630</td><td>0.614</td></tr>
+              <tr><td>80</td><td>0.738</td><td>0.738</td></tr>
+              <tr><td>160</td><td>0.844</td><td>0.812</td></tr>
+              <tr><td>320</td><td>0.843</td><td>0.851</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <div class="prose" style="margin-top:1.6rem">
+        <p>Power climbs fast as trials go from 10 to 80 (0.30 to 0.74) and then flattens. The simulation gives almost the same value at 160 and 320 (0.844 and 0.843), while the approximation gives 0.812 and 0.851. That gap is within Monte Carlo error (about 0.011); it does not mean power stops rising after 160, only that it rises slowly.</p>
+        <p>The blue dashed line is the power that corresponds to <span class="m"><i>d</i><sub>z</sub></span> reaching its ceiling of 0.75 (about 0.89). At N = 20 and δ = 15 ms, power cannot exceed this no matter how many trials each person completes; to go higher you need more subjects.</p>
+      </div>
+
+      <h3>More subjects or more trials?</h3>
+      <div class="prose">
+        <p>Plugging the <span class="m"><i>d</i><sub>z</sub></span> formula into the analytic approximation gives the smallest N that reaches 80% power at each trial count. The curve in the explorer at the top is a continuous version of this table.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <caption>Smallest number of subjects for 80% power (two-sided α = 0.05) at each trial count (analytic approximation). The shaded row is the 40 trials per condition used in the simulations above.</caption>
+          <thead><tr><th>n (trials per condition)</th><th>δ = 25 ms</th><th>δ = 15 ms</th></tr></thead>
+          <tbody>
+            <tr><td>10</td><td>28</td><td>72</td></tr>
+            <tr><td>20</td><td>18</td><td>44</td></tr>
+            <tr class="hl"><td>40</td><td>13</td><td>30</td></tr>
+            <tr><td>80</td><td>10</td><td>23</td></tr>
+            <tr><td>160</td><td>9</td><td>20</td></tr>
+            <tr><td>320</td><td>8</td><td>18</td></tr>
+            <tr><td>640</td><td>8</td><td>17</td></tr>
+            <tr><td>Unlimited</td><td>8</td><td>16</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>Taking δ = 15 ms: 10 trials per condition needs about 72 subjects, 40 trials needs 30, 160 trials needs 20, and even unlimited trials needs 16. At δ = 25 ms the matching numbers are 28, 13, 9 and 8.</p>
+        <p>When planning, pick a combination of subjects and trials per subject first, then check the table to see whether power is enough. If recruiting is expensive, adding trials can save subjects, but the saving has a floor: 16 and 8 subjects for the two effect sizes. The table comes from the analytic approximation, so before relying on it, run <code>power()</code> from the source file on the combination you plan to use.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s-use">
+      <h2 id="s-use">In practice</h2>
+      <div class="prose">
+        <ol>
+          <li><b>Swap in your own generative model.</b> With pilot data you can bootstrap subjects instead of generating them from a parametric model, then compare with the results here. A large gap means the assumed distribution shape is off. A bootstrap cannot extrapolate to an <span class="m"><i>N</i></span> larger than the pilot.</li>
+          <li><b>Swap in the statistic you will actually use.</b> If your analysis uses a median difference, a trimmed mean, or max-statistic correction, change only the statistic inside <code>perm_p</code>; the rest of the pipeline stays the same. This is the main advantage of simulation over an analytic formula.</li>
+          <li><b>Run a range of effect sizes.</b> Effect sizes from pilots are usually inflated. Run at least one shrunken value (for example half to two-thirds of the pilot estimate) and report a range of N.</li>
+          <li><b>Watch Monte Carlo error.</b> With power near 0.8, S = 1000 gives a standard error of about 0.013; do not read into differences between neighboring values of N that are smaller than that.</li>
+          <li><b>Check B.</b> The smallest possible permutation p value is 1/(B+1). With a stricter α (after multiple-comparison correction, for instance), B must grow with it.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="s-limit">
+      <h2 id="s-limit">Limits</h2>
+      <div class="prose">
+        <ul>
+          <li>Everything depends on the assumed model: independent trials, approximately normal effects across subjects, and no correlation between baseline RT and effect size. Real RT data often show practice effects, fatigue, and serial dependence, which stop trial noise from shrinking as 1/<span class="m"><i>n</i></span>.</li>
+          <li><span class="m"><i>σ</i><sub>b</sub></span> = 20 ms is an assumption. The smaller the between-subject variability, the longer extra trials keep paying off; the larger it is, the sooner the ceiling arrives.</li>
+          <li>The permutation unit here is the subject (sign flips on subject-level differences). If your real analysis is trial-level (a mixed-effects model, or permuting condition labels within subjects), the exchangeable unit and the simulation have to be redesigned, and these results do not carry over directly.</li>
+          <li>The analytic approximation is only a check. With very few subjects, clearly skewed differences, or outliers, the power of a permutation test and a t-test can differ, and the simulation should be trusted.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Simulation code and full output: <a href="rt_permutation_power.qmd" download>rt_permutation_power.qmd</a> (Quarto; Python 3, numpy, scipy, matplotlib). The numbers on this page match that file’s output.</p>
+    <p>Typefaces: Bricolage Grotesque and Atkinson Hyperlegible Next, both under the SIL Open Font License 1.1.</p>
+    <p><a href="/">Back to Erik Chang’s site</a>　<a href="./" lang="zh-Hant-TW" hreflang="zh-Hant-TW">中文版</a></p>
+  </div>
+</footer>
+
+<script>
+window.CONCEPT_I18N = {
+  xTrials: "trials per condition (n)",
+  yReqN: "subjects needed, N (power 0.80)",
+  floor: "floor: {v} subjects",
+  here: "n = {n}: {need} subjects",
+  mixCap: "SD of d<sub>i</sub> is about <strong>{sd} ms</strong>; standardized effect d<sub>z</sub> = <strong>{dz}</strong>. Blue is the between-subject variance that does not change with n ({between} ms²); vermilion is trial noise ({noise} ms²). Bar length is scaled to the total variance at n = 5.",
+  footMore: "With unlimited trials you could save at most {save} more subjects.",
+  footDone: "Already close to the floor; more trials will not save subjects.",
+  xN: "N (subjects)",
+  yPower: "power",
+  ceiling: "ceiling with unlimited trials: {v}",
+  flipX: "d_i (ms)",
+  histX: "group mean after flips (ms)",
+  histY: "count",
+  observed: "observed {v}",
+  meanLab: "mean {v}",
+  flipIdle: "Press “Flip once” to start. On each flip every subject has a 50% chance of swapping to the opposite sign.",
+  flipRun: "<strong>{n}</strong> flips so far; <strong>{k}</strong> gave a group mean at least as extreme as the observed {obs} ms (in absolute value).<br>p = ({k} + 1) / ({n} + 1) = <strong>{p}</strong>",
+  chartExp: "Curve of subjects needed against trials per condition, with the floor and a marker for the current setting",
+  chartFlipDots: "Differences of 12 subjects and their positions after the current sign flip",
+  chartFlipHist: "Histogram of accumulated group means under sign flips, with the observed value and both tails marked",
+  chartPowerN: "Power against number of subjects, with simulated points and the analytic approximation",
+  chartPowerT: "Power against trials per condition, with the ceiling for unlimited trials"
+};
+</script>
+<script src="data.js"></script>
+<script src="concepts.js"></script>
+</body>
+</html>

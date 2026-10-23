@@ -1,0 +1,394 @@
+---
+title: "用置換檢定估計 RT 實驗的樣本數：為什麼 trial 數會影響 power"
+date: 2026-10-23
+lang: zh-TW
+format:
+  html:
+    toc: true
+    toc-title: "目錄"
+    number-sections: true
+    code-fold: true
+    code-summary: "顯示程式"
+    embed-resources: true
+    fig-format: png
+    fig-dpi: 150
+jupyter: python3
+execute:
+  warning: false
+---
+
+## 這份文件在做什麼
+
+本文用一個 flanker 或 Stroop 類型的反應時間（RT）實驗當例子，示範如何用模擬加置換檢定估計所需的受試者人數，並說明每位受試者的 trial 數為什麼會左右結果。
+
+文中所有參數（RT 分布、效果大小、受試者間變異）都是我假設的，沒有一項是從真實資料估計出來的。拿去規劃自己的實驗時，請換成 pilot 資料或文獻中的估計值，並至少跑一組比預期更小的效果。
+
+## 流程總覽
+
+置換檢定沒有現成的 power 公式。它的做法是對手上的資料重新分配標籤或正負號，建立虛無分布，這個步驟本身不會產生「真的有效果」的資料。所以估計 power 要拆成兩件事：
+
+- **決策規則**由置換檢定提供，決定一份資料算不算顯著。
+- **效果**由你假設的資料生成模型提供。對資料做置換會把效果洗掉，因此不能用置換來造出 H1 的資料。
+
+把兩者接起來，重複很多次，顯著的比例就是 power：
+
+```{mermaid}
+flowchart TD
+  A["假設真實效果<br/>平均 δ，受試者間 SD σ_b"] --> B["每位受試者產生 n 個 trial 的 RT<br/>兩個條件，ex-Gaussian"]
+  B --> C["每人取平均後相減<br/>得到一個差值 d_i"]
+  C --> D["符號翻轉置換 B 次<br/>建立虛無分布，算 p 值"]
+  D --> E["p 小於 alpha 嗎？"]
+  E --> F["重複 S 次實驗<br/>顯著比例 = power"]
+  F --> G["換一個 N 重做<br/>找最小的 N 使 power 達 0.80"]
+```
+
+## 資料生成模型
+
+每位受試者在兩個條件（一致、不一致）各有 $n$ 個 trial。
+
+- 基準 RT 對兩個條件相同，所以相減時會抵消，不影響 power。真實資料中基準較慢的人常有較大的效果，這個相關性這裡沒有模擬。
+- 每個 trial 的 RT 是高斯（SD = 40 ms）加指數尾（$\tau$ = 80 ms），也就是 RT 常用的右偏 ex-Gaussian。單一 trial 的標準差為 $\sigma_t=\sqrt{40^2+80^2}\approx 89.4$ ms。
+- 受試者 $i$ 的真實效果 $\theta_i \sim N(\delta,\ \sigma_b^2)$，$\sigma_b = 20$ ms，代表人與人之間效果大小不同。
+
+分析時每人只保留一個數字：
+
+$$
+d_i = \overline{RT}_{\text{incongruent},i} - \overline{RT}_{\text{congruent},i}
+$$
+
+平均了 $n$ 個 trial 之後，$d_i$ 近似常態，可以寫成「真實效果加上估計誤差」：
+
+$$
+d_i \approx \theta_i + \varepsilon_i,\qquad
+\operatorname{Var}(\varepsilon_i)=\frac{2\sigma_t^2}{n}
+$$ {#eq-d}
+
+```{python}
+#| label: setup
+#| code-fold: false
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+plt.rcParams.update({
+    "axes.spines.top": False, "axes.spines.right": False, "font.size": 10,
+})
+C_BLUE, C_ORANGE, C_GRAY, C_RED = "#2b6cb0", "#dd6b20", "#8a8f98", "#c53030"
+
+rng = np.random.default_rng(2026)
+
+# ---- 假設的資料生成參數（單位 ms）----
+MU_BASE, SD_BASE = 550, 60       # 受試者基準 RT 的平均與 SD
+SIGMA, TAU = 40, 80              # ex-Gaussian：高斯部分的 SD、指數尾
+SD_B = 20                        # 真實效果在受試者間的 SD（σ_b）
+SIGMA_T = np.hypot(SIGMA, TAU)   # 單一 trial 的 SD（σ_t，約 89.4）
+
+def sim_diffs(N, n_trials, delta, rng=rng):
+    """每位受試者一個值：不一致 - 一致 的平均 RT 差（ms）。"""
+    base = rng.normal(MU_BASE, SD_BASE, N)[:, None]
+    eff = rng.normal(delta, SD_B, N)[:, None]
+    def trials(mu):
+        return (rng.normal(mu, SIGMA, (N, n_trials))
+                + rng.exponential(TAU, (N, n_trials)))
+    return trials(base + eff).mean(1) - trials(base).mean(1)
+
+def perm_p(d, B=2000, rng=rng):
+    """符號翻轉置換檢定，雙尾，分子分母各 +1 以避免 p = 0。"""
+    obs = abs(d.mean())
+    signs = rng.choice([-1, 1], size=(B, len(d)))
+    null = np.abs((signs * d).mean(1))
+    return (np.sum(null >= obs) + 1) / (B + 1)
+
+def power(N, n_trials, delta, S=1000, alpha=0.05):
+    """S 次模擬實驗中，置換檢定顯著的比例。"""
+    return np.mean([perm_p(sim_diffs(N, n_trials, delta)) < alpha
+                    for _ in range(S)])
+```
+
+## 置換檢定做了什麼
+
+配對設計下的虛無假設是：差值 $d_i$ 的分布對 0 對稱。如果成立，每位受試者的差值被翻成相反正負號，資料的機率不變。所以做法是保留每個 $|d_i|$，隨機決定每人的正負號，重算組平均，重複 $B$ 次，得到「虛無假設成立時組平均會長什麼樣」的分布。p 值是虛無分布中絕對值不小於觀察值的比例。
+
+@fig-perm 用一次模擬實驗（12 位受試者，每條件 40 個 trial，真實平均效果 25 ms）示範這個過程。
+
+```{python}
+#| label: fig-perm
+#| fig-cap: "符號翻轉置換檢定示意。(a) 每位受試者的觀察差值。(b) 其中一次翻轉：橘色為被翻成相反符號的受試者，大小不變。(c) 重複 10,000 次翻轉得到的組平均虛無分布；虛線為實際觀察到的組平均，紅色區域為絕對值不小於它的尾端，其面積比例即雙尾 p 值。"
+#| fig-width: 11
+#| fig-height: 3.6
+r1 = np.random.default_rng(2)   # 隨便挑的種子；平均接近真實效果 25 ms，是一次典型的結果
+N, n_trials, delta = 12, 40, 25
+d = np.sort(sim_diffs(N, n_trials, delta, rng=r1))
+flip = r1.choice([-1, 1], size=N)
+d_flip = d * flip
+B = 10000
+null = (r1.choice([-1, 1], size=(B, N)) * d).mean(1)
+obs = d.mean()
+p = (np.sum(np.abs(null) >= abs(obs)) + 1) / (B + 1)
+
+fig, ax = plt.subplots(1, 3, figsize=(11, 3.6),
+                       gridspec_kw={"width_ratios": [1, 1, 1.5]})
+y = np.arange(N)
+lim = np.abs(d).max() * 1.2
+
+ax[0].axvline(0, color=C_GRAY, lw=1)
+ax[0].scatter(d, y, color=C_BLUE, s=30, zorder=3)
+ax[0].set_title("(a) observed $d_i$")
+
+ax[1].axvline(0, color=C_GRAY, lw=1)
+for yi, a, b, f in zip(y, d, d_flip, flip):
+    if f < 0:
+        ax[1].plot([a, b], [yi, yi], color=C_ORANGE, alpha=0.35, lw=1)
+ax[1].scatter(d_flip, y, c=np.where(flip < 0, C_ORANGE, C_BLUE), s=30, zorder=3)
+ax[1].set_title("(b) one random sign flip")
+
+for a in ax[:2]:
+    a.set_xlim(-lim, lim)
+    a.set_xlabel("$d_i$ (ms)")
+    a.set_yticks([])
+ax[0].set_ylabel("subjects (sorted)")
+ax[0].text(0.03, 0.04, f"mean = {obs:.1f} ms", transform=ax[0].transAxes)
+ax[1].text(0.03, 0.04, f"mean = {d_flip.mean():.1f} ms", transform=ax[1].transAxes)
+
+ax[2].hist(null, bins=60, color=C_GRAY, alpha=0.8)
+edge = abs(obs)
+xmax = max(np.abs(null).max(), edge) * 1.1
+for side in (-1, 1):
+    ax[2].axvspan(side * edge, side * xmax, color=C_RED, alpha=0.25)
+ax[2].axvline(obs, color="k", ls="--", lw=1.2)
+ax[2].set_xlim(-xmax, xmax)
+ax[2].set_title("(c) null distribution of the group mean")
+ax[2].set_xlabel("group mean of $d_i$ under sign flips (ms)")
+ax[2].set_ylabel("count")
+ax[2].text(0.03, 0.9, f"two-sided p = {p:.4f}", transform=ax[2].transAxes,
+           ha="left")
+fig.tight_layout()
+```
+
+## 掃描 N 得到 power
+
+固定每人每條件 40 個 trial，對每個候選的 $N$ 各跑 1000 次模擬實驗，每次實驗做 2000 次置換。真實平均效果取兩種：25 ms 和 15 ms。
+
+```{python}
+#| label: tbl-sim-power
+#| tbl-cap: "每條件 40 個 trial 時，置換檢定的模擬 power（每格 1000 次模擬實驗）。"
+Ns = [8, 10, 12, 15, 18, 20, 25, 30, 40]
+sim_N = pd.DataFrame({
+    "N": Ns,
+    "power, δ = 25 ms": [power(N, 40, 25) for N in Ns],
+    "power, δ = 15 ms": [power(N, 40, 15) for N in Ns],
+}).set_index("N")
+sim_N.round(3)
+```
+
+為了對照，下面的程式再寫出 $d_i$ 近似常態時的解析近似：標準化效果量
+
+$$
+d_z=\frac{\delta}{\sqrt{\sigma_b^2+2\sigma_t^2/n}}
+$$ {#eq-dz}
+
+代入配對 t 檢定的 power（非中心 t 分布）。它不是置換檢定本身，但 $d_i$ 接近常態時兩者的 power 非常接近，可以當作模擬有沒有寫錯的檢查，也能快速掃過很多組參數。
+
+```{python}
+#| label: analytic
+def dz_of(n_trials, delta):
+    return delta / np.sqrt(SD_B**2 + 2 * SIGMA_T**2 / n_trials)
+
+def t_power(dz, N, alpha=0.05):
+    df, nc = N - 1, dz * np.sqrt(N)
+    tc = stats.t.ppf(1 - alpha / 2, df)
+    return 1 - stats.nct.cdf(tc, df, nc) + stats.nct.cdf(-tc, df, nc)
+
+def n_required(dz, target=0.80, alpha=0.05):
+    for N in range(3, 2000):
+        if t_power(dz, N, alpha) >= target:
+            return N
+```
+
+```{python}
+#| label: fig-power-subj
+#| fig-cap: "固定每條件 40 個 trial 時，power 隨受試者人數的變化。圓點為置換檢定的模擬結果（每點 1000 次模擬實驗），虛線為配對 t 檢定的解析近似，水平線為 0.80。"
+#| fig-width: 6.5
+#| fig-height: 4
+Ngrid = np.arange(5, 46)
+fig, ax = plt.subplots(figsize=(6.5, 4))
+for delta, col in [(25, C_BLUE), (15, C_ORANGE)]:
+    ax.plot(sim_N.index, sim_N[f"power, δ = {delta} ms"], "o", color=col,
+            label=f"permutation (simulated), δ = {delta} ms")
+    ax.plot(Ngrid, t_power(dz_of(40, delta), Ngrid), "--", color=col, lw=1)
+ax.plot([], [], "--", color=C_GRAY, lw=1, label="paired-t approximation")
+ax.axhline(0.8, color="k", lw=0.8, ls=":")
+ax.set_xlabel("N (subjects)")
+ax.set_ylabel("power")
+ax.set_ylim(0, 1.05)
+ax.set_title("40 trials per condition")
+ax.legend(frameon=False, loc="lower right")
+fig.tight_layout()
+```
+
+以 power 達 0.80 為目標，@fig-power-subj 可以這樣讀：δ = 25 ms 時，模擬在 N = 12 為 0.795、N = 15 為 0.895，解析近似給出的最小 N 是 13；δ = 15 ms 時，模擬在 N = 30 為 0.798，解析近似的最小 N 是 30。同一個設計，真實效果從 25 ms 縮到 15 ms，所需人數從 13 位左右增加到 30 位左右，是兩倍以上。效果量的假設對結論的影響，比其他任何設定都大。
+
+模擬和解析近似大致吻合，只有 N = 8 時模擬（0.519）明顯低於近似（0.576）。我的推測是人數太少時符號翻轉只有 $2^8=256$ 種組合，p 值解析度很粗，檢定偏保守；這只是推測，沒有另外驗證。每個模擬點有約 0.01 到 0.016 的 Monte Carlo 誤差（S = 1000），小於這個量級的差距不需要解讀。
+
+## 為什麼 trial 數會影響 power
+
+置換檢定只看到每位受試者的一個差值 $d_i$，不知道背後有幾個 trial。trial 數是透過 $d_i$ 的雜訊間接影響 power。由 @eq-d，$d_i$ 的變異分成兩項：
+
+$$
+\operatorname{Var}(d_i)=\underbrace{\sigma_b^2}_{\text{人與人的真實差異，不隨 } n \text{ 改變}}
++\underbrace{\frac{2\sigma_t^2}{n}}_{\text{trial 雜訊，隨 } n \text{ 縮小}}
+$$
+
+第二項隨 $n$ 增加而縮小，第一項不動。@fig-var 把這兩項畫在一起：
+
+```{python}
+#| label: fig-var
+#| fig-cap: "Var(d_i) 的兩個來源與 dz 的關係（δ = 15 ms）。藍色是不隨 trial 數改變的受試者間變異，橘色是 trial 雜訊，黑線為對應的 dz，虛線為 trial 數趨近無限時 dz 的上限 δ/σ_b。"
+#| fig-width: 7
+#| fig-height: 4.2
+n_list = np.array([5, 10, 20, 40, 80, 160, 320, 640])
+noise = 2 * SIGMA_T**2 / n_list
+between = np.full(len(n_list), SD_B**2)
+
+fig, ax = plt.subplots(figsize=(7, 4.2))
+x = np.arange(len(n_list))
+b1 = ax.bar(x, between, color=C_BLUE,
+            label=r"between-subject variance $\sigma_b^2$ (fixed)")
+b2 = ax.bar(x, noise, bottom=between, color=C_ORANGE,
+            label=r"trial noise $2\sigma_t^2/n$ (shrinks with n)")
+ax.set_xticks(x, n_list)
+ax.set_xlabel("trials per condition (n)")
+ax.set_ylabel(r"Var($d_i$)  (ms$^2$)")
+
+ax2 = ax.twinx()
+ax2.spines["right"].set_visible(True)
+l1, = ax2.plot(x, dz_of(n_list, 15), "k-o", ms=4, label=r"$d_z$ at $\delta$ = 15 ms")
+ax2.axhline(15 / SD_B, color="k", ls="--", lw=1)
+ax2.text(len(n_list) - 0.6, 15 / SD_B + 0.02, r"ceiling $\delta/\sigma_b$",
+         ha="right", va="bottom")
+ax2.set_ylim(0, 1)
+ax2.set_ylabel(r"$d_z$")
+
+fig.legend(handles=[b1, b2, l1], loc="upper center",
+           bbox_to_anchor=(0.5, 0.0), frameon=False, ncol=1)
+fig.tight_layout()
+```
+
+下表列出同樣的數字，另外加上 $\delta = 25$ ms 的 $d_z$：
+
+```{python}
+#| label: tbl-var
+#| tbl-cap: "Var(d_i) 的兩個來源，以及 δ = 15 ms 與 δ = 25 ms 時的 dz。"
+tab = pd.DataFrame({
+    "n (trials/cond)": n_list,
+    "σ_b² (ms²)": between,
+    "2σ_t²/n (ms²)": noise.round(0).astype(int),
+    "SD(d_i) (ms)": np.sqrt(between + noise).round(1),
+    "dz, δ = 15": dz_of(n_list, 15).round(2),
+    "dz, δ = 25": dz_of(n_list, 25).round(2),
+}).set_index("n (trials/cond)")
+tab
+```
+
+trial 數少的時候，雜訊項遠大於受試者間變異，多加 trial 能大幅縮小 $\operatorname{Var}(d_i)$，$d_z$ 和 power 都上升得快。trial 數夠多之後，雜訊項已經小於受試者間變異，再增加 trial 對總變異的影響越來越小，$d_z$ 逼近 $\delta/\sigma_b$ 這個上限，再多的 trial 也無法越過。
+
+下面的模擬驗證這個推論：固定 $N = 20$、$\delta = 15$ ms，只改變 trial 數。
+
+```{python}
+#| label: tbl-sim-trials
+#| tbl-cap: "N = 20、δ = 15 ms 時，power 隨每條件 trial 數的變化：置換檢定模擬（每列 1000 次）與解析近似。"
+nts = [10, 20, 40, 80, 160, 320]
+sim_nt = pd.DataFrame({
+    "n trials": nts,
+    "simulated (permutation)": [power(20, nt, 15) for nt in nts],
+    "paired-t approximation": [t_power(dz_of(nt, 15), 20) for nt in nts],
+}).set_index("n trials")
+sim_nt.round(3)
+```
+
+```{python}
+#| label: fig-power-trials
+#| fig-cap: "N = 20、δ = 15 ms 時，power 隨每條件 trial 數的變化。橘線為置換檢定的模擬結果，灰色虛線為解析近似，紅色點線是 trial 數無限多時 dz 達到上限 δ/σ_b 所對應的 power；水平黑線為 0.80。"
+#| fig-width: 6.5
+#| fig-height: 4
+grid = np.logspace(np.log10(8), np.log10(700), 80)
+fig, ax = plt.subplots(figsize=(6.5, 4))
+ax.plot(grid, t_power(dz_of(grid, 15), 20), "--", color=C_GRAY, lw=1,
+        label="paired-t approximation")
+ax.plot(sim_nt.index, sim_nt["simulated (permutation)"], "o-", color=C_ORANGE,
+        label="permutation (simulated)")
+ceil = t_power(15 / SD_B, 20)
+ax.axhline(ceil, color=C_RED, ls=":", lw=1.2)
+ax.text(9, ceil + 0.015, "ceiling with infinitely many trials", color=C_RED)
+ax.axhline(0.8, color="k", lw=0.8, ls=":")
+ax.set_xscale("log")
+ax.set_xticks(nts, [str(t) for t in nts])
+ax.minorticks_off()
+ax.set_xlabel("trials per condition (n)")
+ax.set_ylabel("power")
+ax.set_ylim(0, 1.05)
+ax.set_title("N = 20, δ = 15 ms")
+ax.legend(frameon=False, loc="lower right")
+fig.tight_layout()
+```
+
+@fig-power-trials 顯示，trial 數從 10 增加到 80 時 power 上升得很快（0.30 到 0.74），之後趨緩。模擬在 160 和 320 的數值幾乎相同（0.844 和 0.843），解析近似則分別是 0.812 和 0.851。這個差距在 Monte Carlo 誤差（約 0.011）的範圍內，並不表示 power 在 160 之後停止上升，而是上升得很慢。
+
+紅色點線是 $d_z$ 達到上限 0.75 時對應的 power（約 0.89）。在 N = 20、δ = 15 ms 的條件下，不論每人收多少 trial，power 都不會超過這個值；要再往上，只能增加受試者。
+
+### 多收受試者還是多收 trial
+
+想知道「每人收幾個 trial，需要多少受試者」，可以把 @eq-dz 代入解析近似，直接算出各 trial 數下達到 80% power 的最小 $N$：
+
+```{python}
+#| label: fig-required-subj
+#| fig-cap: "達到 80% power（雙尾 alpha = 0.05）所需的受試者人數，隨每條件 trial 數的變化（解析近似）。點線是 trial 數無限多時的所需人數，也就是用增加 trial 所能換到的最大節省。"
+#| fig-width: 6.5
+#| fig-height: 4
+tg = np.unique(np.round(np.logspace(1, 3, 30)).astype(int))
+fig, ax = plt.subplots(figsize=(6.5, 4))
+for delta, col in [(25, C_BLUE), (15, C_ORANGE)]:
+    need = [n_required(dz_of(t, delta)) for t in tg]
+    ax.plot(tg, need, color=col, label=f"δ = {delta} ms")
+    ax.axhline(n_required(delta / SD_B), color=col, ls=":", lw=1)
+ax.set_xscale("log")
+ax.set_xlabel("trials per condition (n)")
+ax.set_ylabel("N needed for 80% power")
+ax.set_ylim(0, 80)
+ax.legend(frameon=False)
+fig.tight_layout()
+```
+
+```{python}
+#| label: tbl-required-subj
+#| tbl-cap: "各 trial 數下，達到 80% power（雙尾 alpha = 0.05）所需的最小受試者人數（解析近似）。"
+rows = [10, 20, 40, 80, 160, 320, 640]
+req = pd.DataFrame({
+    "n (trials/cond)": rows + ["infinite"],
+    "N for 80% power, δ = 25": [n_required(dz_of(t, 25)) for t in rows]
+                               + [n_required(25 / SD_B)],
+    "N for 80% power, δ = 15": [n_required(dz_of(t, 15)) for t in rows]
+                               + [n_required(15 / SD_B)],
+}).set_index("n (trials/cond)")
+req
+```
+
+以 δ = 15 ms 為例，每人每條件 10 個 trial 需要約 72 位受試者，40 個 trial 需要 30 位，160 個 trial 需要 20 位，即使 trial 數無限多也還需要 16 位。δ = 25 ms 時對應的人數是 28、13、9 和 8。
+
+規劃時可以先決定受試者人數和每人 trial 數的組合，再對照這張表看 power 夠不夠。招募受試者比較貴的話，增加 trial 可以省人，但省下的人數有下限，上面兩種效果量的下限分別是 16 位和 8 位。這張表來自解析近似，正式採用前，建議用 `power()` 在你要用的組合上實際模擬一次。
+
+## 實際使用時
+
+1. **換成自己的資料生成模型。** 如果有 pilot 資料，可以對受試者做 bootstrap，取代 `sim_diffs` 的參數式生成，再和這裡的結果比較。兩者差距大，代表假設的分布形狀有問題。但 bootstrap 無法外推到比 pilot 更大的 $N$。
+2. **換成自己要用的統計量。** 如果正式分析用的是中位數差、trimmed mean 或最大統計量校正，只需要改 `perm_p` 裡的統計量，其餘流程不變。這是模擬法相對於解析公式的主要好處。
+3. **效果量跑一個範圍。** pilot 的效果量通常偏高，建議至少再跑一組縮小後的值（例如 pilot 估計的一半到三分之二），報告 N 的範圍。
+4. **控制 Monte Carlo 誤差。** power 約 0.8 時，S = 1000 的標準誤差約 0.013，相鄰兩個 N 的差距若小於這個量級，不要過度解讀。
+5. **檢查 B。** 置換 p 值的最小值是 1/(B+1)。若改用更嚴格的 alpha（例如多重比較校正後），B 要隨之增加。
+
+## 限制
+
+- 所有結論以假設的模型為條件：trial 彼此獨立、效果在受試者間近似常態、基準 RT 與效果量無相關。真實 RT 資料常有練習效果、疲勞和序列相依，這些會讓 trial 雜訊不再以 $1/n$ 的速度縮小。
+- $\sigma_b = 20$ ms 是假設。受試者間變異越小，增加 trial 的效益持續得越久；越大，上限來得越早。
+- 這裡的置換單位是受試者（符號翻轉受試者層級的差值）。如果正式分析是 trial 層級（例如混合效果模型，或在受試者內置換條件標籤），可交換單位和模擬方式都要重新設計，本文的結果不能直接套用。
+- 解析近似只是檢查工具。受試者數很少、差值明顯偏態或有離群值時，置換檢定與 t 檢定的 power 會出現差異，應以模擬結果為準。
