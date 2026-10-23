@@ -24,15 +24,18 @@ menu:
         - name: Data & Tools
           url: data/
           weight: 4
+        - name: Concepts
+          url: concepts/
+          weight: 5
         - name: Conferences & Workshops
           url: activities/
-          weight: 5
+          weight: 6
         - name: Awards
           url: awards/
-          weight: 6
+          weight: 7
         - name: Lab Wiki
           url: "http://140.115.47.34/new_wiki/index.php/Action_%26_Cognition_Laboratory"
-          weight: 7
+          weight: 8
 
 params:
     description: "Erik Chang's academic website — Action & Cognition Lab, National Central University. Research in neuroimaging, cognitive neuroscience, and recommender systems."
