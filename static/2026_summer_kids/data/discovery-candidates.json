@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-10-19",
+    "updatedAt": "2026-10-26",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
     "lastMessage": "1 new candidate(s) discovered."
@@ -1482,6 +1482,40 @@
           "2026.08.05"
         ],
         "contentHash": "4be9450a38e68a1c"
+      }
+    },
+    {
+      "id": "candidate-taipei-3d4304aa42",
+      "city": "台北",
+      "status": "candidate",
+      "title": "2026暑期三天二夜免費營隊活動「南國散策：Tech-Eco 永續科普探索營」活動 | 臺北市立中崙高級中學",
+      "url": "https://www.zlsh.tp.edu.tw/news/2026%E6%9A%91%E6%9C%9F%E4%B8%89%E5%A4%A9%E4%BA%8C%E5%A4%9C%E5%85%8D%E8%B2%BB%E7%87%9F%E9%9A%8A%E6%B4%BB%E5%8B%95%E3%80%8C%E5%8D%97%E5%9C%8B%E6%95%A3%E7%AD%96%EF%BC%9Atech-eco-%E6%B0%B8%E7%BA%8C",
+      "sourceTitle": "Tp",
+      "description": "臺北市立中正國民中學辦理115年度第1學期假日科學實驗探索營「國小組」及「國中組」 ... 勞動部115年產業新尖兵計畫「智慧無人機組裝維修與飛手技能培訓班」招生簡章 ... 【2026-04-14】臺灣探究與實作教育學會辦理「2026 ...",
+      "dateSnippets": [
+        "2026-04-14",
+        "2026-10-22",
+        "2026-10-19",
+        "2026-10-16",
+        "2026-10-15",
+        "2026-10-13",
+        "2026 年 4 月 14 日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-10-26",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026-10-22",
+          "2026-10-19",
+          "2026-10-16",
+          "2026-10-15",
+          "2026-10-13",
+          "2026 年 4 月 14 日",
+          "2026-04-14"
+        ],
+        "contentHash": "2469b8ba21a29ee4"
       }
     }
   ]
