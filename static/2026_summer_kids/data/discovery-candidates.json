@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-10-26",
+    "updatedAt": "2026-11-02",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "1 new candidate(s) discovered."
+    "lastMessage": "2 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -1516,6 +1516,46 @@
           "2026-04-14"
         ],
         "contentHash": "2469b8ba21a29ee4"
+      }
+    },
+    {
+      "id": "candidate-taoyuan-8f484cd91a",
+      "city": "桃園",
+      "status": "candidate",
+      "title": "台灣生態教育推廣協會將舉辦「eye上大自然~2026暑假兒童生態夏令營」活動",
+      "url": "https://www.daxi.tycg.gov.tw/News_Content.aspx?n=7532&s=1613943",
+      "sourceTitle": "Tycg",
+      "description": "台灣生態教育推廣協會...辦2026暑假兒童生態夏令營活動，共計17種營隊。 · 本活動內容計有宜蘭特色農場營、東勢森林生態營、頭城山海探索營、濕地生態夏令營、航太科技探索隊、魔法科學營、藝術科學營、科學烘焙營、食品科學營、顯微觀察營、昆蟲小達人營、海洋生態營、桃園農場體驗...",
+      "dateSnippets": [],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-11-02",
+      "pageCheck": {
+        "ok": false,
+        "status": 404,
+        "dateSnippets": [],
+        "contentHash": "04ed5fc5a3b9626f"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-efe59d1288",
+      "city": "新北",
+      "status": "candidate",
+      "title": "新北市政府稅捐稽徵處-宣導園地-活動訊息-【新莊分處】2026兒童藝術季暨星光電影院",
+      "url": "https://www.tax.ntpc.gov.tw/cp-63-20834-13082-1.html",
+      "sourceTitle": "Ntpc",
+      "description": "兒童藝術季暨星光電影院 · 各位新莊大朋友小朋友 · 漫長暑假不知道要去哪裡玩嗎 · 2026新莊兒童藝術季暨星光電影院要開始囉 · 7/18(六)新莊分處也會在現場一起共襄盛舉 · 追蹤FB粉專「稅不著-呼叫暗光鳥」及訂閱YT頻道「新北租稅影音放送站」即可獲得精美小禮物喔 ·",
+      "dateSnippets": [
+        "7/18"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-11-02",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "7/18"
+        ],
+        "contentHash": "4020cce346b09e19"
       }
     }
   ]
