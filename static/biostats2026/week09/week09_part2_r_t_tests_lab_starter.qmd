@@ -1,0 +1,161 @@
+---
+title: "Week 09 Part 2 R 實作：三種 t 檢定"
+author: "你的姓名、學號"
+date: "2026-11-05"
+lang: zh-Hant
+format:
+  html:
+    embed-resources: true
+    toc: true
+execute:
+  echo: true
+---
+
+## 問題與資料
+
+三個案例與 Week 09 t 檢定投影片相同：
+
+- 問題 A（單一樣本）：接受訓練大鼠 RNA 的 25 隻大鼠，平均選擇安全路徑的次數與基準 60 次不同嗎？雙尾，$\alpha=.05$。
+- 問題 B（獨立樣本）：自己搜尋答案的人，自評信心是否與只閱讀資訊的人不同？差的方向為搜尋組 − 非搜尋組，雙尾，$\alpha=.001$，採合併法。
+- 問題 C（配對）：同一批 20 位大學生觀看影片前後，平均態度分數有改變嗎？差值方向為前測 − 後測，雙尾，$\alpha=.05$。
+
+A、B 只有摘要統計量；C 有完整資料 `week09_part2_film_attitude.csv`。執行程式前，先寫下每個問題該用哪一種 t 檢定，以及自由度是多少。
+
+（在此作答）
+
+```{r}
+#| label: setup
+# 示範資料：只對齊樣本數、平均與標準差，不是原研究的逐筆資料
+make_demo <- function(n, mean, sd) {
+  z <- rnorm(n)
+  z <- (z - mean(z)) / sd(z)
+  mean + sd * z
+}
+```
+
+## 0. pt() 與 qt()
+
+```{r}
+#| label: pt-qt
+qt(0.975, df = 24)
+2 * pt(-abs(2.57), df = 24)
+```
+
+請用一句話說明：為什麼雙尾 $p$ 值要寫成 `2 * pt(-abs(t), df)`，而不是 `pt(t, df)`？
+
+（在此作答）
+
+## A. 單一樣本 t 檢定：大鼠迷宮
+
+```{r}
+#| label: rat-summary
+n <- 25; xbar <- 66; mu0 <- 60; SS <- 3259
+s2 <- SS / (n - 1)
+se <- sqrt(s2 / n)
+t_rat <- (xbar - mu0) / se
+p_rat <- 2 * pt(-abs(t_rat), df = n - 1)
+c(t = t_rat, p = p_rat)
+qt(1 - 0.05 / 2, df = n - 1)
+```
+
+```{r}
+#| label: rat-ttest
+set.seed(1105)
+rat <- make_demo(25, mean = 66, sd = sqrt(3259 / 24))
+c(mean = mean(rat), SS = sum((rat - mean(rat))^2))
+
+fit_rat <- t.test(rat, mu = 60)
+fit_rat
+```
+
+```{r}
+#| label: rat-practice
+# 練習 1：把 alternative 改成 "greater"，取出 p 值
+# 先在下方文字預測 p 值會變大、變小或不變，再執行
+
+```
+
+說明單尾與雙尾 $p$ 值的關係，以及本例為何仍以雙尾作結論。
+
+（在此作答）
+
+## B. 獨立樣本 t 檢定：網路搜尋
+
+```{r}
+#| label: search-summary
+n1 <- 93;  m1 <- 3.78; v1 <- 1.42   # 網路搜尋組
+n2 <- 102; m2 <- 3.07; v2 <- 1.25   # 非搜尋組
+df_pool <- (n1 - 1) + (n2 - 1)
+sp2 <- ((n1 - 1) * v1 + (n2 - 1) * v2) / df_pool
+se_pool <- sqrt(sp2 * (1 / n1 + 1 / n2))
+t_pool <- (m1 - m2) / se_pool
+c(sp2 = sp2, se = se_pool, t = t_pool, df = df_pool)
+qt(1 - 0.001 / 2, df = df_pool)
+2 * pt(-abs(t_pool), df = df_pool)
+```
+
+```{r}
+#| label: search-data
+set.seed(2015)
+search <- data.frame(
+  group = rep(c("search", "nonsearch"), times = c(n1, n2)),
+  confidence = c(make_demo(n1, m1, sqrt(v1)),
+                 make_demo(n2, m2, sqrt(v2))))
+search$group <- factor(search$group, levels = c("search", "nonsearch"))
+tapply(search$confidence, search$group, mean)
+tapply(search$confidence, search$group, var)
+```
+
+```{r}
+#| label: search-ttest
+# 練習：
+# 1. 用 t.test() 做合併法（var.equal = TRUE），conf.level 與 alpha = .001 對應
+# 2. 拿掉 var.equal，再跑一次，比較 t、df、p
+# 3. 計算 Cohen's d（分母為合併標準差 sqrt(sp2)）
+
+```
+
+合併法與 Welch 的結果差在哪裡？`levels` 若改成 `c("nonsearch", "search")`，輸出哪些地方會變？
+
+（在此作答）
+
+## C. 配對 t 檢定：影片前後測
+
+```{r}
+#| label: film-read
+film <- read.csv("week09_part2_film_attitude.csv")
+str(film)
+film$D <- film$pre - film$post
+c(sum(film$D), sum(film$D^2))
+c(mean = mean(film$D), sd = sd(film$D))
+```
+
+```{r}
+#| label: film-plot
+plot(c(1, 2), range(film[c("pre", "post")]), type = "n", xaxt = "n",
+     xlab = "", ylab = "態度分數", xlim = c(0.7, 2.3))
+axis(1, at = c(1, 2), labels = c("前測", "後測"))
+segments(1, film$pre, 2, film$post, col = "grey50")
+```
+
+```{r}
+#| label: film-ttest
+# 練習：
+# 1. 用 paired = TRUE 做配對 t
+# 2. 對 film$D 做單一樣本 t（mu = 0），確認 t 相同
+# 3. 拿掉 paired = TRUE 再跑一次，比較 df、p 與信賴區間
+# 4. 計算 d_z（分母為差值的標準差）
+
+```
+
+為什麼本例應該用配對 t？忘記 `paired = TRUE` 時，標準誤為什麼變大？
+
+（在此作答）
+
+## 結論
+
+用三到四句寫出問題 C 的結論：差的方向與大小（含單位）、95% 信賴區間、$t$、$df$、$p$、$d_z$，以及這個單組前後測設計能推論到哪裡。
+
+（在此作答）
+
+來源：Week 09 t 檢定投影片三個案例；`week09_part2_film_attitude.csv` 由 t 檢定投影片的完整資料表轉錄（案例資料標示為 Devoe, 1990）。A、B 的示範資料由 `make_demo()` 產生，只用來練習 `t.test()` 的寫法。
