@@ -1048,8 +1048,8 @@ margin-right: 0; }
 
 .reveal #p2-pair-variance img { max-height: 285px; width: auto; }
 .reveal #p2-tail img { max-height: 280px; width: auto; }
-.reveal #week09-part-one .slido-qr img, .reveal #week09-part-two .slido-qr img { width: 300px; height: 300px; }
-.reveal #week09-part-one .slido-qr, .reveal #week09-part-two .slido-qr { margin-top: 12px; }
+.reveal #week09-comparing-means .slido-qr img, .reveal #week09-part-two .slido-qr img { width: 300px; height: 300px; }
+.reveal #week09-comparing-means .slido-qr, .reveal #week09-part-two .slido-qr { margin-top: 12px; }
 </style>
 </head>
 <body class="quarto-light">
@@ -1558,6 +1558,70 @@ HT3001B 生物統計學與 R
 </div>
 <div class="section-ref">
 <p>IMS 2e §20.3、§21.3；自編練習</p>
+</div>
+</section>
+<section id="week09-comparing-means" class="slide level2">
+<h2>Part Two Quiz｜比較兩組平均</h2>
+<p>概念題 1–3，單選，每題 45 秒。</p>
+<p><a href="https://app.sli.do/event/1jvhioqZKKM7xUwqNzn4av"><strong>開啟 Slido 作答頁</strong></a> · 活動代碼 <strong>2249905</strong></p>
+<div class="slido-qr">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://app.sli.do/event/1jvhioqZKKM7xUwqNzn4av"><img role="img" aria-label="第九週 Slido 作答入口 QR code，活動代碼 2249905。" data-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAewAAAHsAQAAAAA4UaPNAAADnUlEQVR4nO2dUY7jIBBEm1b+nRvk/sfaG9gnYNU0NCTZj5kiK5m4ShFhCE+2I9xqKuBJWSZ06AwtQhyW4qiJOCzFURNxWIqjJuKwFEdNxGEpjpqIw1IcNRGHpThqIi4pdC/1u8jxVj53O8/Jo1KYLCK+KC65SLbcK3ttHCVbfT3135e+diV+cTy16J0e2WO5hfeUrOlI791OdfKQFMOaiC+K396b8pFk22v9/x5diaNSmCwi/qr8pwX2w6K9ZTXrnPyPpT/vSvwr43xulVReVVtOzx3y91y7Er80flQ/xuplrmoGzsNKr9u9cH/udp6TB6Uo6CK+dpzPQ1OOSetQWpL/j/Re546uxFEpTMrVcRmtSKt4S7Mrw5ysKu3dtNyXvnYlfklc6tgWsfHcXvWjvZXFtK9DfXTv96WvXYlfEr/5myctqcxYvax2ZSk9sQmlbU/VzFz62pX4xX2bVAzJfNzzkTylr+WW611wpLesXueOrsRRKUzK1XHp+XypW9P2muq8Lj+I9Ia5DS6dYIX4Z/L53Mazp/HDpDUy/PG+MHHM49IJVojP43mvnmR61PHvbrwF9kjmyx2R7m3Yn+bkUSlMFhFfO87nvlSyNHq0H4zKMHBGJDPO49IJVojPKL8Mabclx09be+T5Q+ajF/7qlPjSYz7HSB7c+AjsMW+NhD9zzAvxtb3K5M68/1FcynAsB/d+94+s80Z/XokvHefFc/ieqNeJ6rNLM9iYLsZ5XDrBCvEZ5VEtpfH6aNd3MzO6ZY75GekULcSn8aPuDam7RY7kpmUf8LvtChz9zBOdPChFQRfxxfN5Gcq22CAS+NgqWJfffOzoxGEpjl4dv/lbDGObopbS5rC+MfboW75L4z33lqWvXYlfEr/JEOFjwFdb5mmZZTV2vEU+c3QljkphUq6OS35TN+q9Qyyq900l4d5nzmFnpFO0EJ/F08sDytoam27dlNhet8RyDvu5bx6VwmQRcekPKHOLpmz9jgVm4djUn2vjSSAnOXlQioIu4mvnNtLWGEQCUz8Nrz4W4Yw7ZPelr12Jo9LvxLca9r3el9aX57UmPqNViH8PnnzlvKc0nt6UV/+Vqm+PPd3J/0b6q97Ev/g5Zrnsii0/y1pCY85km8O+9JS1r12JXxo/+gPKPG+JnVP94fM9pRHmNkJ8VTzxf6ihUpgsIg5LcdREHJbiqIk4LMVRE3FYiqMm4rAUR03EYSmOmojDmvxN6i+c7J8Xqk0g7wAAAABJRU5ErkJggg==" alt="第九週 Slido 作答入口 QR code，活動代碼 2249905。"></a></p>
+<figcaption>第九週 Slido 作答入口 QR code。</figcaption>
+</figure>
+</div>
+</div>
+<div class="section-ref">
+<p><a href="https://app.sli.do/event/1jvhioqZKKM7xUwqNzn4av">第九週 Slido</a>；Part Two｜比較兩組平均</p>
+</div>
+</section>
+<section id="concept-q1" class="slide level2 quiz">
+<h2>Slido 1｜配對之後，n 是多少？</h2>
+<p>同一批 30 人各量一次介入前與介入後血壓，想比較平均改變。哪個分析起點最合理？</p>
+<ol type="A">
+<li>把 60 次量測當作 60 位獨立受試者</li>
+<li>保留每人的前後對應，以 30 個個人差分析</li>
+<li>因為前後人數相等，就隨機重新配對</li>
+<li>只比較兩欄的最大值</li>
+</ol>
+<div class="fragment">
+<p><strong>答案：B。</strong>分析單位是人／配對；同一人兩次量測仍形成一個個人差。人數相同本身不構成配對。</p>
+</div>
+<div class="section-ref">
+<p>IMS 2e §21.3；本週配對資料概念</p>
+</div>
+</section>
+<section id="concept-q2" class="slide level2 quiz">
+<h2>Slido 2｜Welch 能處理哪個問題？</h2>
+<p>兩個獨立樣本比較平均收縮壓，樣本數與變異不同；病人自行選擇門診。哪個分析與解釋最合理？</p>
+<ol type="A">
+<li>改用配對分析，讓兩組人數一樣</li>
+<li>直接混合標籤置換，因為置換沒有假設</li>
+<li>p 值小，就表示門診造成血壓差異</li>
+<li>獨立性及分布條件適用時考慮 Welch t，並保留觀察研究的因果限制</li>
+</ol>
+<div class="fragment">
+<p><strong>答案：D。</strong>Welch 分別估計兩組變異，但仍需獨立性與分布條件。自行選擇門診可能有混淆，不能從小 p 值直接推論因果。</p>
+</div>
+<div class="section-ref">
+<p>IMS 2e §20.3；本週 Welch 與推論界線</p>
+</div>
+</section>
+<section id="concept-q3" class="slide level2 quiz">
+<h2>Slido 3｜平均相等，就能任意洗牌嗎？</h2>
+<p>觀察性資料的兩組平均相等，但樣本數不平衡、變異也不同。直接混合標籤、以原始平均差做置換檢定，哪句話正確？</p>
+<ol type="A">
+<li>平均相等就保證所有標籤可交換</li>
+<li>重排次數夠多就能消除設計偏誤</li>
+<li>還需設計或可交換性假設；僅平均相等不足以支持任意重排</li>
+<li>改做配對內交換，便不需要任何額外條件</li>
+</ol>
+<div class="fragment">
+<p><strong>答案：C。</strong>平均相等不保證分布相同；原始平均差的標籤置換仍需設計或模型支持。不等變異且樣本數不平衡時尤其要留意。</p>
+</div>
+<div class="section-ref">
+<p>IMS 2e §20.1；本週可交換性與方法條件</p>
 </div>
 </section>
 <section id="把方法效果與推論界線連起來" class="slide level2">
