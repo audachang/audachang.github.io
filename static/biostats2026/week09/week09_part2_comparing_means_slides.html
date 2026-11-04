@@ -1045,6 +1045,9 @@ margin-right: 0; }
 @media print { .reveal .fragment { opacity: 1 !important; visibility: visible !important; } }
 @media (prefers-reduced-motion: reduce) { .reveal * { transition: none !important; animation: none !important; } }
 #title-slide .week-index-link { display: inline-block; font-size: .78em; margin-top: .7em; }
+
+.reveal #p2-pair-variance img { max-height: 285px; width: auto; }
+.reveal #p2-tail img { max-height: 280px; width: auto; }
 </style>
 </head>
 <body class="quarto-light">
@@ -1171,9 +1174,8 @@ HT3001B 生物統計學與 R
 </figure>
 </div>
 <ul>
-<li>配對 t 檢定（paired t-test）針對的是<strong>個人差的平均</strong>。</li>
-<li>估計不確定性要看「個人差的標準差（standard deviation, SD）」，不能只看兩欄各自的 SD。</li>
-<li>不同人的差仍需可視為獨立。</li>
+<li>配對 t 檢定（paired t-test）針對<strong>個人差的平均</strong>。</li>
+<li>SE 使用個人差的標準差（standard deviation, SD）。</li>
 </ul>
 <div class="section-ref">
 <p>IMS 2e Ch21、§21.3</p>
