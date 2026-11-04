@@ -1230,212 +1230,438 @@ HT3001B 生物統計學與 R
 </tr>
 </tbody>
 </table>
-<p>接下來依答對率由低到高逐題說明。</p>
+<p>接下來依答對率由低到高逐題說明：左邊是題目，右邊是解說。</p>
 </section>
-<section id="q11" class="slide level2">
+<section id="q11" class="slide level2 image-text">
 <h2>第 11 題（9%）：事件與非事件都要至少 10 筆</h2>
-<p>四份樣本，哪一份符合課堂介紹的單一比例常態近似條件？</p>
-<p>A. 120 人、6 件事件　B. 40 人、20 件事件　C. 500 人、495 件事件　D. 100 人、92 件事件</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　四份樣本均滿足獨立性。以 95% 信賴水準、用常態近似建立單一比例的信賴區間，哪一份資料滿足課堂介紹的事件／非事件筆數條件？</p>
+<ol type="A">
+<li>120 人；6 件事件</li>
+<li>40 人；20 件事件</li>
+<li>500 人；495 件事件</li>
+<li>100 人；92 件事件</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
 <li><strong>正解 B</strong>：事件 20、非事件 20，兩類都至少 10 筆。</li>
-<li>20 人選 A：事件只有 6 筆；13 人選 C：非事件只有 5 筆。</li>
+<li>20 人選 A：事件只有 6 筆。</li>
+<li>13 人選 C：非事件只有 5 筆；D 的非事件也只有 8 筆。</li>
 <li>樣本大不等於條件成立，要看<strong>人數較少的那一類</strong>是否達到 10 筆。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §16.2；第五週 Part 1</p>
 </div>
 </section>
-<section id="q22" class="slide level2">
+<section id="q22" class="slide level2 image-text">
 <h2>第 22 題（30%）：次序資料用 Spearman，並保留同一人的配對</h2>
-<p>自評活動程度為 1–5 級（相鄰等級差距不相等）、步數為數值，兩欄各有遺漏，要算兩者的相關。</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　<code>health</code> 有 84 人的 <code>activity</code>（自評活動程度 1–5 級，相鄰等級差距不相等）與 <code>steps</code>（步數），兩欄各有遺漏。哪段程式最適合計算兩者的相關，並保留同一人的配對？</p>
+<ol type="A">
+<li><code>cor(activity, steps, method = &quot;pearson&quot;, use = &quot;complete.obs&quot;)</code></li>
+<li><code>cor(activity[!is.na(activity)], steps[!is.na(steps)], method = &quot;spearman&quot;)</code></li>
+<li><code>cor(activity, steps, method = &quot;spearman&quot;)</code></li>
+<li><code>cor(activity, steps, method = &quot;spearman&quot;, use = &quot;complete.obs&quot;)</code></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li><strong>正解 D</strong>：<code>cor(health$activity, health$steps, method = &quot;spearman&quot;, use = &quot;complete.obs&quot;)</code>，只用兩欄都有值的 68 人。</li>
+<li><strong>正解 D</strong>：次序關聯用 Spearman；<code>use = &quot;complete.obs&quot;</code> 只用兩欄都有值的 68 人。</li>
 <li>15 人選 A：Pearson 假定等級之間的差距相等，不適合次序變項。</li>
 <li>14 人選 B：兩欄各自刪除遺漏後長度不同（76 與 72），配對被打亂，執行也會報錯。</li>
-<li>選 C 會因為遺漏值得到 NA。</li>
+<li>C：遇到遺漏值會得到 NA。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>Rosner 8e §11.12；R 實習 3</p>
 </div>
 </section>
-<section id="q3" class="slide level2">
+<section id="q3" class="slide level2 image-text">
 <h2>第 3 題（33%）：<code>geom_bar()</code> 會自己計次</h2>
-<p><code>visits</code> 每列是一次門診（A 科 4 筆、B 科 2 筆、C 科 1 筆）；<code>freq</code> 是 <code>count(department)</code> 的結果。要畫出高度 4、2、1 的長條圖？</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　<code>visits</code> 每列是一次門診，<code>department</code> 的紀錄筆數依序為 A 科 4 筆、B 科 2 筆、C 科 1 筆；另已執行 <code>freq &lt;- visits |&gt; count(department)</code>。哪段程式會產生三根高度依序為 4、2、1 的長條圖？</p>
+<ol type="A">
+<li><code>ggplot(visits, aes(x = department)) + geom_bar()</code></li>
+<li><code>ggplot(freq, aes(x = department)) + geom_bar()</code></li>
+<li><code>ggplot(freq, aes(x = n)) + geom_bar()</code></li>
+<li><code>ggplot(visits, aes(x = department)) + geom_histogram(binwidth = 1)</code></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li><strong>正解 A</strong>：<code>ggplot(visits, aes(x = department)) + geom_bar()</code>，對原始列資料計次。</li>
-<li>23 人選 B：對 <code>freq</code> 再用 <code>geom_bar()</code>，每科只有一列，三根都是 1。</li>
+<li><strong>正解 A</strong>：<code>geom_bar()</code> 對輸入資料的列數計次，原始列資料得到 4、2、1。</li>
+<li>23 人選 B：<code>freq</code> 每科只有一列，再計次會讓三根都是 1。</li>
 <li>已經算好的次數要用 <code>geom_col(aes(x = department, y = n))</code>。</li>
+<li>D：類別變項不能用直方圖，建立圖時會報錯。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>R 實習 2；IMS 2e §4.1</p>
 </div>
 </section>
-<section id="q18" class="slide level2">
+<section id="q18" class="slide level2 image-text">
 <h2>第 18 題（44%）：每個門診都納入、各名冊內抽人，是分層抽樣</h2>
-<p>四種門診的完整名冊各隨機抽 100 人；資料表一列代表一位病人。</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　醫院要了解四種門診當月所有成年病人的等候經驗。研究小組沒有先抽選部分門診，而是從每種門診的完整名冊各隨機抽出 100 人；資料表一列代表一位病人。「資料表每列的對象」與「抽樣方式」依序是哪一組？</p>
+<ol type="A">
+<li>一種門診；cluster sampling</li>
+<li>一位病人；cluster sampling</li>
+<li>一種門診；stratified sampling</li>
+<li>一位病人；stratified sampling</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li><strong>正解 D</strong>：每列是一位病人；抽樣方式是分層（stratified）。</li>
-<li>16 人選 B：群聚抽樣（cluster）是先隨機抽「部分門診」，再把抽中門診的全部病人納入；本題四種門診全部納入，門診內再抽人。</li>
+<li><strong>正解 D</strong>：每列是一位病人；四種門診全部納入、門診內再抽人，是分層（stratified）。</li>
+<li>16 人選 B：群聚抽樣（cluster）是先隨機抽「部分門診」，再把抽中門診的全部病人納入；本題沒有抽門診。</li>
 <li>分辨方式：被隨機挑選的是「群」還是「群內的人」。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §2.1</p>
 </div>
 </section>
-<section id="q8" class="slide level2">
+<section id="q8" class="slide level2 image-text">
 <h2>第 8 題（47%）：連續變數恰等於一個值的機率是 0</h2>
-<p>Z 服從標準常態；z＝1 處曲線高度 0.2420，左側面積 0.8413。P(Z＝1) 與 P(Z≤1)？</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　假設某連續量測值的 Z 分數服從標準常態分布。已知 z＝1 處的曲線高度約為 0.2420，而 1 左側的曲線下面積約為 0.8413。P(Z＝1) 與 P(Z≤1) 依序為何？</p>
+<ol type="A">
+<li>0.2420；0.8413</li>
+<li>0.8413；0.2420</li>
+<li>0；0.2420</li>
+<li>0；0.8413</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li><strong>正解 D</strong>：0；0.8413。</li>
-<li>21 人選 A（0.2420；0.8413）：把曲線高度當成單點機率。曲線高度是<strong>密度</strong>，機率是<strong>面積</strong>；單一點沒有寬度，面積為 0。</li>
-<li>P(Z≤1) 是 1 左側的累積面積 0.8413。</li>
+<li><strong>正解 D</strong>：單一點沒有寬度，面積為 0；P(Z≤1) 是 1 左側的累積面積 0.8413。</li>
+<li>21 人選 A：把曲線高度當成單點機率。曲線高度是<strong>密度</strong>，機率是曲線下的<strong>面積</strong>。</li>
+<li>C 把密度當成累積機率，B 把高度與面積對調。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §13.1</p>
 </div>
 </section>
-<section id="q20" class="slide level2">
+<section id="q20" class="slide level2 image-text">
 <h2>第 20 題（49%）：右偏、少數極端值，用中位數配 IQR</h2>
-<p>回覆者的等候時間右偏，少數人等很久；要用兩個數值摘要典型值與散布，並降低極端值的影響。</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　問卷回覆者的等候時間明顯右偏，少數人等候特別久，且都是實際紀錄。團隊要用兩個數值，分別摘要回覆者的典型等候時間與散布，並降低少數極長等候紀錄的影響。最適當的組合是什麼？</p>
+<ol type="A">
+<li>Median；interquartile range</li>
+<li>Mean；interquartile range</li>
+<li>Median；standard deviation</li>
+<li>Mean；standard deviation</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li><strong>正解 A</strong>：中位數配四分位距（IQR）。</li>
-<li>10 人選 B（平均數＋IQR）：平均數會被長時間拉高；9 人選 C（中位數＋標準差）：標準差同樣受極端值影響。</li>
+<li><strong>正解 A</strong>：中位數與四分位距都不受少數極端值影響。</li>
+<li>10 人選 B：平均數會被極長的等候時間拉高。</li>
+<li>9 人選 C：標準差同樣受極端值影響。</li>
 <li>這不表示右偏資料一律不能報平均數，而是題目要求「降低極端值的影響」。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §5.5–5.6</p>
 </div>
 </section>
-<section id="q24" class="slide level2">
+<section id="q24" class="slide level2 image-text">
 <h2>第 24 題（54%）：殘差中心彎曲是線性的警訊，散布一致則沒有等變異警訊</h2>
-<p>依預測值分三段：殘差平均 −2、4、−2，殘差標準差都是 3。</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　以步數預測心率的簡單線性迴歸，依預測值分成三個人數相同的區段：</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>區段</th>
+<th style="text-align: right;">人數</th>
+<th style="text-align: right;">殘差平均</th>
+<th style="text-align: right;">殘差 SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>低</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">−2</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td>中</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td>高</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">−2</td>
+<td style="text-align: right;">3</td>
+</tr>
+</tbody>
+</table>
+<p>結合三個區段的殘差中心與散布，哪項判斷最符合表中訊息？</p>
+<ol type="A">
+<li>線性與等變異皆無明顯警訊</li>
+<li>僅等變異有明顯警訊</li>
+<li>僅線性有明顯警訊</li>
+<li>線性與等變異皆有明顯警訊</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li><strong>正解 C</strong>：只有線性有明顯警訊。</li>
-<li>殘差中心隨預測值先低、再高、再低，表示直線沒有描述到的彎曲。</li>
+<li><strong>正解 C</strong>：殘差中心隨預測值先低、再高、再低，是直線沒有描述到的彎曲。</li>
 <li>三段標準差相同，沒有散布改變的訊號；8 人選 B、7 人選 D 把它也當成警訊。</li>
 <li>表中資訊不能用來「證明」等變異成立，也不能檢查獨立或常態。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §7.3、§24.6</p>
 </div>
 </section>
-<section id="q21" class="slide level2">
+<section id="q21" class="slide level2 image-text">
 <h2>第 21 題（56%）：回覆率不同的兩類人，只用回覆者會高估</h2>
-<p>目標母體至少等候 40 分鐘的占 25%；受邀 400 人中，長等候者 100 人回覆 80 人，短等候者 300 人回覆 160 人。</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　行政紀錄顯示目標母體中至少等候 40 分鐘者占 25%。受邀 400 人中，至少等候 40 分鐘者 100 人、回覆 80 人；少於 40 分鐘者 300 人、回覆 160 人。若將來繼續增加邀請人數，兩類的比例與回覆機率維持不變，只用回覆者估計「至少等候 40 分鐘的比例」，相對目標母體最可能出現何種偏差？</p>
+<ol type="A">
+<li>Downward bias</li>
+<li>No bias</li>
+<li>Upward bias</li>
+<li>Cannot determine</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li>回覆者裡長等候者占 80／240＝33%，高於 25%：<strong>向上偏誤（正解 C）</strong>。</li>
-<li>11 人選 A（向下）：方向相反。長等候者較願意回覆，所以回覆者中長等候的比例被放大。</li>
-<li>增加邀請人數不會消除這種無回應偏差，因為兩類人的回覆率仍然不同。</li>
+<li><strong>正解 C</strong>：回覆者裡長等候者占 80／240＝33%，高於母體的 25%，向上偏誤。</li>
+<li>長等候者的回覆率 80%，短等候者 53%；較願意回覆的那一類在回覆者中被放大。</li>
+<li>11 人選 A：方向相反。</li>
+<li>增加邀請人數不會消除無回應偏差，因為兩類人的回覆率仍然不同。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §2.1</p>
 </div>
 </section>
-<section id="q25" class="slide level2">
+<section id="q25" class="slide level2 image-text">
 <h2>第 25 題（56%）：事前指定雙尾，p 值是兩尾相加</h2>
-<p>虛無分布中 P(T≤−0.21)＝0.038、P(T≥0.21)＝0.041，事前規定以 |T| 越大越極端。</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　檢定母體皮爾森相關係數是否為 0。模擬得到的虛無分布中，P(T≤−0.21)＝0.038、P(T≥0.21)＝0.041；觀察值 T＝−0.21，事前規定以 |T| 越大視為越極端。依事前指定的雙尾規則，p 值應為多少？</p>
+<ol type="A">
+<li>0.079</li>
+<li>0.038</li>
+<li>0.076</li>
+<li>0.041</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li><strong>正解 A</strong>：0.038＋0.041＝0.079。</li>
-<li>9 人選 B（0.038）：只取觀察到的那一尾。</li>
-<li>7 人選 C（0.076）：把一尾乘以 2，等於假定模擬分布左右對稱；實際模擬得到的兩尾並不相等。</li>
+<li><strong>正解 A</strong>：0.038＋0.041＝0.079，兩尾實際的機率相加。</li>
+<li>9 人選 B：只取觀察到的那一尾。</li>
+<li>7 人選 C：把一尾乘以 2，等於假定模擬分布左右對稱；實際模擬得到的兩尾並不相等。</li>
+<li>D 取的是另一尾。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §11.3、§14.1</p>
 </div>
 </section>
-<section id="q17" class="slide level2">
+<section id="q17" class="slide level2 image-text">
 <h2>第 17 題（58%）：統計顯著與實際重要是兩件事</h2>
-<p>甲：平均差 0.1 分、p＝0.001；乙：平均差 6.0 分、p＝0.20；實際重要性門檻 5 分。</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　兩項研究皆預設 α＝0.05，並以差異至少 5 分為實際重要性門檻。</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>研究</th>
+<th style="text-align: right;">兩組平均數差的點估計</th>
+<th style="text-align: right;">p 值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>甲</td>
+<td style="text-align: right;">0.1 分</td>
+<td style="text-align: right;">0.001</td>
+</tr>
+<tr class="even">
+<td>乙</td>
+<td style="text-align: right;">6.0 分</td>
+<td style="text-align: right;">0.20</td>
+</tr>
+</tbody>
+</table>
+<p>「達統計顯著」與「點估計達實際重要性門檻」依序是哪項研究？</p>
+<ol type="A">
+<li>甲；甲</li>
+<li>甲；乙</li>
+<li>乙；乙</li>
+<li>乙；甲</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li><strong>正解 B</strong>：達統計顯著的是甲（p＜0.05）；點估計達門檻的是乙（6.0 分≥5 分）。</li>
-<li>10 人選 C（乙；乙）：p＝0.20 沒有達到顯著。</li>
+<li><strong>正解 B</strong>：達顯著的是甲（p＜0.05）；點估計達門檻的是乙（6.0 分≥5 分）。</li>
+<li>10 人選 C：乙的 p＝0.20 沒有達到顯著。</li>
 <li>p 值小不代表效果大；點估計超過門檻也不能證明母體差異已超過 5 分。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e Ch. 14；第七週 Part 2</p>
 </div>
 </section>
-<section id="q1" class="slide level2">
+<section id="q1" class="slide level2 image-text">
 <h2>第 1 題（60%）：改碼保持順序，中位數所在的等級不變</h2>
-<p>次序變項原編碼 0、1、2、3 改為 0、1、4、9，共 101 筆，四級都有觀察值。</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　某次序類別變項有 101 筆資料，四個等級皆有觀察值；原編碼 0、1、2、3 依序改為 0、1、4、9。下列哪項必然不變？</p>
+<ol type="A">
+<li>Value of the maximum</li>
+<li>Value of the mean</li>
+<li>Value of the standard deviation</li>
+<li>Category containing the median</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li><strong>正解 D</strong>：中位數所屬的類別不變，因為改碼沒有改變排序。</li>
+<li><strong>正解 D</strong>：改碼沒有改變排序，中位數落在同一個等級。</li>
 <li>14 人選 C：標準差用到數值之間的差距，改碼後會改變；平均數與最大值的數值也會改變。</li>
 <li>「中位數所屬等級不變」不等於「中位數的編碼數值不變」。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §1.2、§5.3</p>
 </div>
 </section>
-<section id="q13" class="slide level2">
+<section id="q13" class="slide level2 image-text">
 <h2>第 13 題（67%）：已知 σ 的方法，要的是母體標準差真的已知</h2>
-<p>甲：500 人，只知道樣本標準差 s＝8；乙：36 人，母體標準差 σ＝8 確實已知。</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　甲資料有 500 人，只知道樣本標準差 s＝8；乙資料有 36 人，且母體標準差確實已知為 σ＝8。兩者皆滿足獨立性，平均數的常態模型亦適用。哪一份可直接使用課堂的已知母體標準差方法？</p>
+<ol type="A">
+<li>僅乙</li>
+<li>僅甲</li>
+<li>甲、乙皆可</li>
+<li>甲、乙皆不可</li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li><strong>正解 A</strong>：只有乙可以直接用課堂的已知 σ 方法。</li>
-<li>7 人選 C（甲、乙皆可）：甲的 n 很大，但 8 只是 s，σ 仍是估計出來的，不符合「已知」。</li>
+<li><strong>正解 A</strong>：只有乙的 σ 是已知的。</li>
+<li>7 人選 C：甲的 n 很大，但 8 只是樣本標準差 s，σ 仍是估計出來的，不符合「已知」。</li>
 <li>樣本大小不會把樣本標準差變成母體標準差。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>第五週 Part 1；IMS 2e §13.3</p>
 </div>
 </section>
-<section id="q15" class="slide level2">
+<section id="q15" class="slide level2 image-text">
 <h2>第 15 題（67%）：有效筆數要算「不是 NA」的，0 也算有效</h2>
-<p>A 組 score 為 0、5、NA，B 組為 10、NA、NA；要得到 valid_n 為 2 與 1。</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　<code>scores</code> 中，A 組的 <code>score</code> 為 0、5、NA，B 組為 10、NA、NA。要各組一列，且 <code>valid_n</code> 分別為 A 組 2、B 組 1，應選哪段程式（皆接在 <code>scores |&gt; group_by(group) |&gt;</code> 之後）？</p>
+<ol type="A">
+<li><code>summarise(valid_n = sum(!is.na(score)))</code></li>
+<li><code>summarise(valid_n = sum(score &gt; 0, na.rm = TRUE))</code></li>
+<li><code>summarise(valid_n = sum(is.na(score)))</code></li>
+<li><code>summarise(valid_n = n())</code></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li><strong>正解 A</strong>：<code>summarise(valid_n = sum(!is.na(score)))</code>。</li>
-<li>12 人選 B：<code>sum(score &gt; 0, na.rm = TRUE)</code> 只算正值，A 組的 0 被排除，得到 1。</li>
-<li><code>n()</code> 算的是全部列數（3、3），<code>sum(is.na(score))</code> 算的是遺漏筆數。</li>
+<li><strong>正解 A</strong>：<code>!is.na(score)</code> 把 0 算進有效值、把 NA 排除，得到 2 與 1。</li>
+<li>12 人選 B：只算正值，A 組的 0 被排除，得到 1。</li>
+<li>C 算的是遺漏筆數（1、2）；D 的 <code>n()</code> 算全部列數（3、3）。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>R 實習 2</p>
 </div>
 </section>
-<section id="q29-3" class="slide level2">
+<section id="q29-3" class="slide level2 image-text">
 <h2>29-3（36%）：區間估計的是母體中位數，95% 說的是程序的涵蓋率</h2>
-<p>常見的寫法：</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　從目標母體隨機取得 80 位互相獨立的服務使用者，各記錄一次等候時間；對樣本做 4,000 次 bootstrap 中位數，百分位法得到中央 95% 區間 [8.4, 17.2] 分鐘。</p>
+<p>第 3 小題：解釋 95% 區間所估計的母體量，以及 95% 信賴水準的意思。（3 分）</p>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li>「95% 的使用者等候 8.4–17.2 分鐘」：區間描述的不是個人。</li>
-<li>「母體量是 80 人」或「120,000」：題目問的是被估計的參數，不是人數。</li>
-<li>「母體中位數有 95% 的機率落在區間內」：母體中位數是固定的值，機率是對程序說的。</li>
+<li>估計對象是目標母體等候時間的<strong>中位數</strong>。</li>
+<li>95% 的意思：反覆抽取同樣大小的樣本、用同樣程序建構區間，約 95% 的區間會涵蓋這個固定的母體中位數。</li>
+<li>常見寫法：「95% 的使用者等候 8.4–17.2 分鐘」（區間不描述個人）、「母體量是 80 人」（問的是參數，不是人數）、「母體中位數有 95% 的機率落在區間內」（機率是對程序說的）。</li>
 </ul>
-<p>正確的說法：估計對象是目標母體等候時間的<strong>中位數</strong>；若反覆抽取同樣大小的樣本、用同樣程序建構區間，約 95% 的區間會涵蓋這個固定的母體中位數。</p>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §12.3–12.4、§13.6</p>
 </div>
 </section>
-<section id="q29-4" class="slide level2">
+<section id="q29-4" class="slide level2 image-text">
 <h2>29-4（50%）：重抽次數 B 只減少模擬誤差，區間寬度由原始樣本數決定</h2>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　同上題的 bootstrap（n＝80，重抽 4,000 次）。</p>
+<p>第 4 小題：有人建議「把重抽次數從 4,000 次增加到 40,000 次，區間就會明顯變窄、估計更精確」。增加重抽次數主要改善什麼？95% 區間會因此大致減半嗎？請說明理由。（3 分）</p>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li>常見的寫法：「B 從 4,000 增加到 40,000，標準誤變小，區間會變窄」。這把重抽次數 B 當成了樣本數 n。</li>
-<li>增加 B 只讓 bootstrap 分布與百分位端點更穩定，不會增加關於母體的資訊。</li>
-<li>區間寬度主要由原始樣本數 n＝80 與資料本身的變異決定；要讓寬度減半，樣本數要變成 4 倍。</li>
+<li>增加 B 只讓 bootstrap 分布與百分位端點更穩定（減少模擬誤差），不會增加關於母體的資訊。</li>
+<li>區間寬度主要由原始樣本數 n＝80 與資料本身的變異決定，不會因此減半；要讓寬度減半，樣本數要變成 4 倍。</li>
+<li>常見寫法：「B 變大，標準誤變小，區間變窄」，這把重抽次數 B 當成了樣本數 n。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §12.1–12.2</p>
 </div>
 </section>
-<section id="q30-2-3" class="slide level2">
+<section id="q30-2-3" class="slide level2 image-text">
 <h2>30-2 與 30-3（67%、56%）：算出 z 之後要寫決策；門檻用 SE，不用 σ</h2>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　n＝100、x̄＝53 分、母體標準差 σ＝12 分已知；H₀: μ≤50、H₁: μ＞50，右尾檢定，α＝0.05，臨界值 1.645。已給中間結果：√100＝10、53−50＝3、1.645×12＝19.74。</p>
+<p>第 2 小題：計算 z 統計量，並用臨界值作統計決策，寫出比較過程。（2 分）</p>
+<p>第 3 小題：將 z 臨界值換回分數尺度求 x̄crit，並寫出樣本平均須落在門檻的哪一側才拒絕 H₀。（2 分）</p>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
-<li>30-2：z＝(53−50)/1.2＝2.5。完整的作答要接著寫「2.5＞1.645，拒絕 H₀」；只算到 2.5 沒有回答決策。</li>
-<li>30-3：分數尺度的門檻是 x̄crit＝50＋1.645×SE＝50＋1.645×1.2≈51.97 分。</li>
-<li>10 人用了題目給的 19.74（＝1.645×12，也就是乘到 σ）得到 69.74；門檻說的是樣本平均數的分布，要乘的是 SE＝σ/√n。</li>
+<li>30-2：SE＝12/10＝1.2，z＝3/1.2＝2.5。完整的作答要接著寫「2.5＞1.645，拒絕 H₀」；只算到 2.5 沒有回答決策。</li>
+<li>30-3：x̄crit＝50＋1.645×SE＝50＋1.645×1.2≈51.97 分；樣本平均高於它才拒絕 H₀。</li>
+<li>10 人用了題目給的 19.74（＝1.645×σ）得到 69.74。門檻說的是樣本平均數的分布，要乘的是 SE＝σ/√n，19.74 是刻意放的錯誤組合。</li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §13.3、§14.1</p>
 </div>
 </section>
-<section id="q30-4" class="slide level2">
+<section id="q30-4" class="slide level2 image-text">
 <h2>30-4（65%）：型一錯誤是 H₀ 其實為真卻被拒絕；結論針對母體平均</h2>
+<div class="columns">
+<div class="column" style="width:46%;">
+<p><strong>題目</strong>　同上題：H₀: μ≤50 分，檢定結果拒絕 H₀。</p>
+<p>第 4 小題：(a) 若這次的統計決策其實是型一錯誤，目標母體的實際狀況是什麼？(b) 拒絕 H₀ 是否表示每位受測者的分數都高於 50 分？請說明理由。（4 分）</p>
+</div><div class="column" style="width:50%;">
+<p><strong>解說</strong></p>
 <ul>
 <li><ol type="a">
-<li>若這次決策是型一錯誤，母體的實際狀況是<strong>平均分數不高於 50 分</strong>（H₀ 為真），卻被拒絕了。常見的錯誤：寫成「母體平均其實大於 50」，或寫成未拒絕 H₀ 的情形（那是型二錯誤）。</li>
+<li>母體的實際狀況是<strong>平均分數不高於 50 分</strong>（H₀ 為真），卻被拒絕了。常見錯誤：寫成「母體平均其實大於 50」，或寫成未拒絕 H₀ 的情形（那是型二錯誤）。</li>
 </ol></li>
 <li><ol start="2" type="a">
-<li>拒絕 H₀ 只表示有證據支持<strong>母體平均</strong>高於 50 分；個人分數仍有散布（母體 SD 為 12 分），可能有不少人低於 50 分。</li>
+<li>不表示。拒絕 H₀ 只說明有證據支持<strong>母體平均</strong>高於 50 分；個人分數仍有散布（母體 SD 為 12 分），可能有不少人低於 50 分。</li>
 </ol></li>
 </ul>
+</div></div>
 <div class="section-ref">
 <p>IMS 2e §14.1–14.3</p>
 </div>
