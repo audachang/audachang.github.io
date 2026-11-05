@@ -25,11 +25,18 @@ A、B 只有摘要統計量；C 有完整資料 `week09_part2_film_attitude.csv`
 
 ```{r}
 #| label: setup
+#| message: false
+# 載入套件：dplyr 整理資料、ggplot2 畫圖、readr 讀 CSV
+# 本檔的 |> 是 R 內建的管線（R 4.1 以上），把左邊的結果交給右邊函數的第一個引數
+library(dplyr)
+library(ggplot2)
+library(readr)
+
 # 示範資料：只對齊樣本數、平均與標準差，不是原研究的逐筆資料
 make_demo <- function(n, mean, sd) {
-  z <- rnorm(n)
-  z <- (z - mean(z)) / sd(z)
-  mean + sd * z
+  z <- rnorm(n)                  # 先抽 n 個標準常態隨機數
+  z <- (z - mean(z)) / sd(z)     # 標準化：讓這 n 個數的平均剛好 0、標準差剛好 1
+  mean + sd * z                  # 平移、縮放到指定的平均與標準差
 }
 ```
 
@@ -37,7 +44,12 @@ make_demo <- function(n, mean, sd) {
 
 ```{r}
 #| label: pt-qt
+# qt()：給機率，回傳 t 值（臨界值）
+# 自由度 24、雙尾 α = .05 時，右尾面積 .025，所以累積機率是 .975
 qt(0.975, df = 24)
+
+# pt()：給 t 值，回傳左側累積機率
+# -abs() 先取到左尾，pt() 得到單尾面積，再乘 2 得到雙尾 p 值
 2 * pt(-abs(2.57), df = 24)
 ```
 
@@ -49,21 +61,31 @@ qt(0.975, df = 24)
 
 ```{r}
 #| label: rat-summary
-n <- 25; xbar <- 66; mu0 <- 60; SS <- 3259
-s2 <- SS / (n - 1)
-se <- sqrt(s2 / n)
-t_rat <- (xbar - mu0) / se
-p_rat <- 2 * pt(-abs(t_rat), df = n - 1)
+# 只有摘要統計量時，照公式一步一步算
+n <- 25; xbar <- 66; mu0 <- 60; SS <- 3259   # 樣本數、樣本平均、基準值、離均差平方和
+s2 <- SS / (n - 1)                  # 樣本變異數
+se <- sqrt(s2 / n)                  # 平均數的標準誤
+t_rat <- (xbar - mu0) / se          # t 統計量
+p_rat <- 2 * pt(-abs(t_rat), df = n - 1)   # 雙尾 p 值，df = n - 1
 c(t = t_rat, p = p_rat)
-qt(1 - 0.05 / 2, df = n - 1)
+qt(1 - 0.05 / 2, df = n - 1)        # 雙尾 α = .05 的臨界值
 ```
 
 ```{r}
 #| label: rat-ttest
+# 產生 25 筆示範資料；固定 seed，每次執行結果相同
 set.seed(1105)
 rat <- make_demo(25, mean = 66, sd = sqrt(3259 / 24))
-c(mean = mean(rat), SS = sum((rat - mean(rat))^2))
 
+# 放進資料框，用管線檢查平均與 SS 是否和摘要統計量一致
+rat_df <- data.frame(choice = rat)
+rat_df |>
+  summarise(
+    mean_choice = mean(choice),                   # 樣本平均，應為 66
+    SS          = sum((choice - mean_choice)^2)   # 可直接使用上一行剛算出的 mean_choice；應為 3259
+  )
+
+# 單一樣本 t 檢定：與基準 μ0 = 60 比較（預設雙尾）
 fit_rat <- t.test(rat, mu = 60)
 fit_rat
 ```
@@ -83,27 +105,39 @@ fit_rat
 
 ```{r}
 #| label: search-summary
+# 兩組的樣本數、平均、變異數（摘要統計量）
 n1 <- 93;  m1 <- 3.78; v1 <- 1.42   # 網路搜尋組
 n2 <- 102; m2 <- 3.07; v2 <- 1.25   # 非搜尋組
-df_pool <- (n1 - 1) + (n2 - 1)
-sp2 <- ((n1 - 1) * v1 + (n2 - 1) * v2) / df_pool
-se_pool <- sqrt(sp2 * (1 / n1 + 1 / n2))
-t_pool <- (m1 - m2) / se_pool
+
+df_pool <- (n1 - 1) + (n2 - 1)                        # 合併法自由度 = n1 + n2 - 2
+sp2 <- ((n1 - 1) * v1 + (n2 - 1) * v2) / df_pool      # 合併變異數：以各組自由度加權
+se_pool <- sqrt(sp2 * (1 / n1 + 1 / n2))              # 平均差的標準誤
+t_pool <- (m1 - m2) / se_pool                         # t 統計量（搜尋組 − 非搜尋組）
 c(sp2 = sp2, se = se_pool, t = t_pool, df = df_pool)
-qt(1 - 0.001 / 2, df = df_pool)
-2 * pt(-abs(t_pool), df = df_pool)
+qt(1 - 0.001 / 2, df = df_pool)                       # 雙尾 α = .001 的臨界值
+2 * pt(-abs(t_pool), df = df_pool)                    # 雙尾 p 值
 ```
 
 ```{r}
 #| label: search-data
+# 產生長格式示範資料：一列一人，group 標組別、confidence 為自評信心
 set.seed(2015)
 search <- data.frame(
   group = rep(c("search", "nonsearch"), times = c(n1, n2)),
   confidence = c(make_demo(n1, m1, sqrt(v1)),
-                 make_demo(n2, m2, sqrt(v2))))
-search$group <- factor(search$group, levels = c("search", "nonsearch"))
-tapply(search$confidence, search$group, mean)
-tapply(search$confidence, search$group, var)
+                 make_demo(n2, m2, sqrt(v2)))
+) |>
+  # 設定因子層級的順序；t.test(y ~ group) 會以「第一個層級 − 第二個層級」計算
+  mutate(group = factor(group, levels = c("search", "nonsearch")))
+
+# 依組別分組，計算各組的人數、平均與變異數
+search |>
+  group_by(group) |>
+  summarise(
+    n    = n(),
+    mean = mean(confidence),
+    var  = var(confidence)
+  )
 ```
 
 ```{r}
@@ -123,19 +157,36 @@ tapply(search$confidence, search$group, var)
 
 ```{r}
 #| label: film-read
-film <- read.csv("week09_part2_film_attitude.csv")
-str(film)
-film$D <- film$pre - film$post
-c(sum(film$D), sum(film$D^2))
-c(mean = mean(film$D), sd = sd(film$D))
+#| message: false
+# 讀入寬格式資料：一列一人，pre、post 為同一人的前測與後測
+film <- read_csv("week09_part2_film_attitude.csv") |>
+  mutate(D = pre - post)     # 新增差值欄 D，方向為前測 − 後測
+glimpse(film)                # 檢查欄位名稱、型態與前幾筆
+
+# 差值的摘要：ΣD、ΣD²、平均與標準差
+film |>
+  summarise(
+    sum_D  = sum(D),
+    sum_D2 = sum(D^2),
+    mean_D = mean(D),
+    sd_D   = sd(D)
+  )
 ```
 
 ```{r}
 #| label: film-plot
-plot(c(1, 2), range(film[c("pre", "post")]), type = "n", xaxt = "n",
-     xlab = "", ylab = "態度分數", xlim = c(0.7, 2.3))
-axis(1, at = c(1, 2), labels = c("前測", "後測"))
-segments(1, film$pre, 2, film$post, col = "grey50")
+# 前後測連線圖：每條灰線是一位學生，左端為前測、右端為後測
+# x = 1 代表前測、x = 2 代表後測，再用 scale_x_continuous() 換成中文刻度標籤
+film |>
+  ggplot() +
+  geom_segment(aes(x = 1, xend = 2, y = pre, yend = post),
+               colour = "grey50") +              # 同一人前後測連線
+  geom_point(aes(x = 1, y = pre), colour = "grey30") +   # 前測分數
+  geom_point(aes(x = 2, y = post), colour = "grey30") +  # 後測分數
+  scale_x_continuous(breaks = c(1, 2), labels = c("前測", "後測"),
+                     limits = c(0.7, 2.3)) +
+  labs(x = NULL, y = "態度分數") +
+  theme_minimal()
 ```
 
 ```{r}
