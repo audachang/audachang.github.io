@@ -1122,7 +1122,7 @@ HT3001B 生物統計學與 R
 <li>設 <span class="math inline">\(H_0:\mu=25\)</span>、<span class="math inline">\(H_1:\mu\ne25\)</span>，採雙尾檢定（two-tailed test），<span class="math inline">\(\alpha=.01\)</span>。</li>
 <li>在獨立常態抽樣下，<span class="math inline">\(H_0\)</span> 成立時，單一樣本 z 檢定（one-sample z test）的統計量服從標準常態分布（standard normal distribution）。</li>
 </ul>
-<p><span class="math display">\[z=\frac{\bar x-\mu_0}{\sigma/\sqrt n}=\frac{23-25}{6/\sqrt{64}}\approx-2.67\]</span></p>
+<p><span class="math display">\[\mathrm{SE}=\frac{\sigma}{\sqrt{n}}=\frac{6}{\sqrt{64}}=0.75,\qquad z=\frac{\bar{x}-\mu_0}{\mathrm{SE}}=\frac{23-25}{0.75}\approx -2.67\]</span></p>
 <p>雙尾 <span class="math inline">\(p\approx .0077&lt;.01\)</span>，拒絕 <span class="math inline">\(H_0\)</span>。資料支持母體平均異於 25 分，樣本平均比基準低 2 分。</p>
 <p><strong>如果 <span class="math inline">\(\sigma\)</span> 未知，要怎麼估計分母的標準誤（standard error）？</strong></p>
 <div class="section-ref">
@@ -1204,7 +1204,11 @@ HT3001B 生物統計學與 R
 <section id="w09-t-07" class="slide level2">
 <h2>t 統計量用估計的標準誤</h2>
 <p>用樣本標準差 <span class="math inline">\(s\)</span> 估計平均數的標準誤，再把觀察到的差標準化。</p>
-<p>$ (X)==, t= $</p>
+<p><span class="math display">\[
+\widehat{SE}(\bar X)=\sqrt{\frac{s^2}{n}}=\frac{s}{\sqrt n},
+\qquad
+t=\frac{\bar x-\mu_0}{\widehat{SE}(\bar X)}
+\]</span></p>
 <p><span class="math inline">\(t\)</span> 表示樣本平均與基準相差幾個<strong>估計標準誤</strong>。單一樣本 t 檢定的自由度（degrees of freedom, <span class="math inline">\(df\)</span>）為 <span class="math inline">\(n-1\)</span>。</p>
 <div class="section-ref">
 <p><a href="https://openintro-ims.netlify.app/inference-one-mean">IMS 2e §19.2.5（單一樣本 t 統計量）</a>。</p>
@@ -1412,13 +1416,13 @@ t=\frac{\bar x_1-\bar x_2}{\sqrt{s_p^2(1/n_1+1/n_2)}},
 <section id="w09-t-27" class="slide level2">
 <h2>網路搜尋案例｜用合併標準誤計算 t</h2>
 <p>假定兩組母體變異數相等。自由度為 <span class="math inline">\(df=(93-1)+(102-1)=193\)</span>。</p>
-$
-<span class="math display">\[\begin{aligned}
+<p><span class="math display">\[
+\begin{aligned}
 s_p^2 &amp;= \frac{92(1.42)+101(1.25)}{193}\approx 1.3310\\
 \widehat{SE} &amp;= \sqrt{s_p^2(1/93+1/102)}\approx .1654\\
 t &amp;= \frac{3.78-3.07}{\widehat{SE}}\approx 4.29
-\end{aligned}\]</span>
-<p>$</p>
+\end{aligned}
+\]</span></p>
 <div class="section-ref">
 <p>Rosner 8e §8.4, pp. 286–289（合併法）。本頁依課堂表列摘要重算。</p>
 </div>
@@ -1547,7 +1551,10 @@ t &amp;= \frac{3.78-3.07}{\widehat{SE}}\approx 4.29
 <section id="w09-t-40" class="slide level2">
 <h2>配對 t 統計量與自由度</h2>
 <p><span class="math inline">\(n\)</span> 是完整配對數，<span class="math inline">\(s_D\)</span> 是個人差值的樣本標準差。若虛無假設指定平均差 <span class="math inline">\(\mu_{D,0}=0\)</span>：</p>
-<p>$ t==, df=n-1 $</p>
+<p><span class="math display">\[
+t=\frac{\bar D-\mu_{D,0}}{s_D/\sqrt n}=\frac{\bar D}{s_D/\sqrt n},
+\qquad df=n-1
+\]</span></p>
 <p>影片案例有 20 對，所以 <span class="math inline">\(df=19\)</span>。</p>
 <div class="section-ref">
 <p><a href="https://openintro-ims.netlify.app/inference-paired-means">IMS 2e §21.3.3（配對 t 統計量）</a>。</p>
@@ -1556,7 +1563,11 @@ t &amp;= \frac{3.78-3.07}{\widehat{SE}}\approx 4.29
 <section id="w09-t-47" class="slide level2">
 <h2>影片案例｜用 20 個差值算出 t</h2>
 <p>樣本平均差是 <span class="math inline">\(\bar D=-7.60\)</span>，差值的樣本變異數是 <span class="math inline">\(s_D^2\approx94.78\)</span>。</p>
-<p>$ (D)=, t= $</p>
+<p><span class="math display">\[
+\widehat{SE}(\bar D)=\sqrt{s_D^2/20}\approx 2.177,
+\qquad
+t=\frac{-7.60}{\widehat{SE}(\bar D)}\approx -3.49
+\]</span></p>
 <p>分母估計的是<strong>平均差值</strong>的標準誤。</p>
 <div class="section-ref">
 <p><a href="https://openintro-ims.netlify.app/inference-paired-means">IMS 2e §21.3.3（用差值計算配對 t）</a>。影片案例資料標示為 Devoe (1990)。</p>
