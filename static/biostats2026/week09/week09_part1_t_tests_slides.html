@@ -1131,6 +1131,7 @@ HT3001B 生物統計學與 R
 </section>
 <section id="w09-t-overview" class="slide level2">
 <h2>今天會學哪三種 t 檢定？</h2>
+<p>剛才用母體標準差 <span class="math inline">\(\sigma\)</span> 算標準誤。當 <span class="math inline">\(\sigma\)</span> 未知，改用樣本估計，並依資料結構決定要比較哪個平均。</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -1237,8 +1238,12 @@ t=\frac{\bar x-\mu_0}{\widehat{SE}(\bar X)}
 </section>
 <section id="w09-t-09" class="slide level2">
 <h2>大鼠迷宮案例｜設定問題與假設</h2>
-<p>接受訓練大鼠 RNA 的 25 隻大鼠，在 T 型迷宮中平均選擇「安全」路徑 66 次。這和隨機選擇下的基準 60 次有差嗎？</p>
-<p><span class="math inline">\(H_0:\mu=60,\qquad H_1:\mu\ne60\)</span></p>
+<ul>
+<li><strong>研究情境</strong>。研究者想知道，受訓大鼠的 RNA 是否會影響其他大鼠的選路表現。25 隻大鼠接受這些 RNA，之後在 T 型迷宮中反覆選路。</li>
+<li><strong>怎麼記錄？</strong> 每隻大鼠記一筆資料，也就是牠選到「安全」路徑的總次數。25 隻的平均是 66 次。</li>
+<li><strong>和什麼比？</strong> 以隨機選路時平均選到安全路徑的 60 次為固定基準，檢驗接受 RNA 的大鼠平均表現是否偏離基準。</li>
+</ul>
+<p><span class="math inline">\(H_0:\mu=60,\qquad H_1:\mu\ne60\)</span>，其中 <span class="math inline">\(\mu\)</span> 是接受 RNA 的大鼠在這項任務中的母體平均安全選路次數。</p>
 <p>母體標準差未知，使用單一樣本 t 檢定。採雙尾，<span class="math inline">\(\alpha=.05\)</span>。</p>
 <div class="section-ref">
 <p><a href="https://openintro-ims.netlify.app/inference-one-mean">IMS 2e §19.2.5（單一樣本 t 檢定）</a>。大鼠迷宮為課堂案例。</p>
@@ -1246,16 +1251,17 @@ t=\frac{\bar x-\mu_0}{\widehat{SE}(\bar X)}
 </section>
 <section id="w09-t-10" class="slide level2">
 <h2>大鼠迷宮案例｜算出 t</h2>
-<p>已知 <span class="math inline">\(n=25\)</span>、<span class="math inline">\(\bar x=66\)</span>、<span class="math inline">\(\mu_0=60\)</span>、<span class="math inline">\(SS=3259\)</span>。</p>
+<p>每隻大鼠選到安全路徑的次數記為 <span class="math inline">\(x_i\)</span>。樣本數 <span class="math inline">\(n=25\)</span>，樣本平均 <span class="math inline">\(\bar x=66\)</span>，檢定基準 <span class="math inline">\(\mu_0=60\)</span>。</p>
+<p><strong>離均差平方和（sum of squares，<span class="math inline">\(SS\)</span>）</strong>是把每隻大鼠的次數減去樣本平均 66，各自平方後加總。本例給的摘要是 <span class="math inline">\(SS=\sum_{i=1}^{25}(x_i-66)^2=3259\)</span>。</p>
 <p><span class="math display">\[
 \begin{aligned}
-s^2 &amp;= 3259/24 \approx 135.79\\
-\widehat{SE}(\bar X) &amp;= \sqrt{(3259/24)/25}\approx 2.331\\
-t &amp;= (66-60)/\widehat{SE}(\bar X) \approx 2.57
+s^2 &amp;= \frac{SS}{n-1}=\frac{3259}{24}\approx 135.79\\
+\widehat{SE}(\bar X) &amp;= \sqrt{\frac{s^2}{n}}\approx 2.331\\
+t &amp;= \frac{66-60}{\widehat{SE}(\bar X)}\approx 2.57
 \end{aligned}
 \]</span></p>
 <div class="section-ref">
-<p><a href="https://openintro-ims.netlify.app/inference-one-mean">IMS 2e §19.2.5（單一樣本 t 統計量）</a>。大鼠迷宮為課堂案例。</p>
+<p><a href="https://openintro-ims.netlify.app/explore-numerical">IMS 2e §5.4（樣本變異數）</a>、<a href="https://openintro-ims.netlify.app/inference-one-mean">§19.2.5（單一樣本 t 統計量）</a>。大鼠迷宮為課堂案例。</p>
 </div>
 </section>
 <section id="w09-t-12" class="slide level2">
@@ -1263,7 +1269,8 @@ t &amp;= (66-60)/\widehat{SE}(\bar X) \approx 2.57
 <ul>
 <li><strong>查參考分布</strong>。<span class="math inline">\(df=24\)</span>，雙尾 <span class="math inline">\(\alpha=.05\)</span>，臨界值是 <span class="math inline">\(\pm 2.064\)</span>。</li>
 <li><strong>做統計決策</strong>。<span class="math inline">\(|t|=2.57&gt;2.064\)</span>，雙尾 <span class="math inline">\(p\approx .0166\)</span>，拒絕 <span class="math inline">\(H_0\)</span>。</li>
-<li><strong>寫研究結論</strong>。接受 RNA 的這組大鼠平均選擇安全路徑 66 次，高於 60 次基準。要判定 RNA 的因果作用，還需要適當的比較設計。</li>
+<li><strong>寫研究結論</strong>。接受 RNA 的這組大鼠平均選到安全路徑 66 次，比隨機基準多 6 次。</li>
+<li><strong>解讀範圍</strong>。本例把一組大鼠與固定基準相比。要判斷差異是否由 RNA 造成，還需要設置條件相同的對照組。</li>
 </ul>
 <div class="section-ref">
 <p><a href="https://openintro-ims.netlify.app/inference-one-mean">IMS 2e §19.2.5（單一樣本 t 檢定與結果判讀）</a>。大鼠迷宮為課堂案例。</p>
@@ -1271,6 +1278,7 @@ t &amp;= (66-60)/\widehat{SE}(\bar X) \approx 2.57
 </section>
 <section id="w09-t-04" class="slide level2">
 <h2>兩組資料有沒有一對一對應？</h2>
+<p>大鼠案例比較的是一組平均與固定的 60 次。如果另收集一組對照資料，就要先弄清楚兩組觀察是否一一對應。</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -1316,7 +1324,8 @@ t &amp;= (66-60)/\widehat{SE}(\bar X) \approx 2.57
 </section>
 <section id="w09-t-15" class="slide level2">
 <h2>網路搜尋案例｜設計與資料</h2>
-<p>自己搜尋答案的人，會對回答其他主題問題更有信心嗎？兩組以 1–7 分自評，分數越高代表越有信心。</p>
+<p><strong>研究問題</strong>。即使讀到相同的解釋，親自上網搜尋的人，會不會更相信自己能回答其他主題的問題？</p>
+<p><strong>研究流程</strong>。例如查高爾夫球表面為何有凹點。兩組用不同方式取得同一篇解釋，接著對氣象、食物等未搜尋主題的答題能力自評（1–7 分）。</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -1330,14 +1339,14 @@ t &amp;= (66-60)/\widehat{SE}(\bar X) \approx 2.57
 <tbody>
 <tr class="odd">
 <td>網路搜尋</td>
-<td>自己搜尋答案</td>
+<td>上網找到指定網頁</td>
 <td style="text-align: right;">93</td>
 <td style="text-align: right;">3.78</td>
 <td style="text-align: right;">1.42</td>
 </tr>
 <tr class="even">
 <td>非搜尋</td>
-<td>閱讀相同資訊</td>
+<td>直接閱讀同一網頁的文字</td>
 <td style="text-align: right;">102</td>
 <td style="text-align: right;">3.07</td>
 <td style="text-align: right;">1.25</td>
@@ -1353,7 +1362,7 @@ t &amp;= (66-60)/\widehat{SE}(\bar X) \approx 2.57
 <h2>網路搜尋案例｜假設與顯著水準</h2>
 <p>令 <span class="math inline">\(\mu_1\)</span>、<span class="math inline">\(\mu_2\)</span> 分別為搜尋組與非搜尋組的母體平均自評分數。</p>
 <p><span class="math inline">\(H_0:\mu_1-\mu_2=0,\qquad H_1:\mu_1-\mu_2\ne0\)</span></p>
-<p>本例採雙尾檢定，事先設定 <span class="math inline">\(\alpha=.001\)</span>，每尾分配 .0005。</p>
+<p>課堂示範採雙尾檢定，設定 <span class="math inline">\(\alpha=.001\)</span>，每尾分配 .0005。接下來要衡量，兩組平均差在虛無假設下通常會波動多大。</p>
 <div class="section-ref">
 <p><a href="https://openintro-ims.netlify.app/inference-two-means">IMS 2e §20.3（獨立兩組平均差的檢定）</a>。顯著水準另見 <a href="https://openintro-ims.netlify.app/foundations-errors">IMS 2e §14.1–14.2（顯著水準與雙尾假設）</a>。</p>
 </div>
@@ -1362,7 +1371,7 @@ t &amp;= (66-60)/\widehat{SE}(\bar X) \approx 2.57
 <h2>平均差的抽樣分布（sampling distribution）</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>兩組獨立時，兩個平均數相減的<strong>變異數相加</strong>。</p>
+<p>這次要估計的是<strong>兩組平均差的標準誤</strong>。兩組獨立時，兩個平均數相減的變異數相加。</p>
 <p><span class="math display">\[
 SE(\bar X_1-\bar X_2)=
 \sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}
@@ -1431,7 +1440,7 @@ t &amp;= \frac{3.78-3.07}{\widehat{SE}}\approx 4.29
 <h2>網路搜尋案例｜作決策並解讀差異</h2>
 <ul>
 <li><strong>統計決策</strong>。<span class="math inline">\(df=193\)</span>，雙尾 <span class="math inline">\(\alpha=.001\)</span> 的臨界值為 <span class="math inline">\(\pm 3.3416\)</span>。以課堂表列摘要重算，<span class="math inline">\(|t|\approx4.29&gt;3.3416\)</span>，<span class="math inline">\(p&lt;.001\)</span>，拒絕 <span class="math inline">\(H_0\)</span>。</li>
-<li><strong>研究結論</strong>。搜尋組平均自評為 3.78 分，非搜尋組為 3.07 分，差 0.71 分。這是對自身知識的評估。</li>
+<li><strong>研究結論</strong>。搜尋組對未搜尋主題的答題能力自評為 3.78 分，非搜尋組為 3.07 分，差 0.71 分。這個結果的測量指標是自評分數。</li>
 </ul>
 <p>Fisher 等人的原論文報告 <span class="math inline">\(t(193)=4.30\)</span>，與本頁用課堂表列摘要重算所得的 <span class="math inline">\(t\approx4.29\)</span> 得到相同檢定決策。</p>
 <div class="section-ref">
@@ -1440,34 +1449,18 @@ t &amp;= \frac{3.78-3.07}{\widehat{SE}}\approx 4.29
 </section>
 <section id="w09-t-29" class="slide level2">
 <h2>網路搜尋案例｜平均差有多大？</h2>
-<p>效果量（effect size）以合併標準差 <span class="math inline">\(s_p\)</span> 為單位呈現平均差。</p>
-<p><span class="math display">\[s_p=\sqrt{1.331}\approx1.15,\qquad |d|=\frac{|3.78-3.07|}{s_p}\approx.62\]</span></p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>指標</th>
-<th>意義</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Cohen’s <span class="math inline">\(d\)</span></td>
-<td>標準化平均差</td>
-</tr>
-<tr class="even">
-<td>Hedges’ <span class="math inline">\(g\)</span></td>
-<td>對 <span class="math inline">\(d\)</span> 作小樣本偏差校正</td>
-</tr>
-</tbody>
-</table>
-<p>常見的效果量經驗基準為 .20、.50、.80。實際意義須參考結果的單位與情境。</p>
+<p>檢定提供平均差是否偏離 0 的證據。效果量（effect size）則回答差多少，這裡以合併標準差 <span class="math inline">\(s_p\)</span> 為單位。</p>
+<p><strong>Cohen’s <span class="math inline">\(d\)</span></strong> 是兩組平均差除以合併標準差。搜尋組減非搜尋組，得 <span class="math inline">\(d=(3.78-3.07)/s_p\approx0.615\)</span>。</p>
+<p><strong>Hedges’ <span class="math inline">\(g\)</span></strong> 是將 <span class="math inline">\(d\)</span> 乘上校正因子 <span class="math inline">\(J\)</span> 的標準化平均差。這個校正用來減少小樣本的估計偏差。</p>
+<p><span class="math display">\[g=Jd,\qquad J\approx 1-\frac{3}{4df-1},\qquad df=n_1+n_2-2\]</span></p>
+<p>本例 <span class="math inline">\(df=193\)</span>，<span class="math inline">\(g\approx0.613\)</span>。兩組自評相差約 <strong>0.6 個合併標準差</strong>，原量表差 0.71 分。</p>
 <div class="section-ref">
-<p><a href="https://lakens.github.io/statistical_inferences/06-effectsize.html">Lakens, Ch. 6（§6.4–6.5、§6.7，標準化平均差與偏差校正）</a>。</p>
+<p><a href="https://lakens.github.io/statistical_inferences/06-effectsize.html">Lakens, Ch. 6（§6.4–6.5，標準化平均差與偏差校正）</a>、<a href="https://doi.org/10.3389/fpsyg.2013.00863">Lakens (2013), 式 (4)</a>。本頁依課堂表列摘要重算。</p>
 </div>
 </section>
 <section id="w09-t-33" class="slide level2">
 <h2>自然形成的兩組可以比較什麼？</h2>
-<p>自然組比較（natural group comparison）的組別由既有特徵決定，例如生醫系與生科系、不同性別或不同年齡層。</p>
+<p>網路搜尋案例由研究者安排兩種任務。若組別是生醫系與生科系這類既有特徵，則屬於自然組比較（natural group comparison）。</p>
 <p>若觀察獨立且模型條件適當，可用獨立樣本 t 檢定比較平均。</p>
 <p><strong>這類比較支持描述組間差異。因果解釋需要能處理混雜的研究設計或假設。</strong></p>
 <div class="section-ref">
@@ -1476,6 +1469,7 @@ t &amp;= \frac{3.78-3.07}{\widehat{SE}}\approx 4.29
 </section>
 <section id="w09-t-34" class="slide level2">
 <h2>配對 t 是對每對的差做單一樣本 t</h2>
+<p>剛才每人只屬於一組。如果同一人提供前測與後測，兩筆分數要先配成一對。</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 50%">
@@ -1498,16 +1492,17 @@ t &amp;= \frac{3.78-3.07}{\widehat{SE}}\approx 4.29
 </tr>
 </tbody>
 </table>
-<p>每對先算一個差值，再用單一樣本 t 檢定比較平均差與 0。各對之間須獨立，常態條件看的是<strong>差值的分布</strong>。</p>
+<p>每對先算一個差值，再沿用單一樣本 t 的做法，把這一組差值的平均與 0 相比。各對之間須獨立，常態條件看的是<strong>差值的分布</strong>。</p>
 <div class="section-ref">
 <p><a href="https://openintro-ims.netlify.app/inference-paired-means">IMS 2e §21.3.1–21.3.2（配對差與適用條件）</a>。</p>
 </div>
 </section>
 <section id="w09-t-35" class="slide level2">
 <h2>影片案例｜同一人的前測與後測</h2>
-<p>同一批 20 位大學生在觀看《The Silent Scream》前後，各完成一次態度量表。</p>
+<p><strong>研究問題</strong>。大學生看完《The Silent Scream》後，對墮胎的態度分數是否改變？</p>
+<p><strong>研究流程</strong>。同一批 20 位學生在看片前與看片後立即各填一次態度量表。依本例的計分方向，分數越高，代表反對墮胎的態度越強。</p>
 <p><strong>前測 → 觀看影片 → 立即後測</strong></p>
-<p>平均態度分數有改變嗎？每人提供一個差值，方向固定為<strong>前測 − 後測</strong>。</p>
+<p>每人的兩筆分數連成一對，接著算出一筆差值，方向固定為<strong>前測 − 後測</strong>。</p>
 <div class="section-ref">
 <p><a href="https://openintro-ims.netlify.app/inference-paired-means">IMS 2e §21.3.1（配對資料與差值）</a>。影片案例資料標示為 Devoe (1990)。</p>
 </div>
@@ -1586,12 +1581,12 @@ t=\frac{-7.60}{\widehat{SE}(\bar D)}\approx -3.49
 </section>
 <section id="w09-t-49" class="slide level2">
 <h2>影片案例｜用差值的標準差報效果量</h2>
-<p>以差值的樣本標準差 <span class="math inline">\(s_D\)</span> 標準化。</p>
+<p>後測平均高了 7.60 分。要把這個變化轉成標準化效果量，分母改用個人差值的樣本標準差 <span class="math inline">\(s_D\)</span>。</p>
 <p><span class="math display">\[d_z=\frac{\bar D}{s_D}\approx\frac{-7.60}{9.74}=-.78\]</span></p>
 <ul>
 <li>有方向的標準化平均差為 <span class="math inline">\(-.78\)</span>，對應「前測 − 後測」。</li>
 <li>只報大小時，<span class="math inline">\(|d_z|\approx .78\)</span>。</li>
-<li>這裡的分母來自<strong>個人差值</strong>，獨立組案例的分母則是合併標準差。</li>
+<li>獨立組用組內的合併標準差，配對資料則用<strong>個人差值的標準差</strong>。</li>
 </ul>
 <div class="section-ref">
 <p><a href="https://lakens.github.io/statistical_inferences/06-effectsize.html">Lakens, Ch. 6（配對效果量 d_z）</a>。</p>
@@ -1599,7 +1594,7 @@ t=\frac{-7.60}{\widehat{SE}(\bar D)}\approx -3.49
 </section>
 <section id="w09-t-50" class="slide level2">
 <h2>整合練習｜怎麼選 t 檢定？</h2>
-<p>有三個研究問題，分別該用哪一種 t 檢定？</p>
+<p>先辨認比較對象：固定基準、兩組不同個體，還是同一人的兩次量測？再為下列三題選擇 t 檢定。</p>
 <ol type="1">
 <li>這班的平均測驗分數和既定基準 70 分有差嗎？</li>
 <li>兩組不同學生使用兩種教材，平均分數有差嗎？</li>
@@ -1908,6 +1903,22 @@ t=\frac{-7.60}{\widehat{SE}(\bar D)}\approx -3.49
 <p>合計 <span class="math inline">\(\sum_i D_i=-152\)</span>，<span class="math inline">\(\sum_iD_i^2=2956\)</span>。</p>
 <div class="section-ref">
 <p><a href="https://openintro-ims.netlify.app/inference-paired-means">IMS 2e §21.3.1–21.3.2（配對差與差值摘要）</a>。影片案例資料標示為 Devoe (1990)。</p>
+</div>
+</section>
+<section id="week09-part-one" class="slide level2">
+<h2>Slido｜t 檢定概念題</h2>
+<p>三題單選，每題 45 秒。題目在 Slido 上作答，由課堂啟動。</p>
+<p><a href="https://app.sli.do/event/1jvhioqZKKM7xUwqNzn4av"><strong>開啟 Slido 作答頁</strong></a> · 活動代碼 <strong>2249905</strong></p>
+<div class="slido-qr">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://app.sli.do/event/1jvhioqZKKM7xUwqNzn4av"><img role="img" aria-label="第九週 Slido 作答入口 QR code，活動代碼 2249905。" data-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbwAAAG8AQAAAACNyy1yAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjQ0YWUyYmM3LTk2NzUtNDA3MC1iOTEyLWU0MWYxZmViMGRkOQAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNoWT7llv1h07ztxNs10mNzjAAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6NTIzNzc2NTItYWNiMi00NzgyLTkzYjEtYTRhM2FkYjA0MGM5bHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaD09cJcI+VHW0XhkZtLmerwAAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYIGWhlqc72yTY3qAWtfPn3UUOB8uHIPBpJgZLiSQHWWoXpGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2isKebMfvQKKyaSrZap4Q83AAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFggfdhpcknOexgWoez9cXagYrfN3qhriYWDeO/ylHdjtXxkbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTo0NGFlMmJjNy05Njc1LTQwNzAtYjkxMi1lNDFmMWZlYjBkZDkvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDo1MDk5Y2VmYy04OGUxLTQ5YzItYjNiYS1mMTVjY2JiYTU0YzdyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggZaGWpzvbJNjeoBa18+fdRQ4Hy4cg8GkmBkuJJAdZaheiY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYICV/dsDxZgsSKWK7dRmiquaBCNrPaNYe+2QTfE/GeX8yomN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIBMI7ZiKaHwi29N8rHaxGc/nORnW5yc4uKNVxnXNl0oRdGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2WEAzOpxgLoAW4QElfOaJBVO+sSREGKOORxta5Q0UcAa8lkSGqU5EKnU/nO9jD4D01/x4suhRlK70TABjzgz9RHxxwTgiUQAAA3JJREFUeF7tXFtugzAQtKv+ww16/2P1BuEErvbt0IrQRQkonhFCFOGa2ONlvLt2bSWF5SNVrJSCghtA46BxcgBzLsWc0lpnWSe+nlq7/TrfP9Zu6MdL9eMI3cFcnZpAWKp/dCAO89E9NkLj4DdecTzWWutML1a/Gl3XWhY+l1IWPjP8McjOTYDkzyD55+qftqWW6SY3N6dd6I5ndAda9X+t2r7NkC5kXVXEroFW/V+r7gNadQNqV92E1kKHYmp+LQ90lhatCq7mcIw5LE1VnfIcqs4sXGfyBqiOnUm4xmMHa8zg2G/MADVeajySXe11KV3LZKo7k4hdy1f046X6cYTuUJ+V+KOIkC3cVu6kUrA7S51X8FmBq0mkh5XGAoiHdggoHCBnCw3ceV/BVXA1iTRXQwNUnknJWd1W7LwSAeCo063S/XSNKAjxkESEouTrL3ErvhBJ4D6r/g7sKuxqknB5YxVs1Ig/pwT0ksDJbEpVyPz6V0WNgxtk06ueDGDmNCZZGsUyM6vJLWDO4Mw5hwDERhal9UtdAeJNJUPqYpVnWHX2vKxzXjUFvOp7DKu1XnUB0Dus3CGgTi1ogAfA6HjG6AiflctRh8gATwgMRxa4Cq6eMB6NkH5xn2ht6tTSXMNRANPxDNOBVt0A+VfVsypPLbWxT9WDrRKBJZ8q36SH4V+FXT1hWHVxK4dYUV/eIssBRAyIOwsaAFw9iase7o8oqtE1AgG+1EWjrvhaQQPkkGZORKkibiVstDQVn1JFGIs0bbpGFATJc2C9KopUdWmzxAAVqL6kRdMDtB5QDpTLIc2cu/xVmjpxnirNrWTh1cIrBhl8c256J10jCoLkOYRddaLyNJ9XBETaFV/LIXsIgHKgXBJpY7XeDSAcrWJLPanVFCzmVjuQ7g4UfPDR0WVUtkWA5wBE5hXbUl1yxTkDsKuwqzvG7J84VtA3VGFDKksCPXFF9rWIAKuuyD5WYwaocXCh22VT2y5AfXJ1n3ctItacsWDO4My5DAFsqaDwU2MEnDpIy7HJN3CZV30MvOp7DivNXOWtq1QG8O4rKlMjoxUEeE8C7MbrCbDed4WdqzMnWpPnijxUchgQC9iB1/fjMDV2G6rILiu+UkA++uIEkAt1CIzTOBkMw5wM0o3DuX8JYA92aIAk0lxFQcjOHF7PnB/StYtP+EJlgAAAAABJRU5ErkJggg==" alt="第九週 Slido 作答入口 QR code，活動代碼 2249905。"></a></p>
+<figcaption>第九週 Slido 作答入口 QR code，活動代碼 2249905。</figcaption>
+</figure>
+</div>
+</div>
+<div class="section-ref">
+<p><a href="https://app.sli.do/event/1jvhioqZKKM7xUwqNzn4av">第九週 Slido</a>；題目對應本講次的 t 分布、配對 t 與研究結論。</p>
 </div>
 
 </section>

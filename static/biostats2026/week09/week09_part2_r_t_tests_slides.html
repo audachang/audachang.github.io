@@ -1643,6 +1643,20 @@ HT3001B 生物統計學與 R
 <p>本週 R 實作；<a href="https://openintro-ims.netlify.app/statistical-inference">IMS 2e Ch. 19–21（平均數推論）</a>。</p>
 </div>
 </section>
+<section id="rt-power" class="slide level2">
+<h2>附錄｜檢定力的常態近似</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href></a>crit_diff <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.001</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> <span class="dv">193</span>) <span class="sc">*</span> se_pool</span>
+<span id="cb20-2"><a href></a>power <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(crit_diff, <span class="at">mean =</span> <span class="fl">0.71</span>, <span class="at">sd =</span> se_pool,</span>
+<span id="cb20-3"><a href></a>               <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a href></a>         <span class="fu">pnorm</span>(<span class="sc">-</span>crit_diff, <span class="at">mean =</span> <span class="fl">0.71</span>, <span class="at">sd =</span> se_pool)</span>
+<span id="cb20-5"><a href></a><span class="fu">c</span>(<span class="at">crit_diff =</span> crit_diff, <span class="at">power =</span> power)</span>
+<span id="cb20-6"><a href></a><span class="co">#&gt; crit_diff     power</span></span>
+<span id="cb20-7"><a href></a><span class="co">#&gt; 0.5527535 0.8291032</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<p>以常態近似估計檢定力：以 t 臨界值乘上固定標準誤得到平均差刻度上的界線，再用常態曲線近似兩側拒絕域的面積。</p>
+<div class="section-ref">
+<p><a href="https://openintro-ims.netlify.app/foundations-errors">IMS 2e §14.4（檢定力）</a>；Rosner 8e §8.9, pp. 307–311。本週 R 實作。</p>
+</div>
+</section>
 <section id="week09-part-two" class="slide level2">
 <h2>Slido｜R 程式題</h2>
 <p>三題單選，每題 45 秒。題目在 Slido 上作答，由課堂啟動。</p>
@@ -1657,20 +1671,6 @@ HT3001B 生物統計學與 R
 </div>
 <div class="section-ref">
 <p><a href="https://app.sli.do/event/1jvhioqZKKM7xUwqNzn4av">第九週 Slido</a>；本週已教 R 語法：t.test()、factor()。</p>
-</div>
-</section>
-<section id="rt-power" class="slide level2">
-<h2>附錄｜檢定力的常態近似</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href></a>crit_diff <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.001</span> <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> <span class="dv">193</span>) <span class="sc">*</span> se_pool</span>
-<span id="cb20-2"><a href></a>power <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(crit_diff, <span class="at">mean =</span> <span class="fl">0.71</span>, <span class="at">sd =</span> se_pool,</span>
-<span id="cb20-3"><a href></a>               <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb20-4"><a href></a>         <span class="fu">pnorm</span>(<span class="sc">-</span>crit_diff, <span class="at">mean =</span> <span class="fl">0.71</span>, <span class="at">sd =</span> se_pool)</span>
-<span id="cb20-5"><a href></a><span class="fu">c</span>(<span class="at">crit_diff =</span> crit_diff, <span class="at">power =</span> power)</span>
-<span id="cb20-6"><a href></a><span class="co">#&gt; crit_diff     power</span></span>
-<span id="cb20-7"><a href></a><span class="co">#&gt; 0.5527535 0.8291032</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
-<p>以常態近似估計檢定力：以 t 臨界值乘上固定標準誤得到平均差刻度上的界線，再用常態曲線近似兩側拒絕域的面積。</p>
-<div class="section-ref">
-<p><a href="https://openintro-ims.netlify.app/foundations-errors">IMS 2e §14.4（檢定力）</a>；Rosner 8e §8.9, pp. 307–311。本週 R 實作。</p>
 </div>
 
 </section>
