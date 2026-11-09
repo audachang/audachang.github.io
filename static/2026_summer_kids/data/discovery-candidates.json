@@ -1,9 +1,9 @@
 {
   "meta": {
-    "updatedAt": "2026-11-02",
+    "updatedAt": "2026-11-09",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "2 new candidate(s) discovered."
+    "lastMessage": "4 new candidate(s) discovered."
   },
   "candidates": [
     {
@@ -1556,6 +1556,182 @@
           "7/18"
         ],
         "contentHash": "4020cce346b09e19"
+      }
+    },
+    {
+      "id": "candidate-taipei-9ef2e6e9a6",
+      "city": "台北",
+      "status": "candidate",
+      "title": "生活進行式 2026/07/06 (一) - 聽臺北",
+      "url": "https://tradio.gov.taipei/channel/MjEyNQ/MjUxNTA2",
+      "sourceTitle": "Gov",
+      "description": "《台北事 7月號》 首先，今年「2026台北兒童藝術節」從6月30日登場，一路陪伴大小朋友度過暑假。這次集結來自法國、澳洲、比利時、西班牙、印尼、泰國及台灣共31組團隊，帶來34檔、總計169場演出與活動，從戲劇、偶戲...",
+      "dateSnippets": [
+        "2026/07/06",
+        "6月30日",
+        "2026/11/09",
+        "2026/11/06",
+        "2026/11/05",
+        "2026/11/04",
+        "2026/11/03",
+        "2026/11/02"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-11-09",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026/07/06",
+          "6月30日",
+          "2026/11/09",
+          "2026/11/06",
+          "2026/11/05",
+          "2026/11/04",
+          "2026/11/03",
+          "2026/11/02"
+        ],
+        "contentHash": "920af1596f8103ea"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-edf5c6bba7",
+      "city": "新北",
+      "status": "candidate",
+      "title": "市政新聞-2026新北市兒童藝術節「怪獸叢林」7/13-7/19登場 紙風車劇團揭開序幕 五大主題場域打造暑假親子藝術冒險-新北市政府",
+      "url": "https://www.ntpc.gov.tw/ch/home.jsp?dataserno=202607130066&id=28",
+      "sourceTitle": "Ntpc",
+      "description": "新北市長侯友宜出席2026新北市兒童藝術節開幕活動，邀請大小朋友暑假一起走進「 怪獸叢林 」，展開充滿藝術與想像力的冒險旅程。",
+      "dateSnippets": [
+        "7/13",
+        "7/19",
+        "2026-07-13",
+        "7月13日",
+        "7月19日",
+        "7月14日",
+        "7月15日",
+        "7月17日",
+        "7月18日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-11-09",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "2026-07-13",
+          "7月13日",
+          "7月19日",
+          "7月14日",
+          "7月15日",
+          "7月17日",
+          "7月18日"
+        ],
+        "contentHash": "e90c02a2111a2653"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-bf7443d351",
+      "city": "新北",
+      "status": "candidate",
+      "title": "【五股守讓堂】「暑光行旅─從書裡出發」夏日文學趣旅行系列活動-新北市立圖書館",
+      "url": "https://www.library.ntpc.gov.tw/singlehtml/ActvInfo?cntId=4f781a8ef239448c9f0ca87ef47fda3a",
+      "sourceTitle": "Ntpc",
+      "description": "「旅行是一種閱讀，閱讀... 夏日文學趣旅行 」主題活動，在盛夏的光影與微風中，邀請民眾走進守讓堂、圖書館，展開一段不需遠行的心靈旅程。 ... 發布單位：五股分館 發布日期：2026-07-09 更新日期：2026-07-09 ...",
+      "dateSnippets": [
+        "2026-07-09",
+        "9月14日",
+        "8月8日",
+        "10月1日",
+        "6月1日",
+        "11月27日",
+        "11月09日",
+        "10/14",
+        "11/9",
+        "11/30",
+        "8月27日",
+        "10/17",
+        "11/3",
+        "11/28",
+        "10/20",
+        "12/20"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-11-09",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "9月14日",
+          "8月8日",
+          "10月1日",
+          "6月1日",
+          "11月27日",
+          "11月09日",
+          "10/14",
+          "11/9",
+          "11/30",
+          "8月27日",
+          "10/17",
+          "11/3",
+          "11/28",
+          "10/20",
+          "12/20",
+          "11/20"
+        ],
+        "contentHash": "df5ff8cacebe7a95"
+      }
+    },
+    {
+      "id": "candidate-new-taipei-a066d0ec52",
+      "city": "新北",
+      "status": "candidate",
+      "title": "【泰山分館】「閱讀原動力，2026啟動計畫」系列活動-新北市立圖書館",
+      "url": "https://www.library.ntpc.gov.tw/singlehtml/ActvInfo?cntId=ead788e0a0244c898dea27db40d0fd18",
+      "sourceTitle": "Ntpc",
+      "description": "首頁 > 圖書館資訊 > 活動資訊 > 【泰山分館】「閱讀原動力，2026啟動計畫」系列活動",
+      "dateSnippets": [
+        "9月14日",
+        "8月8日",
+        "10月1日",
+        "6月1日",
+        "11月27日",
+        "11月09日",
+        "10/14",
+        "11/9",
+        "11/30",
+        "8月27日",
+        "10/17",
+        "11/3",
+        "11/28",
+        "10/20",
+        "12/20",
+        "11/20"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-11-09",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "9月14日",
+          "8月8日",
+          "10月1日",
+          "6月1日",
+          "11月27日",
+          "11月09日",
+          "10/14",
+          "11/9",
+          "11/30",
+          "8月27日",
+          "10/17",
+          "11/3",
+          "11/28",
+          "10/20",
+          "12/20",
+          "11/20"
+        ],
+        "contentHash": "df5ff8cacebe7a95"
       }
     }
   ]
