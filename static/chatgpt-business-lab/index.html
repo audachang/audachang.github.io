@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="供大學研究實驗室主持人評估 ChatGPT Business 的正體中文指引。包含 Standard 與 Premium 費用、Codex 用量、Owner 資料匯出及研究資料治理。">
-  <title>大學研究實驗室導入 ChatGPT Business 指引</title>
+  <meta name="description" content="供大學研究實驗室主持人評估 ChatGPT Business 與 Claude Team 的正體中文指引。包含 Standard 與 Premium 費用、程式代理用量、資料匯出、科學家計畫、研究資料治理及兩方案對照。">
+  <title>大學研究實驗室導入 ChatGPT Business 與 Claude Team 指引</title>
   <style>
 :root {
   color-scheme: light;
@@ -72,6 +72,12 @@ table.money td { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .source-url { display: none; }
 footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .875rem; padding-block: 1rem; }
 :target { scroll-margin-top: .5rem; }
+.toc li.group { color: var(--ink); font-weight: 700; font-size: .82rem; letter-spacing: .04em; margin-top: .75rem; }
+.toc li.group:first-child { margin-top: 0; }
+.part { color: var(--accent); font-size: .875rem; font-weight: 700; letter-spacing: .1em; margin-bottom: .35rem; }
+table.three-col th:first-child { width: 17%; }
+.open-items { padding-left: 1.7rem; }
+.open-items li { margin-bottom: .45rem; padding-left: .25rem; }
 @media (max-width: 54rem) {
   .layout { display: block; padding-top: 1.4rem; }
   .toc { position: static; border: 1px solid var(--line); background: var(--wash); padding: .8rem 1rem; margin-bottom: 1.75rem; }
@@ -96,6 +102,7 @@ footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .875
   h2, h3 { break-after: avoid; }
   .layout { display: block; padding: 1rem 0 0; }
   article section + section { padding-top: .5rem; margin-top: .9rem; }
+  #claude-overview { break-before: page; }
   p { orphans: 3; widows: 3; }
   tr { break-inside: avoid; }
   th, td { padding: .35rem .45rem; }
@@ -118,25 +125,38 @@ footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .875
     <header class="intro">
       <div class="wrap">
         <p class="kicker">研究實驗室導入指引</p>
-        <h1><span>大學研究實驗室導入</span><span>ChatGPT Business 指引</span></h1>
-        <p class="meta">供研究計畫主持人與實驗室管理人員參考<br>官方資料查核日 <time datetime="2026-11-10">2026 年 11 月 10 日</time></p>
-        <p class="lede">ChatGPT Team 已於 2025 年 8 月 29 日更名為 ChatGPT Business。若實驗室需要集中付款、管理成員，並讓多人共同維護研究流程，建議先以 <strong>Standard 席次月繳試行</strong>，再依用量與校方審查結果決定是否升級或改年繳。Standard 已包含 Codex。<span class="refs">［<a href="#ref-1" aria-label="來源 1">1</a>–<a href="#ref-3" aria-label="來源 3">3</a>］</span></p>
+        <h1><span>大學研究實驗室導入</span><span>ChatGPT Business 與 Claude Team 指引</span></h1>
+        <p class="meta">供研究計畫主持人與實驗室管理人員參考<br>ChatGPT Business 官方資料查核日 <time datetime="2026-11-10">2026 年 11 月 10 日</time><br>Claude Team 官方資料查核日 <time datetime="2026-11-11">2026 年 11 月 11 日</time></p>
+        <p class="lede">本頁以同一架構評估兩個團隊方案：第一至五章為 ChatGPT Business，第六至十三章為 Claude Team，含對照表與尚未確認的事項。</p>
+        <p class="lede"><strong>ChatGPT Business。</strong>ChatGPT Team 已於 2025 年 8 月 29 日更名為 ChatGPT Business。若實驗室需要集中付款、管理成員，並讓多人共同維護研究流程，建議先以 <strong>Standard 席次月繳試行</strong>，再依用量與校方審查結果決定是否升級或改年繳。Standard 已包含 Codex。<span class="refs">［<a href="#ref-1" aria-label="來源 1">1</a>–<a href="#ref-3" aria-label="來源 3">3</a>］</span></p>
+        <p class="lede"><strong>Claude Team。</strong>Claude 的 Team plan 沒有叫 Business 的版本，席次價格與 ChatGPT Business 相同。建議先確認校方是否已有 Claude 機構協議，再由 PI 申請科學家計畫，未通過才以 Standard 席次月繳試行。<span class="refs">［<a href="#ref-18" aria-label="來源 18">18</a>、<a href="#ref-19" aria-label="來源 19">19</a>、<a href="#ref-38" aria-label="來源 38">38</a>］</span></p>
       </div>
     </header>
     <div class="wrap layout">
       <nav class="toc" aria-labelledby="toc-title">
         <h2 id="toc-title">章節目錄</h2>
         <ul>
+<li class="group">ChatGPT Business</li>
 <li><a href="#pricing">一、席次費用與採購</a></li>
 <li><a href="#codex">二、Codex 用量與追加預算</a></li>
 <li><a href="#workspace">三、工作空間與專案權限</a></li>
 <li><a href="#privacy">四、私人對話與資料存取</a></li>
 <li><a href="#governance">五、研究資料治理與導入配置</a></li>
+<li class="group">Claude Team</li>
+<li><a href="#claude-overview">六、概要與科學家計畫</a></li>
+<li><a href="#claude-pricing">七、席次費用與採購</a></li>
+<li><a href="#claude-code">八、Claude Code 用量與額外預算</a></li>
+<li><a href="#claude-workspace">九、組織與專案權限</a></li>
+<li><a href="#claude-privacy">十、私人對話與資料存取</a></li>
+<li><a href="#claude-governance">十一、研究資料治理與導入配置</a></li>
+<li class="group">綜合</li>
+<li><a href="#compare">十二、兩方案對照</a></li>
+<li><a href="#open-items">十三、Claude 尚未確認的事項</a></li>
 <li><a href="#sources">官方資料來源</a></li>
         </ul>
       </nav>
       <article aria-label="導入指引全文">
-<section aria-labelledby="pricing"><h2 id="pricing">一、席次費用與採購</h2>
+<section aria-labelledby="pricing"><p class="part">ChatGPT Business</p><h2 id="pricing">一、席次費用與採購</h2>
 <div class="table"><table class="money"><thead><tr><th scope="col">席次</th><th scope="col">月繳／席</th><th scope="col">年繳月均／席</th><th scope="col">全年實付／席</th></tr></thead><tbody>
 <tr><th scope="row">Standard</th><td>US$25</td><td>US$20</td><td>US$240</td></tr>
 <tr><th scope="row">Premium</th><td>US$125</td><td>US$100</td><td>US$1,200</td></tr>
@@ -200,8 +220,108 @@ footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .875
 <p><strong>2　試行首月。</strong> 維持 Personal 與 Business 分離。用公開或合成資料驗證登入、Project 權限、Codex 及交接流程。限制外部連線與自動加值，為核准的額外點數訂定支出上限。</p>
 <p><strong>3　續約前。</strong> 檢查哪些人頻繁受額度中斷、付費點數實際支出與空置席次。若單一成員長期需要更多用量，再比較限定點數與升級一席 Premium。成員離組時同步撤權、確認交接並檢視是否排程減席。</p>
 </section>
+<section aria-labelledby="claude-overview"><p class="part">Claude Team</p><h2 id="claude-overview">六、Claude Team 概要與科學家計畫</h2>
+<p>Anthropic 官方頁面使用的方案名稱是 Team plan，公開資料中沒有叫 Business 的方案；Team 之上是 Enterprise。Team 的席次結構與價格和 ChatGPT Business 相同：Standard 月繳 US$25、年繳月均 US$20，Premium 月繳 US$125、年繳月均 US$100。兩種席次都含 Claude Code，Premium 用量約為 Standard 的五倍。<span class="refs">［<a href="#ref-18" aria-label="來源 18">18</a>、<a href="#ref-19" aria-label="來源 19">19</a>］</span></p>
+<p>價格之外，有一項對研究室影響更大的差異。Anthropic 推出 Claude Team plan for scientists（發布日期為 2026 年 8 月 27 日，取自媒體報導）：經驗證的 PI 可申請免費的 Standard 席次，Premium 席次每月 US$15，優惠期 12 個月，每個實驗室 1 至 25 席。<span class="refs">［<a href="#ref-38" aria-label="來源 38">38</a>–<a href="#ref-41" aria-label="來源 41">41</a>］</span>官方列出的適用領域是「自然科學、數學、電腦科學、工程及相關領域」，沒有明寫神經科學或心理學。是否算在「相關領域」，無法從公開資料判斷，只能靠實際申請驗證。若通過，五席 Standard 的席次費為 US$0，四席 Standard 加一席 Premium 為每年 US$180；未通過則依一般 Team 價格。</p>
+<p>建議的順序是：先問校方有沒有現成的 Claude 機構協議，再申請科學家計畫，沒有通過才以 Standard 席次月繳試行。</p>
+</section>
+<section aria-labelledby="claude-pricing"><h2 id="claude-pricing">七、席次費用與採購</h2>
+<div class="table"><table class="money"><thead><tr><th scope="col">席次</th><th scope="col">月繳／席</th><th scope="col">年繳月均／席</th><th scope="col">全年實付／席</th></tr></thead><tbody>
+<tr><th scope="row">Standard</th><td>US$25</td><td>US$20</td><td>US$240</td></tr>
+<tr><th scope="row">Premium</th><td>US$125</td><td>US$100</td><td>US$1,200</td></tr>
+</tbody></table></div>
+<p class="note">表列為美國客戶的官方標價，未計稅費與額外用量；官方說明各地區的價格、幣別與稅務處理不同。<span class="refs">［<a href="#ref-19" aria-label="來源 19">19</a>、<a href="#ref-20" aria-label="來源 20">20</a>］</span></p>
+<div class="table"><table class="money"><thead><tr><th scope="col">五人實驗室試算</th><th scope="col">一般 Team 月繳</th><th scope="col">一般 Team 年繳</th><th scope="col">科學家計畫（若通過，優惠期年繳）</th></tr></thead><tbody>
+<tr><th scope="row">5 席 Standard</th><td>US$125／月</td><td>US$1,200／年</td><td>US$0</td></tr>
+<tr><th scope="row">4 席 Standard ＋ 1 席 Premium</th><td>US$225／月</td><td>US$2,160／年</td><td>US$180／年</td></tr>
+</tbody></table></div>
+<p class="note">混配的固定增額為 US$100／月（月繳）或 US$960／年（年繳）。科學家計畫為優惠期內的價格，申請條件見第十一章的採購與上線檢核。</p>
+<p>Team 方案為 2 至 150 席，超過須改用 Enterprise。<span class="refs">［<a href="#ref-18" aria-label="來源 18">18</a>、<a href="#ref-19" aria-label="來源 19">19</a>］</span>席次綁定個人，不能轉讓或共用，同一組織可混配兩種席次。新增成員或升級席次，立即依本期剩餘天數按比例收費；減少席次與 Premium 降為 Standard 於下次續約生效，不退款。移除成員也不產生退款或抵扣，空出的席次可重新指派給其他人。待處理的邀請同樣佔用席次，Primary Owner 本身也佔一席。<span class="refs">［<a href="#ref-19" aria-label="來源 19">19</a>–<a href="#ref-21" aria-label="來源 21">21</a>、<a href="#ref-25" aria-label="來源 25">25</a>］</span></p>
+<p>年繳一次付清全年。年繳的取消與退款規則，官方帳務文章沒有涵蓋，採購前需向 Anthropic 確認。<span class="refs">［<a href="#ref-20" aria-label="來源 20">20</a>、<a href="#ref-22" aria-label="來源 22">22</a>］</span></p>
+<p>付款方式為信用卡、簽帳卡或預付卡，不接受 ACH 轉帳；官方帳務 FAQ 沒有提到採購單或發票付款。<span class="refs">［<a href="#ref-22" aria-label="來源 22">22</a>］</span>如果校方只能以採購單或匯款採購，Team 方案可能無法直接滿足，需另向 Anthropic 業務洽詢；公開資料中未見 Team 的合約採購管道。發票由 Owner 在 Organization settings → Billing 取得。帳單地址決定稅務管轄，免稅須在訂閱後另送證明文件給 Support。結帳幣別官方 FAQ 沒有說明；第三方資料稱以美元計價，未經官方確認。<span class="refs">［<a href="#ref-22" aria-label="來源 22">22</a>］</span></p>
+<p>建立 Team 的帳號必須使用機構或公司信箱，gmail.com 等公共網域不被接受，但可另外加為其他成員的允許網域。<span class="refs">［<a href="#ref-26" aria-label="來源 26">26</a>］</span></p>
+</section>
+<section aria-labelledby="claude-code"><h2 id="claude-code">八、Claude Code 用量與額外預算</h2>
+<p>每個 Team 席次都含 Claude Code 與 Cowork，Premium 的差別只在用量，並不是只有 Premium 才能用 Claude Code。<span class="refs">［<a href="#ref-19" aria-label="來源 19">19</a>、<a href="#ref-24" aria-label="來源 24">24</a>］</span>Standard 席次的每個工作階段用量為 Pro 方案的 1.25 倍，Premium 為 6.25 倍，兩者另有跨模型共用的每週上限。上限按個人計算，不在全隊共用，每週重置時間固定於各帳號。<span class="refs">［<a href="#ref-19" aria-label="來源 19">19</a>］</span>官方沒有公布每週上限的具體數字，實際消耗取決於模型、任務與程式碼庫的大小，無法換算成固定的任務數。與 ChatGPT Premium 取消五小時限制不同，Claude 的 Premium 仍有工作階段與每週上限，只是額度較高。價格頁另有一行提到 Fable 在 Premium 席次以每週上限的 50% 計，確切意義無法從頁面確認。<span class="refs">［<a href="#ref-18" aria-label="來源 18">18</a>］</span></p>
+<p>內含額度用完後，Owner 或 Primary Owner 可啟用預付的用量點數（usage credits），讓任何席次的成員繼續使用 Claude、Cowork 與 Claude Code。點數以 API 標準費率計價，可設定全組織的每月支出上限與個別成員的上限，並可啟用自動儲值。點數自購買起 12 個月到期，不可退款。官方列出的操作者是 Owner 與 Primary Owner，Admin 不在其中。<span class="refs">［<a href="#ref-23" aria-label="來源 23">23</a>］</span></p>
+<p>Team 方案另附每月 API 點數，各席次的額度合併成一個池，上限 US$500／月，需由 Owner 連結 Claude Console 組織後領取，新訂閱滿七天才能領。<span class="refs">［<a href="#ref-20" aria-label="來源 20">20</a>、<a href="#ref-26" aria-label="來源 26">26</a>］</span>例如 3 席 Standard 加 2 席 Premium 為每月 US$260。這些 API 點數不能用在 Claude Code 或 Claude 應用程式，包括額外用量。API 用量與席次費分開計價。<span class="refs">［<a href="#ref-20" aria-label="來源 20">20</a>、<a href="#ref-24" aria-label="來源 24">24</a>］</span></p>
+</section>
+<section aria-labelledby="claude-workspace"><h2 id="claude-workspace">九、組織與專案權限</h2>
+<p>Claude 的管理單位是「組織」（organization），相當於 ChatGPT 的 Business Workspace。Team 方案有四種內建角色，沒有自訂角色，自訂角色屬 Enterprise。<span class="refs">［<a href="#ref-25" aria-label="來源 25">25</a>］</span></p>
+<h3>組織角色</h3>
+<div class="table"><table class="two-col"><thead><tr><th scope="col">角色</th><th scope="col">主要工作與權限</th></tr></thead><tbody>
+<tr><th scope="row">User<br>一般成員</th><td>建立與修改對話，使用 Projects。</td></tr>
+<tr><th scope="row">Admin<br>管理員</th><td>邀請與移除一般成員。在 Team 方案看不到用量分析，也不能管理角色或帳務。</td></tr>
+<tr><th scope="row">Owner<br>擁有者</th><td>含 Admin 權限，另可邀請或移除 Admin 與 Owner、修改角色、管理帳務與付款方式、啟用整合與專案共享、檢視用量分析、設定用量點數的支出上限。</td></tr>
+<tr><th scope="row">Primary Owner<br>主要擁有者</th><td>含 Owner 權限。全組織唯一一位，佔一個席次，可以是不綁特定個人的服務帳號。只有此角色能要求資料匯出與移轉 Primary Ownership。</td></tr>
+</tbody></table></div>
+<p>Owner 與 Primary Owner 不能自行退出組織，須由另一位 Owner 或 Primary Owner 移除。<span class="refs">［<a href="#ref-43" aria-label="來源 43">43</a>］</span>與 ChatGPT Business 的角色相比，Claude Team 的 Admin 權限較窄：用量分析與支出上限由 Owner 以上處理，資料匯出只有 Primary Owner 能做。<span class="refs">［<a href="#ref-23" aria-label="來源 23">23</a>、<a href="#ref-25" aria-label="來源 25">25</a>］</span></p>
+<h3>共享 Project 的兩級權限</h3>
+<p>Project 在建立時可選 Public（全組織皆可搜尋與使用）或 Private（僅受邀者）。分享後的權限有兩級。<span class="refs">［<a href="#ref-27" aria-label="來源 27">27</a>］</span></p>
+<div class="table"><table class="two-col"><thead><tr><th scope="col">專案權限</th><th scope="col">可執行的操作</th></tr></thead><tbody>
+<tr><th scope="row">Can view</th><td>檢視專案內容、知識庫與指令，並在專案內對話，不能修改。較舊的官方文章稱為 Can use。</td></tr>
+<tr><th scope="row">Can edit</th><td>修改指令與知識庫、更新成員設定、貢獻內容，也能從 Share 選單移除他人的存取。</td></tr>
+</tbody></table></div>
+<p>共享 Project 內的個人對話預設仍是私人的，即使是公開專案也一樣，除非成員自行分享該對話。<span class="refs">［<a href="#ref-27" aria-label="來源 27">27</a>］</span>Owner 可關閉整個組織的專案分享與公開專案；關閉後公開專案轉為私人，已分享的專案保留既有權限。依群組分享屬 Enterprise。<span class="refs">［<a href="#ref-27" aria-label="來源 27">27</a>］</span>Can edit 的成員能移除其他人，與 ChatGPT 的移除成員由專案擁有者處理不同，因此授予 Can edit 的人數宜少。官方同系列文章對「封存專案是否重設分享權限」的說法不一致，要收回權限時應直接在分享設定中移除成員，不要倚賴封存。<span class="refs">［<a href="#ref-27" aria-label="來源 27">27</a>］</span></p>
+<p>記憶的行為也和 ChatGPT 的共享 Project 不同。Claude 的每個 Project 有獨立的記憶空間，但在 Project 內對話時，Claude 會同時使用該專案記憶與成員在專案外的帳號記憶；要讓專案記憶完全獨立，須在該專案頁面關閉「Use account memory」。<span class="refs">［<a href="#ref-28" aria-label="來源 28">28</a>］</span>組織層級的記憶控制，官方兩篇文章說法不同：一篇寫 Team 沒有組織層級控制、由成員自行管理，另一篇寫 Owner 可為整個組織停用，需在實際管理介面確認。<span class="refs">［<a href="#ref-28" aria-label="來源 28">28</a>］</span></p>
+</section>
+<section aria-labelledby="claude-privacy"><h2 id="claude-privacy">十、私人對話與資料存取</h2>
+<h3>一般介面中的可見性</h3>
+<p>官方資料中未見讓 Admin 或 Owner 即時閱讀成員對話的介面。官方列出的取得對話內容的途徑，是 Primary Owner 的組織資料匯出，內容可能包含對話、上傳的檔案與使用紀錄。<span class="refs">［<a href="#ref-29" aria-label="來源 29">29</a>、<a href="#ref-30" aria-label="來源 30">30</a>］</span>官方也寫明 Team 的無痕對話包含在標準資料匯出內，並遵循組織的保留設定。<span class="refs">［<a href="#ref-28" aria-label="來源 28">28</a>］</span>官方文章沒有說明匯出時是否通知成員，實驗室應事前告知成員在什麼情況下會匯出、由誰核准、如何留存紀錄。Audit logs 與 Compliance API 屬 Enterprise。<span class="refs">［<a href="#ref-18" aria-label="來源 18">18</a>］</span></p>
+<h3>匯出的條件與範圍</h3>
+<p><strong>組織匯出只有 Primary Owner 能做。</strong> 路徑為 Organization settings → Data and privacy → Export Data，下載連結 24 小時後失效，可重新申請。<span class="refs">［<a href="#ref-30" aria-label="來源 30">30</a>］</span>與 ChatGPT Business 由 Owner 逐一成員匯出不同，Claude 官方說明的是匯出整個組織的對話與使用者資料。公開說明未載明能否限定單一成員或時間範圍，也未載明是否涵蓋 Claude Code 工作階段與 Cowork 的內容。</p>
+<p>成員預設無法自助匯出。Owner 或 Primary Owner 可在 Data management 開啟「Allow members to export their own data」，開啟後成員在網頁版或桌面版的 Settings → Privacy 匯出自己的對話，不含上傳檔案的內容，行動版 App 不能匯出；Primary Owner 不會看到個人匯出按鈕。<span class="refs">［<a href="#ref-30" aria-label="來源 30">30</a>、<a href="#ref-31" aria-label="來源 31">31</a>］</span></p>
+<h3>個人帳號與組織帳號分開</h3>
+<p>同一個信箱可以同時有個人帳號與 Team 帳號，從左下角的帳號選單切換。加入 Team 時若偵測到同信箱的個人帳號，可選擇保留兩個帳號，或只用組織帳號並移入內容。兩個帳號之間的資料無法合併，移入組織的內容也無法搬回個人帳號。<span class="refs">［<a href="#ref-32" aria-label="來源 32">32</a>］</span>PI 若從現有的個人帳號直接升級為 Team，預設會就地升級既有組織並帶入部分內容；要保留個人帳號，須在建立 Team 的流程中勾選「Keep your personal account separate」。<span class="refs">［<a href="#ref-26" aria-label="來源 26">26</a>］</span>建議保留分離，只把經核准的研究室內容放進 Team。</p>
+<h3>離組、保存與交接</h3>
+<p>移除成員不會刪除其帳號或資料；Owner 或 Primary Owner 可請 Support 永久刪除，刪除前先由 Primary Owner 做組織匯出，匯出仍包含已移除成員的資料。<span class="refs">［<a href="#ref-33" aria-label="來源 33">33</a>］</span>該成員的私人專案，其他成員無法再存取；若曾分享給整個組織，專案仍留在 Team 分頁，其他成員依權限檢視或編輯。該成員的對話，其他成員也無法再開啟，包括曾分享給組織的對話連結，會顯示「Conversation not found」。以同一信箱重新加入同一組織，先前的對話會恢復。<span class="refs">［<a href="#ref-44" aria-label="來源 44">44</a>］</span>這點與 ChatGPT Business 不同：成員移除後，已分享的對話連結會失效。重要成果應在撤權前存入校方核准的儲存庫，並確認接手者能開啟。</p>
+</section>
+<section aria-labelledby="claude-governance"><h2 id="claude-governance">十一、研究資料治理與導入配置</h2>
+<p>依商業條款，Anthropic 不得以付費服務中的客戶內容訓練模型，Team 價格頁也寫明預設不訓練。<span class="refs">［<a href="#ref-18" aria-label="來源 18">18</a>、<a href="#ref-36" aria-label="來源 36">36</a>］</span>例外有兩項。一是成員按讚或倒讚、回報錯誤等主動提交的回饋，連同完整對話可保存最長 5 年（不同版本的官方文章寫 5 年與 10 年，此處採較新的 5 年），Owner 或 Primary Owner 可在 Data and Privacy 關閉「Rate chats」。二是服務專屬條款載明，客戶啟用「Development Partner Mode」後，Anthropic 可將資料用於訓練；這是需主動啟用的選項，應確認為關閉。<span class="refs">［<a href="#ref-34" aria-label="來源 34">34</a>、<a href="#ref-37" aria-label="來源 37">37</a>］</span>部分第三方法律部落格稱 Team 適用消費者條款、預設可能用於訓練，與官方現行頁面不符；官方說明文章明寫消費者條款與隱私政策不適用於 Anthropic 擔任資料處理者的 Team 使用。此處採官方說法，簽約前請以實際適用的條款為準。<span class="refs">［<a href="#ref-29" aria-label="來源 29">29</a>］</span></p>
+<p>保留方面，Team 預設保留對話直到使用者刪除；刪除後立即從歷史移除，並在 30 天內從後端系統刪除。被判定違反使用政策的內容，或法律要求時，可能保留更久。<span class="refs">［<a href="#ref-35" aria-label="來源 35">35</a>］</span>自訂保留期限、audit logs、Compliance API、角色式存取控制與 HIPAA-ready 方案都屬 Enterprise。<span class="refs">［<a href="#ref-18" aria-label="來源 18">18</a>］</span>公開資料中未見 Team 方案是否提供資料所在地（data residency）選項。若研究資料受保留期或資料落地要求約束，Team 可能無法滿足，應請校方先確認。</p>
+<p>人體研究資料是否可交由雲端服務處理，仍須依同意書、IRB 核准條件、契約、適用法令與校方政策判定，由 PI 與校方權責單位決定。處理原則與 ChatGPT Business 相同，第五章的資料分類表可直接沿用。Claude 方面需要另外納入同一標準的有：Claude Code 可讀取的工作目錄與執行的指令、Cowork 可存取的檔案，以及 Owner 啟用的連接器（Google Drive、Gmail、Google Calendar、GitHub、Microsoft 365、Slack）。<span class="refs">［<a href="#ref-19" aria-label="來源 19">19</a>、<a href="#ref-25" aria-label="來源 25">25</a>］</span>地區限制也要留意：Anthropic 的支援地區政策依成員實際所在位置判定，台灣在名單內，但成員人在不支援地區（例如出差或合作成員位於中國大陸、香港、澳門）時不得使用。<span class="refs">［<a href="#ref-42" aria-label="來源 42">42</a>］</span></p>
+<h3>五人實驗室的初始配置</h3>
+<p>PI 以校方信箱建立 Team 並擔任 Primary Owner，其餘四人為 User，席次比照 ChatGPT 的配置，先配置 Standard。Primary Owner 是單點：只有它能要求資料匯出與移轉所有權，而 Owner 與 Primary Owner 也不能自行退出。因此建議另指派一位校方允許的成員擔任 Owner 作為管理備援，並先與校方討論 Primary Owner 的交接辦法。官方說明 Primary Owner 可以是不綁特定個人的服務帳號，但會佔一個席次，是否適合由共用帳號擔任，須由校方資安政策判斷。<span class="refs">［<a href="#ref-25" aria-label="來源 25">25</a>、<a href="#ref-43" aria-label="來源 43">43</a>］</span>Admin 只在需要有人代為邀請與移除成員時設定。Project 逐案邀請，優先給 Can view，Can edit 限於一兩位。</p>
+<h3>採購與上線檢核</h3>
+<p><strong>1　採購前。</strong> 先向校方確認是否已有 Claude 機構協議；科學家計畫頁面要求已有 Claude Enterprise 協議的機構先聯絡其帳號管理員。<span class="refs">［<a href="#ref-38" aria-label="來源 38">38</a>］</span>再確認校方允許交給商業雲端 AI 的資料範圍，以及只能刷卡、沒有採購單的付款方式能否報帳，幣別與稅額以實際結帳為準。<span class="refs">［<a href="#ref-22" aria-label="來源 22">22</a>］</span></p>
+<p><strong>2　申請科學家計畫。</strong> 由 PI 在 <a href="https://claude.com/programs/team-plan-for-scientists">claude.com/programs/team-plan-for-scientists</a> 提出驗證，需確認機構隸屬並簡述研究，多數申請在 5 至 7 個工作天內審核；已建立的 Team 可從 Settings → Account 的「Program verifications」申請。<span class="refs">［<a href="#ref-38" aria-label="來源 38">38</a>、<a href="#ref-40" aria-label="來源 40">40</a>］</span>每個實驗室限一個 Plan，每個 Plan 1 至 25 席，成員可含博士後、研究生與研究人員。優惠期 12 個月，期滿依當時價格續約，金額官方未公布；若連續 90 天沒有有效使用，Anthropic 可終止優惠並停用帳號；優惠只涵蓋席次費，額外用量另計；已收費用不退。Anthropic 可隨時修改、暫停或結束這項促銷，初始名額上限為 10,000 人，額滿也可能關閉。<span class="refs">［<a href="#ref-39" aria-label="來源 39">39</a>］</span>Standard 席次每月附 US$20 的 API 點數、Premium 附 US$100，合併成池，上限 US$500／月。<span class="refs">［<a href="#ref-38" aria-label="來源 38">38</a>］</span></p>
+<p><strong>3　試行首月。</strong> 維持個人與 Team 帳號分離，用公開或合成資料驗證 Project 權限、Claude Code 與交接流程。用量點數先不啟用，或設定偏低的每月上限；關閉「Rate chats」並確認 Development Partner Mode 為關閉。是否開放成員自助匯出需要取捨：開放後成員可保存自己的對話，資料也更容易離開組織，這由 PI 與校方決定。</p>
+<p><strong>4　續約前。</strong> 用量分析只有 Owner 與 Primary Owner 看得到，用量點數頁面有成員本月支出欄位，可用來找出常撞上限的人。<span class="refs">［<a href="#ref-23" aria-label="來源 23">23</a>、<a href="#ref-25" aria-label="來源 25">25</a>］</span>單一成員長期需要更多用量時，比較用量點數與升級為 Premium（每席多 US$100／月或 US$960／年）。成員離組時同步撤權、確認交接，並檢視是否排程減席。</p>
+<h3>什麼情況需要 Enterprise</h3>
+<p>需要 SCIM、audit logs、自訂保留期、Compliance API、角色式存取控制、HIPAA-ready 方案，或超過 150 席時，才需要 Enterprise。價格頁寫 Enterprise 每席每月 US$20（年繳），最少 20 席，另加按 API 費率計算的用量，五人實驗室低於席次下限，無法自助購買。<span class="refs">［<a href="#ref-18" aria-label="來源 18">18</a>］</span></p>
+</section>
+<section aria-labelledby="compare"><h2 id="compare">十二、與 ChatGPT Business 的對照</h2>
+<p>ChatGPT Business 欄依本頁前五章整理，前五章未提及的項目不下結論。</p>
+<div class="table"><table class="three-col"><thead><tr><th scope="col">項目</th><th scope="col">ChatGPT Business</th><th scope="col">Claude Team</th></tr></thead><tbody>
+<tr><th scope="row">方案名稱</th><td>Business（原 Team，2025 年 8 月 29 日更名）</td><td>Team，沒有叫 Business 的方案</td></tr>
+<tr><th scope="row">席次價格</th><td>Standard US$25／20，Premium US$125／100</td><td>相同</td></tr>
+<tr><th scope="row">最少席次</th><td>一般至少兩席，部分新工作空間可一席</td><td>兩席，上限 150 席</td></tr>
+<tr><th scope="row">程式代理</th><td>Standard 已含 Codex</td><td>Standard 已含 Claude Code 與 Cowork</td></tr>
+<tr><th scope="row">Premium 用量</th><td>約五倍，取消五小時限制</td><td>約五倍（6.25 倍對 1.25 倍 Pro），仍有工作階段與每週上限</td></tr>
+<tr><th scope="row">額外用量</th><td>Workspace credits，Owner 購買，Owner／Admin 設上限</td><td>Usage credits 以 API 費率計價，Owner／Primary Owner 設上限，12 個月到期</td></tr>
+<tr><th scope="row">管理角色</th><td>Owner、Admin、Analytics Viewer、Member</td><td>Primary Owner、Owner、Admin、User，Team 無自訂角色</td></tr>
+<tr><th scope="row">共享 Project 權限</th><td>Chat、Edit、Project owner</td><td>Can view、Can edit，另有 Public／Private</td></tr>
+<tr><th scope="row">管理端取得對話內容</th><td>Owner 可逐成員匯出（有條件）</td><td>Primary Owner 匯出整個組織</td></tr>
+<tr><th scope="row">成員移除後</th><td>聊天保留，重新加入可恢復</td><td>資料保留，重新加入可恢復，但已分享的對話連結失效</td></tr>
+<tr><th scope="row">付款</th><td>信用卡或簽帳金融卡，採購單另洽</td><td>信用卡、簽帳卡或預付卡，官方 FAQ 未提採購單</td></tr>
+<tr><th scope="row">研究優惠</th><td>本頁未涵蓋</td><td>PI 驗證後 Standard 免費、Premium US$15（12 個月）</td></tr>
+</tbody></table></div>
+</section>
+<section aria-labelledby="open-items"><h2 id="open-items">十三、Claude Team 尚未確認的事項</h2>
+<ol class="open-items">
+<li>神經科學或認知科學是否屬於科學家計畫的「相關領域」，名額是否仍有餘額。</li>
+<li>中央大學是否已有 Claude 機構協議，這會影響科學家計畫的申請方式。</li>
+<li>結帳幣別與台灣的稅務處理，官方帳務 FAQ 沒有寫。</li>
+<li>年繳方案的取消與退款規則。</li>
+<li>組織資料匯出能否限定單一成員或日期，以及是否涵蓋 Claude Code 與 Cowork 的內容。</li>
+<li>Team 方案能否停用個別對話的分享連結，以及組織層級的記憶控制。</li>
+<li>購買新席次是否限 Primary Owner，官方角色表的兩個版本說法不一致。</li>
+<li>Team 方案的資料所在地選項。</li>
+<li>Premium 席次每週上限的實際數字，官方只給倍數。</li>
+</ol>
+</section>
 <section aria-labelledby="sources"><h2 id="sources">官方資料來源</h2>
-<p class="note">來源均為 OpenAI 公開資料，查核日期為 2026 年 11 月 10 日。價格、用量與管理功能可能調整，採購或訂定治理規則前，請重新核對官方說明與實際工作空間。</p>
+<p class="note">來源均為 OpenAI 與 Anthropic 公開資料。第 1 至 17 筆（ChatGPT Business）的查核日期為 2026 年 11 月 10 日，第 18 至 44 筆（Claude Team）為 2026 年 11 月 11 日。其中第 41 筆的發布日期與第 43、44 筆的部分內容取自搜尋結果摘錄，未逐篇開啟全文。價格、用量與管理功能可能調整，採購或訂定治理規則前，請重新核對官方說明與實際管理介面。</p>
 <ol class="sources">
 <li id="ref-1"><a href="https://openai.com/business/pricing/">Business 方案與價格</a><span class="source-url"> · openai.com/business/pricing/</span></li>
 <li id="ref-2"><a href="https://help.openai.com/en/articles/8542115">Business 常見問題與 Team 更名</a><span class="source-url"> · help.openai.com/en/articles/8542115</span></li>
@@ -220,6 +340,33 @@ footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .875
 <li id="ref-15"><a href="https://help.openai.com/en/articles/8801890">Personal Workspace 遷移與合併</a><span class="source-url"> · help.openai.com/en/articles/8801890</span></li>
 <li id="ref-16"><a href="https://help.openai.com/en/articles/8266418">移除成員後的資料保留</a><span class="source-url"> · help.openai.com/en/articles/8266418</span></li>
 <li id="ref-17"><a href="https://openai.com/enterprise-privacy/">OpenAI 商業服務的資料隱私承諾</a><span class="source-url"> · openai.com/enterprise-privacy/</span></li>
+<li id="ref-18"><a href="https://claude.com/pricing">Claude 價格頁</a><span class="source-url"> · claude.com/pricing</span></li>
+<li id="ref-19"><a href="https://support.claude.com/en/articles/9266767-what-is-the-team-plan">Team 方案介紹</a><span class="source-url"> · support.claude.com/en/articles/9266767</span></li>
+<li id="ref-20"><a href="https://support.claude.com/en/articles/9267289-how-is-my-team-plan-bill-calculated">Team 方案帳單的計算方式</a><span class="source-url"> · support.claude.com/en/articles/9267289</span></li>
+<li id="ref-21"><a href="https://support.claude.com/en/articles/12004354-how-to-purchase-and-manage-premium-seats">Premium 席次的購買與管理</a><span class="source-url"> · support.claude.com/en/articles/12004354</span></li>
+<li id="ref-22"><a href="https://support.claude.com/en/articles/12997503-team-plan-billing-faqs">Team 方案帳務 FAQ</a><span class="source-url"> · support.claude.com/en/articles/12997503</span></li>
+<li id="ref-23"><a href="https://support.claude.com/en/articles/12005970-manage-usage-credits-for-team-and-seat-based-enterprise-plans">Team 與席次制 Enterprise 的用量點數管理</a><span class="source-url"> · support.claude.com/en/articles/12005970</span></li>
+<li id="ref-24"><a href="https://support.claude.com/en/articles/11845131">在 Team 或 Enterprise 方案使用 Claude Code</a><span class="source-url"> · support.claude.com/en/articles/11845131</span></li>
+<li id="ref-25"><a href="https://support.claude.com/en/articles/9267276-roles-and-permissions">角色與權限</a><span class="source-url"> · support.claude.com/en/articles/9267276</span></li>
+<li id="ref-26"><a href="https://support.claude.com/en/articles/9267247-how-do-i-get-started-with-the-team-plan">Team 方案入門與建立</a><span class="source-url"> · support.claude.com/en/articles/9267247</span></li>
+<li id="ref-27"><a href="https://support.claude.com/en/articles/9519189-manage-project-visibility-and-sharing">專案可見性與分享</a><span class="source-url"> · support.claude.com/en/articles/9519189</span></li>
+<li id="ref-28"><a href="https://support.claude.com/en/articles/11817273-how-does-memory-work">記憶功能說明</a><span class="source-url"> · support.claude.com/en/articles/11817273</span></li>
+<li id="ref-29"><a href="https://support.claude.com/en/articles/9265372-who-owns-and-manages-the-data-of-my-team">Team 資料的所有權與管理</a><span class="source-url"> · support.claude.com/en/articles/9265372</span></li>
+<li id="ref-30"><a href="https://privacy.claude.com/en/articles/13346720-how-can-i-export-my-organization-s-data">匯出組織資料</a><span class="source-url"> · privacy.claude.com/en/articles/13346720</span></li>
+<li id="ref-31"><a href="https://support.claude.com/en/articles/9450526-how-can-i-export-my-claude-data">成員匯出個人 Claude 資料</a><span class="source-url"> · support.claude.com/en/articles/9450526</span></li>
+<li id="ref-32"><a href="https://support.claude.com/en/articles/9267400-move-your-personal-claude-account-to-a-team-or-enterprise-organization">個人帳號移入 Team 或 Enterprise 組織</a><span class="source-url"> · support.claude.com/en/articles/9267400</span></li>
+<li id="ref-33"><a href="https://support.claude.com/en/articles/12053672-what-happens-to-a-user-s-data-when-they-are-removed-from-a-team-or-enterprise-organization">成員移出組織後的資料處理</a><span class="source-url"> · support.claude.com/en/articles/12053672</span></li>
+<li id="ref-34"><a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training">資料是否用於模型訓練</a><span class="source-url"> · privacy.claude.com/en/articles/7996868</span></li>
+<li id="ref-35"><a href="https://privacy.claude.com/en/articles/7996866">組織資料的保存期限</a><span class="source-url"> · privacy.claude.com/en/articles/7996866</span></li>
+<li id="ref-36"><a href="https://www.anthropic.com/legal/commercial-terms">Anthropic 商業服務條款</a><span class="source-url"> · anthropic.com/legal/commercial-terms</span></li>
+<li id="ref-37"><a href="https://www.anthropic.com/legal/service-specific-terms">Anthropic 服務專屬條款</a><span class="source-url"> · anthropic.com/legal/service-specific-terms</span></li>
+<li id="ref-38"><a href="https://support.claude.com/en/articles/16634237-claude-team-plan-for-scientists">Team plan for scientists 說明文章</a><span class="source-url"> · support.claude.com/en/articles/16634237</span></li>
+<li id="ref-39"><a href="https://anthropic.com/legal/team-plan-for-scientists-terms">Team plan for scientists 條款</a><span class="source-url"> · anthropic.com/legal/team-plan-for-scientists-terms</span></li>
+<li id="ref-40"><a href="https://claude.com/programs/team-plan-for-scientists">Team plan for scientists 計畫頁</a><span class="source-url"> · claude.com/programs/team-plan-for-scientists</span></li>
+<li id="ref-41"><a href="https://anthropic.com/news/expanding-support-for-scientists">Anthropic 擴大支援科學家的公告</a><span class="source-url"> · anthropic.com/news/expanding-support-for-scientists</span></li>
+<li id="ref-42"><a href="https://www.anthropic.com/legal/supported-regions">支援地區政策（2026 年 11 月 12 日生效版）</a><span class="source-url"> · anthropic.com/legal/supported-regions</span></li>
+<li id="ref-43"><a href="https://support.claude.com/en/articles/13133750-manage-members-on-team-and-enterprise-plans">Team 與 Enterprise 的成員管理</a><span class="source-url"> · support.claude.com/en/articles/13133750</span></li>
+<li id="ref-44"><a href="https://privacy.claude.com/en/articles/7996865-deleting-commercial-anthropic-accounts">商業 Anthropic 帳號的刪除</a><span class="source-url"> · privacy.claude.com/en/articles/7996865</span></li>
 </ol>
 </section>
       </article>
