@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="供大學研究實驗室主持人評估 ChatGPT Business 的正體中文指引。包含 Standard 與 Premium 費用、Codex 用量、Owner 資料匯出及研究資料治理。">
+  <title>大學研究實驗室導入 ChatGPT Business 指引</title>
+  <style>
+:root {
+  color-scheme: light;
+  --ink: #142840;
+  --body: #243042;
+  --muted: #4d6076;
+  --accent: #235779;
+  --line: #d7e0ea;
+  --wash: #f3f6f9;
+  --table-head: #e0e9f1;
+  font-family: system-ui, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  color: var(--body);
+  background: #fff;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 1.5rem; }
+body { margin: 0; line-height: 1.75; }
+a { color: var(--accent); text-underline-offset: .19em; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+h1, h2, h3, p { margin-block: 0; }
+strong { color: var(--ink); }
+.wrap { width: min(100% - 3rem, 71rem); margin-inline: auto; }
+.masthead { border-bottom: 1px solid var(--line); }
+.masthead .wrap { min-height: 3.75rem; display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+.home, .print { color: var(--ink); font: inherit; font-size: .875rem; font-weight: 650; }
+.home { text-decoration: none; }
+.home:hover { text-decoration: underline; }
+.print { background: #fff; border: 1px solid #aab9c8; border-radius: .25rem; padding: .3rem .75rem; cursor: pointer; white-space: nowrap; }
+.print:hover { background: var(--wash); }
+.print[hidden] { display: none; }
+.skip { position: fixed; top: .5rem; left: .5rem; padding: .5rem 1rem; background: #fff; transform: translateY(-200%); z-index: 5; }
+.skip:focus { transform: translateY(0); }
+.intro { background: var(--wash); border-bottom: 1px solid var(--line); padding-block: clamp(2rem, 6vw, 4rem); }
+.kicker { color: var(--accent); font-size: .875rem; font-weight: 700; letter-spacing: .1em; margin-bottom: .75rem; }
+h1 { font-size: clamp(1.85rem, 5.6vw, 3.35rem); line-height: 1.23; letter-spacing: -.025em; color: var(--ink); }
+h1 span { display: block; }
+.meta { margin-top: 1rem; color: var(--muted); font-size: .9rem; }
+.lede { max-width: 68ch; margin-top: 1.2rem; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 14rem); gap: clamp(2rem, 6vw, 5rem); align-items: start; padding-block: 2.5rem 4rem; }
+.toc { grid-column: 2; grid-row: 1; position: sticky; top: 1.5rem; border-left: 2px solid var(--line); padding-left: 1rem; font-size: .9rem; }
+.toc h2 { font-size: .9rem; margin: 0 0 .55rem; }
+.toc ul { list-style: none; padding: 0; margin: 0; }
+.toc a { display: block; text-decoration: none; padding-block: .29rem; }
+.toc a:hover { text-decoration: underline; }
+article { grid-column: 1; grid-row: 1; min-width: 0; }
+article section + section { border-top: 1px solid var(--line); margin-top: 2rem; padding-top: 2rem; }
+h2 { color: var(--ink); font-size: clamp(1.35rem, 2.8vw, 1.8rem); line-height: 1.35; margin-bottom: .85rem; }
+h3 { color: var(--accent); font-size: 1.125rem; margin-block: 1.4rem .45rem; line-height: 1.5; }
+article p { margin-bottom: .9rem; }
+.table { margin-block: 1rem .6rem; }
+table { border-collapse: collapse; width: 100%; font-size: .94rem; line-height: 1.55; }
+th, td { padding: .72rem .8rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+thead th { color: var(--ink); background: var(--table-head); font-weight: 700; }
+tbody th { color: var(--ink); font-weight: 650; }
+tbody tr:nth-child(odd) { background: var(--wash); }
+table.two-col th:first-child { width: 28%; }
+table.money td { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.note { color: var(--muted); font-size: .875rem; }
+.refs { white-space: nowrap; font-size: .79em; }
+.refs a { font-weight: 650; }
+.sources { padding-left: 1.7rem; }
+.sources li { margin-bottom: .55rem; padding-left: .25rem; }
+.sources li::marker { color: var(--muted); }
+.sources a { overflow-wrap: anywhere; }
+.source-url { display: none; }
+footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .875rem; padding-block: 1rem; }
+:target { scroll-margin-top: .5rem; }
+@media (max-width: 54rem) {
+  .layout { display: block; padding-top: 1.4rem; }
+  .toc { position: static; border: 1px solid var(--line); background: var(--wash); padding: .8rem 1rem; margin-bottom: 1.75rem; }
+  .toc ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 .65rem; }
+}
+@media (max-width: 34rem) {
+  .wrap { width: calc(100% - 2rem); }
+  .toc ul { grid-template-columns: 1fr; }
+  table { font-size: .82rem; }
+  th, td { padding: .55rem .38rem; }
+  table.money td { white-space: normal; }
+}
+@media print {
+  @page { size: A4; margin: 15mm 17mm; }
+  body { font-size: 10.5pt; line-height: 1.48; }
+  .wrap { width: 100%; }
+  .masthead, .toc, .skip, footer { display: none; }
+  .intro { background: #fff; border: 0; padding: 0; }
+  h1 { font-size: 24pt; }
+  h2 { font-size: 16pt; }
+  h3 { font-size: 12pt; }
+  h2, h3 { break-after: avoid; }
+  .layout { display: block; padding: 1rem 0 0; }
+  article section + section { padding-top: .5rem; margin-top: .9rem; }
+  p { orphans: 3; widows: 3; }
+  tr { break-inside: avoid; }
+  th, td { padding: .35rem .45rem; }
+  table { font-size: 9.5pt; }
+  thead th { background: var(--table-head); }
+  table, th, td { print-color-adjust: exact; }
+  .source-url { display: inline; font-size: 9pt; color: var(--muted); overflow-wrap: anywhere; }
+}
+  </style>
+</head>
+<body id="top">
+  <a class="skip" href="#main-content">跳到主要內容</a>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="home" href="/">Erik Chang　<span aria-hidden="true">↗</span></a>
+      <button type="button" class="print" hidden>列印／另存 PDF</button>
+    </div>
+  </header>
+  <main id="main-content" tabindex="-1">
+    <header class="intro">
+      <div class="wrap">
+        <p class="kicker">研究實驗室導入指引</p>
+        <h1><span>大學研究實驗室導入</span><span>ChatGPT Business 指引</span></h1>
+        <p class="meta">供研究計畫主持人與實驗室管理人員參考<br>官方資料查核日 <time datetime="2026-11-10">2026 年 11 月 10 日</time></p>
+        <p class="lede">ChatGPT Team 已於 2025 年 8 月 29 日更名為 ChatGPT Business。若實驗室需要集中付款、管理成員，並讓多人共同維護研究流程，建議先以 <strong>Standard 席次月繳試行</strong>，再依用量與校方審查結果決定是否升級或改年繳。Standard 已包含 Codex。<span class="refs">［<a href="#ref-1" aria-label="來源 1">1</a>–<a href="#ref-3" aria-label="來源 3">3</a>］</span></p>
+      </div>
+    </header>
+    <div class="wrap layout">
+      <nav class="toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">章節目錄</h2>
+        <ul>
+<li><a href="#pricing">一、席次費用與採購</a></li>
+<li><a href="#codex">二、Codex 用量與追加預算</a></li>
+<li><a href="#workspace">三、工作空間與專案權限</a></li>
+<li><a href="#privacy">四、私人對話與資料存取</a></li>
+<li><a href="#governance">五、研究資料治理與導入配置</a></li>
+<li><a href="#sources">官方資料來源</a></li>
+        </ul>
+      </nav>
+      <article aria-label="導入指引全文">
+<section aria-labelledby="pricing"><h2 id="pricing">一、席次費用與採購</h2>
+<div class="table"><table class="money"><thead><tr><th scope="col">席次</th><th scope="col">月繳／席</th><th scope="col">年繳月均／席</th><th scope="col">全年實付／席</th></tr></thead><tbody>
+<tr><th scope="row">Standard</th><td>US$25</td><td>US$20</td><td>US$240</td></tr>
+<tr><th scope="row">Premium</th><td>US$125</td><td>US$100</td><td>US$1,200</td></tr>
+</tbody></table></div>
+<p class="note">表列為官方美元標價，未計稅費及額外用量。採購以實際結帳幣別、稅額與金額為準。<span class="refs">［<a href="#ref-1" aria-label="來源 1">1</a>、<a href="#ref-2" aria-label="來源 2">2</a>］</span></p>
+<p>同一訂閱可混配兩種席次。一般至少兩個付費席次，部分新工作空間可於結帳選一席。年繳為年度付款，表中月均供比較。Owner 購買的席次即使空置也會計費。增購按當期剩餘期間比例收費，減席於下個計費週期生效。移除成員後，若無接替人選，須另排程減席。<span class="refs">［<a href="#ref-1" aria-label="來源 1">1</a>、<a href="#ref-2" aria-label="來源 2">2</a>、<a href="#ref-4" aria-label="來源 4">4</a>、<a href="#ref-5" aria-label="來源 5">5</a>］</span></p>
+<div class="table"><table class="money"><thead><tr><th scope="col">五人實驗室試算</th><th scope="col">月繳合計</th><th scope="col">年繳合計</th></tr></thead><tbody>
+<tr><th scope="row">5 席 Standard</th><td>US$125／月</td><td>US$1,200／年</td></tr>
+<tr><th scope="row">4 席 Standard ＋ 1 席 Premium</th><td>US$225／月</td><td>US$2,160／年</td></tr>
+</tbody></table></div>
+<p class="note">混配的固定增額為 US$100／月或 US$960／年。兩列均以席次組合維持整個計費期間估算。</p>
+</section>
+<section aria-labelledby="codex"><h2 id="codex">二、Codex 用量與追加預算</h2>
+<p>兩種席次均可使用 ChatGPT、ChatGPT Work 與 Codex，實際功能依工作空間設定。Work 與 Codex 目前共用用量。Premium 提供較高的 Work／Codex 內含額度，官方以約五倍說明，並取消五小時用量限制。實際消耗取決於模型、推理強度及任務規模，無法換算成固定任務數。OpenAI 已公告自 2026 年 12 月起，Business 的 ChatGPT 與 Codex 將共用額度。<span class="refs">［<a href="#ref-2" aria-label="來源 2">2</a>、<a href="#ref-3" aria-label="來源 3">3</a>、<a href="#ref-6" aria-label="來源 6">6</a>、<a href="#ref-7" aria-label="來源 7">7</a>］</span></p>
+<p>內含額度用完後，符合資格的用量可使用共用 Workspace credits，取決於餘額與支出設定。Owner 可購買點數或設定自動加值，Owner／Admin 可依席次類型或個人設定每月點數上限。API 另行計費，符合資格的 Business 可另申領 API credits，兩種點數分開管理。<span class="refs">［<a href="#ref-8" aria-label="來源 8">8</a>、<a href="#ref-9" aria-label="來源 9">9</a>］</span></p>
+</section>
+<section aria-labelledby="workspace"><h2 id="workspace">三、工作空間與專案權限</h2>
+<p><strong>Business Workspace</strong> 是研究室管理成員、席次、帳務及功能設定的範圍。<strong>Project</strong> 用來彙整特定計畫的對話、檔案與指令。同一 Workspace 可依研究案、分析流程或教學用途開設多個 Projects，並分別指定參與者。個人 ChatGPT 方案也可使用 Projects，席次費依訂閱計算。<span class="refs">［<a href="#ref-2" aria-label="來源 2">2</a>、<a href="#ref-5" aria-label="來源 5">5</a>、<a href="#ref-10" aria-label="來源 10">10</a>、<a href="#ref-11" aria-label="來源 11">11</a>］</span></p>
+<h3>工作空間角色</h3>
+<div class="table"><table class="two-col"><thead><tr><th scope="col">角色</th><th scope="col">主要工作與權限</th></tr></thead><tbody>
+<tr><th scope="row">Owner<br>工作空間擁有者</th><td>管理訂閱、付費席次、角色、身分與工作空間設定。可指定其他 Owner。</td></tr>
+<tr><th scope="row">Admin<br>管理員</th><td>管理邀請及較低權限的成員，並可設定點數支出上限。付費席次與角色異動由 Owner 管理。</td></tr>
+<tr><th scope="row">Analytics Viewer<br>分析檢視者</th><td>在角色可用時，依授權查看工作空間資訊與用量分析。</td></tr>
+<tr><th scope="row">Member<br>一般成員</th><td>使用席次及工作空間允許的功能。依官方角色規則，可用預設席次類型邀請一般成員。</td></tr>
+</tbody></table></div>
+<p>角色決定管理權限，席次決定使用權益與額度。Standard Member 可使用 Codex。建議預設席次設為 Standard，定期檢查成員名單與待處理邀請，並檢視 Workspace discovery 與自動加入設定。<span class="refs">［<a href="#ref-2" aria-label="來源 2">2</a>、<a href="#ref-10" aria-label="來源 10">10</a>］</span></p>
+<h3>共享 Project 的三種權限</h3>
+<div class="table"><table class="two-col"><thead><tr><th scope="col">專案權限</th><th scope="col">可執行的操作</th></tr></thead><tbody>
+<tr><th scope="row">Chat</th><td>可檢視及使用專案的對話、檔案與指令。</td></tr>
+<tr><th scope="row">Edit</th><td>可修改指令、增刪檔案及邀請他人。移除現有專案成員由專案擁有者處理。</td></tr>
+<tr><th scope="row">Project owner</th><td>管理成員與權限，並可變更或刪除專案。此角色屬於該專案。</td></tr>
+</tbody></table></div>
+<p>共享 Project 會自動採用 project-only memory，不會使用成員在專案外的個人記憶或脈絡。將對話移入共享 Project 前，先檢查其歷史內容與附件。研究專案宜逐一邀請，僅授予必要的 Chat 或 Edit 權限，避免用全工作空間連結散發限閱資料。<span class="refs">［<a href="#ref-11" aria-label="來源 11">11</a>］</span></p>
+<p>個別對話分享連結與 Project 分享是不同的功能。Business 對話分享連結限同一工作空間開啟。官方指出，全面停用這類分享連結的工作空間層級控制屬於 Enterprise。<span class="refs">［<a href="#ref-12" aria-label="來源 12">12</a>］</span></p>
+</section>
+<section aria-labelledby="privacy"><h2 id="privacy">四、私人對話與資料存取</h2>
+<h3>一般介面中的可見性</h3>
+<p>Business 成員各自保有 ChatGPT 與 Codex 歷程。其他成員不會因加入同一 Workspace 而自動看到未分享的對話或 Codex 活動。Admin 或 Owner 的用量分析與支出控制介面提供管理資訊，無法用來逐則閱讀私人對話。已分享的對話與 Project 內容則依各自的分享權限開放。Standard、Premium 的席次差異不會讓其他成員自動取得對話。<span class="refs">［<a href="#ref-11" aria-label="來源 11">11</a>、<a href="#ref-12" aria-label="來源 12">12</a>］</span></p>
+<h3>Owner 匯出屬於有條件的管理途徑</h3>
+<p><strong>Business 成員無法從 Settings → Data controls 自助匯出 Business 資料。</strong> OpenAI 的 Business 專屬文件明載，若顯示 <strong>Export data</strong> 選項，Workspace Owner 可從該 Business Workspace 的 <strong>Members → 該成員的「•••」選單 → Export data</strong> 匯出該成員資料。<span class="refs">［<a href="#ref-12" aria-label="來源 12">12</a>、<a href="#ref-13" aria-label="來源 13">13</a>］</span></p>
+<p>公開說明未列出所有適用條件、完整匯出欄位或 Codex 工作內容的涵蓋範圍。採購時如需資料交付或稽核，應以實際工作空間的選項及 OpenAI 書面確認為準。組織管理帳號的資料存取亦受設定、適用法令與組織政策規範。研究室應事先告知成員何種情況可申請存取、由誰核准及如何留存紀錄。<span class="refs">［<a href="#ref-12" aria-label="來源 12">12</a>–<a href="#ref-14" aria-label="來源 14">14</a>］</span></p>
+<h3>個人工作空間與 Business 可分開</h3>
+<p><strong>同一個 ChatGPT 登入帳號可切換兩個工作空間。</strong> 受邀加入時選擇保留獨立的 Personal Workspace，個人與 Business 內容分開管理。個人訂閱繼續獨立計費，Business 席次權益適用於 Business 工作空間。研究室的 Business Owner 權限作用於該 Business 工作空間。私人用途可保留於自己管理的 Personal Workspace，並另行檢查個人資料控制設定。<span class="refs">［<a href="#ref-2" aria-label="來源 2">2</a>、<a href="#ref-10" aria-label="來源 10">10</a>、<a href="#ref-14" aria-label="來源 14">14</a>、<a href="#ref-15" aria-label="來源 15">15</a>］</span></p>
+<p>若選擇合併，支援的個人內容會移入 Business，Personal Workspace 停用並從切換選單消失。移轉內容受組織規則約束，離開 Business 可能失去存取，且沒有把 Business 內容搬回個人空間的復原操作。若 Business 工作空間停用，官方另有原 Personal Workspace 的重新啟用流程。建議保留分離，僅將經核准的研究室內容納入 Business。<span class="refs">［<a href="#ref-15" aria-label="來源 15">15</a>］</span></p>
+<h3>離組、保存與交接</h3>
+<p>移除成員會立即撤銷其 Workspace 存取。官方說明，Business 的聊天、檔案及 Canvas 在移除成員後會保留，重新加入可恢復存取。Project 或 GPT 所有權移交給 Owner 時，原成員建立的對話與檔案不會因此轉移或變成可見。重要成果應在撤權前存入校方核准的儲存庫，並確認接手者能開啟。<span class="refs">［<a href="#ref-10" aria-label="來源 10">10</a>、<a href="#ref-16" aria-label="來源 16">16</a>］</span></p>
+</section>
+<section aria-labelledby="governance"><h2 id="governance">五、研究資料治理與導入配置</h2>
+<p>OpenAI 預設不以 Business Workspace 資料訓練模型，包括在該工作空間使用 Codex。人體研究資料是否可交由雲端服務處理，仍須依研究同意書、IRB 核准條件、契約、適用法令與校方政策判定。由 PI 與校方權責單位決定允許的資料類型、處理方式、保存期限和分享對象。<span class="refs">［<a href="#ref-12" aria-label="來源 12">12</a>、<a href="#ref-17" aria-label="來源 17">17</a>］</span></p>
+<h3>研究室建議採用的資料分類</h3>
+<div class="table"><table class="two-col"><thead><tr><th scope="col">資料類別</th><th scope="col">建議處理方式</th></tr></thead><tbody>
+<tr><th scope="row">公開或合成資料</th><td>可用於試行，例如公開文獻的書目資訊、合成資料表、示範 R／Python 程式。仍依授權條件使用。</td></tr>
+<tr><th scope="row">未公開研究資料</th><td>依計畫、契約和校方政策審查後，僅提供完成任務所需的最少內容。限定參與者，使用經審查的摘要、欄位字典或經核准的去識別資料。</td></tr>
+<tr><th scope="row">受限或可識別資料</th><td>直接或間接可識別的訪談逐字稿、原始影像、編碼對照表等，留在校方核准環境。待校方確認處理條件及所需核准程序後，才評估是否可提交。</td></tr>
+</tbody></table></div>
+<p>同一標準適用於提示詞、附件、截圖、程式日誌、連接的 GitHub 儲存庫和 Codex 可讀的工作目錄。編碼取代姓名後，仍應檢查欄位組合能否回推出個人。使用 Codex 可先在合成資料上開發，分析由研究人員在核准環境重跑、比對結果並審閱程式變更。</p>
+<h3>五人實驗室的初始配置</h3>
+<p>五人均先配置 Standard 席次。由 PI 擔任 Owner，其餘研究人員或助理擔任 Member。若校方允許且需交接備援，可由一位現有、經授權的成員擔任第二位 Owner。只有確有日常管理分工時才設定 Admin。專案依研究案逐一邀請，共用程式與正式研究紀錄保存在校方核准的 Git 或研究儲存空間。</p>
+<h3>採購與上線檢核</h3>
+<p><strong>1　採購前。</strong> 確認校方是否已有核准的 ChatGPT Edu 或其他組織方案。若要求自訂保留期、資料落地或合規稽核，先請校方核對方案與合約能力。確認結帳金額、席次下限與報帳流程。自助方案支援信用卡或簽帳金融卡付款。若校方須以採購單、電匯或帳單付款條件採購，應另向 OpenAI 洽詢合約方案。<span class="refs">［<a href="#ref-5" aria-label="來源 5">5</a>］</span></p>
+<p><strong>2　試行首月。</strong> 維持 Personal 與 Business 分離。用公開或合成資料驗證登入、Project 權限、Codex 及交接流程。限制外部連線與自動加值，為核准的額外點數訂定支出上限。</p>
+<p><strong>3　續約前。</strong> 檢查哪些人頻繁受額度中斷、付費點數實際支出與空置席次。若單一成員長期需要更多用量，再比較限定點數與升級一席 Premium。成員離組時同步撤權、確認交接並檢視是否排程減席。</p>
+</section>
+<section aria-labelledby="sources"><h2 id="sources">官方資料來源</h2>
+<p class="note">來源均為 OpenAI 公開資料，查核日期為 2026 年 11 月 10 日。價格、用量與管理功能可能調整，採購或訂定治理規則前，請重新核對官方說明與實際工作空間。</p>
+<ol class="sources">
+<li id="ref-1"><a href="https://openai.com/business/pricing/">Business 方案與價格</a><span class="source-url"> · openai.com/business/pricing/</span></li>
+<li id="ref-2"><a href="https://help.openai.com/en/articles/8542115">Business 常見問題與 Team 更名</a><span class="source-url"> · help.openai.com/en/articles/8542115</span></li>
+<li id="ref-3"><a href="https://help.openai.com/en/articles/12003714">Business 模型與用量限制</a><span class="source-url"> · help.openai.com/en/articles/12003714</span></li>
+<li id="ref-4"><a href="https://help.openai.com/en/articles/20001624">Business 單席配置的適用條件</a><span class="source-url"> · help.openai.com/en/articles/20001624</span></li>
+<li id="ref-5"><a href="https://help.openai.com/en/articles/8792536">Business 帳務與席次管理</a><span class="source-url"> · help.openai.com/en/articles/8792536</span></li>
+<li id="ref-6"><a href="https://learn.chatgpt.com/docs/pricing">ChatGPT Work 與 Codex 用量</a><span class="source-url"> · learn.chatgpt.com/docs/pricing</span></li>
+<li id="ref-7"><a href="https://help.openai.com/en/articles/20001625">ChatGPT 與 Codex 共用額度公告</a><span class="source-url"> · help.openai.com/en/articles/20001625</span></li>
+<li id="ref-8"><a href="https://help.openai.com/en/articles/20001155">Business 點數與支出控制</a><span class="source-url"> · help.openai.com/en/articles/20001155</span></li>
+<li id="ref-9"><a href="https://developers.openai.com/api/docs/guides/chatgpt-api-credits">合資格 ChatGPT 訂閱的 API credits</a><span class="source-url"> · developers.openai.com/api/docs/guides/chatgpt-api-credits</span></li>
+<li id="ref-10"><a href="https://help.openai.com/en/articles/8542216">Business 成員、席次與角色管理</a><span class="source-url"> · help.openai.com/en/articles/8542216</span></li>
+<li id="ref-11"><a href="https://help.openai.com/en/articles/10169521">ChatGPT Projects 與專案分享</a><span class="source-url"> · help.openai.com/en/articles/10169521</span></li>
+<li id="ref-12"><a href="https://help.openai.com/en/articles/8798634">Business 資料、分享、隱私及 Owner 匯出</a><span class="source-url"> · help.openai.com/en/articles/8798634</span></li>
+<li id="ref-13"><a href="https://help.openai.com/en/articles/7260999">ChatGPT 自助資料匯出適用範圍</a><span class="source-url"> · help.openai.com/en/articles/7260999</span></li>
+<li id="ref-14"><a href="https://help.openai.com/en/articles/20001067">受管理 ChatGPT 帳號的資料存取</a><span class="source-url"> · help.openai.com/en/articles/20001067</span></li>
+<li id="ref-15"><a href="https://help.openai.com/en/articles/8801890">Personal Workspace 遷移與合併</a><span class="source-url"> · help.openai.com/en/articles/8801890</span></li>
+<li id="ref-16"><a href="https://help.openai.com/en/articles/8266418">移除成員後的資料保留</a><span class="source-url"> · help.openai.com/en/articles/8266418</span></li>
+<li id="ref-17"><a href="https://openai.com/enterprise-privacy/">OpenAI 商業服務的資料隱私承諾</a><span class="source-url"> · openai.com/enterprise-privacy/</span></li>
+</ol>
+</section>
+      </article>
+    </div>
+  </main>
+  <footer><div class="wrap"><a href="#top">回到頁首 ↑</a></div></footer>
+  <script>
+    const printButton = document.querySelector('.print');
+    printButton.addEventListener('click', () => window.print());
+    printButton.hidden = false;
+  </script>
+</body>
+</html>
