@@ -1,6 +1,9 @@
 {
   "meta": {
     "updatedAt": "2026-04-28",
+    "updatedAtTime": "14:17",
+    "timeZone": "Asia/Taipei",
+    "timeZoneLabel": "台灣時間",
     "audience": "11 歲 / 國小五年級",
     "sourcePolicy": "活動資料以市府、圖書館、售票平台等官方頁面為優先來源。自動更新腳本會檢查來源可讀性、記錄疑似日期線索，並重新產生 Markdown 文件；語意判斷仍以人工確認為準。"
   },

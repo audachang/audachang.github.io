@@ -17,6 +17,23 @@ function todayInTaipei() {
   }).format(new Date());
 }
 
+function currentTaipeiTimestamp() {
+  const now = new Date();
+  const date = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Taipei",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now);
+  const time = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Taipei",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(now);
+  return { date, time, timeZone: "Asia/Taipei", timeZoneLabel: "台灣時間" };
+}
+
 function cityPrefix(city) {
   if (city === "桃園") return "taoyuan";
   if (city === "台北") return "taipei";
@@ -87,9 +104,16 @@ async function main() {
 
   const [candidate] = candidatesPayload.candidates.splice(index, 1);
   const activity = toActivity(candidate, activitiesPayload.activities);
+  const timestamp = currentTaipeiTimestamp();
   activitiesPayload.activities.push(activity);
-  activitiesPayload.meta.updatedAt = todayInTaipei();
-  candidatesPayload.meta.updatedAt = todayInTaipei();
+  activitiesPayload.meta.updatedAt = timestamp.date;
+  activitiesPayload.meta.updatedAtTime = timestamp.time;
+  activitiesPayload.meta.timeZone = timestamp.timeZone;
+  activitiesPayload.meta.timeZoneLabel = timestamp.timeZoneLabel;
+  candidatesPayload.meta.updatedAt = timestamp.date;
+  candidatesPayload.meta.updatedAtTime = timestamp.time;
+  candidatesPayload.meta.timeZone = timestamp.timeZone;
+  candidatesPayload.meta.timeZoneLabel = timestamp.timeZoneLabel;
   candidatesPayload.meta.lastMessage = `Approved ${candidateId} into ${activity.id}.`;
 
   await fs.writeFile(ACTIVITIES_FILE, `${JSON.stringify(activitiesPayload, null, 2)}\n`, "utf8");
