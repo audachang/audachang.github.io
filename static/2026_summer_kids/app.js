@@ -192,7 +192,9 @@ async function init() {
     activities = payload.activities || [];
 
     if (lastChecked && dataMeta.updatedAt) {
-      lastChecked.textContent = `查核日期：${dataMeta.updatedAt}`;
+      const time = dataMeta.updatedAtTime ? ` ${dataMeta.updatedAtTime}` : "";
+      const zone = dataMeta.timeZoneLabel ? `（${dataMeta.timeZoneLabel}）` : "";
+      lastChecked.textContent = `最近更新：${dataMeta.updatedAt}${time}${zone}`;
     }
 
     render();
