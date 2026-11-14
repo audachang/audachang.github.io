@@ -31,6 +31,16 @@ Shen, H., Yau, S., & **Chang, E. C.**\* (2016). Effects of aerobic training inte
 
 Chang, Y.-K., Tsai, J. H.-C., Wang, C.-C., & **Chang, E. C.** (2015). Structural differences in basal ganglia of elite running versus martial arts athletes: A diffusion tensor imaging study. *Experimental Brain Research*, *233*, 2239–2248. https://doi.org/10.1007/s00221-015-4293-x
 
+Lin, M.-W., Lee, M. W., **Chang, E. C.**, & Chen, Y.-C. (2015). Flicker-glare and visual-comfort assessments of light emitting diode billboards II: color display. *Applied Optics*, *54*(13), 4089–4096. https://doi.org/10.1364/AO.54.004089
+
+Lin, M.-W., Hsieh, P.-H., **Chang, E. C.**, & Chen, Y.-C. (2014). Flicker-glare and visual-comfort assessments of light emitting diode billboards. *Applied Optics*, *53*(22), E61. https://doi.org/10.1364/AO.53.000E61
+
+Tzeng, O. J.-L., Lee, C.-Y., Ren Lee, J., Wu, D. H., Juan, C.-H., Cheng, S.-K., Lee, R. R. W., Huang, C.-M., Kuo, N. W.-J., **Chang, E. C.**, & Hung, D. L. (2013). Cognitive neuroscience in the 21st century: A selective review of prominent research topics and applications. *Journal of Neuroscience and Neuroengineering*, *2*(4), 364–381. https://doi.org/10.1166/jnsne.2013.1071
+
+Lin, C.-T., Huang, T.-Y., Lin, W.-J., Chang, S.-Y., Lin, Y.-H., Ko, L.-W., Hung, D. L., & **Chang, E. C.**\* (2012). Gender differences in wayfinding in virtual environments with global or local landmarks. *Journal of Environmental Psychology*, *32*(2), 89–96.
+
+Chiou, R., Wu, D. H., Hung, D. L., Tzeng, O. J. L., & **Chang, E.**\* (2012). Relative size of numerical magnitude induces a size-contrast effect on the grip scaling of reach-to-grasp movements. *Cortex*, *48*, 1043–1051.
+
 Chouinard, P. A., Large, M., **Chang, E.**, & Goodale, M. A. (2009). Dissociable neural mechanisms for determining the perceived heaviness of objects and the predicted weight of objects during lifting: An fMRI investigation of the size-weight illusion. *NeuroImage*, *44*(1), 200–212. https://doi.org/10.1016/j.neuroimage.2008.08.025
 
 **Chang, E. C.**, Flanagan, J. R., & Goodale, M. A. (2008). The intermanual transfer of anticipatory force control in precision grip lifting is not influenced by the perception of weight. *Experimental Brain Research*, *185*, 319–329. https://doi.org/10.1007/s00221-007-1156-0
