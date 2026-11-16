@@ -1,9 +1,12 @@
 {
   "meta": {
-    "updatedAt": "2026-11-09",
+    "updatedAt": "2026-11-16",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
-    "lastMessage": "4 new candidate(s) discovered."
+    "lastMessage": "1 new candidate(s) discovered.",
+    "updatedAtTime": "16:06",
+    "timeZone": "Asia/Taipei",
+    "timeZoneLabel": "台灣時間"
   },
   "candidates": [
     {
@@ -1732,6 +1735,32 @@
           "11/20"
         ],
         "contentHash": "df5ff8cacebe7a95"
+      }
+    },
+    {
+      "id": "candidate-taipei-739bd4b129",
+      "city": "台北",
+      "status": "candidate",
+      "title": "臺北市立圖書館",
+      "url": "https://tpml.gov.taipei/cp.aspx?n=A47B38C411A8827E",
+      "sourceTitle": "Gov",
+      "description": "115-06-15【奇幻「閱」世界：當《山海經》遇上《哈利波特》】115年暑期兒童閱讀活動盛大開跑！ · 115-06-15「臺北活所在：好冊大家讀」，快來借書抽好禮 · 115-06-12「熱血世足：2026年世界盃足球賽主題書展」活動",
+      "dateSnippets": [
+        "11月16日",
+        "12月14日",
+        "12月12日"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-11-16",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [
+          "11月16日",
+          "12月14日",
+          "12月12日"
+        ],
+        "contentHash": "c07c88915c669ce0"
       }
     }
   ]
