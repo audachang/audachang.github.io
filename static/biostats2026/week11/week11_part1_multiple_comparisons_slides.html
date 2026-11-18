@@ -1088,7 +1088,7 @@ HT3001B 生物統計學與 R
 <div class="column" style="width:46%;">
 <ul>
 <li>剛孵化的小雞隨機分到不同飼料，六週後量體重。本示範取酪蛋白、亞麻籽、葵花籽三組，各 12 隻，平均 323.6、218.8、328.9 g。整體 <span class="math inline">\(F(2,33)=14.99\)</span>，<span class="math inline">\(p&lt;.001\)</span>。</li>
-<li>三組兩兩比較有 3 對。這類同時處理多項比較的問題稱為<strong>多重比較（multiple comparisons）</strong>。原題有六種飼料，六組有幾對？</li>
+<li>三組兩兩比較有 3 對。這類同時處理多項比較的問題稱為<strong>多重比較（multiple comparisons）</strong>。<code>chickwts</code> 共有六種飼料；六組兩兩比較有幾對？</li>
 </ul>
 <div class="fragment">
 <p><span class="math inline">\(6\times 5/2=15\)</span> 對。<strong>整族錯誤率（familywise error rate, FWER）</strong>是一批比較中至少犯一次<strong>型一錯誤（Type I error）</strong>的機率。</p>
@@ -1102,7 +1102,7 @@ HT3001B 生物統計學與 R
 </div>
 </div></div>
 <div class="section-ref">
-<p>IMS 2e §22.5 練習 5（R <code>chickwts</code>）；本示範只取三組，原題為六組。IMS §22.2；講義 55 第 10 頁。圖沿用 Week 10 自製示意圖。</p>
+<p>IMS 2e §22.5 練習 5（R <code>chickwts</code>）；資料共六種飼料，本示範取其中三組。IMS §22.2；講義 55 第 10 頁。圖沿用 Week 10 自製示意圖。</p>
 </div>
 </section>
 <section id="w11-mc-02" class="slide level2 visual-slide">
@@ -1499,13 +1499,13 @@ HT3001B 生物統計學與 R
 <tr class="odd">
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">7.5</td>
-<td style="text-align: right;">.0003</td>
+<td style="text-align: right;">.00033</td>
 <td style="text-align: right;">.0083</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">5.3</td>
-<td style="text-align: right;">.0095</td>
+<td style="text-align: right;">.00954</td>
 <td style="text-align: right;">.0167</td>
 </tr>
 <tr class="odd">
@@ -1534,6 +1534,7 @@ HT3001B 生物統計學與 R
 </tr>
 </tbody>
 </table>
+<p>表內 p 僅為顯示取位（右圖列到小數六位）；比較使用未取位值。</p>
 <p>由下往上看：最後一個 p 在門檻以下的是第幾列？</p>
 </div><div class="column" style="width:50%;">
 <div class="fragment" data-fragment-index="1">

@@ -13,7 +13,7 @@ execute:
 
 ## 開始前
 
-本段可直接從乾淨R工作階段開始，不必先執行Part Two。把本QMD和 `week11_counseling_reconstructed.csv` 放在同一資料夾，再設定工作目錄。此CSV依Rosner原書摘要重建，各格均數為8.6、5.3、4.9、1.1，不是Part Two調整為6.4的資料，也不是原書個別資料。
+本段可直接從乾淨R工作階段開始，不必先執行Part Two。把本QMD和 `week11_counseling_reconstructed.csv` 放在同一資料夾，再設定工作目錄。此CSV依Rosner原書摘要重建，各格均數（DBP下降，mmHg）：兩者皆有（`weight`＝yes、`meditation`＝yes）8.6；僅減重（yes、no）5.3；僅冥想（no、yes）4.9；無諮詢（no、no）1.1。這不是Part Two調整為6.4的資料，也不是原書個別資料。
 
 ```{r}
 #| label: setup
