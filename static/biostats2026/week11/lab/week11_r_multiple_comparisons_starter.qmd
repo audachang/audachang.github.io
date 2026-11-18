@@ -1,0 +1,307 @@
+---
+title: "Week 11｜Part Two：多重比較 R tutorial"
+author: "你的姓名、學號"
+date: "2026-11-19"
+lang: zh-Hant
+format:
+  html:
+    embed-resources: true
+    toc: true
+execute:
+  echo: true
+---
+
+## 開始前
+
+本段用R內建chickwts與 `week11_correction_demo_reconstructed.csv`。把本QMD和CSV放在同一資料夾，將R工作目錄設到該資料夾。由單因子建模進入多重比較，再自行算Tukey與BH；檢定力複習留在附錄。
+
+```{r}
+#| label: setup
+getwd()
+file.exists("week11_correction_demo_reconstructed.csv")
+head(chickwts)
+```
+
+每個主題都對照統計函數與逐步自行計算。附錄的常態近似樣本數與t法不同，數字不要求完全相等。
+
+## A. 單因子模型：多重比較的準備
+
+飼料例：IMS 2e §22.5 練習 5 的 `chickwts` 有六種飼料、71 隻小雞。本實習為了各組人數相同，只取酪蛋白（casein）、亞麻籽（linseed）、葵花籽（sunflower）三組，各 12 隻；原題的六組留在作業。
+
+```{r}
+#| label: feed-data
+str(chickwts)
+three <- subset(chickwts, feed %in% c("casein", "linseed", "sunflower"))
+head(three)
+three$feed <- factor(three$feed, levels = c("casein", "linseed", "sunflower"))
+table(three$feed)
+with(three, tapply(weight, feed, mean))
+with(three, tapply(weight, feed, sd))
+```
+
+條件檢查：三組標準差最大與最小相差幾倍？小雞是怎麼分到各組的？
+
+（在此作答）
+
+```{r}
+#| label: one-way-anova
+fit <- aov(weight ~ feed, data = three)
+summary(fit)
+qf(.95, df1 = 2, df2 = 33)
+f_obs <- summary(fit)[[1]][1, "F value"]
+pf(f_obs, df1 = 2, df2 = 33, lower.tail = FALSE)
+```
+
+自己算一次：用各組人數、組平均與總平均求出組間與組內平方和，再除以自由度。
+
+```{r}
+#| label: one-way-by-hand
+n <- table(three$feed)
+m <- tapply(three$weight, three$feed, mean)
+grand <- mean(three$weight)
+ss_group <- sum(n * (m - grand)^2)
+ss_error <- sum((three$weight - m[three$feed])^2)
+ms_group <- ss_group / (3 - 1)
+ms_error <- ss_error / (36 - 3)
+f_hand <- ms_group / ms_error
+c(grand = grand, ss_group = ss_group, ss_error = ss_error,
+  ms_group = ms_group, ms_error = ms_error, F = f_hand,
+  p = pf(f_hand, 2, 33, lower.tail = FALSE))
+```
+
+請寫出 $F$、兩個自由度、$p$ 值，並確認自己算的與 `summary(fit)` 相同。`summary()` 印出的位數較少，差別在哪裡？
+
+（在此作答）
+
+練習 1：請先執行下方程式。比較這次的組別自由度與前一個模型。如何保留 1、2、3 的編碼，同時讓 R 把它們當成三個組別？
+
+```{r}
+#| label: group-coding
+three$code <- as.integer(three$feed)
+summary(aov(weight ~ code, data = three))
+# Add your corrected model here.
+```
+
+（在此作答）
+
+## B. 成對比較
+
+```{r}
+#| label: tukey
+TukeyHSD(fit)
+```
+
+看 `sunflower-casein` 這一列。寫出減法方向、估計差、Tukey 同時信賴區間是否包含 0，以及在 .05 水準下的判斷。再把 `linseed-casein` 改寫成「酪蛋白減亞麻籽」，估計差與上下限各是多少？
+
+（在此作答）
+
+```{r}
+#| label: pairwise-tests
+pairwise.t.test(three$weight, three$feed, p.adjust.method = "none")
+pairwise.t.test(three$weight, three$feed, p.adjust.method = "bonferroni")
+```
+
+自己算三對：平均差、標準誤、t、雙尾 p、Bonferroni p，再計算Tukey的q、臨界值、區間與校正後p。Tukey的分母是√(MSE/n)，比平均差的標準誤少一個√2；所以q=√2×|t|。
+
+```{r}
+#| label: pairs-by-hand
+pairs <- t(combn(levels(three$feed), 2))
+diff <- as.numeric(m[pairs[, 2]] - m[pairs[, 1]])
+se <- sqrt(ms_error * (1 / 12 + 1 / 12))
+t_stat <- diff / se
+p_raw <- 2 * pt(-abs(t_stat), df = 33)
+p_bonf <- pmin(1, 3 * p_raw)
+tukey_mean_se <- sqrt(ms_error / 12)
+q_obs <- abs(diff) / tukey_mean_se
+q_crit <- qtukey(.95, nmeans = 3, df = 33)
+tukey_half <- q_crit * tukey_mean_se
+p_tukey <- ptukey(q_obs, nmeans = 3, df = 33, lower.tail = FALSE)
+c(mean_SE = tukey_mean_se, difference_SE = se, q_critical = q_crit, HSD = tukey_half)
+data.frame(pair = paste(pairs[, 2], pairs[, 1], sep = "-"), diff, se, t_stat,
+           q_obs, p_raw, p_bonf, tukey_lwr = diff - tukey_half,
+           tukey_upr = diff + tukey_half, p_tukey)
+all.equal(q_obs, sqrt(2) * abs(t_stat))
+```
+
+`sunflower-casein` 的 Bonferroni p 為什麼是 1？自己算的區間和 `TukeyHSD()` 一樣嗎？
+
+（在此作答）
+
+Holm 的步驟：由小到大排序、乘上剩下的比較數、取累積最大值、上限 1，再放回原本順序。
+
+```{r}
+#| label: holm-by-hand
+ord <- order(p_raw)
+holm_sorted <- pmin(1, cummax((3:1) * p_raw[ord]))
+p_holm <- numeric(3)
+p_holm[ord] <- holm_sorted
+data.frame(pair = paste(pairs[ord, 2], pairs[ord, 1], sep = "-"),
+           p_raw = p_raw[ord], multiplier = 3:1, holm = holm_sorted)
+all.equal(p_holm, p.adjust(p_raw, method = "holm"))
+```
+
+```{r}
+#| label: adjust-example
+p <- c(.01, .02, .04)
+p.adjust(p, method = "bonferroni")
+p.adjust(p, method = "holm")
+pmin(1, cummax((3:1) * sort(p)))
+```
+
+這三個 $p$ 值為另一組示例。用 .05 判斷時，兩種方法各有幾項達顯著？最後一行為什麼和 Holm 相同？
+
+（在此作答）
+
+## B2. 調整資料：同一批六對，方法不同怎麼算？
+
+本例改編自 Rosner Table 12.33：只把「僅減重」平均由5.3改6.4，其餘平均、SD及每格20人不變。CSV個別數值是教學重建，目的是比較校正方法，不是課本或臨床原始資料。Part Four讀原書摘要的另一份CSV。
+
+```{r}
+#| label: correction-demo-calculations
+# C2. Teaching-adjusted four-group example; not the original Rosner data.
+# Only the weight-only mean is changed from 5.3 to 6.4. n and SD stay the same.
+demo <- read.csv("week11_correction_demo_reconstructed.csv")
+demo$group <- factor(demo$group,
+  levels = c("neither", "meditation_only", "weight_only", "both"))
+demo_fit <- aov(dbp_decrease ~ group, data = demo)
+print(summary(demo_fit))
+print(TukeyHSD(demo_fit))
+demo_n <- table(demo$group)
+demo_m <- tapply(demo$dbp_decrease, demo$group, mean)
+demo_df <- nrow(demo) - length(demo_m)
+demo_ss_error <- sum((demo$dbp_decrease - demo_m[demo$group])^2)
+demo_mse <- demo_ss_error / demo_df
+demo_pairs <- t(combn(levels(demo$group), 2))
+demo_diff <- as.numeric(demo_m[demo_pairs[, 2]] - demo_m[demo_pairs[, 1]])
+demo_se <- as.numeric(sqrt(demo_mse *
+  (1/demo_n[demo_pairs[, 1]] + 1/demo_n[demo_pairs[, 2]])))
+demo_t <- demo_diff / demo_se
+demo_raw <- 2 * pt(-abs(demo_t), demo_df)
+demo_count <- length(demo_raw)                 # six comparisons in the same family
+demo_bonf <- pmin(1, demo_count * demo_raw)
+demo_ord <- order(demo_raw)
+demo_holm <- numeric(demo_count)
+demo_holm[demo_ord] <- pmin(1, cummax((demo_count:1) * demo_raw[demo_ord]))
+
+# Tukey: q uses sqrt(MSE/n), NOT the ordinary difference-SE sqrt(2*MSE/n).
+demo_sq <- sqrt(demo_mse / 20)
+demo_q <- abs(demo_diff) / demo_sq
+demo_qcrit <- qtukey(.95, nmeans = 4, df = demo_df)
+demo_half <- demo_qcrit * demo_sq
+demo_tukey_p <- ptukey(demo_q, nmeans = 4, df = demo_df, lower.tail = FALSE)
+demo_results <- data.frame(
+  pair = paste(demo_pairs[, 2], demo_pairs[, 1], sep = "-"),
+  diff = demo_diff, SE = demo_se, t = demo_t, raw = demo_raw,
+  Bonferroni = demo_bonf, Holm = demo_holm, Tukey = demo_tukey_p,
+  Tukey_lwr = demo_diff-demo_half, Tukey_upr = demo_diff+demo_half)
+print(demo_results)
+demo_tk <- TukeyHSD(demo_fit)$group[demo_results$pair, ]
+stopifnot(max(abs(demo_results$Tukey-demo_tk[, "p adj"])) < 1e-10,
+          max(abs(demo_results$Tukey_lwr-demo_tk[, "lwr"])) < 1e-8,
+          max(abs(demo_holm-p.adjust(demo_raw, "holm"))) < 1e-12,
+          max(abs(demo_bonf-p.adjust(demo_raw, "bonferroni"))) < 1e-12)
+print(demo_results[demo_results$pair == "weight_only-neither", ])
+
+```
+
+同一個 `weight_only-neither` 平均差5.3 mmHg，六對Bonferroni約.057、Holm約.048、Tukey約.046。比較前要先依研究問題選方法，不能看完結果挑能顯著的報告。
+
+## B3. FDR：自己做一次 BH
+
+FDR是重複研究時「誤報數／宣告顯著總數」的期望（無顯著時比例定為0），不是這次研究一定有5%錯。真實資料通常不知道誤報數V，BH用p值控制FDR，不能告訴我們這次真實V。其控制保證需要獨立或適當正相依等條件；本例只用同一六對示範運算。
+
+先由小到大排，找最大的通過序號，再一次拒絕前面全部；不要學Holm在第一次失敗就停止。校正p另從最下面往上取累積最小值。
+
+```{r}
+#| label: bh-step-up-and-adjusted-p
+# C3. FDR with Benjamini-Hochberg: step-up decision and adjusted p-values.
+# This .05 is the FDR target, not Tukey's studentized-range statistic q.
+demo_fdr_target <- .05
+demo_rank <- seq_len(demo_count)
+demo_sorted <- demo_raw[demo_ord]
+demo_bh_threshold <- (demo_rank / demo_count) * demo_fdr_target
+demo_bh_k <- max(c(0, which(demo_sorted <= demo_bh_threshold)))
+demo_bh_reject_sorted <- demo_rank <= demo_bh_k
+print(data.frame(rank = demo_rank, raw = demo_sorted,
+                 BH_threshold = demo_bh_threshold, reject = demo_bh_reject_sorted))
+
+# Multiply by m/i, take the running minimum FROM THE BOTTOM, cap at 1,
+# then restore the input order. Do not stop at the first failing row.
+demo_bh_candidate <- (demo_count / demo_rank) * demo_sorted
+demo_bh_sorted <- pmin(1, rev(cummin(rev(demo_bh_candidate))))
+demo_bh <- numeric(demo_count)
+demo_bh[demo_ord] <- demo_bh_sorted
+print(data.frame(rank = demo_rank, raw = demo_sorted,
+                 candidate = demo_bh_candidate, BH_adjusted = demo_bh_sorted))
+demo_results$BH <- demo_bh
+print(demo_results[demo_results$pair == "weight_only-neither", ])
+stopifnot(max(abs(demo_bh-p.adjust(demo_raw, "BH"))) < 1e-12,
+          identical(demo_bh_sorted <= demo_fdr_target, demo_bh_reject_sorted))
+
+```
+
+補充：下面第1行沒有通過自己的門檻，仍可能因為較後的序號通過而一起被BH拒絕。這是演算法示意p值，不是另一個研究資料。
+
+```{r}
+#| label: bh-step-up-toy
+# Optional step-up illustration: rank 1 fails its bound, yet ranks 1:5 are rejected.
+bh_toy <- c(.009, .014, .026, .031, .040, .20)
+bh_toy_k <- max(c(0, which(bh_toy <= (1:6)/6*.05)))
+print(c(largest_passing_rank = bh_toy_k, rejects = sum(p.adjust(bh_toy, "BH") <= .05)))
+# In real data V (the number of false rejections) is unknown. These adjusted
+# p-values do not reveal the realized false-discovery proportion V/max(R,1).
+```
+
+## 附錄：檢定力與樣本數複習
+
+心率例：想偵測 5 次／分鐘的平均差，標準差估為 10 次／分鐘。採單一樣本、雙尾檢定，$\alpha=.05$，目標檢定力 .80。
+
+```{r}
+#| label: one-sample-n
+heart <- power.t.test(
+  delta = 5, sd = 10, power = .80, type = "one.sample",
+  sig.level = .05, strict = TRUE
+)
+heart$n
+ceiling(heart$n)
+```
+
+網路搜尋例：改用兩個獨立組，目標平均差 .71 分，兩組標準差皆估為 1.154 分，採雙尾檢定，目標檢定力 .80。
+
+```{r}
+#| label: two-sample-n
+search <- power.t.test(
+  delta = .71, sd = 1.154, power = .80, type = "two.sample",
+  sig.level = .05, strict = TRUE
+)
+search$n
+ceiling(search$n)
+```
+
+把上面那段的 `sig.level` 依序改為 `.05/3`（三對 Bonferroni 的單次水準）與 `.001`，各跑一次。三種設定下，各要收多少人？請分別寫每組人數與總人數。
+
+（在此作答）
+
+對照 Week 10 的常態近似公式 $n=2\left[(z_{1-\alpha/2}+z_{1-\beta})\,\sigma/\delta\right]^2$（每組）。它用常態分布代替 t 分布，所以會比 `power.t.test()` 少一點。
+
+```{r}
+#| label: normal-approx-n
+z_n <- 2 * ((qnorm(.975) + qnorm(.80)) * 1.154 / .71)^2
+c(normal_approx = z_n, t_based = search$n)
+```
+
+練習 2（附錄）：若網路搜尋例改成每組 30 人，維持雙尾 $\alpha=.05$，要怎麼改函數的引數來計算檢定力？
+
+```{r}
+#| label: power-exercise
+# Add your code here.
+```
+
+（在此寫下檢定力與解讀）
+
+
+## 資料來源
+
+- R datasets::chickwts；IMS 2e §22.5練習5，印刷p391／PDF第397頁，原題六組，本段選三組作等人數示範。
+- 校正示範改編自Rosner 8e Table12.33：只將僅減重平均5.3改6.4，其餘摘要不變，再以mean+sd*scale(1:20)人工建立個別值。這是教學調整，不是原書資料。
+- FDR/BH、Tukey分布與R函數計算詳見[學生計算講義](../week11_multiple_comparisons_calculation_handout.qmd)。

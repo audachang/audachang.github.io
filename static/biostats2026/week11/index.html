@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Week 11：多重比較、Tukey HSD、FDR、雙因子變異數分析與兩段 R tutorial。">
+  <title>第十一週｜生物統計學與 R</title>
+  <link rel="stylesheet" href="../site.css">
+  <link rel="icon" href="../assets/favicon.svg">
+</head>
+<body><main>
+  <p class="crumb"><a href="../">課程目錄</a>／第十一週</p>
+  <header>
+    <p class="eyebrow">HT3001B · FALL 2026</p>
+    <h1>第十一週｜2026 年 11 月 19 日</h1>
+    <p class="intro">先理解多重比較如何控制誤報，再用 R 重算；接著判讀兩個因子的主要效果與交互作用，最後用 R 完成雙因子分析。</p>
+  </header>
+  <section aria-labelledby="slides">
+    <h2 id="slides">本週投影片</h2>
+    <div class="decks">
+      <article>
+        <h3>Part One｜多重比較</h3>
+        <p>比較範圍、Bonferroni、Holm、Tukey HSD，以及 FWER 與 FDR 的差別和 BH 算法。</p>
+        <p class="meta">18 張（含封面）</p>
+        <a class="open" href="week11_part1_multiple_comparisons_slides.html">開啟多重比較投影片 →</a>
+      </article>
+      <article>
+        <h3>Part Two｜多重比較的 R tutorial</h3>
+        <p>用函數取得結果，再自行計算平方和、Tukey 門檻與 BH 校正後 p，逐步對照。</p>
+        <p class="meta">17 張（含封面）</p>
+        <a class="open" href="week11_part2_r_multiple_comparisons_slides.html">開啟多重比較 R tutorial →</a>
+      </article>
+      <article>
+        <h3>Part Three｜Two-way ANOVA</h3>
+        <p>從四格平均出發，理解邊際平均、主要效果、差之差與交互作用，拆解平方和並寫結論。</p>
+        <p class="meta">16 張（含封面）</p>
+        <a class="open" href="week11_part3_two_way_anova_slides.html">開啟雙因子變異數分析投影片 →</a>
+      </article>
+      <article>
+        <h3>Part Four｜Two-way ANOVA 的 R tutorial</h3>
+        <p>用 R 建立含交互作用的模型，再自行計算各效果的平方和、均方、F 與 p。</p>
+        <p class="meta">8 張（含封面）</p>
+        <a class="open" href="week11_part4_r_two_way_anova_slides.html">開啟雙因子 ANOVA R tutorial →</a>
+      </article>
+    </div>
+    <p>每個 Part 的最後一頁都有 Slido 入口與 QR code，各三題；作答時依課堂開放的活動加入。</p>
+  </section>
+  <section aria-labelledby="reading">
+    <h2 id="reading">計算講義</h2>
+    <p><a href="week11_multiple_comparisons_calculation_handout.html">多重比較計算講義：Tukey HSD、FWER 與 FDR</a>，包含公式、數值代入、自行計算與 R 函數對照。</p>
+  </section>
+  <section aria-labelledby="lab">
+    <h2 id="lab">R 實習下載</h2>
+    <p>兩段可各自從新的 R 工作階段開始，只需 R 內建函數。下載整包並解壓縮，把起始 QMD 與同段 CSV 放在同一資料夾後，用 RStudio 開啟 QMD。</p>
+    <div class="decks">
+      <article>
+        <h3>Part Two：多重比較</h3>
+        <p><a class="open" href="lab/week11_part2_r_tutorial.zip" download>下載 Part Two 整包 ZIP</a></p>
+        <ul>
+          <li><a href="lab/week11_r_multiple_comparisons_starter.qmd" download>學生起始 QMD</a></li>
+          <li><a href="lab/week11_r_multiple_comparisons.R" download>逐步計算與函數對照 R 程式</a></li>
+          <li><a href="lab/week11_correction_demo_reconstructed.csv" download>校正示範調整 CSV</a></li>
+        </ul>
+        <p>本段將「僅減重」平均調整為 6.4，示範同一比較在不同校正下的判斷；不是課本原始數字。</p>
+      </article>
+      <article>
+        <h3>Part Four：Two-way ANOVA</h3>
+        <p><a class="open" href="lab/week11_part4_r_tutorial.zip" download>下載 Part Four 整包 ZIP</a></p>
+        <ul>
+          <li><a href="lab/week11_r_two_way_anova_starter.qmd" download>學生起始 QMD</a></li>
+          <li><a href="lab/week11_r_two_way_anova.R" download>逐步計算與函數對照 R 程式</a></li>
+          <li><a href="lab/week11_counseling_reconstructed.csv" download>原書摘要重建 CSV</a></li>
+        </ul>
+        <p>本段回到 Rosner 原書摘要，「僅減重」平均為 5.3。CSV 是依摘要重建的教學資料，不是臨床原始個別資料。</p>
+      </article>
+    </div>
+    <p>兩份 CSV 用途不同，請勿混用；資料限制與自行計算的步驟也列在各段實習中。</p>
+  </section>
+  <footer>
+    <p>教材整理：張智宏（Erik Chang） · <a href="../">課程目錄</a></p>
+    <p>主要教材：IMS 2e 與 Rosner 8e。各頁列出來源，教學調整資料與自製延伸圖另行標示。</p>
+  </footer>
+</main></body>
+</html>

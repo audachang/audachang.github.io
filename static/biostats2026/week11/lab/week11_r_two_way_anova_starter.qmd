@@ -1,0 +1,101 @@
+---
+title: "Week 11｜Part Four：Two-way ANOVA R tutorial"
+author: "你的姓名、學號"
+date: "2026-11-19"
+lang: zh-Hant
+format:
+  html:
+    embed-resources: true
+    toc: true
+execute:
+  echo: true
+---
+
+## 開始前
+
+本段可直接從乾淨R工作階段開始，不必先執行Part Two。把本QMD和 `week11_counseling_reconstructed.csv` 放在同一資料夾，再設定工作目錄。此CSV依Rosner原書摘要重建，各格均數為8.6、5.3、4.9、1.1，不是Part Two調整為6.4的資料，也不是原書個別資料。
+
+```{r}
+#| label: setup
+getwd()
+file.exists("week11_counseling_reconstructed.csv")
+```
+
+以格平均與平方和逐步計算，並和 `aov()` 對照；人工重建值只能驗算，不能用來證明原研究常態性或等變異。
+
+## A. 雙因子 ANOVA
+
+資料說明：Rosner（2016）Table 12.33 只提供四組的平均與標準差（每組 20 人）。`week11_counseling_reconstructed.csv` 是**依這份摘要重建的教學資料，不是原書的個別病人資料**；每格的平均與標準差和書上一致，ANOVA 平方和也相同。這份資料只拿來練習計算，不用來檢查常態或殘差。`dbp_decrease` 是一個月後舒張壓下降量（mmHg），正值表示下降。
+
+```{r}
+#| label: counseling-data
+cs <- read.csv("week11_counseling_reconstructed.csv")
+cs$weight <- factor(cs$weight, levels = c("no", "yes"))
+cs$meditation <- factor(cs$meditation, levels = c("no", "yes"))
+with(cs, table(weight, meditation))
+cm <- with(cs, tapply(dbp_decrease, list(weight, meditation), mean))
+cm
+```
+
+```{r}
+#| label: interaction-plot
+with(cs, interaction.plot(
+  meditation, weight, dbp_decrease, type = "b",
+  xlab = "Meditation counseling", ylab = "Mean DBP decrease (mm Hg)",
+  trace.label = "Weight counseling", col = c("grey35", "#B64C14"),
+  lty = c(1, 2), pch = c(16, 15), lwd = 2
+))
+```
+
+先從圖讀兩種冥想條件下各自的減重差，一律用「有減重 − 無減重」。
+
+（在此作答）
+
+```{r}
+#| label: two-way-anova
+fit_full <- aov(dbp_decrease ~ weight * meditation, data = cs)
+summary(fit_full)
+```
+
+表中哪一列檢查減重的差是否隨冥想條件而變？請寫出該列的 $F$、兩個自由度與 $p$ 值。
+
+（在此作答）
+
+自己算一次（各格人數相同時才能直接平均格平均）：
+
+```{r}
+#| label: two-way-by-hand
+grand2 <- mean(cm)
+row_m <- rowMeans(cm)
+col_m <- colMeans(cm)
+additive <- outer(row_m, col_m, "+") - grand2
+dev <- cm - additive
+additive
+dev
+ss_w <- 2 * 20 * sum((row_m - grand2)^2)
+ss_m <- 2 * 20 * sum((col_m - grand2)^2)
+ss_i <- 20 * sum(dev^2)
+ss_e <- sum((cs$dbp_decrease - ave(cs$dbp_decrease, cs$weight, cs$meditation))^2)
+ms_e <- ss_e / 76
+data.frame(term = c("weight", "meditation", "weight:meditation", "Residuals"),
+           ss = c(ss_w, ss_m, ss_i, ss_e),
+           F = c(c(ss_w, ss_m, ss_i) / ms_e, NA))
+```
+
+四個偏差 `dev` 各是多少？交互作用平方和為什麼這麼小？
+
+（在此作答）
+
+練習 1：把 `weight * meditation` 改成 `weight + meditation`，輸出表少了哪一列？殘差的自由度與平方和各變成多少？和 `ss_i` 有什麼關係？
+
+```{r}
+#| label: additive-exercise
+# Add your additive model here.
+```
+
+（在此作答）
+
+
+## 資料來源
+
+依Rosner（2016）Fundamentals of Biostatistics 8e，Table12.33、Problems12.14–12.17（印刷p622）摘要重建；原書只給各格平均、SD與每格20人。個別數值按mean+sd*scale(1:20)建立，不能用來推論原研究的分布條件。
