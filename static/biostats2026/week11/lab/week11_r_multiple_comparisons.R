@@ -6,17 +6,22 @@ if (!file.exists("week11_correction_demo_reconstructed.csv")) {
   stop("Place the correction-demo CSV in the current working directory.")
 }
 
+library(dplyr)
+
 # B. One-way ANOVA: three feeds ------------------------------------------------
 str(chickwts)
-three <- subset(chickwts, feed %in% c("casein", "linseed", "sunflower"))
+feeds <- c("casein", "linseed", "sunflower")
+three <- chickwts |> filter(feed %in% feeds)
 print(head(three))
-three$feed <- factor(three$feed, levels = c("casein", "linseed", "sunflower"))
-print(table(three$feed))
-print(with(three, tapply(weight, feed, mean)))
-# Condition check on the real data: group SDs (largest / smallest about 1.32).
-group_sd <- with(three, tapply(weight, feed, sd))
-print(group_sd)
-print(max(group_sd) / min(group_sd))
+three <- three |> mutate(feed = factor(feed, levels = feeds))
+feed_summary <- three |>
+  group_by(feed) |>
+  summarise(
+    n = n(), mean_weight = mean(weight), sd_weight = sd(weight),
+    ss_within = sum((weight - mean(weight))^2), .groups = "drop"
+  )
+print(feed_summary)
+print(max(feed_summary$sd_weight) / min(feed_summary$sd_weight))
 
 fit <- aov(weight ~ feed, data = three)
 print(summary(fit))
@@ -25,13 +30,13 @@ f_obs <- summary(fit)[[1]][1, "F value"]
 print(pf(f_obs, df1 = 2, df2 = 33, lower.tail = FALSE))
 
 # Step by step: the same SS, MS, F and p.
-n <- table(three$feed)
-m <- tapply(three$weight, three$feed, mean)
+n <- setNames(feed_summary$n, feed_summary$feed)
+m <- setNames(feed_summary$mean_weight, feed_summary$feed)
 grand <- mean(three$weight)
 k <- length(m)
 N <- nrow(three)
-ss_group <- sum(n * (m - grand)^2)
-ss_error <- sum((three$weight - m[three$feed])^2)   # m[three$feed]: each chick's own group mean
+ss_group <- sum(feed_summary$n * (m - grand)^2)
+ss_error <- sum(feed_summary$ss_within)
 df_group <- k - 1
 df_error <- N - k
 ms_group <- ss_group / df_group
@@ -48,7 +53,7 @@ stopifnot(all.equal(ss_group, summary(fit)[[1]][1, "Sum Sq"]),
           all.equal(f_hand, f_obs))
 
 # Exercise 1: a numeric code uses 1 df; factor() restores the three groups.
-three$code <- as.integer(three$feed)
+three <- three |> mutate(code = as.integer(feed))
 print(summary(aov(weight ~ code, data = three)))
 print(summary(aov(weight ~ factor(code), data = three)))
 
@@ -90,16 +95,24 @@ stopifnot(all.equal(p_holm, p.adjust(p_raw, "holm")))
 
 # C2. Teaching-adjusted four-group example; not the original Rosner data.
 # Only the weight-only mean is changed from 5.3 to 6.4. n and SD stay the same.
-demo <- read.csv("week11_correction_demo_reconstructed.csv")
-demo$group <- factor(demo$group,
-  levels = c("neither", "meditation_only", "weight_only", "both"))
+demo <- read.csv("week11_correction_demo_reconstructed.csv") |>
+  mutate(group = factor(group, levels = c(
+    "neither", "meditation_only", "weight_only", "both"
+  )))
+demo_summary <- demo |>
+  group_by(group) |>
+  summarise(
+    n = n(), mean_dbp = mean(dbp_decrease),
+    ss_within = sum((dbp_decrease - mean(dbp_decrease))^2),
+    .groups = "drop"
+  )
 demo_fit <- aov(dbp_decrease ~ group, data = demo)
 print(summary(demo_fit))
 print(TukeyHSD(demo_fit))
-demo_n <- table(demo$group)
-demo_m <- tapply(demo$dbp_decrease, demo$group, mean)
-demo_df <- nrow(demo) - length(demo_m)
-demo_ss_error <- sum((demo$dbp_decrease - demo_m[demo$group])^2)
+demo_n <- setNames(demo_summary$n, demo_summary$group)
+demo_m <- setNames(demo_summary$mean_dbp, demo_summary$group)
+demo_df <- nrow(demo) - nrow(demo_summary)
+demo_ss_error <- sum(demo_summary$ss_within)
 demo_mse <- demo_ss_error / demo_df
 demo_pairs <- t(combn(levels(demo$group), 2))
 demo_diff <- as.numeric(demo_m[demo_pairs[, 2]] - demo_m[demo_pairs[, 1]])
@@ -130,7 +143,7 @@ stopifnot(max(abs(demo_results$Tukey-demo_tk[, "p adj"])) < 1e-10,
           max(abs(demo_results$Tukey_lwr-demo_tk[, "lwr"])) < 1e-8,
           max(abs(demo_holm-p.adjust(demo_raw, "holm"))) < 1e-12,
           max(abs(demo_bonf-p.adjust(demo_raw, "bonferroni"))) < 1e-12)
-print(demo_results[demo_results$pair == "weight_only-neither", ])
+print(demo_results |> filter(pair == "weight_only-neither"))
 
 # C3. FDR with Benjamini-Hochberg: step-up decision and adjusted p-values.
 # This .05 is the FDR target, not Tukey's studentized-range statistic q.
@@ -151,8 +164,8 @@ demo_bh <- numeric(demo_count)
 demo_bh[demo_ord] <- demo_bh_sorted
 print(data.frame(rank = demo_rank, raw = demo_sorted,
                  candidate = demo_bh_candidate, BH_adjusted = demo_bh_sorted))
-demo_results$BH <- demo_bh
-print(demo_results[demo_results$pair == "weight_only-neither", ])
+demo_results <- demo_results |> mutate(BH = demo_bh)
+print(demo_results |> filter(pair == "weight_only-neither"))
 stopifnot(max(abs(demo_bh-p.adjust(demo_raw, "BH"))) < 1e-12,
           identical(demo_bh_sorted <= demo_fdr_target, demo_bh_reject_sorted))
 

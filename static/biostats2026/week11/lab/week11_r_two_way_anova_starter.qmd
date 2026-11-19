@@ -13,10 +13,11 @@ execute:
 
 ## 開始前
 
-本段可直接從乾淨R工作階段開始，不必先執行Part Two。把本QMD和 `week11_counseling_reconstructed.csv` 放在同一資料夾，再設定工作目錄。此CSV依Rosner原書摘要重建，各格均數（DBP下降，mmHg）：兩者皆有（`weight`＝yes、`meditation`＝yes）8.6；僅減重（yes、no）5.3；僅冥想（no、yes）4.9；無諮詢（no、no）1.1。這不是Part Two調整為6.4的資料，也不是原書個別資料。
+從新的 R 工作階段開始並載入 `dplyr`。把本QMD和 `week11_counseling_reconstructed.csv` 放在同一資料夾，再設定工作目錄。此CSV依Rosner原書摘要重建，各格均數（DBP下降，mmHg）：兩者皆有（`weight`＝yes、`meditation`＝yes）8.6；僅減重（yes、no）5.3；僅冥想（no、yes）4.9；無諮詢（no、no）1.1。這不是Part Two調整為6.4的資料，也不是原書個別資料。
 
 ```{r}
 #| label: setup
+library(dplyr)
 getwd()
 file.exists("week11_counseling_reconstructed.csv")
 ```
@@ -29,12 +30,19 @@ file.exists("week11_counseling_reconstructed.csv")
 
 ```{r}
 #| label: counseling-data
-cs <- read.csv("week11_counseling_reconstructed.csv")
-cs$weight <- factor(cs$weight, levels = c("no", "yes"))
-cs$meditation <- factor(cs$meditation, levels = c("no", "yes"))
-with(cs, table(weight, meditation))
-cm <- with(cs, tapply(dbp_decrease, list(weight, meditation), mean))
-cm
+cs <- read.csv("week11_counseling_reconstructed.csv") |>
+  mutate(
+    weight = factor(weight, levels = c("no", "yes")),
+    meditation = factor(meditation, levels = c("no", "yes"))
+  )
+cell_summary <- cs |>
+  group_by(weight, meditation) |>
+  summarise(
+    n = n(), mean_dbp = mean(dbp_decrease),
+    ss_within = sum((dbp_decrease - mean(dbp_decrease))^2),
+    .groups = "drop"
+  )
+cell_summary
 ```
 
 ```{r}
@@ -61,32 +69,76 @@ summary(fit_full)
 
 （在此作答）
 
-自己算一次（各格人數相同時才能直接平均格平均）：
+## B. 用 Part 3 的公式重算
+
+$A$ 是減重諮詢，$B$ 是冥想諮詢。把格平均排成矩陣，再算加法預測與偏差。這些公式適用於各格人數相同的設計。
 
 ```{r}
 #| label: two-way-by-hand
-grand2 <- mean(cm)
+cm <- xtabs(mean_dbp ~ weight + meditation, data = cell_summary)
+a <- nrow(cm)
+b <- ncol(cm)
+n_cell <- cell_summary$n[1]
+stopifnot(nrow(cell_summary) == a * b,
+          n_cell > 1, all(cell_summary$n == n_cell))
+grand <- mean(cm)
 row_m <- rowMeans(cm)
 col_m <- colMeans(cm)
-additive <- outer(row_m, col_m, "+") - grand2
+additive <- outer(row_m, col_m, "+") - grand
 dev <- cm - additive
 additive
 dev
-ss_w <- 2 * 20 * sum((row_m - grand2)^2)
-ss_m <- 2 * 20 * sum((col_m - grand2)^2)
-ss_i <- 20 * sum(dev^2)
-ss_e <- sum((cs$dbp_decrease - ave(cs$dbp_decrease, cs$weight, cs$meditation))^2)
-ms_e <- ss_e / 76
-data.frame(term = c("weight", "meditation", "weight:meditation", "Residuals"),
-           ss = c(ss_w, ss_m, ss_i, ss_e),
-           F = c(c(ss_w, ss_m, ss_i) / ms_e, NA))
+
+ss_a <- b * n_cell * sum((row_m - grand)^2)
+ss_b <- a * n_cell * sum((col_m - grand)^2)
+ss_ab <- n_cell * sum(dev^2)
+ss_e <- sum(cell_summary$ss_within)
+ss_c <- n_cell * sum((cm - grand)^2)
+ss_t <- sum((cs$dbp_decrease - grand)^2)
+stopifnot(
+  isTRUE(all.equal(ss_c, ss_a + ss_b + ss_ab)),
+  isTRUE(all.equal(ss_t, ss_c + ss_e))
+)
 ```
 
-四個偏差 `dev` 各是多少？交互作用平方和為什麼這麼小？
+四個偏差 `dev` 各是多少？為什麼 $SS_{AB}$ 比 $SS_A$、$SS_B$ 小？
 
 （在此作答）
 
-練習 1：把 `weight * meditation` 改成 `weight + meditation`，輸出表少了哪一列？殘差的自由度與平方和各變成多少？和 `ss_i` 有什麼關係？
+用自由度把平方和換成均方，填入 Part 3 的 ANOVA 通式表。
+
+```{r}
+#| label: anova-table-by-hand
+df <- c(a - 1, b - 1, (a - 1) * (b - 1), a * b * (n_cell - 1))
+ss <- c(ss_a, ss_b, ss_ab, ss_e)
+ms <- ss / df
+f_values <- ms[1:3] / ms[4]
+
+two_way_hand <- data.frame(
+  term = c("weight", "meditation", "weight:meditation",
+           "Residuals", "Total"),
+  df = c(df, a * b * n_cell - 1),
+  SS = c(ss, ss_t), MS = c(ms, NA_real_),
+  F = c(f_values, NA_real_, NA_real_),
+  p = c(pf(f_values, df[1:3], df[4], lower.tail = FALSE),
+        NA_real_, NA_real_)
+)
+two_way_hand
+r_table <- summary(fit_full)[[1]]
+stopifnot(
+  isTRUE(all.equal(two_way_hand$df[1:4], r_table[, "Df"])),
+  isTRUE(all.equal(two_way_hand$SS[1:4], r_table[, "Sum Sq"])),
+  isTRUE(all.equal(two_way_hand$MS[1:4], r_table[, "Mean Sq"])),
+  isTRUE(all.equal(two_way_hand$F[1:4], r_table[, "F value"])),
+  isTRUE(all.equal(two_way_hand$p[1:4], r_table[, "Pr(>F)"]))
+)
+```
+
+用哪一列均方當三個 $F$ 值的分母？為什麼 R 的 `summary(fit_full)` 沒有列出總計？
+
+（在此作答）
+
+練習 1：把 `weight * meditation` 改成 `weight + meditation`，輸出表少了哪一列？殘差的自由度與平方和各變成多少？和 `ss_ab` 有什麼關係？
 
 ```{r}
 #| label: additive-exercise

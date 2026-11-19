@@ -13,10 +13,11 @@ execute:
 
 ## 開始前
 
-本段用R內建chickwts與 `week11_correction_demo_reconstructed.csv`。把本QMD和CSV放在同一資料夾，將R工作目錄設到該資料夾。由單因子建模進入多重比較，再自行算Tukey與BH；檢定力複習留在附錄。
+先載入 `dplyr`。本實習使用 R 內建資料 `chickwts` 與 `week11_correction_demo_reconstructed.csv`。把本QMD和CSV放在同一資料夾，將R工作目錄設到該資料夾。由單因子建模進入多重比較，再自行算Tukey與BH；檢定力複習留在附錄。
 
 ```{r}
 #| label: setup
+library(dplyr)
 getwd()
 file.exists("week11_correction_demo_reconstructed.csv")
 head(chickwts)
@@ -31,12 +32,17 @@ head(chickwts)
 ```{r}
 #| label: feed-data
 str(chickwts)
-three <- subset(chickwts, feed %in% c("casein", "linseed", "sunflower"))
+feeds <- c("casein", "linseed", "sunflower")
+three <- chickwts |> filter(feed %in% feeds)
 head(three)
-three$feed <- factor(three$feed, levels = c("casein", "linseed", "sunflower"))
-table(three$feed)
-with(three, tapply(weight, feed, mean))
-with(three, tapply(weight, feed, sd))
+three <- three |> mutate(feed = factor(feed, levels = feeds))
+feed_summary <- three |>
+  group_by(feed) |>
+  summarise(
+    n = n(), mean_weight = mean(weight), sd_weight = sd(weight),
+    ss_within = sum((weight - mean(weight))^2), .groups = "drop"
+  )
+feed_summary
 ```
 
 條件檢查：三組標準差最大與最小相差幾倍？小雞是怎麼分到各組的？
@@ -52,15 +58,14 @@ f_obs <- summary(fit)[[1]][1, "F value"]
 pf(f_obs, df1 = 2, df2 = 33, lower.tail = FALSE)
 ```
 
-自己算一次：用各組人數、組平均與總平均求出組間與組內平方和，再除以自由度。
+自己算一次：用 `feed_summary` 的組別人數、組平均與總平均求組間平方和。把各組的 `ss_within` 相加，得到組內平方和。
 
 ```{r}
 #| label: one-way-by-hand
-n <- table(three$feed)
-m <- tapply(three$weight, three$feed, mean)
+m <- setNames(feed_summary$mean_weight, feed_summary$feed)
 grand <- mean(three$weight)
-ss_group <- sum(n * (m - grand)^2)
-ss_error <- sum((three$weight - m[three$feed])^2)
+ss_group <- sum(feed_summary$n * (m - grand)^2)
+ss_error <- sum(feed_summary$ss_within)
 ms_group <- ss_group / (3 - 1)
 ms_error <- ss_error / (36 - 3)
 f_hand <- ms_group / ms_error
@@ -77,7 +82,7 @@ c(grand = grand, ss_group = ss_group, ss_error = ss_error,
 
 ```{r}
 #| label: group-coding
-three$code <- as.integer(three$feed)
+three <- three |> mutate(code = as.integer(feed))
 summary(aov(weight ~ code, data = three))
 # Add your corrected model here.
 ```
@@ -160,16 +165,24 @@ pmin(1, cummax((3:1) * sort(p)))
 #| label: correction-demo-calculations
 # C2. Teaching-adjusted four-group example; not the original Rosner data.
 # Only the weight-only mean is changed from 5.3 to 6.4. n and SD stay the same.
-demo <- read.csv("week11_correction_demo_reconstructed.csv")
-demo$group <- factor(demo$group,
-  levels = c("neither", "meditation_only", "weight_only", "both"))
+demo <- read.csv("week11_correction_demo_reconstructed.csv") |>
+  mutate(group = factor(group, levels = c(
+    "neither", "meditation_only", "weight_only", "both"
+  )))
+demo_summary <- demo |>
+  group_by(group) |>
+  summarise(
+    n = n(), mean_dbp = mean(dbp_decrease),
+    ss_within = sum((dbp_decrease - mean(dbp_decrease))^2),
+    .groups = "drop"
+  )
 demo_fit <- aov(dbp_decrease ~ group, data = demo)
 print(summary(demo_fit))
 print(TukeyHSD(demo_fit))
-demo_n <- table(demo$group)
-demo_m <- tapply(demo$dbp_decrease, demo$group, mean)
-demo_df <- nrow(demo) - length(demo_m)
-demo_ss_error <- sum((demo$dbp_decrease - demo_m[demo$group])^2)
+demo_n <- setNames(demo_summary$n, demo_summary$group)
+demo_m <- setNames(demo_summary$mean_dbp, demo_summary$group)
+demo_df <- nrow(demo) - nrow(demo_summary)
+demo_ss_error <- sum(demo_summary$ss_within)
 demo_mse <- demo_ss_error / demo_df
 demo_pairs <- t(combn(levels(demo$group), 2))
 demo_diff <- as.numeric(demo_m[demo_pairs[, 2]] - demo_m[demo_pairs[, 1]])
@@ -200,7 +213,7 @@ stopifnot(max(abs(demo_results$Tukey-demo_tk[, "p adj"])) < 1e-10,
           max(abs(demo_results$Tukey_lwr-demo_tk[, "lwr"])) < 1e-8,
           max(abs(demo_holm-p.adjust(demo_raw, "holm"))) < 1e-12,
           max(abs(demo_bonf-p.adjust(demo_raw, "bonferroni"))) < 1e-12)
-print(demo_results[demo_results$pair == "weight_only-neither", ])
+print(demo_results |> filter(pair == "weight_only-neither"))
 
 ```
 
@@ -233,8 +246,8 @@ demo_bh <- numeric(demo_count)
 demo_bh[demo_ord] <- demo_bh_sorted
 print(data.frame(rank = demo_rank, raw = demo_sorted,
                  candidate = demo_bh_candidate, BH_adjusted = demo_bh_sorted))
-demo_results$BH <- demo_bh
-print(demo_results[demo_results$pair == "weight_only-neither", ])
+demo_results <- demo_results |> mutate(BH = demo_bh)
+print(demo_results |> filter(pair == "weight_only-neither"))
 stopifnot(max(abs(demo_bh-p.adjust(demo_raw, "BH"))) < 1e-12,
           identical(demo_bh_sorted <= demo_fdr_target, demo_bh_reject_sorted))
 
