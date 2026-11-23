@@ -1,10 +1,10 @@
 {
   "meta": {
-    "updatedAt": "2026-11-16",
+    "updatedAt": "2026-11-23",
     "status": "checked",
     "reviewPolicy": "Candidates are discovered automatically from Brave Search and official-looking sources. Review each candidate before approving it into activities.json.",
     "lastMessage": "1 new candidate(s) discovered.",
-    "updatedAtTime": "16:06",
+    "updatedAtTime": "17:16",
     "timeZone": "Asia/Taipei",
     "timeZoneLabel": "台灣時間"
   },
@@ -1761,6 +1761,31 @@
           "12月12日"
         ],
         "contentHash": "c07c88915c669ce0"
+      }
+    },
+    {
+      "id": "candidate-taipei-9d42e7dba6",
+      "city": "台北",
+      "status": "candidate",
+      "title": "2026 活動年曆 | 臺北旅遊網",
+      "url": "https://www.travel.taipei/zh-tw/event-calendar/2026",
+      "sourceTitle": "Taipei Travel",
+      "description": "2026台北霞海城隍文化節─誕隍祭 · 宗教慶典 · 2026-06-14~2026-07-02 · 2026臺北兒童藝術節 · 觀光旅遊 · 2026-06-30~2026-08-06 · 2026臺北親水節 · 觀光旅遊 · 2026-07-04~2026-08-30 · 光華數位新天地18週年慶活動 ·",
+      "dateSnippets": [
+        "2026-06-14",
+        "2026-07-02",
+        "2026-06-30",
+        "2026-08-06",
+        "2026-07-04",
+        "2026-08-30"
+      ],
+      "reason": "Brave Search result matched official domain and summer/kids activity keywords.",
+      "discoveredAt": "2026-11-23",
+      "pageCheck": {
+        "ok": true,
+        "status": 200,
+        "dateSnippets": [],
+        "contentHash": "5c362c0091f9e895"
       }
     }
   ]
