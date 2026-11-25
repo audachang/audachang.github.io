@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>吸引力預測網路的跨族群解碼｜Luo, Wu &amp; Chang</title>
+<style>
+  :root{
+    --ink:#1c2331; --muted:#5d6676; --faint:#8a93a3; --line:#dde2ea;
+    --bg:#eef1f6; --paper:#ffffff; --navy:#1f3b63; --navy-soft:#e8eef7;
+    --cau:#2a9a5a; --cau-soft:#e5f4eb; --ea:#b04dbd; --ea-soft:#f6e9f8; --non:#555b66;
+    --warn:#a85a12; --warn-soft:#fbf1e4;
+    --font:"Noto Sans TC","Noto Sans CJK TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#0f1520;font-family:var(--font);color:var(--ink);overflow:hidden}
+  .deck{position:fixed;inset:0}
+  .slide{position:absolute;left:50%;top:50%;width:1600px;height:900px;margin:-450px 0 0 -800px;
+    background:var(--paper);display:none;flex-direction:column;padding:56px 72px 44px;
+    transform-origin:center center;font-variant-numeric:tabular-nums}
+  .slide.active{display:flex}
+  .slide::before{content:"";position:absolute;left:0;top:0;right:0;height:8px;
+    background:linear-gradient(90deg,var(--cau) 0 33%,var(--non) 33% 66%,var(--ea) 66% 100%)}
+  .kicker{font-size:21px;letter-spacing:.06em;color:var(--navy);font-weight:600;margin-bottom:10px}
+  h2{font-size:44px;line-height:1.25;font-weight:700;margin-bottom:26px}
+  h2 .en{font-weight:500;color:var(--muted);font-size:26px;margin-left:14px}
+  p,li{font-size:25px;line-height:1.6}
+  .muted{color:var(--muted)} .small{font-size:19px;line-height:1.5}
+  .cau{color:var(--cau);font-weight:700} .ea{color:var(--ea);font-weight:700} .non{color:var(--non);font-weight:700}
+  .foot{position:absolute;left:72px;right:72px;bottom:16px;display:flex;justify-content:space-between;
+    font-size:15px;color:var(--faint)}
+  .body{flex:1;min-height:0;display:flex;gap:40px}
+  figure{display:flex;flex-direction:column;min-height:0}
+  figure img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+  figcaption{font-size:17px;color:var(--muted);line-height:1.45;margin-top:8px}
+  .card{background:var(--navy-soft);border-radius:14px;padding:20px 24px}
+  .card h3{font-size:24px;color:var(--navy);margin-bottom:6px}
+  .card p,.card li{font-size:21px;line-height:1.55}
+  .card ul{padding-left:1.1em}
+  .caveat{background:var(--warn-soft);border-left:5px solid var(--warn);border-radius:8px;padding:12px 18px;font-size:19px;line-height:1.5;color:#5a3a12}
+  .concl .card{padding:36px 32px;align-self:stretch;display:flex;flex-direction:column;justify-content:flex-start}
+  .concl .card h3{font-size:30px;margin-bottom:14px}
+  .concl .card li{font-size:25px;line-height:1.6;margin-bottom:12px}
+  .take{background:var(--navy);color:#fff;border-radius:14px;padding:18px 28px;font-size:27px;line-height:1.5;font-weight:600}
+  .num{font-weight:700;font-size:1.05em}
+  /* title */
+  .title-wrap{display:flex;gap:40px;align-items:center;flex:1}
+  .title-wrap .txt{flex:1.15}
+  .title-wrap h1{font-size:52px;line-height:1.2;font-weight:700;margin-bottom:14px}
+  .title-wrap .sub{font-size:30px;color:var(--muted);margin-bottom:26px}
+  .title-wrap .zh{font-size:30px;color:var(--navy);font-weight:600;margin-bottom:40px;line-height:1.45}
+  .authors{font-size:25px;line-height:1.6}
+  .tag{display:inline-block;margin-top:22px;font-size:18px;border:1.5px solid var(--warn);color:var(--warn);border-radius:999px;padding:4px 14px}
+  /* notes */
+  .notes{display:none}
+  #notesPanel{position:fixed;left:0;right:0;bottom:0;max-height:42vh;overflow:auto;background:rgba(15,21,32,.96);
+    color:#e9edf3;padding:18px 28px 22px;font-size:19px;line-height:1.7;display:none;z-index:20;border-top:3px solid var(--navy)}
+  #notesPanel .t{font-size:14px;color:#9fb0c8;letter-spacing:.08em;margin-bottom:6px}
+  #notesPanel p{font-size:19px;line-height:1.7;margin-bottom:8px}
+  body.show-notes #notesPanel{display:block}
+  .controls{position:fixed;right:14px;top:14px;display:flex;gap:6px;z-index:30;opacity:.25;transition:opacity .2s}
+  .controls:hover{opacity:1}
+  .controls button{background:#26324a;color:#fff;border:0;border-radius:8px;padding:8px 12px;font-size:15px;cursor:pointer;font-family:var(--font)}
+  #progress{position:fixed;left:0;top:0;height:3px;background:var(--cau);z-index:25;transition:width .2s}
+  #help{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;border-radius:12px;padding:22px 28px;
+    z-index:40;display:none;box-shadow:0 10px 40px rgba(0,0,0,.4);font-size:17px;line-height:1.9}
+  body.show-help #help{display:block}
+  kbd{background:#eef1f6;border:1px solid #ccd3de;border-radius:5px;padding:1px 7px;font-family:ui-monospace,monospace;font-size:15px}
+  @media print{
+    @page{size:1600px 900px;margin:0}
+    html,body{background:#fff;overflow:visible;height:auto}
+    .deck{position:static}
+    .slide{position:relative;display:flex!important;left:0;top:0;margin:0;transform:none!important;page-break-after:always;break-after:page}
+    #notesPanel,.controls,#progress,#help{display:none!important}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div class="deck" id="deck">
+
+<!-- 0 Title -->
+<section class="slide" data-label="封面">
+  <div class="title-wrap">
+    <div class="txt">
+      <div class="kicker">ACL@NCU · Seminar</div>
+      <h1>What can a facial-attractiveness network decode across demographic groups?</h1>
+      <div class="sub">A layer-wise study of visual representations</div>
+      <div class="zh">吸引力預測網路在不同族群臉孔上能解碼出什麼？<br>逐層視覺表徵分析</div>
+      <div class="authors">Pei-Xuan Luo, Denise Hsien Wu, Erik Chihhung Chang<br>
+        <span class="muted">國立中央大學 認知神經科學研究所</span></div>
+      <span class="tag">Manuscript in preparation · 數據與結論以正式發表版本為準</span>
+    </div>
+    <figure style="flex:1;align-items:center"><img src="img/g_hero.jpg" alt="臉部輪廓與神經網路節點的概念插圖" style="border-radius:16px"></figure>
+  </div>
+  <div class="foot"><span>概念插圖由 Gemini 產生；結果圖取自論文稿</span><span class="pn"></span></div>
+  <div class="notes"><p>（開場前）這是一份尚未發表的稿件，數字以最終版本為準。</p></div>
+</section>
+
+<!-- 1 Motivation -->
+<section class="slide" data-label="研究動機" data-time="0:00–1:00">
+  <div class="kicker">研究動機與核心問題</div>
+  <h2>跨族群的預測落差，該怎麼解讀？</h2>
+  <div style="display:flex;flex-direction:column;gap:22px;flex:1;min-height:0">
+    <figure style="flex:0 0 auto"><img src="img/g_ore_bias.jpg" alt="人腦觀看臉孔與 CNN 黑盒子之間的問號" style="border-radius:14px;width:100%"></figure>
+    <div style="display:flex;gap:28px">
+      <div class="card" style="flex:1"><h3>人類：異族效應（ORE）</h3>
+        <p>臉孔辨識與吸引力評價的一致性，受對該族群的接觸經驗影響。</p></div>
+      <div class="card" style="flex:1"><h3>模型：跨族群預測落差</h3>
+        <p>CNN 遷移學習已能高度擬合平均評分；一旦跨族群掉分，常被直接稱為「演算法偏誤」或「演算法版的 ORE」。</p></div>
+    </div>
+    <div class="take">輸出變差，是表徵裡沒有另一群的資訊，還是最後的讀出沒有用對？<br>
+      <span style="font-weight:400;font-size:23px">→ 同時評估輸出表現，與 17 個深度的線性探針</span></div>
+  </div>
+  <div class="foot"><span>Luo, Wu &amp; Chang · manuscript in preparation</span><span class="pn"></span></div>
+  <div class="notes">
+    <p>各位老師、同學好。今天分享的問題是：當深度學習模型學會預測人臉吸引力評分，它學到了什麼？面對不同族群的臉孔，它的預測和內部表徵又怎麼變化？</p>
+    <p>人類研究裡有熟悉的異族效應：對較少接觸的族群，臉孔辨識比較差，吸引力評價的一致性也比較低。電腦視覺領域則大量用 CNN 和遷移學習預測吸引力評分，在公開資料集上已經能達到很高的相關。</p>
+    <p>但多數研究只看輸出端的分數。一旦族群之間出現落差，很容易直接說成「演算法有偏見」或「重現了異族效應」。這個推論少了一步：輸出變差，是網路裡真的沒有另一群臉孔的相關資訊，還是最後的讀出沒有用對？我們用逐層線性探針，把這兩件事分開來看。</p>
+  </div>
+</section>
+
+<!-- 2 Design -->
+<section class="slide" data-label="實驗設計" data-time="1:00–2:00">
+  <div class="kicker">實驗設計</div>
+  <h2>受控的資料、三種模型、兩個層次的評估</h2>
+  <div class="body">
+    <figure style="flex:1.35;justify-content:center">
+      <img src="img/fig1_cv.png" alt="論文圖 1：五折交叉驗證與同群、跨群測試設計">
+      <figcaption>論文圖 1。以 Cau-FT 第 1 輪為例：4 份訓練（其中 20% 作 early stopping 驗證）、1 份同群測試，另一群 5 份全部作跨群測試。每份 300 張。</figcaption>
+    </figure>
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+      <div class="card" style="display:flex;gap:16px;align-items:center">
+        <img src="img/g_landmark.jpg" alt="臉部特徵點示意" style="width:118px;border-radius:10px">
+        <div><h3>刺激</h3>
+          <p>SCUT-FBP5500 中資料集標記為 Caucasian 與 East Asian 各 1,500 張，依評分分布配對；以特徵點擬合橢圓遮罩，只留內部臉孔。評分全部來自 <b>60 位年輕亞洲評分者</b>。</p></div>
+      </div>
+      <div class="card"><h3>模型（ImageNet 預訓練 GoogLeNet）</h3>
+        <p><span class="cau">Cau-FT</span> 只用 Caucasian 臉微調；<span class="ea">EA-FT</span> 只用 East Asian 臉微調；<span class="non">Non-FT</span> 未微調。輸出層改為單一數值迴歸。</p></div>
+      <div class="card"><h3>逐層線性探針</h3>
+        <p>17 個節點的活化值 → 稀疏隨機投影 → 線性 SVR（留一法），讀出評分的相關 r。</p></div>
+      <p class="small muted">整個流程以 3 個資料切分（seed 14、28、42）重複；圖中數字以 seed 28 為主。</p>
+    </div>
+  </div>
+  <div class="foot"><span>Luo, Wu &amp; Chang · manuscript in preparation</span><span class="pn"></span></div>
+  <div class="notes">
+    <p>資料來自 SCUT-FBP5500。我們依評分分布做分層抽樣，取資料集標記為 Caucasian 與 East Asian 的臉各 1,500 張，兩組評分分布對齊。再用 MediaPipe 的臉部特徵點擬合橢圓遮罩，去掉髮型、衣著和背景，只留內部臉孔。所有評分都來自 60 位年輕亞洲評分者，這點等一下解讀時很重要。</p>
+    <p>模型是 ImageNet 預訓練的 GoogLeNet，輸出層換成單一數值的迴歸。三種條件：只用 Caucasian 臉微調的 Cau-FT、只用 East Asian 臉微調的 EA-FT，以及沒有微調的 Non-FT。</p>
+    <p>左邊是交叉驗證設計：每一輪用四份訓練、一份做同群測試，再拿另一群的五份做跨群測試。內部表徵的部分，我們在 17 個節點抽活化值，用稀疏隨機投影降維，再用線性 SVR 以留一法解碼評分。整個流程用 3 個資料切分重複。</p>
+  </div>
+</section>
+
+<!-- 3 Output -->
+<section class="slide" data-label="發現一" data-time="2:00–3:00">
+  <div class="kicker">發現一 · 輸出端</div>
+  <h2>跨族群預測明顯下降，而且分數被壓縮、整體高估</h2>
+  <div class="body">
+    <div style="flex:1;display:flex;flex-direction:column;gap:18px">
+      <svg viewBox="0 0 640 230" width="100%" role="img" aria-label="同群與跨群輸出相關的啞鈴圖">
+        <g font-family="inherit" font-size="17" fill="#5d6676">
+          <line x1="120" y1="190" x2="620" y2="190" stroke="#dde2ea"/>
+          <g id="ticks"></g>
+          <text x="370" y="226" text-anchor="middle">輸出端 Pearson r（三個切分的範圍；點為 seed 28）</text>
+        </g>
+        <g id="dumb"></g>
+      </svg>
+      <div class="card"><h3>迴歸斜率（預測對實際）</h3>
+        <p>同群 約 .72–.73 → 跨群 <span class="cau">.22</span>（Cau-FT）、<span class="ea">.41</span>（EA-FT）</p></div>
+      <div class="card"><h3>平均偏差（預測 − 實際）</h3>
+        <p>同群在 ±.035 內；跨群高估 <span class="cau">+.08</span>、<span class="ea">+.075</span>（三個切分 +.05 至 +.12）</p></div>
+      <div class="caveat">「預測範圍收窄」是描述性標籤：迴歸效應、斜率衰減、校準誤差都可能產生類似圖形，本研究不把它當成單一機制。</div>
+    </div>
+    <figure style="flex:1.05;align-items:center">
+      <img src="img/fig2_scatter.jpg" alt="論文圖 2：同群與跨群的預測分數對實際評分散布圖">
+      <figcaption>論文圖 2（seed 28）。藍：同群；紅：跨群；虛線：y = x；綠線：最小平方擬合。灰色 Non-FT 列是未訓練的輸出層，只用來確認輸出端沒有評分資訊。</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span>Luo, Wu &amp; Chang · manuscript in preparation</span><span class="pn"></span></div>
+  <div class="notes">
+    <p>先看輸出端。兩個模型在自己訓練的那一群上，相關約 0.86 到 0.87；換到另一群就明顯下降，而且不對稱：Cau-FT 預測 East Asian 臉只剩約 0.43，EA-FT 預測 Caucasian 臉還有約 0.65。三個資料切分都一樣，15 個 iteration 全部是同群高於跨群。</p>
+    <p>右邊的散布圖顯示，跨群預測的迴歸線變平，斜率從約 0.7 降到 0.22 和 0.41；預測分數的分散程度變小，平均還整體往上偏。論文把這個型態稱為「預測範圍收窄」，但這只是描述性的標籤，迴歸效應、校準誤差都可能產生類似的圖形，我們沒有把它當成一個機制。灰色那一列是沒訓練過的輸出層，不是真正的基準。</p>
+  </div>
+</section>
+
+<!-- 4 Probe: information present -->
+<section class="slide" data-label="發現二" data-time="3:00–3:35">
+  <div class="kicker">發現二 · 內部表徵</div>
+  <h2 style="margin-bottom:14px">另一群的評分資訊還在，是讀出沒有跟上</h2>
+  <div style="display:flex;flex-direction:column;gap:12px;flex:1;min-height:0">
+    <figure style="flex:0 0 auto">
+      <img src="img/fig3B_layers.png" alt="論文圖 3B：三個模型在 17 個節點的評分解碼 r" style="width:100%">
+      <figcaption>論文圖 3B（seed 28）。▲ Caucasian 臉、○ East Asian 臉；每一點為線性探針的留一法解碼 r（平均 ± SE）。</figcaption>
+    </figure>
+    <div style="display:flex;gap:28px;align-items:stretch;flex:1;min-height:0">
+      <figure style="flex:1.05;justify-content:center"><img src="img/g_readout.jpg" alt="中間層探針 r = 0.78 與最終輸出 r = 0.43 的示意圖" style="border-radius:12px">
+        <figcaption>示意：Cau-FT 預測 East Asian 臉，inception4c 探針 r = .78，輸出只有 .43（seed 28）。</figcaption></figure>
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;justify-content:center">
+        <p>跨群探針 <span class="num">.78–.82</span>，遠高於同一模型輸出的 <span class="num">.43–.65</span>；未微調的 <span class="non">Non-FT</span> 中層也有約 <span class="num">.8</span>。</p>
+        <div class="caveat">探針用該群的評分訓練，因此是可讀資訊的<b>上限</b>：能排除「資訊不存在」，但不代表模型輸出真的用了這些資訊。</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Luo, Wu &amp; Chang · manuscript in preparation</span><span class="pn"></span></div>
+  <div class="notes">
+    <p>模型是不是「看不懂」另一群的臉？線性探針的答案是否定的。中間層對另一群的評分仍可讀出 0.78 到 0.82，遠高於同一個模型輸出的 0.43 到 0.65。連從沒看過臉孔評分的 Non-FT，中層也能讀到約 0.8。</p>
+    <p>要提醒的是，探針用了該群的評分來訓練，所以這是可讀資訊的上限；它能排除「資訊不存在」，但不代表模型的輸出真的用了這些資訊。跨群落差至少有一部分出在讀出端。</p>
+  </div>
+</section>
+
+<!-- 5 Divergence + gender control -->
+<section class="slide" data-label="發現二（續）" data-time="3:35–4:00">
+  <div class="kicker">發現二 · 層級分歧與性別對照</div>
+  <h2>層級分歧跟著「用哪一群微調」走，不是吸引力特有</h2>
+  <div style="position:absolute;right:72px;top:58px"><img src="img/legend.png" alt="圖例" style="height:78px"></div>
+  <div class="body" style="gap:28px">
+    <figure style="flex:1">
+      <div class="card" style="padding:10px 16px;margin-bottom:8px;background:var(--cau-soft)"><p><b>吸引力</b>：輸出跨群 r 下降 <span class="num">.2–.4</span></p></div>
+      <img src="img/fig3CD_dz.png" alt="論文圖 3C–D：吸引力解碼的群間差與模型間對比">
+      <figcaption>論文圖 3C–D。C：Δz = z(Cau) − z(EA)，正值表示 Caucasian 臉較易讀出；EA-FT 在 inception4a 翻轉（三個切分皆同）。D：模型間對比。</figcaption>
+    </figure>
+    <figure style="flex:1">
+      <div class="card" style="padding:10px 16px;margin-bottom:8px;background:var(--ea-soft)"><p><b>性別分類</b>：輸出跨群 AUC 只降 <span class="num">.02–.04</span></p></div>
+      <img src="img/fig4CD_dlogit.png" alt="論文圖 4C–D：性別解碼的群間差與模型間對比">
+      <figcaption>論文圖 4C–D。同樣的影像、切分與網路；EA-FT 翻轉提早到 inception3a–3b。AUC 接近天花板，logit 會放大差距，兩圖單位不同，不比大小。</figcaption>
+    </figure>
+  </div>
+  <div class="foot"><span>Luo, Wu &amp; Chang · manuscript in preparation</span><span class="pn"></span></div>
+  <div class="notes">
+    <p>左圖是兩群可解碼性的差距，正值代表 Caucasian 臉比較好讀。Non-FT 有小幅 Caucasian 優勢，但大小隨資料切分而變。Cau-FT 往深層拉大這個差距，主要在晚層；EA-FT 則在 inception4a 翻轉，三個切分都一樣。</p>
+    <p>右圖是性別分類的對照，用同樣的影像、切分與網路。性別在輸出端幾乎完全跨群轉移，AUC 只掉 0.02 到 0.04，但內部的分歧型態和吸引力很像，只是翻轉提早到 inception3a、3b。所以這個層級分歧反映的是「用哪一群微調」，不是吸引力特有的，也不能用來預測輸出能轉移多少。性別的數值接近天花板，兩張圖的大小不能直接比。</p>
+  </div>
+</section>
+
+<!-- 6 Discussion -->
+<section class="slide" data-label="討論與結論" data-time="4:00–5:00">
+  <div class="kicker">討論、推論界線與結論</div>
+  <h2>能說什麼，不能說什麼</h2>
+  <div class="body concl" style="gap:24px;align-items:center">
+    <div class="card" style="flex:1;background:var(--cau-soft)"><h3 style="color:var(--cau)">資料支持</h3>
+      <ul><li>單一族群微調 → 輸出跨群落差與校準偏移，三個切分重現</li>
+        <li>跨群缺損不是因為表徵裡讀不到評分資訊</li>
+        <li>層級分歧跟著微調群別走，與輸出能否轉移是兩回事</li></ul></div>
+    <div class="card" style="flex:1;background:var(--warn-soft)"><h3 style="color:var(--warn)">不能推論</h3>
+      <ul><li>「演算法版的異族效應」</li>
+        <li>某一層「造成」偏誤：探針只代表線性可讀，不是因果</li>
+        <li>推到其他架構、資料集，或人類審美的普遍階層</li></ul></div>
+    <div class="card" style="flex:1"><h3>標籤與倫理</h3>
+      <ul><li>評分來自一群年輕亞洲評分者，標籤帶有文化脈絡</li>
+        <li>影像統計、微調權重、標籤特性三者在此設計中無法分離</li>
+        <li>吸引力分數沒有客觀真值，結果不支持將自動評分用於任何社會決策</li></ul></div>
+  </div>
+  <div class="take" style="margin-top:22px">稽核模型的族群偏誤：輸出表現與內部可讀資訊要分開評估，不能互相代替。</div>
+  <div class="foot"><span>Luo, Wu &amp; Chang · manuscript in preparation</span><span class="pn"></span></div>
+  <div class="notes">
+    <p>最後談推論的界線。第一，輸出端的跨群失敗，不能直接等同內部表徵有缺陷，也不宜叫做演算法的異族效應。</p>
+    <p>第二，評分全部來自一群年輕亞洲評分者，標籤本身帶有文化脈絡；跨群誤差可能混合了影像統計差異、微調權重差異和標籤特性，目前的設計分不開。</p>
+    <p>第三，這是單一架構、單一資料集的描述性探針分析，不能證明因果，也不能推到人類審美的普遍階層。吸引力分數沒有客觀真值，這類模型不應該用在任何實際的社會決策上。</p>
+    <p>帶走的一句話：稽核模型的族群偏誤，輸出表現和內部可讀資訊要分開評估。謝謝大家。</p>
+  </div>
+</section>
+
+<!-- 7 Q1 -->
+<section class="slide" data-label="Q&amp;A 1">
+  <div class="kicker">備用 Q&amp;A · 1</div>
+  <h2>為什麼未微調的 Non-FT，中層就能讀到約 .8？</h2>
+  <div class="body" style="flex-direction:column;gap:18px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <p>預訓練的通用視覺特徵，本來就和這份資料的平均評分共變。</p>
+      <p>連第一層 conv1 就有 <span class="num">.63–.71</span>，代表有相當部分可能來自亮度、膚色、紋理等低階影像統計；微調只把自己那一群提高到 <span class="num">.85–.87</span>。</p>
+      <div class="caveat">哪些特徵貢獻多少，本研究沒有檢驗。要回答需要 pixel／HOG 等低階基準，以及特徵層級的分析；不宜直接說成「對稱性」或「平均度」。</div>
+    </div>
+    <figure style="flex:1;min-height:0;align-items:center"><img src="img/fig3B_layers.png" alt="論文圖 3B"><figcaption>論文圖 3B：左為 Non-FT。</figcaption></figure>
+  </div>
+  <div class="foot"><span>Luo, Wu &amp; Chang · manuscript in preparation</span><span class="pn"></span></div>
+  <div class="notes"><p>回答重點：通用特徵已經帶有和評分共變的資訊；conv1 就有約 0.7，低階影像統計可能占很大一部分。具體是哪些特徵，本研究沒有檢驗。</p></div>
+</section>
+
+<!-- 8 Q2 -->
+<section class="slide" data-label="Q&amp;A 2">
+  <div class="kicker">備用 Q&amp;A · 2</div>
+  <h2>為什麼 EA-FT 的跨群表現比 Cau-FT 好？</h2>
+  <div class="body">
+    <div style="flex:1.3;display:flex;flex-direction:column;gap:16px">
+      <p>三個切分都是 Cau-FT 掉得比較多（跨群 r .43–.45，EA-FT .64–.65），但目前無法歸因到單一來源：</p>
+      <div class="card"><ul>
+        <li>評分者是亞洲人，兩群臉孔的評分和可見特徵的關係可能不同</li>
+        <li>兩組影像本身的統計分布不同</li>
+        <li>預訓練特徵對兩群原本就有小幅差異（吸引力上大小隨切分而變）</li></ul></div>
+      <p class="muted">要分開這些因素，需要多個評分者族群交叉評分同一批臉孔。</p>
+    </div>
+    <figure style="flex:0.8;justify-content:center"><img src="img/fig3A_output.png" alt="論文圖 3A：輸出端同群與跨群 r"><figcaption>論文圖 3A：每點為一個切分。</figcaption></figure>
+  </div>
+  <div class="foot"><span>Luo, Wu &amp; Chang · manuscript in preparation</span><span class="pn"></span></div>
+  <div class="notes"><p>回答重點：不能單純歸因於演算法；評分者族群、影像統計、預訓練特徵的基線差異都可能有貢獻，設計上無法分離。</p></div>
+</section>
+
+<!-- 9 Q3 -->
+<section class="slide" data-label="Q&amp;A 3">
+  <div class="kicker">備用 Q&amp;A · 3</div>
+  <h2>性別對照到底說明了什麼？</h2>
+  <div class="body">
+    <div style="flex:1.3;display:flex;flex-direction:column;gap:16px">
+      <p>它把兩件事拆開：性別在輸出端幾乎完全跨群轉移（跨群 AUC <span class="num">.959–.976</span>），內部卻出現同樣型態的分歧。所以層級分歧是群別微調的痕跡，不是吸引力專屬的特徵。</p>
+      <div class="caveat">限制：性別 AUC 接近天花板，logit 會放大很小的差異；性別與吸引力在難度、二元／連續上也不同，因此不能用這個對照證明「依賴評分者文化」才是跨群落差的原因。</div>
+      <p class="muted">更乾淨的對照：用特徵點算出的客觀連續指標（如臉寬高比）當目標。</p>
+    </div>
+    <figure style="flex:0.9;justify-content:center;gap:14px">
+      <img src="img/g_scale.jpg" alt="天秤概念插圖" style="border-radius:12px;max-height:250px">
+      <img src="img/fig4A_output.png" alt="論文圖 4A：性別分類輸出 AUC" style="max-height:340px">
+      <figcaption>論文圖 4A：性別分類的輸出 AUC。</figcaption></figure>
+  </div>
+  <div class="foot"><span>Luo, Wu &amp; Chang · manuscript in preparation</span><span class="pn"></span></div>
+  <div class="notes"><p>回答重點：把輸出泛化和內部分歧拆開。但要承認天花板與任務差異的限制，不宜說兩者「完全相同」。</p></div>
+</section>
+
+<!-- 10 Appendix fig3 -->
+<section class="slide" data-label="附圖 3">
+  <div class="kicker">附錄 · 論文圖 3</div>
+  <div class="body" style="align-items:stretch">
+    <figure style="flex:1;align-items:center"><img src="img/fig3_full.png" alt="論文圖 3 全圖"></figure>
+    <div style="flex:0 0 470px;display:flex;flex-direction:column;justify-content:center;gap:14px">
+      <h2 style="font-size:36px;margin:0">吸引力：逐層解碼與群間差</h2>
+      <p class="small">(A) 輸出端 r；(B) 各層解碼 r（seed 28）；(C) Δz = z(Cau) − z(EA)，三個切分；(D) 模型間對比 ΔΔz。</p>
+      <p class="small muted">各層 permutation test 因臉孔與模型重複使用，作者視為探索性；主要依據是三個切分的一致性。</p>
+    </div>
+  </div>
+  <div class="foot"><span>Luo, Wu &amp; Chang · manuscript in preparation</span><span class="pn"></span></div>
+  <div class="notes"><p>附錄：完整的圖 3，回答細節問題時用。</p></div>
+</section>
+
+<!-- 11 Appendix fig4 -->
+<section class="slide" data-label="附圖 4">
+  <div class="kicker">附錄 · 論文圖 4</div>
+  <div class="body" style="align-items:stretch">
+    <figure style="flex:1;align-items:center"><img src="img/fig4_full.png" alt="論文圖 4 全圖"></figure>
+    <div style="flex:0 0 470px;display:flex;flex-direction:column;justify-content:center;gap:14px">
+      <h2 style="font-size:36px;margin:0">性別分類對照</h2>
+      <p class="small">(A) 輸出 AUC；(B) 各層解碼 AUC（seed 28）；(C) Δlogit(AUC)；(D) 模型間對比。</p>
+      <p class="small muted">截斷網路（只保留到 inception4c）的結果只在內文報告：吸引力的翻轉點提早到 inception3b，性別大致不變。</p>
+    </div>
+  </div>
+  <div class="foot"><span>Luo, Wu &amp; Chang · manuscript in preparation</span><span class="pn"></span></div>
+  <div class="notes"><p>附錄：完整的圖 4，以及截斷網路的補充說明。</p></div>
+</section>
+
+</div>
+
+<div id="notesPanel"><div class="t" id="notesTitle"></div><div id="notesBody"></div></div>
+<div class="controls">
+  <button id="bPrev" title="上一頁（←）">‹</button>
+  <button id="bNext" title="下一頁（→）">›</button>
+  <button id="bNotes" title="講者備忘（N）">備忘</button>
+  <button id="bFull" title="全螢幕（F）">全螢幕</button>
+  <button id="bHelp" title="說明（?）">?</button>
+</div>
+<div id="help">
+  <b>操作</b><br>
+  <kbd>→</kbd> <kbd>空白鍵</kbd> 下一頁　<kbd>←</kbd> 上一頁　<kbd>Home</kbd> / <kbd>End</kbd> 第一／最後頁<br>
+  <kbd>N</kbd> 講者備忘　<kbd>F</kbd> 全螢幕　<kbd>?</kbd> 開關說明<br>
+  手機：左右滑動換頁。列印成 PDF：瀏覽器列印，每頁一張投影片。
+</div>
+
+<script>
+(function(){
+  // Output-level dumbbell (values from Table 2: seeds 14 / 28 / 42)
+  var rows=[
+    {name:"Cau-FT", color:"#2a9a5a", y:55,  within:[0.859,0.863,0.854], cross:[0.441,0.429,0.452], lab:"預測 EA 臉"},
+    {name:"EA-FT",  color:"#b04dbd", y:135, within:[0.868,0.870,0.871], cross:[0.641,0.652,0.639], lab:"預測 Cau 臉"}
+  ];
+  var x=function(r){return 120+(r-0.25)/(1.0-0.25)*500;};
+  var NS="http://www.w3.org/2000/svg", g=document.getElementById("dumb"), t=document.getElementById("ticks");
+  function el(tag,attrs,txt){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(txt!=null)e.textContent=txt;return e;}
+  [0.25,0.5,0.75,1.0].forEach(function(v){
+    t.appendChild(el("line",{x1:x(v),x2:x(v),y1:20,y2:190,stroke:"#eef1f6"}));
+    t.appendChild(el("text",{x:x(v),y:208,"text-anchor":"middle"},v.toFixed(2)));
+  });
+  rows.forEach(function(r){
+    var c28=r.cross[1], w28=r.within[1];
+    g.appendChild(el("text",{x:10,y:r.y+6,"font-size":21,"font-weight":700,fill:r.color},r.name));
+    g.appendChild(el("line",{x1:x(c28),x2:x(w28),y1:r.y,y2:r.y,stroke:r.color,"stroke-width":7,"stroke-opacity":.35}));
+    [["cross",r.cross],["within",r.within]].forEach(function(p){
+      var lo=Math.min.apply(null,p[1]),hi=Math.max.apply(null,p[1]);
+      g.appendChild(el("line",{x1:x(lo),x2:x(hi),y1:r.y,y2:r.y,stroke:r.color,"stroke-width":3}));
+    });
+    g.appendChild(el("circle",{cx:x(c28),cy:r.y,r:10,fill:"#fff",stroke:r.color,"stroke-width":3}));
+    g.appendChild(el("circle",{cx:x(w28),cy:r.y,r:10,fill:r.color}));
+    g.appendChild(el("text",{x:x(c28),y:r.y-18,"text-anchor":"middle","font-size":17,fill:"#1c2331"},"跨群 "+c28.toFixed(2).slice(1)));
+    g.appendChild(el("text",{x:x(w28),y:r.y-18,"text-anchor":"middle","font-size":17,fill:"#1c2331"},"同群 "+w28.toFixed(2).slice(1)));
+    g.appendChild(el("text",{x:x(c28),y:r.y+32,"text-anchor":"middle","font-size":15,fill:"#8a93a3"},r.lab));
+  });
+
+  var slides=[].slice.call(document.querySelectorAll(".slide")), cur=0, N=slides.length;
+  slides.forEach(function(s,i){var pn=s.querySelector(".pn"); if(pn) pn.textContent=(i+1)+" / "+N;});
+  function fit(){
+    var s=Math.min(window.innerWidth/1600, window.innerHeight/900);
+    slides.forEach(function(el){el.style.transform="scale("+s+")";});
+  }
+  function show(i){
+    cur=Math.max(0,Math.min(N-1,i));
+    slides.forEach(function(s,k){s.classList.toggle("active",k===cur);});
+    var s=slides[cur], n=s.querySelector(".notes");
+    document.getElementById("notesTitle").textContent=(cur+1)+" / "+N+" · "+(s.dataset.label||"")+(s.dataset.time?" · "+s.dataset.time:"");
+    document.getElementById("notesBody").innerHTML=n?n.innerHTML:"";
+    document.getElementById("progress").style.width=((cur+1)/N*100)+"%";
+    if(location.hash!=="#"+(cur+1)) history.replaceState(null,"","#"+(cur+1));
+  }
+  function toggle(cls){document.body.classList.toggle(cls);}
+  function full(){
+    if(!document.fullscreenElement){(document.documentElement.requestFullscreen||function(){}).call(document.documentElement);}
+    else{document.exitFullscreen();}
+  }
+  document.addEventListener("keydown",function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var k=e.key;
+    if(k==="ArrowRight"||k===" "||k==="PageDown"){e.preventDefault();show(cur+1);}
+    else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();show(cur-1);}
+    else if(k==="Home"){show(0);} else if(k==="End"){show(N-1);}
+    else if(k==="n"||k==="N"){toggle("show-notes");}
+    else if(k==="f"||k==="F"){full();}
+    else if(k==="?"){toggle("show-help");}
+    else if(k==="Escape"){document.body.classList.remove("show-help");}
+  });
+  document.getElementById("bPrev").onclick=function(){show(cur-1);};
+  document.getElementById("bNext").onclick=function(){show(cur+1);};
+  document.getElementById("bNotes").onclick=function(){toggle("show-notes");};
+  document.getElementById("bFull").onclick=full;
+  document.getElementById("bHelp").onclick=function(){toggle("show-help");};
+  var tx=null;
+  document.addEventListener("touchstart",function(e){tx=e.touches[0].clientX;},{passive:true});
+  document.addEventListener("touchend",function(e){
+    if(tx===null)return; var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(Math.abs(dx)>50) show(cur+(dx<0?1:-1));
+  },{passive:true});
+  window.addEventListener("resize",fit);
+  window.addEventListener("hashchange",function(){var h=parseInt(location.hash.slice(1),10); if(h&&h-1!==cur) show(h-1);});
+  fit();
+  var h=parseInt(location.hash.slice(1),10); show(h?h-1:0);
+})();
+</script>
+</body>
+</html>
